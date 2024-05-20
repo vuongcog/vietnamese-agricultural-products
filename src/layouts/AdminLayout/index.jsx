@@ -6,7 +6,7 @@ import AddminFooter from "../../components/admin/Footer";
 const AdminLayout = ({ children }) => {
   return (
     <div className="admin-app">
-      <div id="admin-body">
+      <div id="admin-body" className="flex">
         <AdminLeftSidebar></AdminLeftSidebar>
         <main id="admin-content">
           <AddminTopNav></AddminTopNav>

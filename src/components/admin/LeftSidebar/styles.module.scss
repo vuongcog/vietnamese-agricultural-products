@@ -1,0 +1,6 @@
+@use "../../../assets/css/abstracts/index" as abstracts;
+.left-side-bar {
+  width: 20%;
+  height: 100vh;
+  background-color: abstracts.$coreColorBlackAdmin;
+}
