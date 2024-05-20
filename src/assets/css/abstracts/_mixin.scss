@@ -7,6 +7,11 @@
   flex-direction: column;
   justify-content: center;
 }
+@mixin display-vetical($gap) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
 @mixin center {
   display: flex;
   justify-content: center;
