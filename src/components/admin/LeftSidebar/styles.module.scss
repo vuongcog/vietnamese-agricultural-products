@@ -1,6 +1,39 @@
-@use "../../../assets/css/abstracts/index" as abstracts;
+@use "../../../assets/css/abstracts/" as abstracts;
+
 .left-side-bar {
   width: 20%;
   height: 100vh;
   background-color: abstracts.$coreColorBlackAdmin;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px;
+  .wrappertTitle {
+    display: flex;
+    gap: 12px;
+    .title {
+      &::before {
+        display: inline-block !important;
+        color: white;
+        font-size: 22px;
+        border: 1px solid white;
+        padding: 6px 6px;
+        border-radius: 50%;
+      }
+    }
+  }
+  .sidebar-menu {
+    .navbar-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .label {
+        color: white;
+      }
+      .icon-chevron {
+        font-size: 13px;
+        color: white;
+      }
+    }
+  }
 }

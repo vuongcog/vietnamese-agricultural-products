@@ -1,0 +1,19 @@
+@use "../../../assets/css/abstracts/index" as abstract;
+.container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 0;
+  &__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+  }
+  &__wrapperInfo {
+    color: white;
+    font-weight: 500;
+    & :nth-child(1) {
+      color: abstract.$coreColorBAB8B8;
+    }
+  }
+}
