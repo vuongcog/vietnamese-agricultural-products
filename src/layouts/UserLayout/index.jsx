@@ -1,10 +1,14 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
-const UserLayout = () => {
+const UserLayout = ({ children }) => {
   return (
     <div>
       <div>Header</div>
-      <div>Contenr</div>
+      <div>
+        {children}
+        <Outlet></Outlet>
+      </div>
       <div>Footer</div>
     </div>
   );

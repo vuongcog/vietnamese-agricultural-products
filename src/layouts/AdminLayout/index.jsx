@@ -1,11 +1,9 @@
 import React from "react";
 
-const AdminLayout = () => {
+const AdminLayout = ({ children }) => {
   return (
-    <div>
-      <div>Header</div>
-      <div>Contenr</div>
-      <div>Footer</div>
+    <div className="app">
+      <div id="user-left-sidebar">Sidebar</div>
     </div>
   );
 };

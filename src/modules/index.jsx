@@ -6,8 +6,10 @@ import UserLayout from "../layouts/UserLayout";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" Component={AdminLayout}></Route>
-      <Route path="/home" Component={UserLayout}></Route>
+      <Route path="/" Component={UserLayout}>
+        <Route path="/shoping" Component={() => <div>Home</div>}></Route>
+      </Route>
+      <Route path="/admin" Component={AdminLayout}></Route>
     </Routes>
   );
 };
