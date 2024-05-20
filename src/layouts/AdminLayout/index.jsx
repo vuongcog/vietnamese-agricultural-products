@@ -1,9 +1,21 @@
 import React from "react";
+import AdminLeftSidebar from "../../components/admin/LeftSidebar";
+import AddminTopNav from "../../components/admin/TopNav";
+import AddminFooter from "../../components/admin/Footer";
 
 const AdminLayout = ({ children }) => {
   return (
-    <div className="app">
-      <div id="user-left-sidebar">Sidebar</div>
+    <div className="admin-app">
+      <div id="admin-body">
+        <AdminLeftSidebar></AdminLeftSidebar>
+        <main id="admin-content">
+          <AddminTopNav></AddminTopNav>
+          {children}
+        </main>
+      </div>
+      <div id="footer">
+        <AddminFooter></AddminFooter>
+      </div>
     </div>
   );
 };
