@@ -8,7 +8,7 @@ const AdminLayout = ({ children }) => {
     <div className="admin-app">
       <div id="admin-body" className="flex font-inter">
         <AdminLeftSidebar></AdminLeftSidebar>
-        <main id="admin-content">
+        <main id="admin-content" className="w-full">
           <AddminTopNav></AddminTopNav>
           {children}
         </main>
