@@ -7,6 +7,7 @@ import counterReducer, { increment } from "../modules/Test/reducer";
 import counterReducer1 from "../modules/Test/reducer1";
 const rootReducer = combineSlices({ counterReducer, counterReducer1 });
 const sagaMiddleware = createSagaMiddleware();
+
 const makeStore = () => {
   const store = configureStore({
     reducer: rootReducer,
@@ -23,6 +24,9 @@ const makeStore = () => {
   return store;
 };
 
-export const store = makeStore();
-console.log(store.getState());
+const store = makeStore();
+store.injectedReducers = {}; // Reducer registry
+store.injectedSagas = {};
+store.runSaga = sagaMiddleware.run;
 store.dispatch(increment());
+export default store;
