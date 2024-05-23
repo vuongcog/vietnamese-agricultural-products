@@ -10,10 +10,8 @@ module.exports = {
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
   settings: { react: { version: "18.2" } },
-  plugins: ["react-refresh", "lodash"],
+  plugins: ["react-refresh"],
   rules: {
-    "lodash/import-scope": "off",
-    "lodash/prefer-noop": "off",
     "react/jsx-no-target-blank": "off",
     "react-refresh/only-export-components": [
       "warn",

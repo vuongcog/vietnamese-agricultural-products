@@ -1,7 +1,6 @@
-import { invariant } from "invariant";
+import invariant from "invariant";
 import store from "../configStore/configStore";
-// import { store } from "../configStore/configStore";
-console.log(store);
+import _ from "lodash";
 export default function checkStore(store) {
   const shape = {
     dispatch: _.isFunction,

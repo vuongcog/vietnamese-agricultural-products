@@ -1,5 +1,9 @@
 import checkStore from "./checkStore";
 import store from "../configStore/configStore";
+import counterReducer from "../modules/Test/reducer";
+import invariant from "invariant";
+import _ from "lodash";
+import createReducer from "./createReducer";
 export function injectReducerFactory(store, isValid) {
   return function injectReducer(key, reducer) {
     if (!isValid) checkStore(store);
@@ -11,10 +15,10 @@ export function injectReducerFactory(store, isValid) {
     if (
       Reflect.has(store.injectedReducers, key) &&
       store.injectedReducers[key] === reducer
-    ) {
-      store.injectedReducers[key] = reducer; // eslint-disable-line no-param-reassign
-      store.replaceReducer(createReducer(store.injectedReducers));
-    }
+    )
+      return;
+    store.injectedReducers[key] = reducer; // eslint-disable-line no-param-reassign
+    store.replaceReducer(createReducer(store.injectedReducers));
   };
 }
 export default function getInjectors(store) {

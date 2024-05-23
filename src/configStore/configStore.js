@@ -5,12 +5,15 @@ import watcher from "../modules/Test/saga";
 import createSagaMiddleware from "redux-saga";
 import counterReducer, { increment } from "../modules/Test/reducer";
 import counterReducer1 from "../modules/Test/reducer1";
-const rootReducer = combineSlices({ counterReducer, counterReducer1 });
+import createReducer from "../utils/createReducer";
+const rootReducer = {
+  counterReducer,
+  counterReducer1,
+};
 const sagaMiddleware = createSagaMiddleware();
-
 const makeStore = () => {
   const store = configureStore({
-    reducer: rootReducer,
+    reducer: createReducer(rootReducer),
     middleware: (getDefaultMiddleware) => {
       return [
         sagaMiddleware,
@@ -19,14 +22,13 @@ const makeStore = () => {
       ];
     },
   });
+  store.injectedReducers = {};
+  store.injectedSagas = {};
+  store.runSaga = sagaMiddleware.run;
   //   setupListeners(store.dispatch);
-  sagaMiddleware.run(watcher);
+  store.runSaga(watcher);
   return store;
 };
 
 const store = makeStore();
-store.injectedReducers = {}; // Reducer registry
-store.injectedSagas = {};
-store.runSaga = sagaMiddleware.run;
-store.dispatch(increment());
 export default store;
