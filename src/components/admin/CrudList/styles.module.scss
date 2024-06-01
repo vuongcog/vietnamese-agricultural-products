@@ -1,0 +1,24 @@
+.table {
+  font-family: Inter;
+  .heading-container {
+    background-color: pink;
+    .row-heading {
+      th {
+        font-size: 13px;
+        font-weight: 500;
+      }
+    }
+  }
+  .body-container {
+    background-color: blue($color: #000000);
+
+    .row-body {
+      &:hover {
+        background-color: red;
+      }
+      td {
+        font-size: 13px;
+      }
+    }
+  }
+}

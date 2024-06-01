@@ -1,0 +1,7 @@
+{
+  "global": "globalThis",
+  "window1": "'window.GetParams'",
+  "document1": "'document'",
+  "test": "fileJson",
+  "NUMBER_VARIABLE": 123
+}

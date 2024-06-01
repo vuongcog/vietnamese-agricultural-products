@@ -2,6 +2,7 @@ import React from "react";
 import AdminLeftSidebar from "../../components/admin/LeftSidebar";
 import AddminTopNav from "../../components/admin/TopNav";
 import AddminFooter from "../../components/admin/Footer";
+import { Outlet } from "react-router-dom";
 
 const AdminLayout = ({ children }) => {
   return (
@@ -11,6 +12,7 @@ const AdminLayout = ({ children }) => {
         <main id="admin-content" className="w-full">
           <AddminTopNav></AddminTopNav>
           {children}
+          <Outlet></Outlet>
         </main>
       </div>
       <div id="footer">

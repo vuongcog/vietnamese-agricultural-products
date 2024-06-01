@@ -4,10 +4,12 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import AddminAvatar from "../Avatar";
 import { SCHEMA } from "../../../constants/nav-bar-item";
 import _ from "lodash";
+import { useNavigate } from "react-router-dom";
 
 const AdminLeftSidebar = () => {
   const [select, setSelect] = useState(Array(SCHEMA.length).fill(false));
   const [click, setClick] = useState(null);
+  const navigate = useNavigate();
   return (
     <nav className={styles[`left-side-bar`]}>
       <div className={styles.wrappertTitle}>
@@ -19,12 +21,12 @@ const AdminLeftSidebar = () => {
         {SCHEMA.map((item, index) => {
           return (
             <li
-              c
               onClick={() => {
                 const newSelect = _.cloneDeep(select);
                 newSelect[index] = !select[index];
                 setSelect(newSelect);
                 setClick(index);
+                navigate(item.link);
               }}
               className={`${click === index && styles[`active-select`]} ${
                 styles[`navbar-item`]
