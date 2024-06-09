@@ -11,12 +11,12 @@ const AddminAvatar = ({ info }) => {
   );
 };
 
-AddminAvatar.Avatar = function AdminAvatar() {
+const Avatar = () => {
   return (
     <img className={styles.container__avatar} src={AVATAR.admin} alt="admin" />
   );
 };
-AddminAvatar.Info = function AdminAvatar({ name, phone }) {
+const Info = ({ name, phone }) => {
   return (
     <div className={styles.container__wrapperInfo}>
       <div>{name}</div>
@@ -24,14 +24,17 @@ AddminAvatar.Info = function AdminAvatar({ name, phone }) {
     </div>
   );
 };
+AddminAvatar.Avatar = Avatar;
+AddminAvatar.Info = Info;
+
 AddminAvatar.propTypes = {
   info: PropTypes.object,
 };
-AddminAvatar.Info.propTypes = {
+Info.propTypes = {
   name: PropTypes.string,
   phone: PropTypes.string,
 };
-AddminAvatar.Info.defaultProps = {
+Info.defaultProps = {
   name: "Vương",
   phone: "0348079230",
 };
@@ -41,5 +44,5 @@ AddminAvatar.defaultProps = {
 };
 
 // Setting display name for the component
-AddminAvatar.displayName = "AddminAvatar";
+// AddminAvatar.displayName = "AddminAvatar";
 export default AddminAvatar;

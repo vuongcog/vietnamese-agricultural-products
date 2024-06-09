@@ -5,8 +5,8 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 const UserName = ({ name }) => {
   return (
     <div className={styles.container}>
-      <SupportAgentIcon></SupportAgentIcon>
-      {name}
+      <SupportAgentIcon className={styles.icon}></SupportAgentIcon>
+      <span className={`${styles.label}`}>{name}</span>
     </div>
   );
 };

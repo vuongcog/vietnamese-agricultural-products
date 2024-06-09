@@ -21,6 +21,7 @@ export function injectReducerFactory(store, isValid) {
     store.replaceReducer(createReducer(store.injectedReducers));
   };
 }
+
 export default function getInjectors(store) {
   checkStore(store);
   return {

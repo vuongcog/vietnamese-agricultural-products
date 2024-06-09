@@ -2,7 +2,7 @@ export const listUser = [
   {
     id: 1,
     name: "Nguyen Van Huynh",
-    email: "huynhnhatvuong01012002@gmail.com",
+    email: "huynhnhatvuong@gmail.com",
     email_verified_at: null,
     created_at: "2024-05-22T16:34:02:000000Z",
     updated_at: "2024-05-22T16:34:02:000000Z",
@@ -10,7 +10,7 @@ export const listUser = [
   {
     id: 2,
     name: "Nguyen Van Huynh",
-    email: "huynhnhatvuong01012002@gmail.com",
+    email: "huynhnhatvuong@gmail.com",
     email_verified_at: null,
     created_at: "2024-05-22T16:34:02:000000Z",
     updated_at: "2024-05-22T16:34:02:000000Z",
@@ -18,7 +18,7 @@ export const listUser = [
   {
     id: 3,
     name: "Nguyen Van Huynh",
-    email: "huynhnhatvuong01012002@gmail.com",
+    email: "huynhnhatvuong@gmail.com",
     email_verified_at: null,
     created_at: "2024-05-22T16:34:02:000000Z",
     updated_at: "2024-05-22T16:34:02:000000Z",
@@ -26,7 +26,7 @@ export const listUser = [
   {
     id: 4,
     name: "Nguyen Van Huynh",
-    email: "huynhnhatvuong01012002@gmail.com",
+    email: "huynhnhatvuong@gmail.com",
     email_verified_at: null,
     created_at: "2024-05-22T16:34:02:000000Z",
     updated_at: "2024-05-22T16:34:02:000000Z",
@@ -34,7 +34,7 @@ export const listUser = [
   {
     id: 5,
     name: "Nguyen Van Huynh",
-    email: "huynhnhatvuong01012002@gmail.com",
+    email: "huynhnhatvuong@gmail.com",
     email_verified_at: null,
     created_at: "2024-05-22T16:34:02:000000Z",
     updated_at: "2024-05-22T16:34:02:000000Z",

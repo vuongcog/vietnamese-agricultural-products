@@ -1,4 +1,3 @@
-@use "../../../assets/css/abstracts/index" as abstract;
 .container {
   display: flex;
   align-items: center;
@@ -8,12 +7,13 @@
     width: 56px;
     height: 56px;
     border-radius: 100%;
+    object-fit: cover;
   }
   &__wrapperInfo {
     color: white;
     font-weight: 500;
     & :nth-child(1) {
-      color: abstract.$coreColorBAB8B8;
+      color: var(--core-text-white);
     }
   }
 }

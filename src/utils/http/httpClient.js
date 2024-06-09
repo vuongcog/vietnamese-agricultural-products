@@ -6,7 +6,7 @@ const httpClient = (isEndpoint = false) => {
   const accessToken = localStorage.getItem("accessToken");
   const headers = {
     "Content-Type": "application/json",
-    Authorization: accessToken,
+    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   };
   const cancelTokenSource = axios.CancelToken.source();
   const defaultOptions = {
@@ -64,6 +64,7 @@ const httpClient = (isEndpoint = false) => {
         ...options,
       });
     },
+
     post: (url, data = {}, options = {}) => {
       console.log("httpClient");
       // if (!options.ignoreAuth && !window.localStorage.getItem("accessToken")) {
@@ -73,7 +74,7 @@ const httpClient = (isEndpoint = false) => {
         data.status = "inactive";
       }
       if (isEndpoint) {
-        url = process.env.VITE_API_URL + url;
+        url = import.meta.env.VITE_API_URL + url;
       }
       console.log("httpClient");
       console.log(url);

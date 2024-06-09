@@ -19,6 +19,7 @@ const AdminLeftSidebar = () => {
       <AddminAvatar></AddminAvatar>
       <ul className={styles[`sidebar-menu`]}>
         {SCHEMA.map((item, index) => {
+          console.log(item.color);
           return (
             <li
               onClick={() => {
@@ -28,13 +29,14 @@ const AdminLeftSidebar = () => {
                 setClick(index);
                 navigate(item.link);
               }}
-              className={`${click === index && styles[`active-select`]} ${
+              className={` ${click === index && styles[`active-select`]} ${
                 styles[`navbar-item`]
               }`}
-              key={index}
+              key={item.name || item.id}
             >
               <i className={`${item.icon} ${styles.icon}`}></i>
-              <div className={`${styles.label} ${styles.test}`}>
+
+              <div className={` ${item.color} ${styles.label} ${styles.test}`}>
                 {item.name}
               </div>
               {select[index] && click === index ? (

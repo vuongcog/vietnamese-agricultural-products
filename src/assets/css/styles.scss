@@ -1,8 +1,8 @@
-@use "abstracts";
 .center-horizontal {
   display: flex;
   justify-content: center;
 }
+
 .center-vertical {
   display: flex;
   flex-direction: column;

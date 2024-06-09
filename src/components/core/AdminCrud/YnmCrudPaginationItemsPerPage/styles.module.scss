@@ -1,0 +1,21 @@
+.pagination-container {
+  display: flex;
+  color: #bababa;
+}
+
+.pagination-container-dropdown {
+  position: relative;
+  top: -10px;
+  margin-left: 10px;
+}
+.pagination-container-dropdown {
+  min-width: 140px;
+
+  .css-1uccc91-singleValue {
+    color: #8ca1a9 !important;
+    font-weight: 600 !important;
+    font-size: 12px;
+    line-height: 16px;
+    font-family: var(--font-family);
+  }
+}

@@ -1,12 +1,14 @@
 import React, { useRef } from "react";
 import { useState } from "react";
-import { listUser } from "../../../constants/listUser";
+import { listUser } from "../../../../constants/listUser";
 import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
 import { clone } from "lodash";
-import Tag from "../../core/Tag";
+import Tag from "../../Tag";
 import classNames from "classnames";
 const CrudList = (props) => {
+  const [isLoading, setLoading] = useState(false);
+  const [isFetching, setFetching] = useState(false);
   // const [deleteOpend, setDeleteOpend] = useState([]);
   // const [isCheckedAll, setIsCheckedAll] = useState(false);
   // const [checkedItems, setCheckedItems] = useState([]);
@@ -16,13 +18,19 @@ const CrudList = (props) => {
   // this.resizeObserver = null;
   // this.tableContainerRef = useRef();
 
-  const { schema } = props;
+  const {
+    schema,
+    classNameProps: { tableBodyRow },
+  } = props;
   const _renderHeading = () =>
-    schema.map((item) => {
-      return <th key={item}>{item.label}</th>;
+    schema.map((schemaItem) => {
+      const cloned = { ...schemaItem };
+      return (
+        <th key={schemaItem.name || schemaItem.label} {...cloned}>
+          <span>{schemaItem.label}</span>
+        </th>
+      );
     });
-
-  /////////////
 
   const _renderColumn = (item) => {
     if (_.isEmpty(schema)) {
@@ -30,7 +38,9 @@ const CrudList = (props) => {
     }
     return schema.map((schemaItem) => {
       const cloned = { ...schemaItem };
+
       let contentField = _.get(item, schemaItem.name) || schemaItem.default;
+
       if (schemaItem.component) {
         let dropdownActions = _.get(schemaItem, "dropdownActions.items", null);
         if (
@@ -47,6 +57,7 @@ const CrudList = (props) => {
           "dropdownActions.visibleWhen",
           null
         );
+
         return (
           <td key={schemaItem.name || schemaItem.label} {...cloned}>
             <Tag
@@ -76,12 +87,12 @@ const CrudList = (props) => {
         );
       }
       return (
-        <td
-          key={schemaItem}
-          className="px-[12px] py-[12px] text-[13px] "
-          {...cloned}
-        >
-          <span>{contentField}</span>
+        <td key={schemaItem.name || schemaItem.label} {...cloned}>
+          <span>
+            {schemaItem.formatDate
+              ? schemaItem.formatDate(contentField)
+              : contentField}
+          </span>
         </td>
       );
     });
@@ -89,14 +100,12 @@ const CrudList = (props) => {
 
   const _renderColumns = () => {
     const { items, isFetching } = props;
-    console.log(items);
-
     if (!items.length && !isFetching) {
       return alert("Not data");
     }
     return items.map((item, index) => {
       return (
-        <tr className={`${styles[`row-body`]}`} key={item}>
+        <tr className={`${styles[`row-body`]} ${tableBodyRow}`} key={index}>
           {_renderColumn(item)}
         </tr>
       );
@@ -106,8 +115,8 @@ const CrudList = (props) => {
   //////////////
   return (
     <>
-      <div>
-        <table className={`w-full ${styles.table}`}>
+      <div className="h-[660px] rounded-md overflow-y-scroll">
+        <table className={` ${styles.table}`}>
           <thead className={`${styles[`heading-container`]}`}>
             <tr className={`${styles[`row-heading`]}`}>{_renderHeading()}</tr>
           </thead>
@@ -121,6 +130,9 @@ const CrudList = (props) => {
   );
 };
 CrudList.propTypes = {
+  classNameProps: PropTypes.shape({
+    tableBodyRow: PropTypes.string,
+  }),
   items: PropTypes.any,
   isFetching: PropTypes.bool,
   schema: PropTypes.object,

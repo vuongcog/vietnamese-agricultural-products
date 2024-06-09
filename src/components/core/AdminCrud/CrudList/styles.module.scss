@@ -1,0 +1,39 @@
+.table {
+  border-collapse: separate;
+  display: block;
+  box-sizing: border-box;
+  padding: 24px;
+  font-family: Inter;
+  border-radius: 6px;
+  background-color: var(--admin-background-second);
+  .heading-container {
+    .row-heading {
+      th {
+        box-sizing: border-box;
+        padding: 24px 16px;
+        height: 56px;
+        font-size: 15px;
+        font-weight: 500;
+      }
+    }
+  }
+  .body-container {
+    .row-body {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.102);
+      border-radius: 100px;
+      &:hover {
+        background-color: #3a3e50;
+        cursor: pointer;
+      }
+      td {
+        padding: 24px 16px;
+        border-radius: 6px;
+        color: var(--core-text-white);
+        font-size: 13px;
+      }
+    }
+  }
+}
+th {
+  color: var(--core-text-white);
+}

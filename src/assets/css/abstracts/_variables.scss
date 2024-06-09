@@ -1,5 +1,46 @@
-//color
-$coreColorGreenAdmin: "#1abb9c";
-$coreColorBlackAdmin: #2a3f54;
-$coreColorBAB8B8: #bab8b8;
-$coreEededed: #ededed;
+//core color
+$coreColorBlackAdmin: #292d3f;
+$coreColorBackgroundAdmin: #212333;
+$coreTextWhite: #dedee1;
+
+$color-map: (
+  "admin-background": $coreColorBackgroundAdmin,
+  "admin-background-second": $coreColorBlackAdmin,
+  "core-text-white": $coreTextWhite,
+);
+
+////theme color
+$theme-red: #ff000d;
+$theme-light-red: #f0414a;
+$theme-light-orange: #ff722d;
+$theme-yellow: #ffce00;
+$theme-light-yellow: #f4d145;
+$theme-green: #00eca3;
+$theme-dark-green: #067854;
+$theme-light-blue: #00e9ff;
+$theme-blue: #0097ff;
+$theme-purple: #ff18cf;
+$theme-pink: #ff2087;
+
+$theme-map: (
+  "theme-red": $theme-red,
+  "theme-light-red": $theme-light-red,
+  "theme-light-orange": $theme-light-orange,
+  "theme-yellow": $theme-yellow,
+  "theme-light-yellow": $theme-light-yellow,
+  "theme-green": $theme-green,
+  "theme-dark-green": $theme-dark-green,
+  "theme-light-blue": $theme-light-blue,
+  "theme-blue": $theme-blue,
+  "theme-purple": $theme-purple,
+  "theme-pink": $theme-pink,
+);
+
+:root {
+  @each $name, $value in $color-map {
+    --#{$name}: #{$value};
+  }
+  @each $name, $value in $theme-map {
+    --#{$name}: #{$value};
+  }
+}

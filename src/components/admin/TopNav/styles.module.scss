@@ -1,8 +1,10 @@
 @use "../../../assets/css/abstracts/index" as styles;
 .container {
+  background-color: transparent;
+  position: fixed;
   box-sizing: border-box;
   width: 100%;
   height: 55px;
-  background-color: styles.$coreEededed;
+  // background-color: styles.$coreEededed;
   border-bottom: 1px solid #d9dee4;
 }

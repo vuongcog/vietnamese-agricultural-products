@@ -32,7 +32,6 @@ const lineChartData = {
   ],
 };
 
-// Thành phần React
 const ChartComponent = () => {
   return (
     <div>
