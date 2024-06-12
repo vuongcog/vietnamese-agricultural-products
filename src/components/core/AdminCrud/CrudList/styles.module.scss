@@ -26,6 +26,11 @@
         cursor: pointer;
       }
       td {
+        .wrapper-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
         padding: 24px 16px;
         border-radius: 6px;
         color: var(--core-text-white);

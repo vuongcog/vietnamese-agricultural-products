@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-
+import UserHeader from "../../components/user/Header";
 const UserLayout = ({ children }) => {
   const [search, setSearch] = useState("");
   const fetch = async () => {
@@ -11,19 +11,11 @@ const UserLayout = ({ children }) => {
 
   return (
     <div>
-      <input
-        type="text"
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-      />
-      <div>Header</div>
+      <UserHeader></UserHeader>
       <div>
         {children}
         <Outlet></Outlet>
       </div>
-      <div>Footer</div>
     </div>
   );
 };

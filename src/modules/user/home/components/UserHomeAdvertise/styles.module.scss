@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  padding: 36px 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  align-items: center;
+  height: 100vh;
+  .container-content {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .messages {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      gap: 24px;
+      width: 45%;
+      height: 100%;
+      position: relative;
+    }
+    .picture1 {
+      position: relative; // Đảm bảo rằng cha có position relative
+      width: 55%;
+      object-fit: cover;
+    }
+
+    .picture2 {
+      position: relative; // Đảm bảo rằng cha có position relative
+      width: 800px;
+      position: absolute;
+      top: 80%;
+      left: 0;
+    }
+  }
+}

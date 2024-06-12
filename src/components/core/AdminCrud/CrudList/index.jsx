@@ -6,22 +6,78 @@ import styles from "./styles.module.scss";
 import { clone } from "lodash";
 import Tag from "../../Tag";
 import classNames from "classnames";
+import {} from "react-select";
+import {
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  UncontrolledButtonDropdown,
+} from "reactstrap";
+import { AVATAR } from "../../../../constants/avatar";
+import {
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
 const CrudList = (props) => {
   const [isLoading, setLoading] = useState(false);
   const [isFetching, setFetching] = useState(false);
-  // const [deleteOpend, setDeleteOpend] = useState([]);
-  // const [isCheckedAll, setIsCheckedAll] = useState(false);
-  // const [checkedItems, setCheckedItems] = useState([]);
-  // const [isScollable, setIsScrollAble] = useState(false);
-  // const [tableHeight, setTableHeight] = useState(600);
-
-  // this.resizeObserver = null;
-  // this.tableContainerRef = useRef();
-
   const {
     schema,
     classNameProps: { tableBodyRow },
   } = props;
+
+  const __renderDropdown = (dropdownOptions, item) => {
+    return dropdownOptions.map((option) => {
+      const cb = _.get(option, "callback");
+      const icon = _.get(option, "icon");
+      return (
+        <MenuItem
+          className={styles["dropdown-item"]}
+          key={option.name || option.label}
+          color={"black"}
+          onClick={() => {
+            cb(item);
+          }}
+        >
+          <div className={styles["wrapper-item"]} onClick={cb}>
+            {icon}
+            <div className={styles.label}>{option.label}</div>
+          </div>
+        </MenuItem>
+        // </div>
+      );
+    });
+  };
+
+  const __renderDropdownActions = (dropdownOptions, item, tagName) => {
+    return (
+      <Tag tagName={tagName} key="options">
+        <Menu>
+          <MenuButton
+            px={4}
+            py={2}
+            transition="all 0.2s"
+            borderRadius="md"
+            borderWidth="1px"
+            _hover={{ bg: "gray.400" }}
+            _expanded={{ bg: "blue.400" }}
+            _focus={{ boxShadow: "outline" }}
+            as={IconButton}
+            aria-label="Options"
+            icon={<HamburgerIcon />}
+            variant="outline"
+          >
+            {/* <img src={AVATAR.admin} className="menu-report" alt="menu" /> */}
+          </MenuButton>
+          <MenuList>{__renderDropdown(dropdownOptions, item)}</MenuList>
+        </Menu>
+      </Tag>
+    );
+  };
   const _renderHeading = () =>
     schema.map((schemaItem) => {
       const cloned = { ...schemaItem };
@@ -43,15 +99,6 @@ const CrudList = (props) => {
 
       if (schemaItem.component) {
         let dropdownActions = _.get(schemaItem, "dropdownActions.items", null);
-        if (
-          dropdownActions &&
-          schemaItem.dropdownActions &&
-          schemaItem.dropdownActions.filterItem
-        ) {
-          dropdownActions = _.filter(dropdownActions, (dropdownItem) =>
-            schemaItem.dropdownActions.filterItem(item, dropdownItem)
-          );
-        }
         const visibleWhen = _.get(
           schemaItem,
           "dropdownActions.visibleWhen",
@@ -61,25 +108,15 @@ const CrudList = (props) => {
         return (
           <td key={schemaItem.name || schemaItem.label} {...cloned}>
             <Tag
+              className="flex"
               tagName={dropdownActions ? "div" : "Fragment"}
-              className={classNames(
-                styles["cell-actions"],
-                styles[visibleWhen]
-              )}
             >
               {schemaItem.component(item)}
               {dropdownActions && (
                 <div
                   className={classNames("ml-auto", styles["dropdown-wrapper"])}
                 >
-                  {this.__renderOptionsColumn(
-                    {
-                      dropdownActions: Boolean(dropdownActions),
-                      options: dropdownActions,
-                    },
-                    item,
-                    "span"
-                  )}
+                  {__renderDropdownActions(dropdownActions, item, "span")}
                 </div>
               )}
             </Tag>

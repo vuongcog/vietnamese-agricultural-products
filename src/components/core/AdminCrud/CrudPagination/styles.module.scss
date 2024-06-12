@@ -1,8 +1,22 @@
 .pagination-container {
   display: flex;
-  color: var(--core-text-white);
+  align-items: center;
+  color: var(--admin-background-second);
+  background-color: white;
+  height: 35px;
+  padding: 0px 12px;
+  border-radius: 6px;
 }
 .pagination {
   display: flex;
   justify-content: center;
+}
+.page-item {
+  font-weight: 500;
+  margin-right: 4px;
+}
+.active-page {
+  font-weight: bolder;
+  text-decoration: underline;
+  border-radius: 5px; /* Bo góc cho item */
 }

@@ -9,7 +9,7 @@ const CrudPagination = (props) => {
   for (let i = 0; i < totalPage; i++) {
     items.push(
       <li>
-        <button>{i + 1}</button>
+        <button className={styles.button}>{i + 1}</button>
       </li>
     );
   }
@@ -35,7 +35,8 @@ const CrudPagination = (props) => {
         }}
         containerClassName={styles.pagination}
         subContainerClassName="pages pagination"
-        activeClassName="active"
+        activeClassName={styles["active-page"]} // Sử dụng lớp CSS từ styles.module.scss
+        pageClassName={styles["page-item"]} // Sử dụng lớp CSS từ styles.module.scss
       ></ReactPaginate>
     </div>
   );

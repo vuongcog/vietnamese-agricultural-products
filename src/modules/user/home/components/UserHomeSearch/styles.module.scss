@@ -1,0 +1,18 @@
+.container {
+  box-shadow: #b0b0b0 0px -2px 9px 0px;
+  display: flex;
+  align-items: center;
+  input {
+    height: 70px;
+    width: 70%;
+    box-sizing: border-box;
+    padding: 0px 12px;
+  }
+  button {
+    color: white;
+    background-color: black;
+    width: 30%;
+    height: 70px;
+    font-size: 24px;
+  }
+}

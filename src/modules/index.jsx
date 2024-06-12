@@ -7,13 +7,26 @@ import User from "./admin/User/container";
 import Http from "../utils/http/http";
 import axios from "axios";
 import Test from "./admin/Test/container";
-// import withAuth from "../../hocs/withAuth"; // Import the HOC
+import Home from "./user/home/container";
+import Shopping from "./user/shoping/container";
+import Authentication from "./authentication/container";
+import FormLogin from "./authentication/components/FormLogin";
+import FormRegister from "./authentication/components/FormRegister";
+import DetailProduct from "./user/detail/container";
 const App = () => {
   return (
     <Routes>
       <Route path="/" Component={UserLayout}>
-        <Route path="/shoping" Component={() => <div>Home</div>}></Route>
+        <Route path="/" Component={Home}></Route>
+        <Route path="/shopping" Component={Shopping}></Route>
+        <Route path="/detail/:id" Component={DetailProduct}></Route>
       </Route>
+
+      <Route path="/authen" Component={Authentication}>
+        <Route path="/authen/signin" Component={FormLogin}></Route>
+        <Route path="/authen/signup" Component={FormRegister}></Route>
+      </Route>
+
       <Route path="/admin" Component={AdminLayout}>
         <Route path="/admin/dashboard" Component={ChartComponent}></Route>
         <Route path="/admin/user" Component={User}></Route>

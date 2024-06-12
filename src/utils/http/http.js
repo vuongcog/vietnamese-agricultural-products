@@ -7,6 +7,9 @@ class Http {
   constructor(endpoint) {
     this.endpoint = endpoint;
   }
+  create = (params = {}, options) => {
+    return this.http.post("/search", params, options);
+  };
   list = (params = {}, page = 1, ppp = 20) => {
     return this.http.get("/search", params);
   };

@@ -27,13 +27,13 @@ const Test = () => {
     schema: [
       {
         name: "title",
-        label: "Id",
+        label: "Title",
         default: "N/A",
         className: "w-[5%] text-start  text-[var(--theme-light-red)]",
       },
       {
         name: "link",
-        label: "Name",
+        label: "Link",
         default: "N/A",
         component: UserName,
         className: "w-[30%]  text-start text-[var(--theme-light-orange)]",
@@ -42,7 +42,29 @@ const Test = () => {
         name: "snippet",
         label: "Email",
         default: "N/A",
-        className: "w-[10%] text-start text-[var(--theme-yellow)] ",
+        className: "w-[20%] text-start text-[var(--theme-yellow)] ",
+        dropdownActions: {
+          items: [
+            {
+              icon: <i className="fa-regular fa-copy"></i>,
+              name: "duplicate",
+              label: "Duplicaate",
+              callback: () => {},
+            },
+            {
+              icon: <i className="fa-regular fa-delete-left"></i>,
+              name: "delete",
+              label: "Delete",
+              callback: () => {},
+            },
+            {
+              icon: <i className="fa-regular fa-pen-to-square"></i>,
+              name: "edit",
+              label: "Edit",
+              callBack: () => {},
+            },
+          ],
+        },
         component: UserEmail,
       },
       {

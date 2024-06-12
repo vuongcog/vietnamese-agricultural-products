@@ -8,7 +8,9 @@ import YnmCrudPaginationItemsPerPage from "./YnmCrudPaginationItemsPerPage";
 import { useState } from "react";
 import { useEffect } from "react";
 import ContextCrudProvider, { CrudContext } from "./CrudContext/CrudContext";
-import { Progress } from "@chakra-ui/react";
+import { Skeleton } from "@chakra-ui/react";
+import SekeletonCrudList from "./SekeletonCrudList";
+import ProgressFeching from "./Progress";
 const AdminCrud = () => {
   const {
     searchText,
@@ -28,39 +30,47 @@ const AdminCrud = () => {
     setErrors,
     classNameProps,
     mode,
+    perpage,
+    setPerpage,
     handleChangeSearchtext,
+    selectPerpage,
+    selectPagination,
   } = useContext(CrudContext);
 
   return (
-    <div className={styles[`main-crud`]}>
-      <BreadCrumb
-        searchText={searchText}
-        onChangeSearchText={handleChangeSearchtext}
-        isSearchInput
-      ></BreadCrumb>
-      <CrudList
-        items={items}
-        classNameProps={classNameProps}
-        schema={crudOptions.schema}
-      ></CrudList>
-      {crudOptions.mode.paging && (
-        <div>
-          <div>
-            <div>
-              <YnmCrudPaginationItemsPerPage value="10"></YnmCrudPaginationItemsPerPage>
-              <CrudPagination
-                isTop
-                itemsPerPage={2}
-                totalItems={100}
-                page={crudOptions.page || 1}
-                onChange={() => {
-                  console.log("hello");
-                }}
-              ></CrudPagination>
-            </div>
+    <div className="relative">
+      <ProgressFeching></ProgressFeching>
+      <div className={`${isFetching && "opacity-30"} ${styles[`main-crud`]}`}>
+        <BreadCrumb
+          searchText={searchText}
+          onChangeSearchText={handleChangeSearchtext}
+          isSearchInput
+        ></BreadCrumb>
+        {isFetching ? (
+          <SekeletonCrudList></SekeletonCrudList>
+        ) : (
+          <CrudList
+            items={items}
+            classNameProps={classNameProps}
+            schema={crudOptions.schema}
+          ></CrudList>
+        )}
+        {crudOptions.mode.paging && (
+          <div className="flex justify-around mt-3">
+            <CrudPagination
+              isTop
+              itemsPerPage={2}
+              totalItems={100}
+              page={crudOptions.page || 1}
+              onChange={selectPagination}
+            ></CrudPagination>
+            <YnmCrudPaginationItemsPerPage
+              value={perpage}
+              onChange={selectPerpage}
+            ></YnmCrudPaginationItemsPerPage>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

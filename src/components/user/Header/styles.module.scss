@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 48px;
+  .title {
+    font-size: 48px;
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    li {
+      font-weight: 500;
+      font-size: 24px;
+      &:hover {
+        color: green;
+      }
+    }
+  }
+}

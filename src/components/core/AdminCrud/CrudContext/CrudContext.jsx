@@ -9,7 +9,7 @@ import {
   startInitFilters,
 } from "../CrudSearch/action";
 import { compose } from "redux";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import withReducer from "../../../../utils/injectReducer";
 import filterProducerReducer from "../CrudSearch/reducers";
 import { useCallback } from "react";
@@ -21,7 +21,7 @@ export const CrudContext = createContext({});
 
 const ContextCrudProvider = ({ children, ...props }) => {
   let crudOptionsDefault = {
-    name: "curd",
+    name: "crud",
     translateName: "name",
     endpoint: "hello",
     endpointParams: {},
@@ -114,24 +114,36 @@ const ContextCrudProvider = ({ children, ...props }) => {
       ...mode,
     },
   };
+  const [perpage, setPerpage] = useState(10);
   const apiParams = NewCrudOptions.endpointParams || {};
   const [searchText, setSearchText] = useState(NewCrudOptions.endpointParams.q);
   const [oldData, setOldData] = useState({});
   const [loaded, setLoaded] = useState(false);
-  const [isFetching, setFetching] = useState(false);
+  const [isFetching, setFetching] = useState(true);
   const [items, setItems] = useState([]);
   const [defaultApiParams, setDefaultParams] = useState(apiParams);
   const [crudOptions, setCrudOptions] = useState(NewCrudOptions);
   const [errors, setErrors] = useState({});
-  const debounceSearch = useDebounce(searchText, 1000);
-
+  const debounceSearch = useDebounce(searchText, 100);
+  const [pagination, setPagination] = useState(1);
   const getItem = (isLoading = true, modeParams) => {};
+  const dispatch = useDispatch();
 
   const handleChangeSearchtext = (value) => {
     setSearchText(value.target.value);
   };
 
+  const selectPerpage = (value) => {
+    setPerpage(value);
+  };
+  const selectPagination = (value) => {
+    setPagination(value);
+    console.log(value);
+  };
+
   const value = {
+    selectPagination,
+    setPerpage,
     handleChangeSearchtext,
     searchText,
     setSearchText,
@@ -151,27 +163,39 @@ const ContextCrudProvider = ({ children, ...props }) => {
     setErrors,
     classNameProps,
     mode,
+    perpage,
+    selectPerpage,
   };
-
   const getItems = async (debounceSearch) => {
     crudOptions.endpointParams["q"] = debounceSearch;
+    crudOptions.endpointParams["num"] = perpage;
+    crudOptions.endpointParams["page"] = pagination;
     const config = {
       headers: {
         "X-API-KEY": "449a3aff26c2fbc9635100375b0e018fd3a4e194",
         "Content-Type": "application/json",
       },
     };
-
     await new Http(crudOptions.endpoint)
       .post(crudOptions.endpointParams, config)
       .then((res) => {
+        setFetching(false);
         setItems(JSON.parse(res.data));
+      })
+      .catch(() => {
+        setFetching(false);
       });
   };
-
+  const handleCreateItem = (item) => {};
   useEffect(() => {
-    getItems(debounceSearch);
-  }, [debounceSearch]);
+    setFetching(true);
+    const timer = setTimeout(() => {
+      getItems(debounceSearch);
+    }, [1500]);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [debounceSearch, perpage, pagination]);
 
   return <CrudContext.Provider value={value}>{children}</CrudContext.Provider>;
 };

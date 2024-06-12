@@ -61,9 +61,7 @@ const YnmCrudPaginationItemsPerPage = ({ value, onChange }) => {
         menuPlacement="top"
         className="select"
         value={selectdOption}
-        onChange={(value) => {
-          setSelectedOption(value);
-        }}
+        onChange={handleChange}
         styles={customStyles}
         options={options}
         isClearable={false}
