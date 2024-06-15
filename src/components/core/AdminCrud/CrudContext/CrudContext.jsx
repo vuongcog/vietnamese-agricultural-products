@@ -127,7 +127,6 @@ const ContextCrudProvider = ({ children, ...props }) => {
   const debounceSearch = useDebounce(searchText, 100);
   const [pagination, setPagination] = useState(1);
   const getItem = (isLoading = true, modeParams) => {};
-  const dispatch = useDispatch();
 
   const handleChangeSearchtext = (value) => {
     setSearchText(value.target.value);
@@ -153,7 +152,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
     setLoaded,
     isFetching,
     setFetching,
-    items: items.organic,
+    items: items,
     setItems,
     defaultApiParams,
     setDefaultParams,
@@ -167,31 +166,30 @@ const ContextCrudProvider = ({ children, ...props }) => {
     selectPerpage,
   };
   const getItems = async (debounceSearch) => {
-    crudOptions.endpointParams["q"] = debounceSearch;
-    crudOptions.endpointParams["num"] = perpage;
-    crudOptions.endpointParams["page"] = pagination;
-    const config = {
-      headers: {
-        "X-API-KEY": "449a3aff26c2fbc9635100375b0e018fd3a4e194",
-        "Content-Type": "application/json",
-      },
-    };
-    await new Http(crudOptions.endpoint)
-      .post(crudOptions.endpointParams, config)
-      .then((res) => {
-        setFetching(false);
-        setItems(JSON.parse(res.data));
-      })
-      .catch(() => {
-        setFetching(false);
-      });
-  };
-  const handleCreateItem = (item) => {};
-  useEffect(() => {
     setFetching(true);
+    crudOptions.endpointParams["search"] = debounceSearch;
+    // crudOptions.endpointParams["num"] = perpage;
+    crudOptions.endpointParams["page"] = pagination;
+    console.log(crudOptions.endpointParams);
+
+    const res = await new Http(crudOptions.endpoint).list(
+      crudOptions.endpointParams
+    );
+
+    setFetching(false);
+    return JSON.parse(res.data).data;
+  };
+  console.log(isFetching);
+  useEffect(() => {
     const timer = setTimeout(() => {
-      getItems(debounceSearch);
-    }, [1500]);
+      getItems(debounceSearch)
+        .then((res) => {
+          setItems(res);
+        })
+        .catch(() => {
+          console.log("err");
+        });
+    }, [500]);
     return () => {
       clearTimeout(timer);
     };

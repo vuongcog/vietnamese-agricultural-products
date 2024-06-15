@@ -42,8 +42,8 @@ const FormLogin = () => {
         setIsAuthenticated(true);
         navigate("/");
       })
-      .catch(() => {
-        console.log("error");
+      .catch((err) => {
+        console.log(err);
       });
   };
 

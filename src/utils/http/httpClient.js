@@ -3,11 +3,14 @@ import _ from "lodash";
 import $ from "jquery";
 import { data } from "autoprefixer";
 const httpClient = (isEndpoint = false) => {
-  const accessToken = localStorage.getItem("accessToken");
+  const parseToken = JSON.parse(localStorage.getItem("accessToken"));
+  const accessToken = parseToken?.access_token;
   const headers = {
     "Content-Type": "application/json",
-    // Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    // Authorization: `Bearer ${accessToken}}`,
   };
+  if (accessToken) headers["Authorization"] = `Bearer ${accessToken}`;
+
   const cancelTokenSource = axios.CancelToken.source();
   const defaultOptions = {
     responseType: "json",
@@ -41,7 +44,7 @@ const httpClient = (isEndpoint = false) => {
     get: (url, params = {}, options = {}) => {
       // process.env.AP
       if (isEndpoint) {
-        url = import.meta.env.VITE_API_URL + url;
+        url = import.meta.env.VITE_API_URL_SERVER + url;
       }
       const cloneParams = { ...params };
       _.forEach(cloneParams, (item, key) => {
@@ -50,15 +53,19 @@ const httpClient = (isEndpoint = false) => {
         }
       });
       ////////////
-      if (cloneParams.page) {
-        cloneParams.$skip = (cloneParams.page - 1) * cloneParams.$limit;
-        delete cloneParams.page;
-      }
+      // if (cloneParams.page) {
+      //   cloneParams.$skip = (cloneParams.page - 1) * cloneParams.$limit;
+      //   delete cloneParams.page;
+      // }
 
       if (!_.isEmpty(cloneParams)) {
         url = `${url}?${$.param(cloneParams)}`;
       }
-      console.log(url);
+      if (options.notAuthor) {
+        console.log(true);
+        delete defaultOptions.headers.Authorization;
+      }
+
       return axios.get(url, {
         ...defaultOptions,
         ...options,
@@ -74,11 +81,9 @@ const httpClient = (isEndpoint = false) => {
         data.status = "inactive";
       }
       if (isEndpoint) {
-        url = import.meta.env.VITE_API_URL + url;
+        url = import.meta.env.VITE_API_URL_SERVER + url;
       }
-      console.log("httpClient");
-      console.log(url);
-      console.log(options);
+
       return axios.post(`${url}`, data, {
         ...defaultOptions,
         ...options,

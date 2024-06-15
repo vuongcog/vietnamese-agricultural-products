@@ -138,7 +138,7 @@ const CrudList = (props) => {
   const _renderColumns = () => {
     const { items, isFetching } = props;
     if (!items.length && !isFetching) {
-      return alert("Not data");
+      // return alert("Not data");
     }
     return items.map((item, index) => {
       return (

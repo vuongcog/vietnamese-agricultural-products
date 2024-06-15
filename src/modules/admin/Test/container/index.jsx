@@ -8,9 +8,9 @@ import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudConte
 const Test = () => {
   const crudOptions = {
     endpointParams: {
-      q: "facebook",
+      q: "",
     },
-    endpoint: "/search",
+    endpoint: "/user",
     mode: {
       breadcrumb: true,
       list: true,
@@ -26,20 +26,20 @@ const Test = () => {
     ],
     schema: [
       {
-        name: "title",
+        name: "id",
         label: "Title",
         default: "N/A",
         className: "w-[5%] text-start  text-[var(--theme-light-red)]",
       },
       {
-        name: "link",
-        label: "Link",
+        name: "name",
+        label: "  Name",
         default: "N/A",
         component: UserName,
         className: "w-[30%]  text-start text-[var(--theme-light-orange)]",
       },
       {
-        name: "snippet",
+        name: "email",
         label: "Email",
         default: "N/A",
         className: "w-[20%] text-start text-[var(--theme-yellow)] ",
@@ -74,11 +74,22 @@ const Test = () => {
         default: "N/A",
       },
       {
-        name: "created_at",
-        label: "Created at",
-        formatDate: formatDateTime,
+        name: "phone_num",
+        label: "Phone Num",
         default: "N/A",
         className: "text-start text-[var(--theme-green)]",
+      },
+      {
+        name: "role",
+        label: "Updated at",
+        default: "N/A",
+        className: "text-end text-[var(--theme-light-blue)]",
+      },
+      {
+        name: "status",
+        label: "Status",
+        default: "N/A",
+        className: "text-end text-[var(--theme-light-blue)]",
       },
       {
         name: "updated_at",

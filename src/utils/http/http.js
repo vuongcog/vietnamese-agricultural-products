@@ -11,7 +11,7 @@ class Http {
     return this.http.post("/search", params, options);
   };
   list = (params = {}, page = 1, ppp = 20) => {
-    return this.http.get("/search", params);
+    return this.http.get(this.endpoint, params);
   };
   post = (params = {}, options) => {
     return this.http.post("/search", params, options);

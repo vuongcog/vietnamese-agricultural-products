@@ -36,10 +36,9 @@ const AdminCrud = () => {
     selectPerpage,
     selectPagination,
   } = useContext(CrudContext);
-
   return (
     <div className="relative">
-      <ProgressFeching></ProgressFeching>
+      {isFetching && <ProgressFeching></ProgressFeching>}
       <div className={`${isFetching && "opacity-30"} ${styles[`main-crud`]}`}>
         <BreadCrumb
           searchText={searchText}

@@ -9,9 +9,12 @@ class HttpUserClient {
   }
 
   getItem = (params = {}) => {
+    const option = {
+      notAuthor: true,
+    };
     const id = params.id;
     delete params.id;
-    return this.http.get(`https://api.zippopotam.us/us/${id}`, params);
+    return this.http.get(`https://api.zippopotam.us/us/${id}`, params, option);
   };
 }
 
