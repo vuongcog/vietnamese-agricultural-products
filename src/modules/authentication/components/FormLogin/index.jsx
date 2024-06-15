@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FormControl,
-  FormLabel,
   Input,
   FormErrorMessage,
   Button,
-  InputGroup,
   Checkbox,
 } from "@chakra-ui/react";
 import styles from "./styles.module.scss";
 import LOGO from "../../../../constants/logo";
+import { FormContext } from "./FormContext";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../contexts/AuthContext";
 const FormLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [remember, setRemember] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useContext(FormContext);
+  const { setIsAuthenticated } = useAuth();
   const handleSubmit = (event) => {
+    console.log("hello");
     event.preventDefault();
-
     if (!email) {
       setEmailError("Email is required");
       return;
@@ -27,7 +31,20 @@ const FormLogin = () => {
       setPasswordError("Password is required");
       return;
     }
-    console.log("Form submitted");
+
+    const loginParams = {
+      email: email,
+      password: password,
+    };
+    login(loginParams)
+      .then((res) => {
+        localStorage.setItem("accessToken", res);
+        setIsAuthenticated(true);
+        navigate("/");
+      })
+      .catch(() => {
+        console.log("error");
+      });
   };
 
   return (

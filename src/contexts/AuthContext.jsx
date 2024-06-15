@@ -6,18 +6,18 @@ const AuthContext = createContext();
 
 // Cung cấp Auth Context
 export function AuthProvider({ children }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const login = () => {
-    setIsAuthenticated(true);
-  };
-
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Boolean(localStorage.getItem("accessToken"))
+  );
+  console.log("auth");
   const logout = () => {
     setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ setIsAuthenticated, isAuthenticated, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

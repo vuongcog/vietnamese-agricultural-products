@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import UserHeader from "../../components/user/Header";
+import { ProtectedRoute } from "../../components/ProtectedRoute";
 const UserLayout = ({ children }) => {
   const [search, setSearch] = useState("");
   const fetch = async () => {
