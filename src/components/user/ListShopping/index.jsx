@@ -1,55 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
 import styles from "./styles.module.scss";
-import { document } from "postcss";
+import { ShoppingContext } from "../../../modules/user/shoping/context";
 const ListShoping = ({ items }) => {
-  // const [scrolledToBottom, setScrolledToBottom] = useState(false);
-
-  // const handleScroll = () => {
-  //   const scrollTop =
-  //     (document.documentElement && document.documentElement.scrollTop) ||
-  //     document.body.scrollTop;
-  //   const scrollHeight =
-  //     (document.documentElement && document.documentElement.scrollHeight) ||
-  //     document.body.scrollHeight;
-  //   const clientHeight =
-  //     document.documentElement.clientHeight || window.innerHeight;
-  //   const scrolledToBottom =
-  //     Math.ceil(scrollTop + clientHeight) >= scrollHeight;
-
-  //   if (scrolledToBottom) {
-  //     setScrolledToBottom(true);
-  //   } else {
-  //     setScrolledToBottom(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
+  const { loading, items: list } = useContext(ShoppingContext);
 
   const __renderCard = (item) => {
     return <Card key={item.title} item={item}></Card>;
   };
 
   const __renderListProduct = (items) => {
-    console.log(items);
     return (
       <div className={styles[`list-product-container`]}>
         {items.map((item) => {
           return __renderCard(item);
         })}
+        {/* {list.map((item, index) => {
+          return (
+            <div key={index} className="w-10 bg-red-400 h-[384px]">
+              {item.title}
+            </div>
+          );
+        })} */}
       </div>
     );
   };
   return <div className={styles.content}>{__renderListProduct(items)}</div>;
 };
 ListShoping.propTypes = {
-  items: PropTypes.string,
+  items: PropTypes.array,
 };
 
 export default ListShoping;

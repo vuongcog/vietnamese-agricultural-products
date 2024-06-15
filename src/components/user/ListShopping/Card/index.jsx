@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext, useRef } from "react";
 import styles from "./styles.module.scss";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { ShoppingContext } from "../../../../modules/user/shoping/context";
 const Card = ({ item, ...props }) => {
   const navigate = useNavigate();
   const cloneItem = _.cloneDeep(item);
-
+  const { elementRef } = useContext(ShoppingContext);
   return (
     <div
+      ref={elementRef ? elementRef : null}
       {...props}
       onClick={() => {
         navigate(`/detail/${item.id}`);

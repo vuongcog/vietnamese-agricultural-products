@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./styles.module.scss";
+import { ContextDetailProduct } from "../../context";
 const CardDetail = ({ item }) => {
+  const { item: itemTemp } = useContext(ContextDetailProduct);
   return (
     <div className={styles.container}>
       <div className={styles[`wrapper-img`]}>
         <img src={item.linkImage} alt="" />
       </div>
       <div className={styles[`wrapper-message`]}>
-        <div className={styles.title}>{item.title}</div>
+        <div className={styles.title}>
+          {itemTemp && itemTemp[`post code`]} - {item.title}
+        </div>
         <div className={styles[`wrapper-statistics`]}>
           <div>{item.rating}</div>
           <div className="text-[rgba(128, 120, 120, 0.7)]">

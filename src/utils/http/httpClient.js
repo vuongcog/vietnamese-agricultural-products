@@ -6,7 +6,7 @@ const httpClient = (isEndpoint = false) => {
   const accessToken = localStorage.getItem("accessToken");
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    // Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   };
   const cancelTokenSource = axios.CancelToken.source();
   const defaultOptions = {

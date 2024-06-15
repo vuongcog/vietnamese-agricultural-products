@@ -4,8 +4,6 @@ import AdminLayout from "../layouts/AdminLayout";
 import UserLayout from "../layouts/UserLayout";
 import ChartComponent from "./Test/Test";
 import User from "./admin/User/container";
-import Http from "../utils/http/http";
-import axios from "axios";
 import Test from "./admin/Test/container";
 import Home from "./user/home/container";
 import Shopping from "./user/shoping/container";
