@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import Card from "./Card";
 import styles from "./styles.module.scss";
 import { ShoppingContext } from "../../../modules/user/shoping/context";
+import { nanoid } from "@reduxjs/toolkit";
 const ListShoping = ({ items }) => {
-  const { loading, items: list } = useContext(ShoppingContext);
-
+  // const { loading, items: list } = useContext(ShoppingContext);
   const __renderCard = (item) => {
-    return <Card key={item.title} item={item}></Card>;
+    return <Card key={nanoid()} item={item}></Card>;
   };
 
   const __renderListProduct = (items) => {

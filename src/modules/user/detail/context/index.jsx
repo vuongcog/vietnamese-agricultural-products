@@ -20,6 +20,7 @@ const DetailProvider = ({ children }) => {
     return JSON.parse(res.data);
   };
   useEffect(() => {
+    console.log("context");
     getItem()
       .then((res) => {
         setItem(res);

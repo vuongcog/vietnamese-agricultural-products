@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styles from "./styles.module.scss";
+import PropTypes from "prop-types";
 import { ContextDetailProduct } from "../../context";
 const CardDetail = ({ item }) => {
   const { item: itemTemp } = useContext(ContextDetailProduct);
@@ -31,5 +32,7 @@ const CardDetail = ({ item }) => {
     </div>
   );
 };
-
+CardDetail.propTypes = {
+  item: PropTypes.object,
+};
 export default CardDetail;
