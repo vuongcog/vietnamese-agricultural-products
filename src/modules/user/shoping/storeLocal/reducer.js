@@ -1,6 +1,12 @@
-import { SET_ITEMS, SET_LOADING, SET_PAGE } from "../constants/constants";
+import {
+  SET_ITEMS,
+  SET_LOADING,
+  SET_PAGE,
+  SET_REFRESH,
+} from "../constants/constants";
 
 export const initialState = {
+  refresh: false,
   loading: false,
   limit: 10,
   page: 1,
@@ -11,16 +17,19 @@ const handleSetLoading = (state, action) => {
 };
 
 const handleSetItems = (state, action) => {
-  console.log("set item");
   return { ...state, items: [...state.items, ...action.payload] };
 };
-const handeSetPage = (state, action) => {
+const handeSetPage = (state) => {
   return { ...state, page: state.page + 1 };
+};
+const handleRefesh = (state) => {
+  return { ...state, refresh: !state.refresh };
 };
 const mapperHandle = {
   [SET_LOADING]: handleSetLoading,
   [SET_ITEMS]: handleSetItems,
   [SET_PAGE]: handeSetPage,
+  [SET_REFRESH]: handleRefesh,
 };
 export const reducer = (state, action) => {
   const handle = mapperHandle[action.type];

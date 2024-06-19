@@ -9,102 +9,25 @@ import {
   startInitFilters,
 } from "../CrudSearch/action";
 import { compose } from "redux";
-import { connect, useDispatch } from "react-redux";
-import withReducer from "../../../../utils/injectReducer";
+import { connect, useDispatch, useSelector } from "react-redux";
 import filterProducerReducer from "../CrudSearch/reducers";
-import { useCallback } from "react";
-import { debounce } from "lodash";
 import { useDebounce } from "../../../../utils/useDebounce";
-import { reducerList } from "../reducer";
+import { reducerList } from "../Store/reducer";
+import { FETCHED_DATA, FETCH_DATA, SET_ITEMS } from "../Store/constants";
+import warcherTest from "../Store/saga";
+import { runSaga } from "../../../../utils/saga/optionsSaga";
+import { crudOptionsDefault } from "./constants";
+import store from "../../../../configStore/configStore";
+import getInjectors from "../../../../utils/reducerInjectors";
+import {
+  getFetchingCrudList,
+  getItemsCrudList,
+  getRefreshCrudList,
+} from "../Store/selector";
+import { AVATAR } from "../../../../constants/avatar";
 
 export const CrudContext = createContext({});
-
 const ContextCrudProvider = ({ children, ...props }) => {
-  let crudOptionsDefault = {
-    name: "crud",
-    translateName: "name",
-    endpoint: "hello",
-    endpointParams: {},
-    $eager: "owner",
-    $sort: { id: -1 },
-    extraFilters: {},
-    mode: {
-      breadcrumb: true,
-      list: true,
-      search: true,
-      create: true,
-      paging: true,
-    },
-    pagingOptions: {
-      mode: "replace",
-    },
-    renderAddButotn: undefined,
-    breadcrums: [{ label: "Excamples" }],
-    headingOptions: [],
-    schema: [
-      {
-        name: "id",
-        label: "ID",
-        default: "N/A",
-        className: "text-center",
-        width: "5%",
-      },
-      { name: "title", label: "Example title", default: "N/A" },
-      {
-        name: "project.name",
-        label: "Project",
-        default: "N/A",
-        width: "20%",
-      },
-      {
-        name: "description",
-        label: "Description",
-        default: "N/A",
-        width: "30%",
-        limit: 100,
-      },
-      {
-        name: "created_at",
-        // date: process.env.DATE_FORMAT_MEDIUM,
-        label: "Created Date",
-        default: "N/A",
-        width: "20%",
-      },
-      {
-        name: "options",
-        label: "",
-        options: [
-          { name: "edit", label: "Edit", callback: null },
-          { name: "delete", label: "Remove", callback: null },
-        ],
-      },
-    ],
-    formSchema: [
-      {
-        name: "title",
-        label: "Example title",
-        placeholder: "Example name",
-        type: "text",
-      },
-      {
-        type: "select",
-        name: "id_project",
-        label: "Project",
-        isMulti: false,
-        endpoint: "/app/projects",
-      },
-      {
-        name: "description",
-        label: "Description",
-        placeholder: "Description (optional)",
-        type: "textarea",
-        rows: 5,
-      },
-    ],
-    type: "list",
-    showTotalItemsOnTop: true,
-  };
-
   const { classNameProps, mode } = props;
   let NewCrudOptions = {
     ...crudOptionsDefault,
@@ -119,14 +42,17 @@ const ContextCrudProvider = ({ children, ...props }) => {
   const [searchText, setSearchText] = useState(NewCrudOptions.endpointParams.q);
   const [oldData, setOldData] = useState({});
   const [loaded, setLoaded] = useState(false);
-  const [isFetching, setFetching] = useState(true);
-  const [items, setItems] = useState([]);
+  // const [isFetching, setFetching] = useState(true);
   const [defaultApiParams, setDefaultParams] = useState(apiParams);
   const [crudOptions, setCrudOptions] = useState(NewCrudOptions);
   const [errors, setErrors] = useState({});
   const debounceSearch = useDebounce(searchText, 100);
   const [pagination, setPagination] = useState(1);
-  const getItem = (isLoading = true, modeParams) => {};
+
+  const dispatch = useDispatch();
+  const items = useSelector(getItemsCrudList);
+  const isFetching = useSelector(getFetchingCrudList);
+  const refresh = useSelector(getRefreshCrudList);
 
   const handleChangeSearchtext = (value) => {
     setSearchText(value.target.value);
@@ -137,10 +63,16 @@ const ContextCrudProvider = ({ children, ...props }) => {
   };
   const selectPagination = (value) => {
     setPagination(value);
-    console.log(value);
   };
+  const createItems = async () => {
+    const http = new Http("/user");
+    await http.create(data);
+  };
+  console.log(refresh);
 
   const value = {
+    createItems,
+    dispatch,
     selectPagination,
     setPerpage,
     handleChangeSearchtext,
@@ -151,9 +83,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
     loaded,
     setLoaded,
     isFetching,
-    setFetching,
-    items: items,
-    setItems,
+    items,
     defaultApiParams,
     setDefaultParams,
     crudOptions,
@@ -166,25 +96,33 @@ const ContextCrudProvider = ({ children, ...props }) => {
     selectPerpage,
   };
   const getItems = async (debounceSearch) => {
-    setFetching(true);
+    dispatch({ type: FETCH_DATA });
     crudOptions.endpointParams["search"] = debounceSearch;
-    // crudOptions.endpointParams["num"] = perpage;
     crudOptions.endpointParams["page"] = pagination;
-    console.log(crudOptions.endpointParams);
 
     const res = await new Http(crudOptions.endpoint).list(
       crudOptions.endpointParams
     );
+    dispatch({ type: FETCHED_DATA });
 
-    setFetching(false);
     return JSON.parse(res.data).data;
   };
-  console.log(isFetching);
+  const data = {
+    name: "Ho Tung Son",
+    email: "huynhnhatvuong7777@gmail.com",
+    password: "huynhnhatvuong1",
+    role: "manager",
+    address: "123 Hoang Hoa Tham",
+    phone_num: "0348079230",
+    avatar: AVATAR.admin,
+    status: "inactive",
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       getItems(debounceSearch)
         .then((res) => {
-          setItems(res);
+          dispatch({ type: SET_ITEMS, payload: res });
         })
         .catch(() => {
           console.log("err");
@@ -193,7 +131,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [debounceSearch, perpage, pagination]);
+  }, [debounceSearch, perpage, pagination, refresh]);
 
   return <CrudContext.Provider value={value}>{children}</CrudContext.Provider>;
 };
@@ -209,34 +147,10 @@ const mapDispatchToProps = {
   clearFilters,
   startInitFilters,
 };
-const injectReducer = withReducer({
-  key: "filter",
-  reducer: filterProducerReducer,
-});
-const injectReducer1 = withReducer({ key: "list", reducer: reducerList });
 
-export default compose(
-  connect(null, mapDispatchToProps),
-  injectReducer,
-  injectReducer1
-)(ContextCrudProvider);
+const injectReducerFactory = getInjectors(store);
+injectReducerFactory.injectReducer("crudList", reducerList);
+injectReducerFactory.injectReducer("filter", filterProducerReducer);
+runSaga(warcherTest, "sagaTest");
 
-// useEffect(() => {
-//   getItems();
-// }, [searchText]);, const handleChangeSearchtext = (value) => {
-//   setSearchText(value.target.value);
-// };,const getItems = async () => {
-//   crudOptions.endpointParams["q"] = searchText;
-//   const config = {
-//     headers: {
-//       "X-API-KEY": "449a3aff26c2fbc9635100375b0e018fd3a4e194",
-//       "Content-Type": "application/json",
-//     },
-//   };
-
-//   await new Http(crudOptions.endpoint)
-//     .post(crudOptions.endpointParams, config)
-//     .then((res) => {
-//       setItems(JSON.parse(res.data));
-//     });
-// };. đây là 3 hàm trên dùng để phục vụ trong việc fetchAPI, tôi muốn khi search, nó sẽ không fetchAPI liền mà mà đợi khi tôi ngừng serach khoảng 1s thì mới fetch
+export default compose(connect(null, mapDispatchToProps))(ContextCrudProvider);

@@ -6,13 +6,14 @@ const intiState = {
   data: [],
 };
 
-const fetchingData = (state, action) => ({
+const fetchingData = (state) => ({
   ...state,
   loading: true,
   isFeching: true,
   data: [],
 });
-const addData = (state, action) => {
+
+const addData = (state) => {
   return {
     ...state,
   };

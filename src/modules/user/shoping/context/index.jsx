@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { SET_ITEMS, SET_LOADING, SET_PAGE } from "../constants/constants";
 
 export const ShoppingContext = createContext({});
-
 const ShoppingProvider = ({ children }) => {
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const elementRef = useRef(null);

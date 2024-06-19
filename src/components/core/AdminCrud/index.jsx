@@ -35,12 +35,14 @@ const AdminCrud = () => {
     handleChangeSearchtext,
     selectPerpage,
     selectPagination,
+    createItems,
   } = useContext(CrudContext);
   return (
     <div className="relative">
       {isFetching && <ProgressFeching></ProgressFeching>}
       <div className={`${isFetching && "opacity-30"} ${styles[`main-crud`]}`}>
         <BreadCrumb
+          handleCreate={createItems}
           searchText={searchText}
           onChangeSearchText={handleChangeSearchtext}
           isSearchInput

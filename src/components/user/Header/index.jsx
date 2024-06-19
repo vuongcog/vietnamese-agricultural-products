@@ -39,7 +39,6 @@ const UserHeader = () => {
           />
           <MenuList>
             {SCHEMA.map((item, index) => {
-              console.log(item.link);
               return (
                 <MenuItem key={index}>
                   <Link className="w-full h-full" to={item.link}>

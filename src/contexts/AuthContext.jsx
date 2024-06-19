@@ -9,7 +9,6 @@ export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(
     Boolean(localStorage.getItem("accessToken"))
   );
-  console.log("auth");
   const logout = () => {
     setIsAuthenticated(false);
   };

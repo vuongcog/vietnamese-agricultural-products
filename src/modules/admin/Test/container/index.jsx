@@ -5,6 +5,9 @@ import UserEmail from "../components/UserEmail";
 import formatDateTime from "../../../../utils/formateDateTime";
 import AdminCrud from "../../../../components/core/AdminCrud";
 import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudContext/CrudContext";
+import { cancelSaga, runSaga } from "../../../../utils/saga/optionsSaga";
+import { useDispatch, useSelector } from "react-redux";
+import fetchUser, { watchFetchTest } from "../store/saga";
 const Test = () => {
   const crudOptions = {
     endpointParams: {
@@ -101,8 +104,36 @@ const Test = () => {
     ],
     initSearch: true,
   };
+  const dispatch = useDispatch();
+  // const user = useSelector((state) => state.user.user);
+  // const error = useSelector((state) => state.user.error);
+
+  const startSaga = () => {
+    runSaga(fetchUser, "fetchUserSaga");
+    runSaga(watchFetchTest, "fetchTestUserSaga");
+    dispatch({ type: "FETCH_USER_REQUEST" });
+  };
+
+  const stopSaga = () => {
+    cancelSaga("fetchUserSaga");
+  };
   return (
     <div className={styles.module}>
+      <button
+        className="text-white"
+        onClick={() => {
+          dispatch({ type: "FETCH_USER_REQUEST" });
+        }}
+      >
+        Click
+      </button>
+      <button className="text-white" onClick={startSaga}>
+        Start Fetch User Saga
+      </button>
+      <button className="text-white" onClick={stopSaga}>
+        Stop Fetch User Saga
+      </button>
+
       <ContextCrudProvider
         {...crudOptions}
         classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
@@ -115,5 +146,4 @@ const Test = () => {
     </div>
   );
 };
-
 export default Test;

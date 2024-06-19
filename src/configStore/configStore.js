@@ -10,11 +10,11 @@ const rootReducer = {
   counterReducer,
   counterReducer1,
 };
-const sagaMiddleware = createSagaMiddleware();
+export const sagaMiddleware = createSagaMiddleware();
 const makeStore = () => {
   const store = configureStore({
     reducer: createReducer(rootReducer),
-    
+
     middleware: (getDefaultMiddleware) => {
       return [
         sagaMiddleware,
