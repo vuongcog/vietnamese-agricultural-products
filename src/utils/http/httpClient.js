@@ -10,7 +10,6 @@ const httpClient = (isEndpoint = false) => {
     // Authorization: `Bearer ${accessToken}}`,
   };
   if (accessToken) headers["Authorization"] = `Bearer ${accessToken}`;
-
   const cancelTokenSource = axios.CancelToken.source();
   const defaultOptions = {
     responseType: "json",
@@ -61,8 +60,8 @@ const httpClient = (isEndpoint = false) => {
       if (!_.isEmpty(cloneParams)) {
         url = `${url}?${$.param(cloneParams)}`;
       }
+      console.log(options.notAuthor);
       if (options.notAuthor) {
-        console.log(true);
         delete defaultOptions.headers.Authorization;
       }
 

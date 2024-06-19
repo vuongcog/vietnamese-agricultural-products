@@ -8,7 +8,7 @@ import { useContext } from "react";
 const Shopping = () => {
   return (
     <ShoppingProvider>
-      <div className="flex bg-red-200 h-[10000px]">
+      <div className="flex  h-[10000px]">
         <UserShoppingCategory></UserShoppingCategory>
         <ListShoping items={LIST_PRODUCT}></ListShoping>
       </div>

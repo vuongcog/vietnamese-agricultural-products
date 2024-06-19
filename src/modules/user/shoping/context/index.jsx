@@ -58,6 +58,7 @@ const ShoppingProvider = ({ children }) => {
       fetchItems(state.page + 1);
     }
   };
+  console.log(state.items);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {

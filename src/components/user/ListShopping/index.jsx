@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 import { ShoppingContext } from "../../../modules/user/shoping/context";
 import { nanoid } from "@reduxjs/toolkit";
 const ListShoping = ({ items }) => {
-  // const { loading, items: list } = useContext(ShoppingContext);
+  const { loading, items: list } = useContext(ShoppingContext);
   const __renderCard = (item) => {
     return <Card key={nanoid()} item={item}></Card>;
   };
@@ -16,13 +16,13 @@ const ListShoping = ({ items }) => {
         {items.map((item) => {
           return __renderCard(item);
         })}
-        {/* {list.map((item, index) => {
+        {list.map((item, index) => {
           return (
-            <div key={index} className="w-10 bg-red-400 h-[384px]">
+            <div key={index} className="w-10 h-[384px]">
               {item.title}
             </div>
           );
-        })} */}
+        })}
       </div>
     );
   };

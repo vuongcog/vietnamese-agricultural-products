@@ -11,6 +11,7 @@ import LOGO from "../../../../constants/logo";
 import { FormContext } from "./FormContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../contexts/AuthContext";
+import axios from "axios";
 const FormLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +21,18 @@ const FormLogin = () => {
   const navigate = useNavigate();
   const { login } = useContext(FormContext);
   const { setIsAuthenticated } = useAuth();
+  // axios.defaults.withCredentials = true;
+  const fetchData = () => {
+    axios
+      .get("http://localhost:3000/set-cookie")
+      .then(() => {
+        console.log("succsess");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  fetchData();
   const handleSubmit = (event) => {
     console.log("hello");
     event.preventDefault();
