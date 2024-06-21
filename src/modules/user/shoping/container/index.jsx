@@ -2,8 +2,7 @@ import React from "react";
 import UserShoppingCategory from "../components/Category";
 import ListShoping from "../../../../components/user/ListShopping";
 import LIST_PRODUCT from "../../../../constants/virtual-item";
-import ShoppingProvider, { ShoppingContext } from "../context";
-import { useContext } from "react";
+import ShoppingProvider from "../context";
 
 const Shopping = () => {
   return (

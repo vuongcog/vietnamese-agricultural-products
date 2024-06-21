@@ -1,8 +1,7 @@
-import React, { Children, useContext } from "react";
-import FormLogin from "../components/FormRegister";
+import React from "react";
 import styles from "./styles.module.scss";
 import { Outlet } from "react-router-dom";
-import FormProvider, { FormContext } from "../components/FormLogin/FormContext";
+import FormProvider from "../components/FormLogin/FormContext";
 
 const Authentication = ({ children }) => {
   return (

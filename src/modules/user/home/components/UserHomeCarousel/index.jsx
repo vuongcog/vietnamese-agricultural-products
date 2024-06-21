@@ -1,4 +1,4 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { PICTURE } from "../../../../../constants/picture";
 import styles from "./styles.module.scss";
@@ -26,8 +26,8 @@ function BannerCarousel() {
           <h2 className="text-[62px]">Vegetables Shop</h2>
           <div className="text-[24px]">
             It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at it's layout. The
-            point of using Lorem Ipsum is that it has a more-or-less normal
+            the readable content of a page when looking at its layout. The point
+            of using Lorem Ipsum is that it has a more-or-less normal
           </div>
           <UserHomeSearch></UserHomeSearch>
           <div className="flex gap-10">

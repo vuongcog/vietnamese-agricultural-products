@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 import UserHeader from "../../components/user/Header";
-import ProgressFullScreen from "../../components/core/Progress";
 const UserLayout = ({ children }) => {
   return (
     <div>

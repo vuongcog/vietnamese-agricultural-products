@@ -1,4 +1,3 @@
-import { yellow } from "@mui/material/colors";
 import { call, put, delay, takeLatest } from "redux-saga/effects";
 
 function fetchUserApi() {

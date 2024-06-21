@@ -1,5 +1,4 @@
 import React from "react";
-import CrudList from "../../../../components/core/AdminCrud/CrudList/index";
 import UserName from "../components/UserName";
 import styles from "./styles.module.scss";
 import UserEmail from "../components/UserEmail";

@@ -1,9 +1,7 @@
-import React, { useRef } from "react";
-import { useState } from "react";
+import React from "react";
 import { listUser } from "../../../../constants/listUser";
 import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
-import { clone } from "lodash";
 import Tag from "../../Tag";
 import classNames from "classnames";
 import {} from "react-select";
@@ -91,11 +89,11 @@ const CrudList = (props) => {
 
       if (schemaItem.component) {
         let dropdownActions = _.get(schemaItem, "dropdownActions.items", null);
-        const visibleWhen = _.get(
-          schemaItem,
-          "dropdownActions.visibleWhen",
-          null
-        );
+        // const visibleWhen = _.get(
+        //   schemaItem,
+        //   "dropdownActions.visibleWhen",
+        //   null
+        // );
 
         return (
           <td key={schemaItem.name || schemaItem.label} {...cloned}>

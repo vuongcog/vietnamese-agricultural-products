@@ -1,4 +1,4 @@
-import { Box, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
+import { Box, SkeletonText } from "@chakra-ui/react";
 import React from "react";
 
 const SekeletonCrudList = () => {

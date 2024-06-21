@@ -49,7 +49,6 @@ const ContextCrudProvider = ({ children, ...props }) => {
   const [errors, setErrors] = useState({});
   const debounceSearch = useDebounce(searchText, 100);
   const [pagination, setPagination] = useState(1);
-  const [alerError, setAllerError] = useState(null);
   const dispatch = useDispatch();
   const items = useSelector(getItemsCrudList);
   const isFetching = useSelector(getFetchingCrudList);

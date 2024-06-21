@@ -1,5 +1,5 @@
 import React from "react";
-import { CircularProgress, layout } from "@chakra-ui/react";
+import { CircularProgress } from "@chakra-ui/react";
 import styles from "./styles.module.scss";
 const ProgressFullScreen = () => {
   return (

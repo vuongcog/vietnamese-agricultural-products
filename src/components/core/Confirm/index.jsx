@@ -8,15 +8,13 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useEffect } from "react";
 
 const Confirm = ({ children, doneText, button, title, callbackCancel }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isConfirmed, setIsConfirmed } = useState(false);
   const cancelRef = useRef();
   const handleConfirm = ({ onConfirm }) => {
-    setIsConfirmed(true);
     onConfirm();
     onClose();
   };

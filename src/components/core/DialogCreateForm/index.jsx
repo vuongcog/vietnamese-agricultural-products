@@ -3,7 +3,6 @@ import Confirm from "../Confirm";
 import CreateForm from "../CreateForm";
 import ProviderDialogCreateForm from "./context/ProviderDialogCreateForm";
 import PropTypes from "prop-types";
-import itemDetail from "../../../constants/item-detail";
 const DialogCreateForm = ({ schemaForm, callbackCancel, endpoint, item }) => {
   return (
     <ProviderDialogCreateForm endpoint={endpoint} type={schemaForm.type}>

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import DetailProvider, { ContextDetailProduct } from "../context";
+import React from "react";
+import DetailProvider from "../context";
 import itemDetail from "../../../../constants/item-detail";
 import CardDetail from "../comopnents/CardDetail";
 import styles from "./styles.module.scss";

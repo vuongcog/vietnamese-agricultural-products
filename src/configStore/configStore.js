@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 // import { quotesApiSlice } from "../features/quotes/quotesApiSlice";
-import { setupListeners } from "@reduxjs/toolkit/query";
 import watcher from "../modules/Test/saga";
 import createSagaMiddleware from "redux-saga";
 import counterReducer, { increment } from "../modules/Test/reducer";

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import {
   FormControl,
-  FormLabel,
   Input,
   FormErrorMessage,
   Button,
-  InputGroup,
   Checkbox,
 } from "@chakra-ui/react";
 import styles from "./styles.module.scss";

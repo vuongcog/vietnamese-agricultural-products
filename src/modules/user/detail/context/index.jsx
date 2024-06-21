@@ -1,9 +1,7 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { createContext } from "react";
-import { SET_LOADING } from "../comopnents/CardDetail/constants/actions";
-import { json, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import HttpUserClient from "../../../../utils/http/httpUserClient";
 export const ContextDetailProduct = createContext({});
 

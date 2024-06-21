@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
-import UserHomeSearch from "../../../modules/user/home/components/UserHomeSearch";
 import SearchHeader from "./SearchHeader";
 const UserHeader = () => {
   return (

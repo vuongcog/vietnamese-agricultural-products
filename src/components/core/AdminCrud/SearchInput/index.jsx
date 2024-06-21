@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import styles from "./styles.module.scss";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
 
 const SearchInput = ({ searchText, placeHolder, onChangeSearchText }) => {
   return (
@@ -25,6 +23,7 @@ const SearchInput = ({ searchText, placeHolder, onChangeSearchText }) => {
   );
 };
 SearchInput.propTypes = {
+  searchText: PropTypes.string,
   placeHolder: PropTypes.string,
   onChangeSearchText: PropTypes.string,
 };

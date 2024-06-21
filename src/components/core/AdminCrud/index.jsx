@@ -5,31 +5,28 @@ import BreadCrumb from "./BreadCrumb";
 import styles from "./styles.module.scss";
 import CrudPagination from "./CrudPagination";
 import YnmCrudPaginationItemsPerPage from "./YnmCrudPaginationItemsPerPage";
-import { useState } from "react";
-import { useEffect } from "react";
-import ContextCrudProvider, { CrudContext } from "./CrudContext/CrudContext";
-import { Skeleton } from "@chakra-ui/react";
+import { CrudContext } from "./CrudContext/CrudContext";
 import SekeletonCrudList from "./SekeletonCrudList";
 import ProgressFeching from "./Progress";
 const AdminCrud = () => {
   const {
     searchText,
-    loaded,
-    setLoaded,
+    // loaded,
+    // setLoaded,
     isFetching,
-    setFetching,
+    // setFetching,
     items,
-    setItems,
-    defaultApiParams,
-    setDefaultParams,
+    // setItems,
+    // defaultApiParams,
+    // setDefaultParams,
     crudOptions,
-    setCrudOptions,
-    errors,
-    setErrors,
+    // setCrudOptions,
+    // errors,
+    // setErrors,
     classNameProps,
-    mode,
+    // mode,
     perpage,
-    setPerpage,
+    // setPerpage,
     handleChangeSearchtext,
     selectPerpage,
     selectPagination,
