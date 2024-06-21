@@ -22,9 +22,9 @@ export const SCHEMA = [
   },
   {
     id: 4,
-    name: "Item4",
+    name: "Test1",
     icon: "fa fa-home",
-    link: "user",
+    link: "/admin/test1",
 
     color: "text-[#00eca3]",
   },

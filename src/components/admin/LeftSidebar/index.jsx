@@ -19,7 +19,6 @@ const AdminLeftSidebar = () => {
       <AddminAvatar></AddminAvatar>
       <ul className={styles[`sidebar-menu`]}>
         {SCHEMA.map((item, index) => {
-          console.log(item.color);
           return (
             <li
               onClick={() => {

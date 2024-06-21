@@ -16,6 +16,7 @@ import {
   ProtectedAuthenRoute,
   ProtectedRoute,
 } from "../components/ProtectedRoute";
+
 const App = () => {
   return (
     <AuthProvider>

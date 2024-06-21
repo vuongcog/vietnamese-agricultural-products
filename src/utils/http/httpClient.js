@@ -1,10 +1,11 @@
 import axios from "axios";
 import _ from "lodash";
 import $ from "jquery";
-import { data } from "autoprefixer";
+import { getCookie } from "../cookie/parseCookie";
 const httpClient = (isEndpoint = false) => {
-  const parseToken = JSON.parse(localStorage.getItem("accessToken"));
-  const accessToken = parseToken?.access_token;
+  // const parseToken = JSON.parse(localStorage.getItem("accessToken"));
+  const accessToken = getCookie("accsessToken");
+
   const headers = {
     "Content-Type": "application/json",
     // Authorization: `Bearer ${accessToken}}`,
@@ -27,18 +28,18 @@ const httpClient = (isEndpoint = false) => {
       return data;
     },
   };
-  axios.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      if (
-        (error.response.status === 401 &&
-          error.response.data.error.message === "Token is inactive") ||
-        error.response.data.error.message === "Token expired"
-      ) {
-        return Promise.reject(error);
-      }
-    }
-  );
+  // axios.interceptors.response.use(
+  //   (response) => response,
+  //   (error) => {
+  //     if (
+  //       (error.response.status === 401 &&
+  //         error.response.data.error.message === "Token is inactive") ||
+  //       error.response.data.error.message === "Token expired"
+  //     ) {
+  //       return Promise.reject(error);
+  //     }
+  //   }
+  // );
   return {
     get: (url, params = {}, options = {}) => {
       // process.env.AP

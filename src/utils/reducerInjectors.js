@@ -1,6 +1,4 @@
 import checkStore from "./checkStore";
-import store from "../configStore/configStore";
-import counterReducer from "../modules/Test/reducer";
 import invariant from "invariant";
 import _ from "lodash";
 import createReducer from "./createReducer";
@@ -17,7 +15,7 @@ export function injectReducerFactory(store, isValid) {
       store.injectedReducers[key] === reducer
     )
       return;
-    store.injectedReducers[key] = reducer; // eslint-disable-line no-param-reassign
+    store.injectedReducers[key] = reducer;
     store.replaceReducer(createReducer(store.injectedReducers));
   };
 }

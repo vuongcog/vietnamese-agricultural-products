@@ -14,8 +14,6 @@ import ProgressFeching from "./Progress";
 const AdminCrud = () => {
   const {
     searchText,
-    oldData,
-    setOldData,
     loaded,
     setLoaded,
     isFetching,
@@ -35,14 +33,14 @@ const AdminCrud = () => {
     handleChangeSearchtext,
     selectPerpage,
     selectPagination,
-    createItems,
+    schemaForm,
   } = useContext(CrudContext);
   return (
     <div className="relative">
       {isFetching && <ProgressFeching></ProgressFeching>}
       <div className={`${isFetching && "opacity-30"} ${styles[`main-crud`]}`}>
         <BreadCrumb
-          handleCreate={createItems}
+          schemaForm={schemaForm}
           searchText={searchText}
           onChangeSearchText={handleChangeSearchtext}
           isSearchInput

@@ -11,7 +11,8 @@ import LOGO from "../../../../constants/logo";
 import { FormContext } from "./FormContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../contexts/AuthContext";
-import axios from "axios";
+import { parseObjectJson } from "../../../../utils/pareJson";
+import ProgressFullScreen from "../../../../components/core/Progress";
 const FormLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,20 +22,8 @@ const FormLogin = () => {
   const navigate = useNavigate();
   const { login } = useContext(FormContext);
   const { setIsAuthenticated } = useAuth();
-  // axios.defaults.withCredentials = true;
-  const fetchData = () => {
-    axios
-      .get("http://localhost:3000/set-cookie")
-      .then(() => {
-        console.log("succsess");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  fetchData();
+  const { isLoading } = useContext(FormContext);
   const handleSubmit = (event) => {
-    console.log("hello");
     event.preventDefault();
     if (!email) {
       setEmailError("Email is required");
@@ -49,9 +38,11 @@ const FormLogin = () => {
       email: email,
       password: password,
     };
+
     login(loginParams)
       .then((res) => {
-        localStorage.setItem("accessToken", res);
+        const responseData = parseObjectJson(res);
+        document.cookie = `accsessToken=${responseData.access_token} ; path = "/" ;  max-age=${responseData.expires_in};`;
         setIsAuthenticated(true);
         navigate("/");
       })
@@ -62,6 +53,7 @@ const FormLogin = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      {isLoading && <ProgressFullScreen></ProgressFullScreen>}
       <img src={LOGO.login}></img>
       <h1>LOG IN</h1>
       <FormControl className={styles.field} isInvalid={!!emailError}>

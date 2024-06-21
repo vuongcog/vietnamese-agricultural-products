@@ -1,5 +1,5 @@
 import { Box, Image } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { PICTURE } from "../../../../../constants/picture";
 import styles from "./styles.module.scss";
 import UserHomeSearch from "../UserHomeSearch";

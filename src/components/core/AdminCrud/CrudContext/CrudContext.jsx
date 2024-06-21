@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createContext } from "react";
 import Http from "../../../../utils/http/http";
+import { compose } from "redux";
 import PropTypes from "prop-types";
 import {
   addFilters,
@@ -8,7 +9,6 @@ import {
   replaceFilters,
   startInitFilters,
 } from "../CrudSearch/action";
-import { compose } from "redux";
 import { connect, useDispatch, useSelector } from "react-redux";
 import filterProducerReducer from "../CrudSearch/reducers";
 import { useDebounce } from "../../../../utils/useDebounce";
@@ -20,15 +20,16 @@ import { crudOptionsDefault } from "./constants";
 import store from "../../../../configStore/configStore";
 import getInjectors from "../../../../utils/reducerInjectors";
 import {
+  getErrorCrudList,
   getFetchingCrudList,
   getItemsCrudList,
   getRefreshCrudList,
 } from "../Store/selector";
-import { AVATAR } from "../../../../constants/avatar";
+import { useCallback } from "react";
 
 export const CrudContext = createContext({});
 const ContextCrudProvider = ({ children, ...props }) => {
-  const { classNameProps, mode } = props;
+  const { classNameProps, mode, schemaForm } = props;
   let NewCrudOptions = {
     ...crudOptionsDefault,
     ...props,
@@ -48,12 +49,12 @@ const ContextCrudProvider = ({ children, ...props }) => {
   const [errors, setErrors] = useState({});
   const debounceSearch = useDebounce(searchText, 100);
   const [pagination, setPagination] = useState(1);
-
+  const [alerError, setAllerError] = useState(null);
   const dispatch = useDispatch();
   const items = useSelector(getItemsCrudList);
   const isFetching = useSelector(getFetchingCrudList);
   const refresh = useSelector(getRefreshCrudList);
-
+  // const errorMessage = useSelector(getErrorCrudList);
   const handleChangeSearchtext = (value) => {
     setSearchText(value.target.value);
   };
@@ -64,14 +65,9 @@ const ContextCrudProvider = ({ children, ...props }) => {
   const selectPagination = (value) => {
     setPagination(value);
   };
-  const createItems = async () => {
-    const http = new Http("/user");
-    await http.create(data);
-  };
-  console.log(refresh);
 
   const value = {
-    createItems,
+    schemaForm,
     dispatch,
     selectPagination,
     setPerpage,
@@ -107,17 +103,17 @@ const ContextCrudProvider = ({ children, ...props }) => {
 
     return JSON.parse(res.data).data;
   };
-  const data = {
-    name: "Ho Tung Son",
-    email: "huynhnhatvuong7777@gmail.com",
-    password: "huynhnhatvuong1",
-    role: "manager",
-    address: "123 Hoang Hoa Tham",
-    phone_num: "0348079230",
-    avatar: AVATAR.admin,
-    status: "inactive",
-  };
+  const isFirstRun = useRef(true);
 
+  // useMemo(() => {
+  //   console.log(errorMessage);
+  //   if (isFirstRun.current) {
+  //     isFirstRun.current = false;
+  //     return null;
+  //   }
+  //   if (!errorMessage) return;
+  //   alert(errorMessage);
+  // }, [errorMessage]);
   useEffect(() => {
     const timer = setTimeout(() => {
       getItems(debounceSearch)
@@ -126,9 +122,12 @@ const ContextCrudProvider = ({ children, ...props }) => {
         })
         .catch(() => {
           console.log("err");
+          dispatch({ type: FETCHED_DATA });
         });
     }, [500]);
+
     return () => {
+      isFirstRun.current = true;
       clearTimeout(timer);
     };
   }, [debounceSearch, perpage, pagination, refresh]);
@@ -139,6 +138,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
 ContextCrudProvider.propTypes = {
   classNameProps: PropTypes.shape({}),
   mode: PropTypes.object,
+  schemaForm: PropTypes.object,
 };
 
 const mapDispatchToProps = {
@@ -153,4 +153,7 @@ injectReducerFactory.injectReducer("crudList", reducerList);
 injectReducerFactory.injectReducer("filter", filterProducerReducer);
 runSaga(warcherTest, "sagaTest");
 
+ContextCrudProvider.propTypes = {
+  children: PropTypes.element,
+};
 export default compose(connect(null, mapDispatchToProps))(ContextCrudProvider);

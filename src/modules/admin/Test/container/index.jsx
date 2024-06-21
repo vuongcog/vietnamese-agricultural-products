@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import UserName from "../components/UserName";
 import styles from "./styles.module.scss";
 import UserEmail from "../components/UserEmail";
 import formatDateTime from "../../../../utils/formateDateTime";
 import AdminCrud from "../../../../components/core/AdminCrud";
 import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudContext/CrudContext";
-import { cancelSaga, runSaga } from "../../../../utils/saga/optionsSaga";
-import { useDispatch, useSelector } from "react-redux";
-import fetchUser, { watchFetchTest } from "../store/saga";
+import DialogCreateForm from "../../../../components/core/DialogCreateForm";
+import { schemaFormFactory } from "../utils/schemaFormFactory";
 const Test = () => {
+  const [selectElement, setSelectElement] = useState(null);
+
   const crudOptions = {
     endpointParams: {
       q: "",
@@ -64,7 +65,18 @@ const Test = () => {
               icon: <i className="fa-regular fa-pen-to-square"></i>,
               name: "edit",
               label: "Edit",
-              callBack: () => {},
+              callback: (item) => {
+                console.log(item);
+                setSelectElement(
+                  <DialogCreateForm
+                    item={item}
+                    endpoint={"/user"}
+                    callbackCancel={setSelectElement}
+                    title="Update User"
+                    schemaForm={schemaFormFactory("edit")}
+                  ></DialogCreateForm>
+                );
+              },
             },
           ],
         },
@@ -104,40 +116,14 @@ const Test = () => {
     ],
     initSearch: true,
   };
-  const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user.user);
-  // const error = useSelector((state) => state.user.error);
-
-  const startSaga = () => {
-    runSaga(fetchUser, "fetchUserSaga");
-    runSaga(watchFetchTest, "fetchTestUserSaga");
-    dispatch({ type: "FETCH_USER_REQUEST" });
-  };
-
-  const stopSaga = () => {
-    cancelSaga("fetchUserSaga");
-  };
   return (
     <div className={styles.module}>
-      <button
-        className="text-white"
-        onClick={() => {
-          dispatch({ type: "FETCH_USER_REQUEST" });
-        }}
-      >
-        Click
-      </button>
-      <button className="text-white" onClick={startSaga}>
-        Start Fetch User Saga
-      </button>
-      <button className="text-white" onClick={stopSaga}>
-        Stop Fetch User Saga
-      </button>
-
       <ContextCrudProvider
+        schemaForm={schemaFormFactory("create")}
         {...crudOptions}
         classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
       >
+        {selectElement}
         <AdminCrud
           classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
           {...crudOptions}

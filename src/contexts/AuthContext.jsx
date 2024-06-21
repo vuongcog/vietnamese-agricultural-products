@@ -1,14 +1,14 @@
 // AuthContext.js
 import React, { createContext, useContext, useState } from "react";
+import { getCookie } from "../utils/cookie/parseCookie";
 
 // Tạo Context
 const AuthContext = createContext();
 
-// Cung cấp Auth Context
 export function AuthProvider({ children }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    Boolean(localStorage.getItem("accessToken"))
-  );
+  const cookie = getCookie("accsessToken");
+  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(cookie));
+
   const logout = () => {
     setIsAuthenticated(false);
   };
@@ -22,7 +22,6 @@ export function AuthProvider({ children }) {
   );
 }
 
-// Custom hook để sử dụng AuthContext
 export function useAuth() {
   return useContext(AuthContext);
 }

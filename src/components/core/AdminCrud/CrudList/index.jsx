@@ -7,13 +7,7 @@ import { clone } from "lodash";
 import Tag from "../../Tag";
 import classNames from "classnames";
 import {} from "react-select";
-import {
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  UncontrolledButtonDropdown,
-} from "reactstrap";
-import { AVATAR } from "../../../../constants/avatar";
+
 import {
   IconButton,
   Menu,
@@ -23,8 +17,6 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 const CrudList = (props) => {
-  const [isLoading, setLoading] = useState(false);
-  const [isFetching, setFetching] = useState(false);
   const {
     schema,
     classNameProps: { tableBodyRow },

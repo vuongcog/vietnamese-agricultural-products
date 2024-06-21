@@ -2,16 +2,14 @@ import React from "react";
 import styles from "./styles.module.scss";
 import SearchInput from "../SearchInput";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { ADD_DATA } from "../Store/constants";
+import DialogCreateForm from "../../DialogCreateForm";
 
 const BreadCrumb = ({
-  handleCreate,
   isSearchInput,
   onChangeSearchText,
   searchText,
+  schemaForm,
 }) => {
-  const dispatch = useDispatch();
   return (
     <div className={`${styles.container} text-white text-center`}>
       {isSearchInput && (
@@ -20,17 +18,13 @@ const BreadCrumb = ({
           searchText={searchText}
         ></SearchInput>
       )}
-      <button
-        onClick={() => {
-          dispatch({ type: ADD_DATA, payload: handleCreate });
-        }}
-      >
-        New Item
-      </button>
+
+      <DialogCreateForm schemaForm={schemaForm}></DialogCreateForm>
     </div>
   );
 };
 BreadCrumb.propTypes = {
+  schemaForm: PropTypes.object,
   handleCreate: PropTypes.func,
   onChangeSearchText: PropTypes.func,
   searchText: PropTypes.string,

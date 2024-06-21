@@ -1,5 +1,4 @@
 import invariant from "invariant";
-import store from "../configStore/configStore";
 import _ from "lodash";
 export default function checkStore(store) {
   const shape = {

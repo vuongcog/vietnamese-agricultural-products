@@ -3,6 +3,7 @@ import {
   FETCHED_DATA,
   FETCH_DATA,
   REFRESH,
+  SET_ERROR,
   SET_ITEMS,
   UPDATE_SLICE,
 } from "./constants";
@@ -11,6 +12,8 @@ const intiState = {
   isFetching: false,
   items: [],
   refresh: false,
+  error: null,
+  errorTimestamp: null,
 };
 
 const fetchingData = (state) => {
@@ -18,6 +21,10 @@ const fetchingData = (state) => {
     ...state,
     isFetching: true,
   };
+};
+const setError = (state, action) => {
+  console.log(action.payload);
+  return { ...state, error: action.payload, errorTimestamp: Date.now() };
 };
 const setItems = (state, action) => ({ ...state, items: action.payload });
 const fetchedData = (state) => ({
@@ -46,6 +53,7 @@ const handlers = {
   [SET_ITEMS]: setItems,
   [UPDATE_SLICE]: updateSlice,
   [REFRESH]: refresh,
+  [SET_ERROR]: setError,
 };
 export const reducerList = (state = intiState, action) => {
   const handler = handlers[action.type];

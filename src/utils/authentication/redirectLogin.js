@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom";
 const redirectLogin = ({ isPush = false, history }) => {
   const { pathname, search } = window.location;
   const new_history = `${pathname}${search}`;

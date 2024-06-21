@@ -8,7 +8,7 @@ class Http {
     this.endpoint = endpoint;
   }
 
-  list = (params = {}, page = 1, ppp = 20) => {
+  list = (params = {}) => {
     return this.http.get(this.endpoint, params);
   };
 
