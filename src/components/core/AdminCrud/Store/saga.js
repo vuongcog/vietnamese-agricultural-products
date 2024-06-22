@@ -6,19 +6,16 @@ import { parseObjectJson } from "../../../../utils/pareJson";
 function* workerTest(action) {
   try {
     const { payload } = action;
-    const http = new Http("/user");
-    yield http
-      .create(payload)
-      .then(() => {
-        console.log("succsess");
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-      });
-
+    console.log(payload);
+    const http = new Http(payload.endpoint);
+    yield call(http.create, payload);
     yield put({ type: REFRESH });
   } catch (err) {
-    console.log(err);
+    const parseData = parseObjectJson(err.response.data);
+    const errorMessage = _.get(parseData, "error.email[0]");
+    if (true) {
+      yield put({ type: SET_ERROR, payload: "Lỗi" });
+    }
   }
 }
 function* handlerUpdate(action) {

@@ -11,7 +11,6 @@ import {
   ejectReducersAndSagas,
   injectReducersAndSagas,
 } from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
-import { ejectReducerFactory } from "../../../../utils/reducerInjectors";
 const Test = () => {
   const [selectElement, setSelectElement] = useState(null);
 
@@ -96,7 +95,7 @@ const Test = () => {
       {
         name: "phone_num",
         label: "Phone Num",
-        default: "N/A",
+        default: "  N/A",
         className: "text-start text-[var(--theme-green)]",
       },
       {
@@ -121,16 +120,12 @@ const Test = () => {
     ],
     initSearch: true,
   };
-  console.log("mount");
-
   useMemo(() => {
-    console.log("memo inject");
     injectReducersAndSagas();
   }, []);
   useEffect(() => {
     injectReducersAndSagas();
     return () => {
-      console.log("eject");
       ejectReducersAndSagas();
     };
   }, []);

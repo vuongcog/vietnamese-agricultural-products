@@ -42,7 +42,11 @@ const FormLogin = () => {
     login(loginParams)
       .then((res) => {
         const responseData = parseObjectJson(res);
-        document.cookie = `accsessToken=${responseData.access_token} ; path = "/" ;  max-age=${responseData.expires_in};`;
+        document.cookie = `accsessToken=${
+          responseData.access_token
+        } ; path = "/" ; expires=${new Date(
+          new Date().getTime() + responseData.expires_in * 1000
+        )};`;
         setIsAuthenticated(true);
         navigate("/");
       })

@@ -37,6 +37,7 @@ const AdminCrud = () => {
       {isFetching && <ProgressFeching></ProgressFeching>}
       <div className={`${isFetching && "opacity-30"} ${styles[`main-crud`]}`}>
         <BreadCrumb
+          endpoint={crudOptions.endpoint}
           schemaForm={schemaForm}
           searchText={searchText}
           onChangeSearchText={handleChangeSearchtext}

@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import styles from "./styles.module.scss";
 import { ContextDialogCreateForm } from "../DialogCreateForm/context/ProviderDialogCreateForm";
-import { UPDATE_DATA } from "../AdminCrud/Store/constants";
+import { ADD_DATA, UPDATE_DATA } from "../AdminCrud/Store/constants";
 import {
   getErrorCrudList,
   getErrorTimeStampCrudList,
@@ -26,7 +26,6 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
   const refresh = useSelector(getRefreshCrudList);
   const isFirstMount = useRef(true);
   const isFirstMountSuccess = useRef(true);
-
   const [formState, setFormState] = useState(
     schemaForm.reduce((acc, field) => {
       acc[field.name] = type === UPDATE_DATA ? defaultValues[field.name] : "";
@@ -44,6 +43,9 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
 
     if (type === UPDATE_DATA) {
       data["endpoint"] = `${endpoint}/${defaultValues.id}?_method=PUT`;
+    }
+    if (type === ADD_DATA) {
+      data["endpoint"] = `${endpoint}`;
     }
 
     setValueForm(data);
@@ -107,7 +109,7 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
 
   const renderListFields = () => {
     return schemaForm.map((item) => {
-      const defaultValue = defaultValues[item.name];
+      const defaultValue = _.get(defaultValues, "name");
       return renderField(item, defaultValue);
     });
   };

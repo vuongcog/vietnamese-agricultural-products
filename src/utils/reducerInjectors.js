@@ -20,9 +20,26 @@ export function injectReducerFactory(store, isValid) {
   };
 }
 
+export function ejectReducerFactory(store, isValid) {
+  return function ejectReducer(key) {
+    if (!isValid) checkStore(store);
+
+    invariant(
+      _.isString(key) && !_.isEmpty(key),
+      "(src/utils...) ejectReducer: Expected `key` to be a non empty string"
+    );
+
+    if (!Reflect.has(store.injectedReducers, key)) return;
+
+    delete store.injectedReducers[key];
+    store.replaceReducer(createReducer(store.injectedReducers));
+  };
+}
+
 export default function getInjectors(store) {
   checkStore(store);
   return {
     injectReducer: injectReducerFactory(store, true),
+    ejectReducer: ejectReducerFactory(store, true),
   };
 }

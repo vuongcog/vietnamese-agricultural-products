@@ -9,11 +9,11 @@ export function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth();
 
   if (!token) {
-    return <Navigate to="authen/signin" />;
+    return <Navigate to="/authen/signin" />;
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="authen/signin" />;
+    return <Navigate to="/authen/signin" />;
   }
 
   return children;

@@ -9,6 +9,7 @@ const BreadCrumb = ({
   onChangeSearchText,
   searchText,
   schemaForm,
+  endpoint,
 }) => {
   return (
     <div className={`${styles.container} text-white text-center`}>
@@ -19,7 +20,10 @@ const BreadCrumb = ({
         ></SearchInput>
       )}
 
-      <DialogCreateForm schemaForm={schemaForm}></DialogCreateForm>
+      <DialogCreateForm
+        endpoint={endpoint}
+        schemaForm={schemaForm}
+      ></DialogCreateForm>
     </div>
   );
 };

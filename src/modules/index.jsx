@@ -1,10 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout";
 import UserLayout from "../layouts/UserLayout";
 import ChartComponent from "./Test/Test";
 import User from "./admin/User/container";
-import Test from "./admin/Test/container";
+
+const Test = React.lazy(() => {
+  return import("./admin/Test/container");
+});
+const Category = React.lazy(() => {
+  return import("./admin/Category/container");
+});
+
 import Home from "./user/home/container";
 import Shopping from "./user/shoping/container";
 import Authentication from "./authentication/container";
@@ -12,6 +19,7 @@ import FormLogin from "./authentication/components/FormLogin";
 import FormRegister from "./authentication/components/FormRegister";
 import DetailProduct from "./user/detail/container";
 import { AuthProvider } from "../contexts/AuthContext";
+
 import {
   ProtectedAuthenRoute,
   ProtectedRoute,
@@ -29,29 +37,51 @@ const App = () => {
             </ProtectedRoute>
           }
         >
-          <Route path="/" Component={Home}></Route>
-          <Route path="/shopping" Component={Shopping}></Route>
-          <Route path="/detail/:id" Component={DetailProduct}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/shopping" element={<Shopping />} />
+          <Route path="/detail/:id" element={<DetailProduct />} />
         </Route>
 
         <Route
           path="/authen"
           element={
             <ProtectedAuthenRoute>
-              <Authentication></Authentication>
+              <Authentication />
             </ProtectedAuthenRoute>
           }
         >
-          <Route path="/authen/signin" Component={FormLogin}></Route>
-          <Route path="/authen/signup" Component={FormRegister}></Route>
+          <Route path="/authen/signin" element={<FormLogin />} />
+          <Route path="/authen/signup" element={<FormRegister />} />
         </Route>
 
-        <Route path="/admin" Component={AdminLayout}>
-          <Route path="/admin/dashboard" Component={ChartComponent}></Route>
-          <Route path="/admin/user" Component={User}></Route>
-          <Route path="/admin/test" Component={Test}></Route>
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="/admin/dashboard" element={<ChartComponent />} />
+          <Route path="/admin/user" element={<User />} />
+          <Route
+            path="/admin/test"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Test />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/category"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Category />
+              </Suspense>
+            }
+          />
         </Route>
-        <Route path="/test" Component={ChartComponent}></Route>
+        <Route path="/test" element={<ChartComponent />} />
       </Routes>
     </AuthProvider>
   );

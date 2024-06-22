@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createContext } from "react";
 import Http from "../../../../utils/http/http";
 import { compose } from "redux";
@@ -10,22 +10,15 @@ import {
   startInitFilters,
 } from "../CrudSearch/action";
 import { connect, useDispatch, useSelector } from "react-redux";
-import filterProducerReducer from "../CrudSearch/reducers";
 import { useDebounce } from "../../../../utils/useDebounce";
-import { reducerList } from "../Store/reducer";
 import { FETCHED_DATA, FETCH_DATA, SET_ITEMS } from "../Store/constants";
-import warcherTest from "../Store/saga";
-import { runSaga } from "../../../../utils/saga/optionsSaga";
 import { crudOptionsDefault } from "./constants";
-import store from "../../../../configStore/configStore";
-import getInjectors from "../../../../utils/reducerInjectors";
 import {
   getErrorCrudList,
   getFetchingCrudList,
   getItemsCrudList,
   getRefreshCrudList,
 } from "../Store/selector";
-import { useCallback } from "react";
 
 export const CrudContext = createContext({});
 const ContextCrudProvider = ({ children, ...props }) => {
@@ -146,11 +139,6 @@ const mapDispatchToProps = {
   clearFilters,
   startInitFilters,
 };
-
-const injectReducerFactory = getInjectors(store);
-injectReducerFactory.injectReducer("crudList", reducerList);
-injectReducerFactory.injectReducer("filter", filterProducerReducer);
-runSaga(warcherTest, "sagaTest");
 
 ContextCrudProvider.propTypes = {
   children: PropTypes.element,
