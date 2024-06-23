@@ -1,22 +1,52 @@
-.pagination-container {
-  display: flex;
-  align-items: center;
-  color: var(--admin-background-second);
-  background-color: white;
-  height: 35px;
-  padding: 0px 12px;
-  border-radius: 6px;
-}
-.pagination {
+.paginationContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
-.page-item {
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.pageItem {
+  margin: 0 4px;
   font-weight: 500;
-  margin-right: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: var(--admin-background-second);
+    color: white;
+    border-radius: 4px;
+  }
 }
-.active-page {
-  font-weight: bolder;
+
+.activePage {
+  font-weight: bold;
   text-decoration: underline;
-  border-radius: 5px; /* Bo góc cho item */
+  color: var(--admin-background-second);
+}
+
+.navButton {
+  margin: 0 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: var(--admin-background-second);
+    color: white;
+    border-radius: 4px;
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }

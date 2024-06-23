@@ -142,7 +142,7 @@ const CrudList = (props) => {
   //////////////
   return (
     <>
-      <div className="h-[540px] rounded-md overflow-y-scroll">
+      <div className="h-[500px] rounded-md overflow-y-scroll">
         <table className={` ${styles.table}`}>
           <thead className={`${styles[`heading-container`]}`}>
             <tr className={`${styles[`row-heading`]}`}>{_renderHeading()}</tr>

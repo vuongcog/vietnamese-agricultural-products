@@ -1,34 +1,60 @@
 .container {
-  box-shadow: #ddd 0px 0px 13px 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  .wrapper-title {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 20px 0;
+
+  .wrapperTitle {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 50%;
-    padding: 48px 48px 10px 124px;
+    padding: 48px;
+
     .about {
-      width: 280px;
+      width: fit-content;
       padding: 12px 20px;
-      background-color: green;
+      background-color: #38a169;
       font-size: 40px;
       font-weight: bold;
       color: white;
+      border-radius: 8px;
+      text-align: center;
+      margin: 0 auto;
     }
+
     .paragraph {
-      font-size: 24px;
+      font-size: 18px;
+      color: #4a5568;
+      line-height: 1.6;
     }
-    .button-read-more {
-      width: 200px;
-      height: 60px;
-      border-radius: 12px;
-      background-color: black;
+
+    .buttonReadMore {
+      width: 160px;
+      height: 48px;
+      border-radius: 8px;
+      background-color: #2d3748;
       color: white;
       font-weight: 600;
+      font-size: 16px;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+      cursor: pointer;
+      align-self: center;
+
+      &:hover {
+        background-color: #4a5568;
+        transform: scale(1.05);
+      }
     }
   }
-  img {
+
+  .image {
     width: 50%;
+    object-fit: cover;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
 }

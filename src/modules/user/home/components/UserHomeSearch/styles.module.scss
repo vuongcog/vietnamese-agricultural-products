@@ -1,18 +1,49 @@
 .container {
-  box-shadow: #b0b0b0 0px -2px 9px 0px;
   display: flex;
   align-items: center;
-  input {
-    height: 70px;
-    width: 70%;
-    box-sizing: border-box;
-    padding: 0px 12px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.input {
+  height: 50px;
+  width: 70%;
+  padding: 0 12px;
+  border: none;
+  box-sizing: border-box;
+  font-size: 16px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 128, 0, 0.5);
   }
-  button {
-    color: white;
-    background-color: black;
-    width: 30%;
-    height: 70px;
-    font-size: 24px;
+
+  &::placeholder {
+    color: #999;
+  }
+}
+
+.button {
+  color: white;
+  background-color: black;
+  width: 30%;
+  height: 50px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+
+  &:hover {
+    background-color: #333;
+    transform: scale(1.05);
   }
 }

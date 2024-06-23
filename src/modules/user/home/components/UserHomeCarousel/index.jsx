@@ -19,20 +19,20 @@ function BannerCarousel() {
   }, []);
 
   return (
-    <div className="about w-screen h-screen px-10 py-10">
+    <div className={styles.banner}>
       <div className={styles.container}>
-        <div className={styles[`wrapper-title`]}>
-          <h1 className="text-[48px]">Welcom To Shree</h1>
-          <h2 className="text-[62px]">Vegetables Shop</h2>
-          <div className="text-[24px]">
+        <div className={styles.wrapperTitle}>
+          <h1 className={styles.title}>Welcome To Shree</h1>
+          <h2 className={styles.subtitle}>Vegetables Shop</h2>
+          <div className={styles.description}>
             It is a long established fact that a reader will be distracted by
             the readable content of a page when looking at its layout. The point
             of using Lorem Ipsum is that it has a more-or-less normal
           </div>
-          <UserHomeSearch></UserHomeSearch>
-          <div className="flex gap-10">
-            <button className={styles[`button-contact`]}>Contact Us</button>
-            <button className={styles[`button-contact`]}>Vegetable</button>
+          <UserHomeSearch />
+          <div className={styles.buttonContainer}>
+            <button className={styles.button}>Contact Us</button>
+            <button className={styles.button}>Vegetable</button>
           </div>
         </div>
         {images.map((image, index) => (
@@ -42,7 +42,7 @@ function BannerCarousel() {
             src={image}
             alt={`Slide ${index}`}
             display={index === currentIndex ? "block" : "none"}
-            transition="opacity 0.5s"
+            transition="opacity 0.5s ease-in-out"
           />
         ))}
       </div>

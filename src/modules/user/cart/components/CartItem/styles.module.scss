@@ -1,0 +1,110 @@
+@import "../../../../../assets/css/abstracts/mixin";
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  span {
+    position: relative;
+
+    &::before {
+      content: "đ";
+      font-size: 0.75rem;
+      position: absolute;
+      top: 0;
+      left: -10px;
+      text-decoration: underline;
+    }
+  }
+}
+
+.checkbox {
+  margin-right: 16px;
+}
+
+.contentWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 40%;
+
+  .image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .messageWrapper {
+    .title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 4px;
+      @include setLimitLine(2);
+    }
+
+    .voucher {
+      color: #e53e3e;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.classify {
+  width: 15%;
+}
+
+.oldPrice {
+  position: relative;
+  color: #a0aec0;
+  text-decoration: line-through;
+  font-size: 0.875rem;
+  width: 10%;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border-top: 1px solid #a0aec0;
+    transform: translateY(-50%);
+  }
+}
+
+.price {
+  font-size: 1rem;
+  color: #2d3748;
+  font-weight: 600;
+  width: 10%;
+}
+
+.totalPrice {
+  color: #e53e3e;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.quantitySelector {
+  width: 10%;
+}
+
+.deleteIcon {
+  color: #e53e3e;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: #c53030;
+  }
+}

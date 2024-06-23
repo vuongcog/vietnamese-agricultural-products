@@ -1,32 +1,20 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import PropTypes from "prop-types";
+import _ from "lodash";
 import styles from "./styles.module.scss";
+
 const YnmCrudPaginationItemsPerPage = ({ value, onChange }) => {
-  const [selectdOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const options = [
-    {
-      value: "5",
-      label: `5 per page`,
-    },
-    {
-      value: "10",
-      label: `10 per page`,
-    },
-    {
-      value: "20",
-      label: `20 per page`,
-    },
-    {
-      value: "50",
-      label: `50 per page`,
-    },
-    {
-      value: "100",
-      label: `100 per page`,
-    },
+    { value: "5", label: "5 per page" },
+    { value: "10", label: "10 per page" },
+    { value: "20", label: "20 per page" },
+    { value: "50", label: "50 per page" },
+    { value: "100", label: "100 per page" },
   ];
+
   const generateSelectedOption = (value) => {
     const checked = _.find(
       options,
@@ -50,24 +38,37 @@ const YnmCrudPaginationItemsPerPage = ({ value, onChange }) => {
       color: state.isSelected ? "#ffffff" : "#52575C",
       backgroundColor: state.isSelected ? "#2996E5" : "#ffffff",
     }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: "#8ca1a9",
+      fontWeight: 600,
+      fontSize: "12px",
+      lineHeight: "16px",
+      fontFamily: "var(--font-family)",
+    }),
   };
+
   useEffect(() => {
     generateSelectedOption(value);
   }, [value]);
+
   return (
-    <div className={styles["pagination-container"]}>
-      <div className={styles["pagination-container-dropdown"]}></div>
+    <div className={styles.paginationContainer}>
       <Select
         menuPlacement="top"
-        className="select"
-        value={selectdOption}
+        value={selectedOption}
         onChange={handleChange}
         styles={customStyles}
         options={options}
         isClearable={false}
-      ></Select>
+      />
     </div>
   );
+};
+
+YnmCrudPaginationItemsPerPage.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default YnmCrudPaginationItemsPerPage;

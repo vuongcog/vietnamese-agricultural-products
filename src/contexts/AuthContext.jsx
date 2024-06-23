@@ -1,18 +1,20 @@
-// AuthContext.js
-import React, { createContext, useContext, useState } from "react";
-import { getCookie } from "../utils/cookie/parseCookie";
-
-// Tạo Context
-const AuthContext = createContext();
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { getCookie, removeCookie } from "../utils/cookie/parseCookie";
+import Cookies from "js-cookie";
+export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const cookie = getCookie("accsessToken");
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(cookie));
-
+  console.log(isAuthenticated);
   const logout = () => {
-    setIsAuthenticated(false);
+    const accsessToken = Cookies.get("accsessToken");
+    if (accsessToken) {
+      Cookies.remove("accsessToken", { path: "/" });
+      // removeCookie("accsessToken", "/");
+      setIsAuthenticated(false);
+    }
   };
-
   return (
     <AuthContext.Provider
       value={{ setIsAuthenticated, isAuthenticated, logout }}

@@ -1,4 +1,6 @@
 import {
+  ADDED_DATA,
+  ADDING_DATA,
   ADD_DATA,
   FETCHED_DATA,
   FETCH_DATA,
@@ -14,6 +16,7 @@ const intiState = {
   refresh: false,
   error: null,
   errorTimestamp: null,
+  isAddingData: false,
 };
 
 const fetchingData = (state) => {
@@ -22,15 +25,16 @@ const fetchingData = (state) => {
     isFetching: true,
   };
 };
-const setError = (state, action) => {
-  console.log(action.payload);
-  return { ...state, error: action.payload, errorTimestamp: Date.now() };
-};
-const setItems = (state, action) => ({ ...state, items: action.payload });
 const fetchedData = (state) => ({
   ...state,
   isFetching: false,
 });
+const addingData = (state) => ({ ...state, isAddingData: true });
+const addedData = (state) => ({ ...state, isAddingData: false });
+const setItems = (state, action) => ({ ...state, items: action.payload });
+const setError = (state, action) => {
+  return { ...state, error: action.payload, errorTimestamp: Date.now() };
+};
 
 const addData = (state) => {
   return {
@@ -38,6 +42,7 @@ const addData = (state) => {
   };
 };
 const refresh = (state) => {
+  console.log("asdasdf");
   return {
     ...state,
     refresh: !state.refresh,
@@ -48,8 +53,13 @@ const updateSlice = (state) => {
 };
 const handlers = {
   [FETCH_DATA]: fetchingData,
-  [ADD_DATA]: addData,
   [FETCHED_DATA]: fetchedData,
+
+  [ADD_DATA]: addData,
+
+  [ADDING_DATA]: addingData,
+  [ADDED_DATA]: addedData,
+
   [SET_ITEMS]: setItems,
   [UPDATE_SLICE]: updateSlice,
   [REFRESH]: refresh,

@@ -1,59 +1,71 @@
-@use "../../../assets/css/abstracts/" as abstracts;
+@use "../../../assets/css/abstracts" as abstracts;
 
-.left-side-bar {
-  width: 25%;
+.leftSideBar {
+  width: 15%;
   height: 100vh;
   background-color: abstracts.$coreColorBlackAdmin;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 16px 16px;
-  .wrappertTitle {
+  padding: 16px;
+
+  .wrapperTitle {
     display: flex;
+    align-items: center;
     gap: 12px;
-    .title {
-      &::before {
-        display: inline-block !important;
-        color: white;
-        font-size: 22px;
-        border: 1px solid white;
-        padding: 6px 6px;
-        border-radius: 50%;
-      }
+
+    .titleIcon {
+      color: white;
+      font-size: 22px;
+      border: 1px solid white;
+      padding: 6px;
+      border-radius: 50%;
+    }
+
+    .titleText {
+      text-align: center;
+      font-size: 24px;
+      color: white;
     }
   }
-  .sidebar-menu {
-    position: relative;
+
+  .sidebarMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     font-weight: 500;
-    @include abstracts.display-vetical(12px);
-    .navbar-item {
-      &:hover {
-        background-color: #465d73;
-        cursor: pointer;
-      }
+
+    .navbarItem {
+      display: flex;
+      align-items: center;
       height: 64px;
       padding: 6px 12px;
       border-radius: 6px;
-      display: flex;
-      align-items: center;
       gap: 12px;
+      cursor: pointer;
+      color: white;
+
+      &:hover {
+        background-color: #465d73;
+      }
+
       .icon {
         font-size: 18px;
-        color: white;
       }
+
       .label {
-        // color: white;
         font-weight: 500;
       }
-      .icon-chevron {
-        position: absolute;
-        right: 24px;
+
+      .iconChevron {
+        margin-left: auto;
         font-size: 13px;
-        color: white;
       }
     }
+
+    .activeSelect {
+      box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0,
+        inset rgba(255, 255, 255, 0.16) 0 1px;
+    }
   }
-}
-.active-select {
-  box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px;
 }

@@ -19,6 +19,6 @@ export const getCookie = (name) => {
   return null;
 };
 
-export const eraseCookie = (name) => {
-  document.cookie = name + "=; Max-Age=-99999999;";
-};
+export function removeCookie(name, path = "/") {
+  document.cookie = `${name}=; Path=${path}; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+}

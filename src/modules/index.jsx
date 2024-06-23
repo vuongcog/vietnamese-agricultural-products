@@ -24,6 +24,8 @@ import {
   ProtectedAuthenRoute,
   ProtectedRoute,
 } from "../components/ProtectedRoute";
+import Product from "./admin/Product/container";
+import CartContainer from "./user/cart/container";
 
 const App = () => {
   return (
@@ -39,6 +41,7 @@ const App = () => {
         >
           <Route path="/" element={<Home />} />
           <Route path="/shopping" element={<Shopping />} />
+          <Route path="/cart" element={<CartContainer />} />
           <Route path="/detail/:id" element={<DetailProduct />} />
         </Route>
 
@@ -63,9 +66,9 @@ const App = () => {
           }
         >
           <Route path="/admin/dashboard" element={<ChartComponent />} />
-          <Route path="/admin/user" element={<User />} />
+          <Route path="/admin/test" element={<User />} />
           <Route
-            path="/admin/test"
+            path="/admin/user"
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <Test />
@@ -77,6 +80,14 @@ const App = () => {
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <Category />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/product"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Product />
               </Suspense>
             }
           />

@@ -11,14 +11,14 @@ import {
   ejectReducersAndSagas,
   injectReducersAndSagas,
 } from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
-const Test = () => {
+const Category = () => {
   const [selectElement, setSelectElement] = useState(null);
 
   const crudOptions = {
     endpointParams: {
       q: "",
     },
-    endpoint: "/user",
+    endpoint: "/category",
     mode: {
       breadcrumb: true,
       list: true,
@@ -40,15 +40,15 @@ const Test = () => {
         className: "w-[5%] text-start  text-[var(--theme-light-red)]",
       },
       {
-        name: "name",
-        label: "  Name",
+        name: "category_name",
+        label: "  Category Name",
         default: "N/A",
-        component: UserName,
+        // component: UserName,
         className: "w-[30%]  text-start text-[var(--theme-light-orange)]",
       },
       {
-        name: "email",
-        label: "Email",
+        name: "category_slug",
+        label: "category_slug",
         default: "N/A",
         className: "w-[20%] text-start text-[var(--theme-yellow)] ",
         dropdownActions: {
@@ -74,7 +74,7 @@ const Test = () => {
                 setSelectElement(
                   <DialogCreateForm
                     item={item}
-                    endpoint={"/user"}
+                    endpoint={"/category"}
                     callbackCancel={setSelectElement}
                     title="Update User"
                     schemaForm={schemaFormFactory("edit")}
@@ -84,11 +84,11 @@ const Test = () => {
             },
           ],
         },
-        component: UserEmail,
+        // component: UserEmail,
       },
       {
-        name: "email_verified_at",
-        label: "Email verified at",
+        name: "category_des",
+        label: "category_des",
         className: "text-center text-[var(--theme-light-yellow)]",
         default: "N/A",
       },
@@ -99,14 +99,15 @@ const Test = () => {
         className: "text-start text-[var(--theme-green)]",
       },
       {
-        name: "role",
-        label: "Updated at",
+        name: "status",
+        label: "status ",
         default: "N/A",
         className: "text-end text-[var(--theme-light-blue)]",
       },
       {
-        name: "status",
-        label: "Status",
+        name: "created_at",
+        label: "created_at",
+        formatDate: formatDateTime,
         default: "N/A",
         className: "text-end text-[var(--theme-light-blue)]",
       },
@@ -114,7 +115,7 @@ const Test = () => {
         name: "updated_at",
         label: "Updated at",
         default: "N/A",
-        formatDate: formatDateTime,
+        // formatDate: formatDateTime,
         className: "text-end text-[var(--theme-light-blue)]",
       },
     ],
@@ -145,4 +146,4 @@ const Test = () => {
     </div>
   );
 };
-export default Test;
+export default Category;

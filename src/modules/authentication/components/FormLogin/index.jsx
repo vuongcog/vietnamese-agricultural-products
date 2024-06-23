@@ -9,17 +9,15 @@ import {
 import styles from "./styles.module.scss";
 import LOGO from "../../../../constants/logo";
 import { FormContext } from "./FormContext";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../contexts/AuthContext";
 import { parseObjectJson } from "../../../../utils/pareJson";
-import ProgressFullScreen from "../../../../components/core/Progress";
+import ProgressFullScreen from "../../../../components/core/ProgressFullScreen";
 const FormLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [remember, setRemember] = useState(false);
-  const navigate = useNavigate();
   const { login } = useContext(FormContext);
   const { setIsAuthenticated } = useAuth();
   const { isLoading } = useContext(FormContext);
@@ -44,11 +42,10 @@ const FormLogin = () => {
         const responseData = parseObjectJson(res);
         document.cookie = `accsessToken=${
           responseData.access_token
-        } ; path = "/" ; expires=${new Date(
+        } ; path = / ; expires=${new Date(
           new Date().getTime() + responseData.expires_in * 1000
         )};`;
         setIsAuthenticated(true);
-        navigate("/");
       })
       .catch((err) => {
         console.log(err);

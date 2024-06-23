@@ -9,15 +9,20 @@ import {
   FormLabel,
   Input,
   Select,
+  effect,
 } from "@chakra-ui/react";
 import styles from "./styles.module.scss";
 import { ContextDialogCreateForm } from "../DialogCreateForm/context/ProviderDialogCreateForm";
 import { ADD_DATA, UPDATE_DATA } from "../AdminCrud/Store/constants";
 import {
+  getAddingData,
   getErrorCrudList,
   getErrorTimeStampCrudList,
   getRefreshCrudList,
 } from "../AdminCrud/Store/selector";
+import AlertMessage from "../AlertMessage";
+import { useMemo } from "react";
+import ProgressFullScreen from "../ProgressFullScreen";
 
 const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
   const { setValueForm } = useContext(ContextDialogCreateForm);
@@ -26,13 +31,17 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
   const refresh = useSelector(getRefreshCrudList);
   const isFirstMount = useRef(true);
   const isFirstMountSuccess = useRef(true);
+  const [element, setElement] = useState(null);
+  const isAddingData = useSelector(getAddingData);
   const [formState, setFormState] = useState(
     schemaForm.reduce((acc, field) => {
       acc[field.name] = type === UPDATE_DATA ? defaultValues[field.name] : "";
+      if (field.items) {
+        acc[field.name] = field.items[0].value;
+      }
       return acc;
     }, {})
   );
-
   const handleChange = (name, value) => {
     setFormState({ ...formState, [name]: value });
   };
@@ -54,18 +63,29 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
   useEffect(() => {
     if (isFirstMount.current) {
       isFirstMount.current = false;
-      return;
+    } else {
+      setElement(<AlertMessage status="error" message="Thất bại" />);
+      var timer = setTimeout(() => {
+        setElement(null);
+      }, 1000);
     }
-    alert(errorMessage);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [errorMessage, errorTimestamp]);
-
   useEffect(() => {
     if (isFirstMountSuccess.current) {
       isFirstMountSuccess.current = false;
-      return;
+    } else {
+      setElement(<AlertMessage status="success" message="Tạo thành công" />);
+      var timer = setTimeout(() => {
+        setElement(null);
+        onClose();
+      }, 1000);
     }
-    alert("Thành công");
-    onClose();
+    return () => {
+      clearTimeout(timer);
+    };
   }, [refresh]);
 
   const renderField = (item, defaultValue) => {
@@ -97,7 +117,6 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
           );
       }
     };
-
     return (
       <FormControl className={styles.field} key={item.name} isRequired>
         {item.label && <FormLabel htmlFor={item.name}>{item.label}</FormLabel>}
@@ -113,9 +132,11 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
       return renderField(item, defaultValue);
     });
   };
-
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
+      {element}
+      {isAddingData && <ProgressFullScreen></ProgressFullScreen>}
+
       {renderListFields()}
       <Button type="submit" leftIcon={<AddIcon />}>
         Create

@@ -11,43 +11,47 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import SearchHeader from "./SearchHeader";
+import Cart from "../../core/Cart";
+
 const UserHeader = () => {
   return (
     <div className={styles.container}>
       <div className={styles.title}>Shree</div>
-      <SearchHeader></SearchHeader>
-      <ul>
-        {SCHEMA.map((item, index) => {
-          return (
-            <li key={index}>
-              <Link className="w-full h-full" to={item.link}>
-                {item.name}
-              </Link>
-            </li>
-          );
-        })}
+      <SearchHeader />
+      <ul className={styles.navList}>
+        {SCHEMA.map((item, index) => (
+          <li key={index}>
+            <Link className={styles.navLink} to={item.link}>
+              {item.name}
+            </Link>
+          </li>
+        ))}
         <li>
-          <a href="#about">About</a> d55
+          <a className={styles.navLink} href="#about">
+            About
+          </a>
+        </li>
+        <li>
+          <Cart />
         </li>
         <Menu>
           <MenuButton
             as={IconButton}
             aria-label="Options"
-            icon={<HamburgerIcon fontSize={"50px"} color={"green"} />}
-            style={{ backgroundColor: "transparent", border: "none" }} // Áp dụng CSS trực tiếp qua thuộc tính style
+            icon={<HamburgerIcon fontSize={"30px"} color={"green"} />}
+            variant="outline"
+            className={styles.menuButton}
           />
           <MenuList>
-            {SCHEMA.map((item, index) => {
-              return (
-                <MenuItem key={index}>
-                  <Link className="w-full h-full" to={item.link}>
-                    {item.name}
-                  </Link>
-                </MenuItem>
-              );
-            })}
+            {SCHEMA.map((item, index) => (
+              <MenuItem key={index}>
+                <Link className={styles.menuLink} to={item.link}>
+                  {item.name}
+                </Link>
+              </MenuItem>
+            ))}
             <MenuItem>
-              <a className="w-full h-full" href={"#about"}>
+              <a className={styles.menuLink} href="#about">
                 About
               </a>
             </MenuItem>

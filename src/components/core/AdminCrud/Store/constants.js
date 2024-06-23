@@ -7,3 +7,5 @@ export const SET_ITEMS = "CRUD_SET_ITEMS";
 export const UPDATE_SLICE = "CRUD_UPDATE_SLICE";
 export const REFRESH = "CRUD_REFRESH";
 export const SET_ERROR = "CRUD_ERROR";
+export const ADDING_DATA = "ADDING_DATA";
+export const ADDED_DATA = "ADDED_DATA";

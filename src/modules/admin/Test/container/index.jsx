@@ -11,8 +11,7 @@ import {
   ejectReducersAndSagas,
   injectReducersAndSagas,
 } from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
-import { ejectReducerFactory } from "../../../../utils/reducerInjectors";
-const Test = () => {
+const User = () => {
   const [selectElement, setSelectElement] = useState(null);
 
   const crudOptions = {
@@ -150,4 +149,4 @@ const Test = () => {
     </div>
   );
 };
-export default Test;
+export default User;

@@ -1,10 +1,11 @@
 import React from "react";
+import styles from "./styles.module.scss";
 
 const SearchHeader = () => {
   return (
-    <div>
+    <div className={styles.searchContainer}>
       <input
-        className="px-[4px] rounded-sm border-[1px] border-solid"
+        className={styles.searchInput}
         type="text"
         placeholder="Search..."
       />
