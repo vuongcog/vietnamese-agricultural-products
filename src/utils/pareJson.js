@@ -3,5 +3,9 @@ export const parseStringJson = (data) => {
 };
 
 export const parseObjectJson = (data) => {
-  return JSON.parse(data);
+  try {
+    return JSON.parse(data);
+  } catch (e) {
+    return data;
+  }
 };

@@ -5,11 +5,19 @@ import React, {
   useEffect,
   useCallback,
   useReducer,
+  useMemo,
 } from "react";
 import axios from "axios";
 import { initialState, reducer } from "../storeLocal/reducer";
+import { reducerProductList } from "../store/reducer/reducer";
 import { SET_ITEMS, SET_LOADING, SET_PAGE } from "../constants/constants";
 import PropTypes from "prop-types";
+
+import warcherSagaProducrtList from "../store/saga/saga";
+import {
+  ejectReducersAndSagas,
+  injectReducersAndSagas,
+} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
 
 export const ShoppingContext = createContext({});
 
@@ -71,7 +79,20 @@ const ShoppingProvider = ({ children }) => {
     }
   }, [lastScrollTop, fetchItems, dispatch, state.page]);
 
-  // useEffect để thêm và loại bỏ sự kiện cuộn
+  const redux = {
+    keyReducer: "list-product-product-saga",
+    keySaga: "list-product-saga",
+    reducer: reducerProductList,
+    saga: warcherSagaProducrtList,
+  };
+
+  useEffect(() => {
+    injectReducersAndSagas(redux);
+    return () => {
+      ejectReducersAndSagas(redux);
+    };
+  }, []);
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {

@@ -20,6 +20,7 @@ module.exports = {
     ],
   },
   globals: {
+    Cookies: "readonly",
     $: true,
     _: true,
     process: true,

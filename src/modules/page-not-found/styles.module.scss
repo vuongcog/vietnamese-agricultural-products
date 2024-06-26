@@ -1,0 +1,84 @@
+/* NotFound.module.scss */
+.notFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background: #282c34;
+  color: #fff;
+  font-family: "Arial", sans-serif;
+
+  .animationContainer {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+
+  .circle,
+  .square,
+  .triangle {
+    position: absolute;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffcc00;
+    top: 0;
+    left: 0;
+  }
+
+  .square {
+    width: 50px;
+    height: 50px;
+    background: #ff6699;
+    top: 0;
+    right: 0;
+    animation-delay: 1s;
+  }
+
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid #66ccff;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 2s;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .messageContainer {
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 1em;
+    }
+
+    a {
+      color: #61dafb;
+      text-decoration: underline;
+      font-size: 1.2em;
+    }
+  }
+}

@@ -3,10 +3,16 @@ $coreColorBlackAdmin: #292d3f;
 $coreColorBackgroundAdmin: #212333;
 $coreTextWhite: #dedee1;
 
+// * color user crud
+$user-crud-background: white;
+
 $color-map: (
   "admin-background": $coreColorBackgroundAdmin,
   "admin-background-second": $coreColorBlackAdmin,
   "core-text-white": $coreTextWhite,
+
+  // * biến user crud
+  "user-crud-background": $user-crud-background,
 );
 
 ////theme color

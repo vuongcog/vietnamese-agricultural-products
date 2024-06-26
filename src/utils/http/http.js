@@ -21,6 +21,9 @@ class Http {
   post = (params = {}, options) => {
     return this.http.post("/search", params, options);
   };
+  sendMail = (params = {}, options) => {
+    return this.http.post("/sendmail", params, options);
+  };
 }
 
 export default Http;

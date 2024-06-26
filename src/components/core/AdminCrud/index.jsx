@@ -27,16 +27,20 @@ const AdminCrud = () => {
     // mode,
     perpage,
     // setPerpage,
+    sendEmail,
     handleChangeSearchtext,
     selectPerpage,
     selectPagination,
     schemaForm,
   } = useContext(CrudContext);
+  const actionSendMail = {};
   return (
     <div className="relative">
       {isFetching && <ProgressFeching></ProgressFeching>}
       <div className={`${isFetching && "opacity-30"} ${styles[`main-crud`]}`}>
         <BreadCrumb
+          sendEmail={sendEmail}
+          actionSendMail={actionSendMail}
           endpoint={crudOptions.endpoint}
           schemaForm={schemaForm}
           searchText={searchText}

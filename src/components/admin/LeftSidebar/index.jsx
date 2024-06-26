@@ -3,13 +3,17 @@ import styles from "./styles.module.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import AdminAvatar from "../Avatar";
 import { SCHEMA } from "../../../constants/nav-bar-item";
-import _ from "lodash";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const AdminLeftSidebar = () => {
-  const [select, setSelect] = useState(Array(SCHEMA.length).fill(false));
-  const [click, setClick] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [activeLink, setActiveLink] = useState(location.pathname);
+
+  const handleNavigate = (link) => {
+    setActiveLink(link);
+    navigate(link);
+  };
 
   return (
     <nav className={styles.leftSideBar}>
@@ -19,27 +23,16 @@ const AdminLeftSidebar = () => {
       </div>
       <AdminAvatar />
       <ul className={styles.sidebarMenu}>
-        {SCHEMA.map((item, index) => (
+        {SCHEMA.map((item) => (
           <li
             key={item.name || item.id}
-            onClick={() => {
-              const newSelect = _.cloneDeep(select);
-              newSelect[index] = !select[index];
-              setSelect(newSelect);
-              setClick(index);
-              navigate(item.link);
-            }}
+            onClick={() => handleNavigate(item.link)}
             className={`${styles.navbarItem} ${
-              click === index && styles.activeSelect
+              activeLink === item.link ? styles.active : ""
             }`}
           >
             <i className={`${item.icon} ${styles.icon}`}></i>
             <div className={`${item.color} ${styles.label}`}>{item.name}</div>
-            <i
-              className={`fas fa-chevron-${
-                select[index] && click === index ? "down" : "right"
-              } ${styles.iconChevron}`}
-            ></i>
           </li>
         ))}
       </ul>

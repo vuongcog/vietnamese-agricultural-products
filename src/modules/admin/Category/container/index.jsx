@@ -11,6 +11,7 @@ import {
   ejectReducersAndSagas,
   injectReducersAndSagas,
 } from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
+import { components } from "react-select";
 const Category = () => {
   const [selectElement, setSelectElement] = useState(null);
 
@@ -51,6 +52,9 @@ const Category = () => {
         label: "category_slug",
         default: "N/A",
         className: "w-[20%] text-start text-[var(--theme-yellow)] ",
+        component: ({ category_slug }) => {
+          return <div>{category_slug}</div>;
+        },
         dropdownActions: {
           items: [
             {

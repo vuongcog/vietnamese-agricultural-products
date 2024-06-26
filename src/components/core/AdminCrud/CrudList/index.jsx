@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
 import Tag from "../../Tag";
 import classNames from "classnames";
-import {} from "react-select";
-
 import {
   IconButton,
   Menu,
@@ -14,8 +12,12 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { nanoid } from "nanoid";
+import _ from "lodash";
+
 const CrudList = (props) => {
   const {
+    items,
     schema,
     classNameProps: { tableBodyRow },
   } = props;
@@ -24,21 +26,25 @@ const CrudList = (props) => {
     return dropdownOptions.map((option) => {
       const cb = _.get(option, "callback");
       const icon = _.get(option, "icon");
+      const actionItem = () => {
+        if (option.name === "export-excel") {
+          cb(items, `${item.email}.xlsx`);
+          return;
+        }
+        cb(item);
+      };
       return (
         <MenuItem
           className={styles["dropdown-item"]}
           key={option.name || option.label}
           color={"black"}
-          onClick={() => {
-            cb(item);
-          }}
+          onClick={actionItem}
         >
           <div className={styles["wrapper-item"]} onClick={cb}>
             {icon}
             <div className={styles.label}>{option.label}</div>
           </div>
         </MenuItem>
-        // </div>
       );
     });
   };
@@ -60,14 +66,13 @@ const CrudList = (props) => {
             aria-label="Options"
             icon={<HamburgerIcon />}
             variant="outline"
-          >
-            {/* <img src={AVATAR.admin} className="menu-report" alt="menu" /> */}
-          </MenuButton>
+          />
           <MenuList>{__renderDropdown(dropdownOptions, item)}</MenuList>
         </Menu>
       </Tag>
     );
   };
+
   const _renderHeading = () =>
     schema.map((schemaItem) => {
       const cloned = { ...schemaItem };
@@ -89,12 +94,6 @@ const CrudList = (props) => {
 
       if (schemaItem.component) {
         let dropdownActions = _.get(schemaItem, "dropdownActions.items", null);
-        // const visibleWhen = _.get(
-        //   schemaItem,
-        //   "dropdownActions.visibleWhen",
-        //   null
-        // );
-
         return (
           <td key={schemaItem.name || schemaItem.label} {...cloned}>
             <Tag
@@ -132,37 +131,45 @@ const CrudList = (props) => {
     }
     return items.map((item, index) => {
       return (
-        <tr className={`${styles[`row-body`]} ${tableBodyRow}`} key={index}>
+        <tr
+          className={classNames(styles["row-body"], tableBodyRow)}
+          key={index}
+        >
           {_renderColumn(item)}
         </tr>
       );
     });
   };
 
-  //////////////
   return (
     <>
-      <div className="h-[500px] rounded-md overflow-y-scroll">
-        <table className={` ${styles.table}`}>
-          <thead className={`${styles[`heading-container`]}`}>
-            <tr className={`${styles[`row-heading`]}`}>{_renderHeading()}</tr>
+      <div
+        className={classNames(
+          "h-[500px] rounded-md overflow-y-scroll",
+          styles.container
+        )}
+      >
+        <table className={styles.table}>
+          <thead className={styles["heading-container"]}>
+            <tr className={styles["row-heading"]}>{_renderHeading()}</tr>
           </thead>
-          <tbody className={`${styles[`body-container`]}`}>
-            {_renderColumns()}
-          </tbody>
+          <tbody className={styles["body-container"]}>{_renderColumns()}</tbody>
           <tfoot></tfoot>
         </table>
       </div>
     </>
   );
 };
+
 CrudList.propTypes = {
   classNameProps: PropTypes.shape({
     tableBodyRow: PropTypes.string,
   }),
   items: PropTypes.any,
   isFetching: PropTypes.bool,
-  schema: PropTypes.object,
+  schema: PropTypes.array,
 };
+
 CrudList.defaultProps = { items: listUser };
+
 export default CrudList;

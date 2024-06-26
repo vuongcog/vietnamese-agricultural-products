@@ -1,18 +1,23 @@
-@use "../../../assets/css/abstracts" as abstracts;
+$coreColorPrimary: #1f3c88;
+$coreColorHover: #3c5aa6;
+$coreColorActive: #2e4a7f;
+$coreColorBorder: rgba(255, 255, 255, 0.1); // Màu của border dưới
 
 .leftSideBar {
   width: 15%;
   height: 100vh;
-  background-color: abstracts.$coreColorBlackAdmin;
+  background-color: var(--admin-background-second);
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 16px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 
   .wrapperTitle {
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-bottom: 20px;
 
     .titleIcon {
       color: white;
@@ -26,6 +31,7 @@
       text-align: center;
       font-size: 24px;
       color: white;
+      font-weight: bold;
     }
   }
 
@@ -44,17 +50,22 @@
       gap: 12px;
       cursor: pointer;
       color: white;
+      transition: background-color 0.3s, transform 0.2s;
+      border-bottom: 1px solid $coreColorBorder; // Thêm border dưới
 
       &:hover {
-        background-color: #465d73;
+        background-color: $coreColorHover;
+        transform: translateX(5px);
       }
 
       .icon {
         font-size: 18px;
+        transition: transform 0.3s;
       }
 
       .label {
         font-weight: 500;
+        transition: color 0.3s;
       }
 
       .iconChevron {
@@ -63,7 +74,8 @@
       }
     }
 
-    .activeSelect {
+    .navbarItem.active {
+      background-color: $coreColorActive;
       box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0,
         inset rgba(255, 255, 255, 0.16) 0 1px;
     }

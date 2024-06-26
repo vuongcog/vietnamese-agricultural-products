@@ -19,6 +19,7 @@ import {
   getItemsCrudList,
   getRefreshCrudList,
 } from "../Store/selector";
+import { useDisclosure } from "@chakra-ui/react";
 
 export const CrudContext = createContext({});
 const ContextCrudProvider = ({ children, ...props }) => {
@@ -59,6 +60,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
   };
 
   const value = {
+    sendEmail: true,
     schemaForm,
     dispatch,
     selectPagination,
@@ -97,15 +99,6 @@ const ContextCrudProvider = ({ children, ...props }) => {
   };
   const isFirstRun = useRef(true);
 
-  // useMemo(() => {
-  //   console.log(errorMessage);
-  //   if (isFirstRun.current) {
-  //     isFirstRun.current = false;
-  //     return null;
-  //   }
-  //   if (!errorMessage) return;
-  //   alert(errorMessage);
-  // }, [errorMessage]);
   useEffect(() => {
     const timer = setTimeout(() => {
       getItems(debounceSearch)

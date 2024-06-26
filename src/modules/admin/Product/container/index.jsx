@@ -11,6 +11,8 @@ import {
   ejectReducersAndSagas,
   injectReducersAndSagas,
 } from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
+import { components } from "react-select";
+import ProductDes from "../components/ProductDes";
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
 
@@ -40,16 +42,13 @@ const Product = () => {
         className: "w-[5%] text-start  text-[var(--theme-light-red)]",
       },
       {
-        name: "id_category",
-        label: "id_category",
-        default: "N/A",
-        className: "w-[30%]  text-start text-[var(--theme-light-orange)]",
-      },
-      {
         name: "product_name",
         label: "product_name",
         default: "N/A",
         className: "w-[20%] text-start text-[var(--theme-yellow)] ",
+        component: ({ product_name }) => {
+          return <span>{product_name}</span>;
+        },
         dropdownActions: {
           items: [
             {
@@ -69,7 +68,6 @@ const Product = () => {
               name: "edit",
               label: "Edit",
               callback: (item) => {
-                console.log(item);
                 setSelectElement(
                   <DialogCreateForm
                     item={item}
@@ -95,11 +93,15 @@ const Product = () => {
         name: "product_image",
         label: "product_image",
         default: "  N/A",
+        component: ({ product_image }) => {
+          return <img src={product_image}></img>;
+        },
         className: "text-start text-[var(--theme-green)]",
       },
       {
         name: "product_des",
         label: "product_des ",
+        component: ProductDes,
         default: "N/A",
         className: "text-end text-[var(--theme-light-blue)]",
       },

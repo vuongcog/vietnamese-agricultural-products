@@ -12,10 +12,17 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import SearchHeader from "./SearchHeader";
 import Cart from "../../core/Cart";
+import ButtonExport from "../../core/ButtonExport";
 
 const UserHeader = () => {
+  const data = [
+    { name: "John Doe", age: 28, city: "New York" },
+    { name: "Jane Smith", age: 22, city: "Los Angeles" },
+    { name: "Michael Johnson", age: 35, city: "Chicago" },
+  ];
   return (
     <div className={styles.container}>
+      <ButtonExport data={data} fileName={"sample.xlsx"}></ButtonExport>
       <div className={styles.title}>Shree</div>
       <SearchHeader />
       <ul className={styles.navList}>

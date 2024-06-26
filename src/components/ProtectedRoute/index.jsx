@@ -15,7 +15,7 @@ export function ProtectedAuthenRoute({ children }) {
   const { isAuthenticated } = useAuth();
 
   if (isAuthenticated) {
-    return <Navigate to="/admin/test" />;
+    return <Navigate to="/admin/user" />;
   }
 
   return children;

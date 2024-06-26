@@ -1,0 +1,55 @@
+.form {
+  //   box-shadow: rgba(0, 0, 0, 1) 0px 0px 44px -27px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  //   width: 50%;
+  gap: 24px;
+  padding: 48px 20px;
+  border-radius: 6px;
+  h1 {
+    font-weight: 600;
+    font-size: 36px;
+    color: white;
+  }
+  img {
+    width: 160px;
+    height: 160px;
+    border-radius: 100%;
+    box-shadow: #000000 0px 0px 44px -27px;
+  }
+  .field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    label {
+      flex: 0 0 100px;
+    }
+
+    input {
+      //   border: none;
+      border-radius: 6px;
+      width: 80%;
+      &::placeholder {
+        font-weight: 500;
+        color: rgba(118, 113, 113, 0.5);
+      }
+    }
+    select {
+      flex: 0 1 auto;
+    }
+
+    input[type="file"] {
+      border: none;
+      height: auto;
+    }
+  }
+  .remember {
+    color: white;
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+  }
+}

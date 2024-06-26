@@ -15,7 +15,6 @@ export default defineConfig(() => {
     plugins: [
       react(),
       nodePolyfills({
-        // Các cài đặt polyfills
         globals: true,
         process: true,
         buffer: true,
@@ -32,7 +31,7 @@ export default defineConfig(() => {
     define: {
       global: "globalThis",
       "process.env": {},
-      "process.version": JSON.stringify("v14.0.0"), // giả sử version Node.js mà bạn muốn sử dụng
+      "process.version": JSON.stringify("v18.0.0"),
     },
   };
 });

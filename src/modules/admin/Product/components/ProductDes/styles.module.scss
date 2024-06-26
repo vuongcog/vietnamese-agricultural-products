@@ -1,0 +1,4 @@
+@import "../../../../../assets/css/abstracts/mixin";
+.wrapper {
+  @include setLimitLine(2);
+}

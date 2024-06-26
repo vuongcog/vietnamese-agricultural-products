@@ -6,13 +6,13 @@ export const SCHEMA = [
     link: "/admin/dashboard",
     color: "text-[#f0414a]",
   },
-  {
-    id: 2,
-    name: "Test",
-    icon: "fa fa-vials",
-    link: "/admin/test",
-    color: "text-[#ff722d]",
-  },
+  // {
+  //   id: 2,
+  //   name: "Test",
+  //   icon: "fa fa-vials",
+  //   link: "/admin/test",
+  //   color: "text-[#ff722d]",
+  // },
   {
     id: 3,
     name: "User",

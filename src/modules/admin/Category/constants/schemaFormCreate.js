@@ -16,7 +16,17 @@ export const schemaFormCreate = {
     {
       name: "status",
       label: "status",
-      type: "text",
+      type: "select",
+      items: [
+        {
+          name: "inactive",
+          value: "inactive",
+        },
+        {
+          name: "active",
+          value: "active",
+        },
+      ],
       placeholder: "status",
       isRequire: true,
     },

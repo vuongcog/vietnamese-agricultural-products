@@ -59,7 +59,7 @@ const CartItem = ({
 
 CartItem.defaultProps = {
   oldPrice: 89000,
-  price: 139000,
+  price: 50000,
   inventory: 20,
   voucher: "Giảm giá 50%",
   title: "Gối cao su non ZARA HOME cao cấp chống ngáy ngủ, đau vai gáy",
