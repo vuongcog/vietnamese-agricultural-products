@@ -11,6 +11,10 @@ const Category = React.lazy(() => {
   return import("./admin/Category/container");
 });
 
+const Order = React.lazy(() => {
+  return import("./admin/Order/container");
+});
+
 import Home from "./user/home/container";
 import Shopping from "./user/shoping/container";
 import Authentication from "./authentication/container";
@@ -99,6 +103,14 @@ const App = () => {
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <Product />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/order"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Order />
               </Suspense>
             }
           />

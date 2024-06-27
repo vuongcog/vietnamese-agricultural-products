@@ -1,107 +1,91 @@
 import React, {
   createContext,
-  useRef,
   useState,
   useEffect,
   useCallback,
-  useReducer,
   useMemo,
 } from "react";
-import axios from "axios";
-import { initialState, reducer } from "../storeLocal/reducer";
 import { reducerProductList } from "../store/reducer/reducer";
-import { SET_ITEMS, SET_LOADING, SET_PAGE } from "../constants/constants";
 import PropTypes from "prop-types";
 
 import warcherSagaProducrtList from "../store/saga/saga";
 import {
+  ejectReducer,
   ejectReducersAndSagas,
+  ejectSaga,
+  injectReducer,
   injectReducersAndSagas,
+  injectSaga,
 } from "../../../../utils/fetch-cancel-saga-reducer-with-key";
+import useCustomSelector from "../utils/useCustomSelector";
+import { FETCH_DATA } from "../store/reducer/constants";
+import { useDispatch } from "react-redux";
+import { refactorReducerFilter } from "../store/reducer/filterReducer";
+import { useDebounce } from "../../../../utils/useDebounce";
+import { FILTER_PAGINATION } from "../store/reducer/filterConstants";
+import { initialFilterState } from "../store/constants/initialFilterState";
+
+const redux = {
+  keyReducer: "list-product-reducer",
+  keySaga: "list-product-saga",
+  reducer: reducerProductList,
+  saga: warcherSagaProducrtList,
+};
 
 export const ShoppingContext = createContext({});
 
 const ShoppingProvider = ({ children }) => {
+  useMemo(() => {
+    injectReducer("filter", refactorReducerFilter({ ...initialFilterState }));
+    injectReducersAndSagas(redux);
+  }, []);
+
   const [lastScrollTop, setLastScrollTop] = useState(0);
-  const elementRef = useRef(null);
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const usedispatch = useDispatch();
+  const { items, pagination, limit, search } = useCustomSelector();
+  const debounceSearch = useDebounce(search, 500);
 
-  // Định nghĩa fetchItems sử dụng useCallback
-  const fetchItems = useCallback(
-    async (page = state.page) => {
-      dispatch({ type: SET_LOADING, payload: true });
-      const res = await axios.post(
-        "https://google.serper.dev/search",
-        {
-          q: "apple inc",
-          page: page,
-          num: state.limit,
-        },
-        {
-          headers: {
-            "X-API-KEY": "07521c846036c9101a98c2c34c6bf4385b65dcdb",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      dispatch({ type: SET_LOADING, payload: false });
-      return res.data;
-    },
-    [state.page, state.limit, dispatch]
-  );
-
-  // Định nghĩa handleScroll sử dụng useCallback
-  const handleScroll = useCallback(() => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop >
-      document.documentElement.offsetHeight
-    ) {
-      return;
-    }
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop > lastScrollTop + elementRef.current.clientHeight) {
-      setLastScrollTop(scrollTop);
-      fetchItems()
-        .then((res) => {
-          dispatch({ type: SET_ITEMS, payload: res.organic });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    if (
-      window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight - 50
-    ) {
-      dispatch({ type: SET_PAGE, payload: state.page + 1 });
-      fetchItems(state.page + 1);
-    }
-  }, [lastScrollTop, fetchItems, dispatch, state.page]);
-
-  const redux = {
-    keyReducer: "list-product-product-saga",
-    keySaga: "list-product-saga",
-    reducer: reducerProductList,
-    saga: warcherSagaProducrtList,
-  };
-
+  const fetchItems = useCallback(() => {
+    const filter = {
+      q: debounceSearch,
+      num: limit,
+      page: pagination,
+    };
+    usedispatch({ type: FILTER_PAGINATION, payload: pagination + 1 });
+    usedispatch({ type: FETCH_DATA, payload: { ...filter } });
+  }, [debounceSearch, limit, usedispatch, pagination]);
   useEffect(() => {
     injectReducersAndSagas(redux);
+    injectReducer("filter", refactorReducerFilter({ ...initialFilterState }));
     return () => {
       ejectReducersAndSagas(redux);
+      ejectReducer("filter");
     };
   }, []);
 
   useEffect(() => {
+    fetchItems();
+  }, [debounceSearch]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+
+      if (scrollTop - lastScrollTop >= windowHeight) {
+        fetchItems();
+        setLastScrollTop(scrollTop);
+        usedispatch({ type: FILTER_PAGINATION, payload: pagination + 1 });
+      }
+    };
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [handleScroll]);
-
+  }, [lastScrollTop, pagination]);
   return (
-    <ShoppingContext.Provider value={{ elementRef, items: state.items }}>
+    <ShoppingContext.Provider value={{ items: items }}>
       {children}
     </ShoppingContext.Provider>
   );

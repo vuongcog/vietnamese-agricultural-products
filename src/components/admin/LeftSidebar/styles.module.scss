@@ -1,10 +1,10 @@
 $coreColorPrimary: #1f3c88;
 $coreColorHover: #3c5aa6;
 $coreColorActive: #2e4a7f;
-$coreColorBorder: rgba(255, 255, 255, 0.1); // Màu của border dưới
+$coreColorBorder: rgba(255, 255, 255, 0.1);
 
 .leftSideBar {
-  width: 15%;
+  min-width: 200px;
   height: 100vh;
   background-color: var(--admin-background-second);
   display: flex;
@@ -12,6 +12,9 @@ $coreColorBorder: rgba(255, 255, 255, 0.1); // Màu của border dưới
   gap: 12px;
   padding: 16px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll;
+  box-sizing: border-box;
+  flex: 0 0 15%;
 
   .wrapperTitle {
     display: flex;

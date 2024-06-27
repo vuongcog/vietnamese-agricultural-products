@@ -42,7 +42,6 @@ const httpClient = (isEndpoint = false) => {
   // );
   return {
     get: (url, params = {}, options = {}) => {
-      // process.env.AP
       if (isEndpoint) {
         url = import.meta.env.VITE_API_URL_SERVER + url;
       }
@@ -52,16 +51,10 @@ const httpClient = (isEndpoint = false) => {
           delete cloneParams[key];
         }
       });
-      ////////////
-      // if (cloneParams.page) {
-      //   cloneParams.$skip = (cloneParams.page - 1) * cloneParams.$limit;
-      //   delete cloneParams.page;
-      // }
 
       if (!_.isEmpty(cloneParams)) {
         url = `${url}?${$.param(cloneParams)}`;
       }
-      console.log(options.notAuthor);
       if (options.notAuthor) {
         delete defaultOptions.headers.Authorization;
       }
@@ -73,10 +66,6 @@ const httpClient = (isEndpoint = false) => {
     },
 
     post: (url, data = {}, options = {}) => {
-      console.log("httpClient");
-      // if (!options.ignoreAuth && !window.localStorage.getItem("accessToken")) {
-      //   return new Promise((_, reject) => reject({}));
-      // }
       if (data.status && data.status === "") {
         data.status = "inactive";
       }
@@ -84,6 +73,9 @@ const httpClient = (isEndpoint = false) => {
         url = import.meta.env.VITE_API_URL_SERVER + url;
       }
 
+      if (options.notAuthor) {
+        delete defaultOptions.headers.Authorization;
+      }
       return axios.post(`${url}`, data, {
         ...defaultOptions,
         ...options,

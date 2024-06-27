@@ -14,7 +14,7 @@ export const initialState = {
   refresh: false,
   loading: false,
   limit: 10,
-  page: 1,
+  page: 0,
 
   items: [],
 };
@@ -25,7 +25,7 @@ const handlerFetched = (state) => {
   return { ...state, isFetching: false };
 };
 const handlerSuccsess = (state, action) => {
-  return { ...state, items: [...state.items, ...action.payload] };
+  return { ...state, items: [...state.items, ...action.payload.organic] };
 };
 const handlerFailed = (state) => {
   return { ...state, isFetchingFailed: null };

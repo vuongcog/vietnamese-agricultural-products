@@ -9,7 +9,6 @@ export const injectReducersAndSagas = ({
   saga,
 }) => {
   const injectReducerFactory = getInjectors(store);
-  console.log("hello");
   injectReducerFactory.injectReducer(keyReducer, reducer);
   runSaga(saga, keySaga);
 };
@@ -18,4 +17,23 @@ export const ejectReducersAndSagas = ({ keyReducer, keySaga }) => {
   const injectReducerFactory = getInjectors(store);
   injectReducerFactory.ejectReducer(keyReducer);
   cancelSaga(keySaga);
+};
+
+// ! define function tạo 1 reducer và saga
+export const injectReducer = (key, reducer) => {
+  const injectReducerFactory = getInjectors(store);
+  injectReducerFactory.injectReducer(key, reducer);
+};
+export const injectSaga = (key, saga) => {
+  runSaga(saga, key);
+};
+
+// ! define function cancel reducer và saga
+
+export const ejectReducer = (key) => {
+  const injectReducerFactory = getInjectors(store);
+  injectReducerFactory.ejectReducer(key);
+};
+export const ejectSaga = (key) => {
+  cancelSaga(key);
 };

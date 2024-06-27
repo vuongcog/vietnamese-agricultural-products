@@ -4,6 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import AdminAvatar from "../Avatar";
 import { SCHEMA } from "../../../constants/nav-bar-item";
 import { useNavigate, useLocation } from "react-router-dom";
+import classNames from "classnames";
 
 const AdminLeftSidebar = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const AdminLeftSidebar = () => {
   };
 
   return (
-    <nav className={styles.leftSideBar}>
+    <nav className={classNames(styles.leftSideBar)}>
       <div className={styles.wrapperTitle}>
         <i className={`fas fa-paw ${styles.titleIcon}`}></i>
         <h1 className={styles.titleText}>Administrator</h1>

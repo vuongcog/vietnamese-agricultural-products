@@ -7,12 +7,17 @@ import { addCart } from "../../../../utils/cart/addCart";
 import { ShoppingCartCheckout } from "@mui/icons-material";
 import AlertMessage from "../../../core/AlertMessage";
 import _ from "lodash";
+import useCustomSelector from "../../../../modules/user/shoping/utils/useCustomSelector";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import SkeletonCart from "../SkeletonCart";
 
 const Card = ({ item, ...props }) => {
   const navigate = useNavigate();
   const cloneItem = _.cloneDeep(item);
   const [element, setElement] = useState(null);
   const { elementRef } = useContext(ShoppingContext);
+  const { isFetching } = useCustomSelector();
 
   useEffect(() => {
     if (element) {
@@ -22,6 +27,19 @@ const Card = ({ item, ...props }) => {
       return () => clearTimeout(timer);
     }
   }, [element]);
+
+  if (isFetching) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.container}>
+          <SkeletonCart></SkeletonCart>
+        </div>
+      </div>
+    );
+  }
+  if (isFetching) {
+    return <SkeletonCart></SkeletonCart>;
+  }
 
   return (
     <div className={styles.wrapper}>

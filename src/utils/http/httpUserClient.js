@@ -7,7 +7,9 @@ class HttpUserClient {
   constructor(endpoint) {
     this.endpoint = endpoint;
   }
-
+  getItems = (param = {}, options = {}) => {
+    return this.http.post(`https://google.serper.dev/search`, param, options);
+  };
   getItem = (params = {}) => {
     const option = {
       notAuthor: true,

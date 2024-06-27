@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import Card from "./Card";
 import styles from "./styles.module.scss";
 import { ShoppingContext } from "../../../modules/user/shoping/context";
-import { nanoid } from "@reduxjs/toolkit";
+import useCustomSelector from "../../../modules/user/shoping/utils/useCustomSelector";
+import SkeletonCart from "./SkeletonCart";
 
 const ListShoping = ({ items }) => {
   const { loading, items: list } = useContext(ShoppingContext);
-
+  const { isFetching } = useCustomSelector();
   const __renderCard = (item) => {
-    return <Card key={nanoid()} item={item} />;
+    return <Card item={item} />;
   };
 
   const __renderListProduct = (items) => {
@@ -18,9 +19,12 @@ const ListShoping = ({ items }) => {
         {items.map((item) => {
           return __renderCard(item);
         })}
-        {list.map((item) => {
+        {list.map((item, index) => {
+          if (isFetching) {
+            return <SkeletonCart key={index}></SkeletonCart>;
+          }
           return (
-            <div key={nanoid()} className={styles.placeholder}>
+            <div key={index} className={styles.placeholder}>
               {item.title}
             </div>
           );

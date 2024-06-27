@@ -1,0 +1,3 @@
+export const FILTER_SEARCH = "FILTER_SEARCH ";
+export const FILTER_PAGINATION = "FILTER_PAGINATION";
+export const FILTER_LIMIT = "FILTER_LIMIT";

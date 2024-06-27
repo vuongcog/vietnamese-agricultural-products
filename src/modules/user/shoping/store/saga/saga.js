@@ -1,89 +1,40 @@
-// import { call, put, takeLatest } from "redux-saga/effects";
-// import {
-//   ADDED_DATA,
-//   ADDING_DATA,
-//   ADD_DATA,
-//   REFRESH,
-//   SENDED_EMAIL,
-//   SENDING_EMAIL,
-//   SEND_EMAIL,
-//   SEND_EMAIL_ERROR,
-//   SEND_EMAIL_SUCCSESS,
-//   SET_ERROR,
-//   UPDATE_DATA,
-// } from "./constants";
-// import Http from "../../../../utils/http/http";
-// import { parseObjectJson } from "../../../../utils/pareJson";
-// import { toast } from "react-toastify";
+import { call, put, takeLatest } from "redux-saga/effects";
+import {
+  FETCHED_DATA,
+  FETCHING_DATA,
+  FETCH_DATA_FAILED,
+  FETCH_DATA_SUCCESS,
+  FETCH_DATA,
+} from "../reducer/constants";
+import HttpUserClient from "../../../../../utils/http/httpUserClient";
+import { parseObjectJson } from "../../../../../utils/pareJson";
 
-// function* workerTest(action) {
-//   try {
-//     yield put({ type: ADDING_DATA });
-//     const { payload } = action;
-//     const http = new Http(payload.endpoint);
-//     yield call(http.create, payload);
-//     yield put({ type: ADDED_DATA });
-//     yield put({ type: REFRESH });
-//   } catch (err) {
-//     yield put({ type: ADDED_DATA });
+const options = {
+  notAuthor: true,
+  headers: {
+    "X-API-KEY": "afcc78057c77c51d7baebcadf1d147dc5a38e9c7",
+    "Content-Type": "application/json",
+  },
+};
 
-//     const parseData = parseObjectJson(err.response.data);
-//     const errors = _.get(parseData, "error", {});
+function* wokerFetchData(action) {
+  try {
+    yield put({ type: FETCHING_DATA });
+    const { payload } = action;
 
-//     for (let key in errors) {
-//       if (errors[key].length > 0) {
-//         errors[key].forEach((errMsg) => toast.error(errMsg));
-//       }
-//     }
-
-//     yield put({ type: SET_ERROR, payload: errors });
-//   }
-// }
-
-// function* handlerUpdate(action) {
-//   try {
-//     yield put({ type: ADDING_DATA });
-//     const { payload } = action;
-//     const http = new Http(payload.endpoint);
-//     delete payload.endpoint;
-//     yield call(http.update, payload);
-//     yield put({ type: ADDED_DATA });
-//     yield put({ type: REFRESH });
-//   } catch (err) {
-//     yield put({ type: ADDED_DATA });
-
-//     const parseData = parseObjectJson(err.response.data);
-//     const errors = _.get(parseData, "error", {});
-
-//     for (let key in errors) {
-//       if (errors[key].length > 0) {
-//         errors[key].forEach((errMsg) => toast.error(errMsg));
-//       }
-//     }
-
-//     yield put({ type: SET_ERROR, payload: errors });
-//   }
-// }
-
-// function* handlerSendMail(action) {
-//   try {
-//     yield put({ type: SENDING_EMAIL });
-//     const { payload } = action;
-//     const http = new Http(payload.endpoint);
-//     delete payload.endpoint;
-//     yield call(http.update, payload);
-//     yield put({ type: SENDED_EMAIL });
-//     yield put({ type: SEND_EMAIL_SUCCSESS });
-//   } catch (err) {
-//     yield put({ type: SENDED_EMAIL });
-//     yield put({ type: SEND_EMAIL_ERROR, payload: "Send mail error" });
-//   }
-// }
+    const http = new HttpUserClient();
+    const res = yield call(http.getItems, payload, options);
+    const parseData = parseObjectJson(res.data);
+    yield put({ type: FETCHED_DATA });
+    yield put({ type: FETCH_DATA_SUCCESS, payload: parseData });
+  } catch (err) {
+    yield put({ type: FETCHED_DATA });
+    yield put({ type: FETCH_DATA_FAILED });
+  }
+}
 
 function* warcherSagaProducrtList() {
-  yield console.log("hello");
-  //   yield takeLatest(UPDATE_DATA, handlerUpdate);
-  //   yield takeLatest(SEND_EMAIL, handlerSendMail);
+  yield takeLatest(FETCH_DATA, wokerFetchData);
 }
 
 export default warcherSagaProducrtList;
