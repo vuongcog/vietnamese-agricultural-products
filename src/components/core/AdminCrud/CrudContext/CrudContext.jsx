@@ -1,25 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createContext } from "react";
 import Http from "../../../../utils/http/http";
-import { compose } from "redux";
 import PropTypes from "prop-types";
-import {
-  addFilters,
-  clearFilters,
-  replaceFilters,
-  startInitFilters,
-} from "../CrudSearch/action";
-import { connect, useDispatch, useSelector } from "react-redux";
+
+import { useDispatch } from "react-redux";
 import { useDebounce } from "../../../../utils/useDebounce";
 import { FETCHED_DATA, FETCH_DATA, SET_ITEMS } from "../Store/constants";
-import { crudOptionsDefault } from "./constants";
+import { crudOptionsDefault } from "../constants/curd-options-default";
+
+import useProducerStateCrud from "../utils/useProducerState";
+import useProducerStateCrudFilter from "../utils/useProducerStateFilter";
 import {
-  getErrorCrudList,
-  getFetchingCrudList,
-  getItemsCrudList,
-  getRefreshCrudList,
-} from "../Store/selector";
-import { useDisclosure } from "@chakra-ui/react";
+  CRUD_SET_CURRENT_PAGE,
+  CRUD_SET_PAGANATION,
+  CRUD_SET_PER_PAGE,
+  CRUD_SET_SEARCH,
+  CRUD_SET_TOTAL_PAGE,
+} from "../constants/actionFilter";
+import { toast } from "react-toastify";
 
 export const CrudContext = createContext({});
 const ContextCrudProvider = ({ children, ...props }) => {
@@ -32,31 +30,27 @@ const ContextCrudProvider = ({ children, ...props }) => {
       ...mode,
     },
   };
-  const [perpage, setPerpage] = useState(10);
+
   const apiParams = NewCrudOptions.endpointParams || {};
-  const [searchText, setSearchText] = useState(NewCrudOptions.endpointParams.q);
-  const [oldData, setOldData] = useState({});
-  const [loaded, setLoaded] = useState(false);
-  // const [isFetching, setFetching] = useState(true);
   const [defaultApiParams, setDefaultParams] = useState(apiParams);
   const [crudOptions, setCrudOptions] = useState(NewCrudOptions);
-  const [errors, setErrors] = useState({});
-  const debounceSearch = useDebounce(searchText, 100);
-  const [pagination, setPagination] = useState(1);
-  const dispatch = useDispatch();
-  const items = useSelector(getItemsCrudList);
-  const isFetching = useSelector(getFetchingCrudList);
-  const refresh = useSelector(getRefreshCrudList);
-  // const errorMessage = useSelector(getErrorCrudList);
-  const handleChangeSearchtext = (value) => {
-    setSearchText(value.target.value);
-  };
 
+  const dispatch = useDispatch();
+
+  // 222 get state of redux
+  const { items, isFetching, refresh } = useProducerStateCrud();
+  const { search, pagination, perpage } = useProducerStateCrudFilter();
+  const debounceSearch = useDebounce(search, 100);
+
+  // 111 define handler set filter
+  const handleChangeSearchtext = (value) => {
+    dispatch({ type: CRUD_SET_SEARCH, payload: value.target.value });
+  };
   const selectPerpage = (value) => {
-    setPerpage(value);
+    dispatch({ type: CRUD_SET_PER_PAGE, payload: value });
   };
   const selectPagination = (value) => {
-    setPagination(value);
+    dispatch({ type: CRUD_SET_PAGANATION, payload: value });
   };
 
   const value = {
@@ -64,22 +58,13 @@ const ContextCrudProvider = ({ children, ...props }) => {
     schemaForm,
     dispatch,
     selectPagination,
-    setPerpage,
     handleChangeSearchtext,
-    searchText,
-    setSearchText,
-    oldData,
-    setOldData,
-    loaded,
-    setLoaded,
     isFetching,
     items,
     defaultApiParams,
     setDefaultParams,
     crudOptions,
     setCrudOptions,
-    errors,
-    setErrors,
     classNameProps,
     mode,
     perpage,
@@ -89,28 +74,32 @@ const ContextCrudProvider = ({ children, ...props }) => {
     dispatch({ type: FETCH_DATA });
     crudOptions.endpointParams["search"] = debounceSearch;
     crudOptions.endpointParams["page"] = pagination;
-
+    crudOptions.endpointParams["per_page"] = perpage;
     const res = await new Http(crudOptions.endpoint).list(
       crudOptions.endpointParams
     );
-    dispatch({ type: FETCHED_DATA });
-
-    return JSON.parse(res.data).data;
+    return JSON.parse(res.data);
   };
-  const isFirstRun = useRef(true);
 
+  const isFirstRun = useRef(true);
   useEffect(() => {
     const timer = setTimeout(() => {
       getItems(debounceSearch)
         .then((res) => {
-          dispatch({ type: SET_ITEMS, payload: res });
+          dispatch({ type: SET_ITEMS, payload: res.data });
+          dispatch({ type: CRUD_SET_TOTAL_PAGE, payload: res.total_pages });
+          dispatch({ type: CRUD_SET_CURRENT_PAGE, payload: res.current_page });
+          dispatch({ type: CRUD_SET_PAGANATION, payload: res.current_page });
         })
         .catch(() => {
-          console.log("err");
+          toast.error(
+            "Không tồn tại dữ liệu hoặc bạn không có quyền truy cập vào dữ liệu này"
+          );
+        })
+        .finally(() => {
           dispatch({ type: FETCHED_DATA });
         });
     }, [500]);
-
     return () => {
       isFirstRun.current = true;
       clearTimeout(timer);
@@ -126,14 +115,7 @@ ContextCrudProvider.propTypes = {
   schemaForm: PropTypes.object,
 };
 
-const mapDispatchToProps = {
-  addFilters,
-  replaceFilters,
-  clearFilters,
-  startInitFilters,
-};
-
 ContextCrudProvider.propTypes = {
   children: PropTypes.element,
 };
-export default compose(connect(null, mapDispatchToProps))(ContextCrudProvider);
+export default ContextCrudProvider;

@@ -14,7 +14,21 @@ const Category = React.lazy(() => {
 const Order = React.lazy(() => {
   return import("./admin/Order/container");
 });
-
+const Blog = React.lazy(() => {
+  return import("./admin/Blog/container");
+});
+const BlogCategory = React.lazy(() => {
+  return import("./admin/Blog-Category/container");
+});
+const Coupoun = React.lazy(() => {
+  return import("./admin/Coupoun/container");
+});
+const Banner = React.lazy(() => {
+  return import("./admin/Banner/container");
+});
+const Cart = React.lazy(() => {
+  return import("./admin/Cart/container");
+});
 import Home from "./user/home/container";
 import Shopping from "./user/shoping/container";
 import Authentication from "./authentication/container";
@@ -97,7 +111,6 @@ const App = () => {
               </Suspense>
             }
           />
-
           <Route
             path="/admin/product"
             element={
@@ -114,7 +127,48 @@ const App = () => {
               </Suspense>
             }
           />
+          <Route
+            path="/admin/blog"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Blog />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/blog-category"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <BlogCategory />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/coupoun"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Coupoun />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/banner"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Banner />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/cart"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Cart />
+              </Suspense>
+            }
+          />
         </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>

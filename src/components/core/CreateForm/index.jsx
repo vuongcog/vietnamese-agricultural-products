@@ -9,30 +9,17 @@ import {
   FormLabel,
   Input,
   Select,
-  effect,
 } from "@chakra-ui/react";
 import styles from "./styles.module.scss";
 import { ContextDialogCreateForm } from "../DialogCreateForm/context/ProviderDialogCreateForm";
 import { ADD_DATA, UPDATE_DATA } from "../AdminCrud/Store/constants";
-import {
-  getAddingData,
-  getErrorCrudList,
-  getErrorTimeStampCrudList,
-  getRefreshCrudList,
-} from "../AdminCrud/Store/selector";
-import AlertMessage from "../AlertMessage";
-import { useMemo } from "react";
+import { getAddingData, getUpdatingData } from "../AdminCrud/Store/selector";
 import ProgressFullScreen from "../ProgressFullScreen";
 
 const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
   const { setValueForm } = useContext(ContextDialogCreateForm);
-  const errorMessage = useSelector(getErrorCrudList);
-  const errorTimestamp = useSelector(getErrorTimeStampCrudList);
-  const refresh = useSelector(getRefreshCrudList);
-  const isFirstMount = useRef(true);
-  const isFirstMountSuccess = useRef(true);
-  const [element, setElement] = useState(null);
   const isAddingData = useSelector(getAddingData);
+  const isUpdatingData = useSelector(getUpdatingData);
   const [formState, setFormState] = useState(
     schemaForm.reduce((acc, field) => {
       acc[field.name] = type === UPDATE_DATA ? defaultValues[field.name] : "";
@@ -49,44 +36,14 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = { ...formState };
-
     if (type === UPDATE_DATA) {
       data["endpoint"] = `${endpoint}/${defaultValues.id}?_method=PUT`;
     }
     if (type === ADD_DATA) {
       data["endpoint"] = `${endpoint}`;
     }
-
     setValueForm(data);
   };
-
-  useEffect(() => {
-    if (isFirstMount.current) {
-      isFirstMount.current = false;
-    } else {
-      setElement(<AlertMessage status="error" message="Thất bại" />);
-      var timer = setTimeout(() => {
-        setElement(null);
-      }, 1000);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [errorMessage, errorTimestamp]);
-  useEffect(() => {
-    if (isFirstMountSuccess.current) {
-      isFirstMountSuccess.current = false;
-    } else {
-      setElement(<AlertMessage status="success" message="Tạo thành công" />);
-      var timer = setTimeout(() => {
-        setElement(null);
-        onClose();
-      }, 1000);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [refresh]);
 
   const renderField = (item, defaultValue) => {
     const renderInput = () => {
@@ -134,8 +91,8 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
   };
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      {element}
       {isAddingData && <ProgressFullScreen></ProgressFullScreen>}
+      {isUpdatingData && <ProgressFullScreen></ProgressFullScreen>}
 
       {renderListFields()}
       <Button type="submit" leftIcon={<AddIcon />}>

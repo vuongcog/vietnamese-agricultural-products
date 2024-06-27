@@ -2,11 +2,10 @@ import React from "react";
 import ReactPaginate from "react-paginate";
 import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
+import useProducerStateCrudFilter from "../utils/useProducerStateFilter";
 
 const CrudPagination = (props) => {
-  const totalPage = Math.ceil(
-    parseInt(props.totalItems, 10) / parseInt(props.itemsPerPage, 10)
-  );
+  const { totalPage } = useProducerStateCrudFilter();
 
   if (totalPage <= 1) {
     return null;

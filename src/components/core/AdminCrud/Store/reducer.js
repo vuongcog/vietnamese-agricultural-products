@@ -1,7 +1,9 @@
 import {
   ADDED_DATA,
   ADDING_DATA,
-  ADD_DATA,
+  ADD_DATA_FAILED,
+  ADD_DATA_SUCCESS,
+  ADD_RESET_STATUS,
   FETCHED_DATA,
   FETCH_DATA,
   REFRESH,
@@ -10,24 +12,37 @@ import {
   SEND_EMAIL_ERROR,
   SEND_EMAIL_SUCCSESS,
   SEND_RESET_EMAIL_STATUS,
-  SET_ERROR,
   SET_ITEMS,
-  UPDATE_SLICE,
+  UPDATED_DATA,
+  UPDATE_FAILED,
+  UPDATE_RESET_STATUS,
+  UPDATE_SUCCESS,
+  UPDATING_DATA,
 } from "./constants";
 const intiState = {
+  // 111 state giành cho các trạng thái global
   loading: true,
   isFetching: false,
   items: [],
   refresh: false,
-  error: null,
-  errorTimestamp: null,
+  // 222 state giành cho create data
   isAddingData: false,
-  // * state giành cho send mail
+  isAddDataSuccess: false,
+  isAddDataFailed: false,
+
+  // 333 state giành cho update data
+  isUpdateData: false,
+  isUpdatedDataSuccess: false,
+  isUpdatedDataFailed: false,
+
+  // 444 state giành cho send mail
   isSendEmail: false,
   sendMailSuccsess: false,
-  sendMailError: null,
+  sendMailError: false,
 };
 
+// 111 handler giành cho nạp dữ liệu global
+const setItems = (state, action) => ({ ...state, items: action.payload });
 const fetchingData = (state) => {
   return {
     ...state,
@@ -38,25 +53,47 @@ const fetchedData = (state) => ({
   ...state,
   isFetching: false,
 });
-const addingData = (state) => ({ ...state, isAddingData: true });
-const addedData = (state) => ({ ...state, isAddingData: false });
-const setItems = (state, action) => ({ ...state, items: action.payload });
-const setError = (state, action) => {
-  return { ...state, error: action.payload, errorTimestamp: Date.now() };
-};
 
-const addData = (state) => {
-  return {
-    ...state,
-  };
-};
-// * các handler giành cho send mail
-const sendingEmail = (state) => {
-  return {
-    ...state,
-    isSendEmail: true,
-  };
-};
+// 222 handler giành cho create data
+const handlerAddingData = (state) => ({ ...state, isAddingData: true });
+const handlerAddedData = (state) => ({ ...state, isAddingData: false });
+const handlerAddSuccess = (state) => ({
+  ...state,
+  isAddDataSuccess: true,
+});
+const handlerAddFailed = (state) => ({
+  ...state,
+  isUpdatedDataFailed: true,
+});
+const handlerResetStatusAddData = (state) => ({
+  ...state,
+  isAddDataSuccess: false,
+  isUpdatedDataFailed: false,
+});
+
+// 333 handler giành cho update data
+const handlerUpdatingData = (state) => ({ ...state, isUpdateData: true });
+const handlerUpdatedData = (state) => ({ ...state, isUpdateData: false });
+const handlerUpdateSuccess = (state) => ({
+  ...state,
+  isAddDataSuccess: true,
+});
+const handlerUpdatedFailed = (state) => ({
+  ...state,
+  isUpdatedDataFailed: true,
+});
+const handlerResetStatusUpdateData = (state) => ({
+  ...state,
+  isUpdatedDataSuccess: false,
+  isUpdatedDataFailed: false,
+});
+
+// 444 handler giành cho send mail
+
+const handlerSendingEmail = (state) => ({
+  ...state,
+  isSendEmail: true,
+});
 
 const sendedEmail = (state) => {
   return { ...state, isSendEmail: false };
@@ -65,12 +102,12 @@ const sendedEmail = (state) => {
 const handlerSendMailSuccess = (state) => {
   return { ...state, sendMailSuccsess: true };
 };
-const handlerSendMailError = (state, action) => {
-  return { ...state, sendMailError: action.payload };
+const handlerSendMailError = (state) => {
+  return { ...state, sendMailError: true };
 };
 
 const handlerResetEmailStatus = (state) => {
-  return { ...state, sendMailSuccsess: false, sendMailError: null };
+  return { ...state, sendMailSuccsess: false, sendMailError: false };
 };
 const refresh = (state) => {
   return {
@@ -79,21 +116,30 @@ const refresh = (state) => {
   };
 };
 
-const updateSlice = (state) => {
-  return { ...state };
-};
+// 111 mapping handlers
 const handlers = {
+  // 222 action giành cho fetch data
   [FETCH_DATA]: fetchingData,
   [FETCHED_DATA]: fetchedData,
-  [ADD_DATA]: addData,
-  [ADDING_DATA]: addingData,
-  [ADDED_DATA]: addedData,
-  [SET_ITEMS]: setItems,
-  [UPDATE_SLICE]: updateSlice,
   [REFRESH]: refresh,
-  [SET_ERROR]: setError,
-  // * action giành cho send mail
-  [SENDING_EMAIL]: sendingEmail,
+  [SET_ITEMS]: setItems,
+
+  // 333 action giành cho add data
+  [ADDING_DATA]: handlerAddingData,
+  [ADDED_DATA]: handlerAddedData,
+  [ADD_DATA_SUCCESS]: handlerAddSuccess,
+  [ADD_DATA_FAILED]: handlerAddFailed,
+  [ADD_RESET_STATUS]: handlerResetStatusAddData,
+
+  // 444 action giành cho update data
+  [UPDATING_DATA]: handlerUpdatingData,
+  [UPDATED_DATA]: handlerUpdatedData,
+  [UPDATE_SUCCESS]: handlerUpdateSuccess,
+  [UPDATE_FAILED]: handlerUpdatedFailed,
+  [UPDATE_RESET_STATUS]: handlerResetStatusUpdateData,
+
+  // 555 action giành cho send mail
+  [SENDING_EMAIL]: handlerSendingEmail,
   [SENDED_EMAIL]: sendedEmail,
   [SEND_EMAIL_ERROR]: handlerSendMailError,
   [SEND_EMAIL_SUCCSESS]: handlerSendMailSuccess,

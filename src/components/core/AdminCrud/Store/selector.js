@@ -4,6 +4,9 @@ export const getRefreshCrudList = (state) => state.crudList.refresh;
 export const getErrorCrudList = (state) => state.crudList.error;
 export const getAddingData = (state) => state.crudList.isAddingData;
 
+// * select edit data
+export const getUpdatingData = (state) => state.crudList.isUpdateData;
+
 // * select send mail
 export const getIsSendingEmailStatus = (state) => state.crudList.isSendEmail;
 export const getErrorSendMail = (state) => state.crudList.sendMailError;

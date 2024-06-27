@@ -12,7 +12,6 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { nanoid } from "nanoid";
 import _ from "lodash";
 
 const CrudList = (props) => {

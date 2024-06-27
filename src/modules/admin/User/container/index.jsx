@@ -15,8 +15,14 @@ import {
 import { exportToExcel } from "../../../../utils/export-excel";
 import { Icon } from "@chakra-ui/react";
 import { ToastContainer } from "react-toastify";
+import {
+  ejectSaga,
+  injectReducer,
+} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
+import { reducerFilter } from "../../../../components/core/AdminCrud/Store/reducerFilter";
 const User = () => {
   const [selectElement, setSelectElement] = useState(null);
+
   const crudOptions = {
     endpointParams: {
       q: "",
@@ -134,12 +140,13 @@ const User = () => {
 
   useMemo(() => {
     injectReducersAndSagas();
+    injectReducer("crudFilter", reducerFilter);
   }, []);
   useEffect(() => {
     injectReducersAndSagas();
     return () => {
-      console.log("eject");
       ejectReducersAndSagas();
+      ejectSaga("crudFilter");
     };
   }, []);
   return (
