@@ -1,0 +1,23 @@
+@use "../../../../../assets/css/abstracts/mixin" as styles;
+
+.container {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+  color: #ff6347;
+  margin-right: 0.75rem;
+}
+
+.slugText {
+  font-weight: 600;
+  color: #555;
+  width: 160px;
+  @include styles.setLimitLine(1);
+}

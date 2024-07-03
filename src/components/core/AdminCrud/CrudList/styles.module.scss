@@ -6,6 +6,7 @@
     padding: 24px;
     font-family: "Inter", sans-serif;
     overflow-y: scroll; /* Đảm bảo nội dung có thể cuộn */
+    overflow-x: scroll; /* Ensure content can scroll horizontally */
     -ms-overflow-style: none; /* IE và Edge */
     scrollbar-width: none; /* Firefox */
 
@@ -17,33 +18,36 @@
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Box-shadow cho container */
 
+    th,
+    td {
+      text-align: center; /* Căn giữa văn bản trong toàn bộ bảng */
+    }
+
     .heading-container {
       .row-heading {
-        background-color: var(
-          --admin-background-second
-        ); /* Màu nền cho tiêu đề */
         th {
           box-sizing: border-box;
-          padding: 16px 24px;
+          padding: 8px 12px;
           height: 24px;
           font-size: 12px;
           font-weight: 500;
-          color: #ffffff; /* Màu chữ cho tiêu đề */
+          color: black; /* Màu chữ cho tiêu đề */
           text-transform: uppercase; /* Chữ hoa cho tiêu đề */
           letter-spacing: 1px; /* Khoảng cách giữa các chữ cái */
           border-left: 1px solid #dee2e6; /* Border trái cho tiêu đề */
           border-right: 1px solid #dee2e6; /* Border phải cho tiêu đề */
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Shadow cho tiêu đề */
           transition: all 0.3s ease-in-out;
-
           &:first-child {
+            padding: 0 24px;
+            font-weight: 600;
             border-left: none; /* Xóa border trái cho ô đầu tiên */
-            border-top-left-radius: 8px; /* Bo tròn góc trên bên trái */
+            border-top-left-radius: 4px; /* Bo tròn góc trên bên trái */
           }
 
           &:last-child {
             border-right: none; /* Xóa border phải cho ô cuối cùng */
-            border-top-right-radius: 8px; /* Bo tròn góc trên bên phải */
+            border-top-right-radius: 4px; /* Bo tròn góc trên bên phải */
           }
 
           &:hover {
@@ -71,13 +75,15 @@
             align-items: center;
             gap: 12px;
           }
-          padding: 16px 24px;
+          padding: 24px 12px;
           color: #495057; /* Màu chữ cho các ô */
           font-size: 14px;
           border-left: 1px solid #dee2e6; /* Border trái cho ô trong body */
           border-right: 1px solid #dee2e6; /* Border phải cho ô trong body */
 
           &:first-child {
+            padding: 0 24px;
+            font-weight: 600;
             border-left: none; /* Xóa border trái cho ô đầu tiên */
           }
 

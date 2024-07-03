@@ -4,6 +4,11 @@ import {
   ADD_DATA_FAILED,
   ADD_DATA_SUCCESS,
   ADD_RESET_STATUS,
+  DELETED_DATA,
+  DELETE_DATA_FAILED,
+  DELETE_DATA_SUCCESS,
+  DELETE_RESET_STATUS,
+  DELETING_DATA,
   FETCHED_DATA,
   FETCH_DATA,
   REFRESH,
@@ -39,6 +44,10 @@ const intiState = {
   isSendEmail: false,
   sendMailSuccsess: false,
   sendMailError: false,
+  // 555 state giành cho delete data
+  isDeleteData: false,
+  isDeletedDataSuccess: false,
+  isDeletedDataFailed: false,
 };
 
 // 111 handler giành cho nạp dữ liệu global
@@ -116,6 +125,24 @@ const refresh = (state) => {
   };
 };
 
+// 555 handler giành cho delete
+
+const handlerDeletingData = (state) => ({ ...state, isDeleteData: true });
+const handlerDeleteddData = (state) => ({ ...state, isDeleteData: false });
+const handlerDeletedSuccess = (state) => ({
+  ...state,
+  isDeletedDataSuccess: true,
+});
+const handlerDeletedFailed = (state) => ({
+  ...state,
+  isDeletedDataFailed: true,
+});
+const handlerResetStatusDeleteData = (state) => ({
+  ...state,
+  isDeletedDataSuccess: false,
+  isDeletedDataFailed: false,
+});
+
 // 111 mapping handlers
 const handlers = {
   // 222 action giành cho fetch data
@@ -144,6 +171,13 @@ const handlers = {
   [SEND_EMAIL_ERROR]: handlerSendMailError,
   [SEND_EMAIL_SUCCSESS]: handlerSendMailSuccess,
   [SEND_RESET_EMAIL_STATUS]: handlerResetEmailStatus,
+
+  //666 action gainhf cho delete
+  [DELETING_DATA]: handlerDeletingData,
+  [DELETED_DATA]: handlerDeleteddData,
+  [DELETE_DATA_SUCCESS]: handlerDeletedSuccess,
+  [DELETE_DATA_FAILED]: handlerDeletedFailed,
+  [DELETE_RESET_STATUS]: handlerResetStatusDeleteData,
 };
 export const reducerList = (state = intiState, action) => {
   const handler = handlers[action.type];

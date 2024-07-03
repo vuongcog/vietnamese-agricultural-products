@@ -1,8 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import UserName from "../components/UserName";
 import styles from "./styles.module.scss";
-import UserEmail from "../components/UserEmail";
-import formatDateTime from "../../../../utils/formateDateTime";
 import AdminCrud from "../../../../components/core/AdminCrud";
 import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudContext/CrudContext";
 import DialogCreateForm from "../../../../components/core/DialogCreateForm";
@@ -11,10 +8,26 @@ import {
   ejectReducersAndSagas,
   injectReducersAndSagas,
 } from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
-import { components } from "react-select";
+import {
+  ejectSaga,
+  injectReducer,
+} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
+import { reducerFilter } from "../../../../components/core/AdminCrud/Store/reducerFilter";
+import Status from "../../../../components/admin/Status";
+import CategoryName from "../components/CategoryName";
+import CategoryDes from "../components/CategoryDes";
+import { Icon } from "@chakra-ui/react";
+import { FaFileExcel } from "react-icons/fa";
+import { exportToExcel } from "../../../../utils/export-excel";
+import { ToastContainer } from "react-toastify";
+import CreatedAtComponent from "../../../../components/core/CreatedAt";
+import UpdatedAtComponent from "../../../../components/core/UpdatedAt";
+import CategorySlugComponent from "../components/CategorySlug";
+import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
+import { useDispatch } from "react-redux";
 const Category = () => {
   const [selectElement, setSelectElement] = useState(null);
-
+  const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
       q: "",
@@ -38,41 +51,55 @@ const Category = () => {
         name: "id",
         label: "Title",
         default: "N/A",
-        className: "w-[5%] text-start  text-[var(--theme-light-red)]",
       },
       {
         name: "category_name",
         label: "  Category Name",
         default: "N/A",
-        // component: UserName,
-        className: "w-[30%]  text-start text-[var(--theme-light-orange)]",
+        component: CategoryName,
       },
       {
         name: "category_slug",
         label: "category_slug",
         default: "N/A",
-        className: "w-[20%] text-start text-[var(--theme-yellow)] ",
-        component: ({ category_slug }) => {
-          return <div>{category_slug}</div>;
-        },
+        component: CategorySlugComponent,
         dropdownActions: {
           items: [
             {
-              icon: <i className="fa-regular fa-copy"></i>,
+              icon: <i className="font-semibold fa-regular fa-copy"></i>,
               name: "duplicate",
               label: "Duplicaate",
               callback: () => {},
             },
             {
-              icon: <i className="fa-regular fa-delete-left"></i>,
+              icon: <i className="text-red-600 fa-regular fa-delete-left"></i>,
               name: "delete",
-              label: "Delete",
-              callback: () => {},
+              label: <span className="text-red-600 font-semibold">Delete</span>,
+              callback: (item) => {
+                dispatch({
+                  type: DELETE_DATA,
+                  payload: `/category/${item.id}`,
+                });
+              },
             },
             {
-              icon: <i className="fa-regular fa-pen-to-square"></i>,
+              icon: <Icon color={"green"} as={FaFileExcel} />,
+              name: "export-excel",
+              label: (
+                <span className="text-green-600 font-semibold">
+                  Export Excel
+                </span>
+              ),
+              callback: (items, name) => {
+                exportToExcel(items, name);
+              },
+            },
+            {
+              icon: (
+                <i className="text-blue-500 fa-regular fa-pen-to-square"></i>
+              ),
               name: "edit",
-              label: "Edit",
+              label: <span className="text-blue-500 font-semibold">Edit</span>,
               callback: (item) => {
                 console.log(item);
                 setSelectElement(
@@ -93,49 +120,44 @@ const Category = () => {
       {
         name: "category_des",
         label: "category_des",
-        className: "text-center text-[var(--theme-light-yellow)]",
         default: "N/A",
-      },
-      {
-        name: "phone_num",
-        label: "Phone Num",
-        default: "  N/A",
-        className: "text-start text-[var(--theme-green)]",
+        component: CategoryDes,
       },
       {
         name: "status",
         label: "status ",
         default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
+        component: Status,
       },
       {
         name: "created_at",
         label: "created_at",
-        formatDate: formatDateTime,
+        component: CreatedAtComponent,
         default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
       },
       {
         name: "updated_at",
         label: "Updated at",
         default: "N/A",
-        // formatDate: formatDateTime,
-        className: "text-end text-[var(--theme-light-blue)]",
+        component: UpdatedAtComponent,
       },
     ],
     initSearch: true,
   };
   useMemo(() => {
     injectReducersAndSagas();
+    injectReducer("crudFilter", reducerFilter);
   }, []);
   useEffect(() => {
     injectReducersAndSagas();
     return () => {
       ejectReducersAndSagas();
+      ejectSaga("crudFilter");
     };
   }, []);
   return (
     <div className={styles.module}>
+      <ToastContainer containerId={"export-excel"} />
       <ContextCrudProvider
         schemaForm={schemaFormFactory("create")}
         {...crudOptions}

@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import PropTypes from "../../../utils/prop-types";
-
+import styles from "./styles.module.scss";
 const DialogMessage = ({
   button,
   children,
@@ -51,7 +51,9 @@ const DialogMessage = ({
 
   return (
     <>
-      <Button onClick={finalOnOpen}>{button}</Button>
+      <button className={styles.customButton} onClick={finalOnOpen}>
+        {button}
+      </button>
       <AlertDialog
         isOpen={finalIsOpen}
         leastDestructiveRef={cancelRef}

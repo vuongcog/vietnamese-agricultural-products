@@ -1,0 +1,28 @@
+.couponContainer {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: max-content;
+}
+
+.couponContainer:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+  font-size: 24px;
+  margin-right: 12px;
+  color: #3f83f8;
+}
+
+.code {
+  font-weight: 500;
+  color: #333;
+  text-transform: uppercase;
+}

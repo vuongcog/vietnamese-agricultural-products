@@ -1,27 +1,36 @@
 import React, { useEffect, useMemo, useState } from "react";
-import UserName from "../components/UserName";
 import styles from "./styles.module.scss";
-import UserEmail from "../components/UserEmail";
 import formatDateTime from "../../../../utils/formateDateTime";
 import AdminCrud from "../../../../components/core/AdminCrud";
 import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudContext/CrudContext";
 import DialogCreateForm from "../../../../components/core/DialogCreateForm";
 import { schemaFormFactory } from "../utils/schemaFormFactory";
-import { FaFileExcel } from "react-icons/fa"; // Import icon từ react-icons
 import {
   ejectReducersAndSagas,
   injectReducersAndSagas,
 } from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
+import ProductDes from "../components/ProductDes";
+import {
+  ejectSaga,
+  injectReducer,
+} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
+import { reducerFilter } from "../../../../components/core/AdminCrud/Store/reducerFilter";
+import ProductName from "../components/ProductName";
+import Status from "../../../../components/admin/Status";
+import ProductInfo from "../components/ProductInfo";
+import ProductUnitPrice from "../components/ProductUnitPrice";
 import { exportToExcel } from "../../../../utils/export-excel";
 import { Icon } from "@chakra-ui/react";
+import { FaFileExcel } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
-const Order = () => {
+const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
+
   const crudOptions = {
     endpointParams: {
       q: "",
     },
-    endpoint: "/user",
+    endpoint: "/product",
     mode: {
       breadcrumb: true,
       list: true,
@@ -38,21 +47,29 @@ const Order = () => {
     schema: [
       {
         name: "id",
-        label: "id",
+        label: "#",
         default: "N/A",
-        className: "w-[5%] text-start  text-[var(--theme-light-red)]",
       },
       {
-        name: "order_code",
-        label: "order_code",
-        default: "N/A",
-        className: "w-[30%]  text-start text-[var(--theme-light-orange)]",
+        name: "product_image",
+        label: "product_image",
+        default: "  N/A",
+        component: ({ product_image }) => {
+          return (
+            <div className="flex items-center justify-center">
+              <img
+                className="rounded-full w-[50px] h-[50px] object-cover"
+                src={product_image}
+              ></img>
+            </div>
+          );
+        },
       },
       {
-        name: "order_total_prices",
-        label: "order_total_prices",
+        name: "product_name",
+        label: "product_name",
         default: "N/A",
-        className: "w-[20%] text-start text-[var(--theme-yellow)] ",
+        component: ProductName,
         dropdownActions: {
           items: [
             {
@@ -80,11 +97,10 @@ const Order = () => {
               name: "edit",
               label: "Edit",
               callback: (item) => {
-                console.log(item);
                 setSelectElement(
                   <DialogCreateForm
                     item={item}
-                    endpoint={"/user"}
+                    endpoint={"/product"}
                     callbackCancel={setSelectElement}
                     title="Update User"
                     schemaForm={schemaFormFactory("edit")}
@@ -96,72 +112,79 @@ const Order = () => {
         },
       },
       {
+        name: "product_slug",
+        label: "product_slug",
+        default: "N/A",
+      },
+
+      {
+        name: "product_des",
+        label: "product_des ",
+        component: ProductDes,
+        default: "N/A",
+      },
+      {
+        name: "product_info",
+        label: "product_ino ",
+        component: ProductInfo,
+        default: "N/A",
+      },
+      {
+        name: "quantity",
+        label: "quantity",
+        default: "N/A",
+      },
+      {
+        name: "unit_prices",
+        label: "unit_prices",
+        component: ProductUnitPrice,
+        default: "N/A",
+      },
+      {
         name: "status",
         label: "status",
-        className: "text-center text-[var(--theme-light-yellow)]",
+        component: Status,
         default: "N/A",
-      },
-      {
-        name: "order_notes",
-        label: "order_notes",
-        default: "N/A",
-        className: "text-start text-[var(--theme-green)]",
-      },
-      {
-        name: "id_user ",
-        label: "id_user ",
-        default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
-      },
-      {
-        name: "id_coupon ",
-        label: "id_coupon ",
-        default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
-      },
-      {
-        name: "id_payment  ",
-        label: "id_payment  ",
-        default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
       },
       {
         name: "created_at",
         label: "created_at",
-        default: "N/A",
         formatDate: formatDateTime,
-        className: "text-end text-[var(--theme-light-blue)]",
+        default: "N/A",
       },
+
       {
         name: "updated_at",
         label: "Updated at",
         default: "N/A",
         formatDate: formatDateTime,
-        className: "text-end text-[var(--theme-light-blue)]",
       },
     ],
     initSearch: true,
   };
-
   useMemo(() => {
     injectReducersAndSagas();
+    injectReducer("crudFilter", reducerFilter);
   }, []);
   useEffect(() => {
     injectReducersAndSagas();
     return () => {
-      console.log("eject");
       ejectReducersAndSagas();
+      ejectSaga("crudFilter");
     };
   }, []);
   return (
     <div className={styles.module}>
+      <ToastContainer containerId={"export-excel"} />
       <ContextCrudProvider
         schemaForm={schemaFormFactory("create")}
         {...crudOptions}
-        classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
+        classNameProps={{
+          tableBodyRow: styles[`table-body-row`],
+          tableHeaderRow: styles[`table-header-row`],
+        }}
       >
         {selectElement}
-        <ToastContainer containerId={"export-excel"} />
         <AdminCrud
           classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
           {...crudOptions}
@@ -170,4 +193,4 @@ const Order = () => {
     </div>
   );
 };
-export default Order;
+export default Product;

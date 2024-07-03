@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f3f3f3, #e0e0e0);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: max-content;
+}
+
+.icon {
+  color: #44271e; /* Màu cam */
+}
+
+.dateText {
+  color: #555;
+  font-weight: 600;
+}

@@ -1,20 +1,33 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./styles.module.scss";
-import formatDateTime from "../../../../utils/formateDateTime";
 import AdminCrud from "../../../../components/core/AdminCrud";
 import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudContext/CrudContext";
 import DialogCreateForm from "../../../../components/core/DialogCreateForm";
 import { schemaFormFactory } from "../utils/schemaFormFactory";
-import { FaFileExcel } from "react-icons/fa"; // Import icon từ react-icons
 import {
   ejectReducersAndSagas,
   injectReducersAndSagas,
 } from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
+import {
+  ejectSaga,
+  injectReducer,
+} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
+import { reducerFilter } from "../../../../components/core/AdminCrud/Store/reducerFilter";
+import Status from "../../../../components/admin/Status";
 import { exportToExcel } from "../../../../utils/export-excel";
 import { Icon } from "@chakra-ui/react";
+import { FaFileExcel } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
-const Blog = () => {
+import CreatedAtComponent from "../../../../components/core/CreatedAt";
+import UpdatedAtComponent from "../../../../components/core/UpdatedAt";
+import BlogIcon from "../components/BlogTitle";
+import BlogSlug from "../components/BlogSlug";
+import BlogContent from "../components/BlogContent";
+import { useDispatch } from "react-redux";
+import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
+const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
+  const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
       q: "",
@@ -36,53 +49,66 @@ const Blog = () => {
     schema: [
       {
         name: "id",
-        label: "ID",
+        label: "id",
         default: "N/A",
-        className: "w-[5%] text-start  text-[var(--theme-light-red)]",
       },
       {
-        name: "id_user",
-        label: "id_user",
+        name: "id_user ",
+        label: "id_user ",
         default: "N/A",
-        className: "w-[30%]  text-start text-[var(--theme-light-orange)]",
       },
       {
-        name: "id_cat",
-        label: "id_cat",
+        name: "id_cat ",
+        label: "id_cat ",
         default: "N/A",
-        className: "w-[20%] text-start text-[var(--theme-yellow)] ",
+        component: ({ id_cat }) => {
+          return <div>{id_cat}</div>;
+        },
+      },
+      {
+        name: "blog_title ",
+        label: "blog_title ",
+        default: "N/A",
+        component: BlogIcon,
         dropdownActions: {
           items: [
             {
-              icon: <i className="fa-regular fa-copy"></i>,
+              icon: <i className="font-semibold fa-regular fa-copy"></i>,
               name: "duplicate",
               label: "Duplicaate",
               callback: () => {},
             },
             {
-              icon: <i className="fa-regular fa-delete-left"></i>,
+              icon: <i className="text-red-600 fa-regular fa-delete-left"></i>,
               name: "delete",
-              label: "Delete",
-              callback: () => {},
+              label: <span className="text-red-600 font-semibold">Delete</span>,
+              callback: (item) => {
+                dispatch({ type: DELETE_DATA, payload: `/blog/${item.id}` });
+              },
             },
             {
-              icon: <Icon as={FaFileExcel} />,
+              icon: <Icon color={"green"} as={FaFileExcel} />,
               name: "export-excel",
-              label: "Export Excel",
+              label: (
+                <span className="text-green-600 font-semibold">
+                  Export Excel
+                </span>
+              ),
               callback: (items, name) => {
                 exportToExcel(items, name);
               },
             },
             {
-              icon: <i className="fa-regular fa-pen-to-square"></i>,
+              icon: (
+                <i className="text-blue-500 fa-regular fa-pen-to-square"></i>
+              ),
               name: "edit",
-              label: "Edit",
+              label: <span className="text-blue-500 font-semibold">Edit</span>,
               callback: (item) => {
-                console.log(item);
                 setSelectElement(
                   <DialogCreateForm
                     item={item}
-                    endpoint={"/user"}
+                    endpoint={"/blog"}
                     callbackCancel={setSelectElement}
                     title="Update User"
                     schemaForm={schemaFormFactory("edit")}
@@ -94,66 +120,80 @@ const Blog = () => {
         },
       },
       {
-        name: "blog_title",
-        label: "blog_title",
-        className: "text-center text-[var(--theme-light-yellow)]",
-        default: "N/A",
-      },
-      {
         name: "blog_slug",
         label: "blog_slug",
+        component: BlogSlug,
         default: "N/A",
-        className: "text-start text-[var(--theme-green)]",
       },
       {
         name: "content",
         label: "content",
         default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
+        component: BlogContent,
       },
+      {
+        name: "blog_image",
+        label: "blog_image",
+        default: "  N/A",
+        component: ({ blog_image }) => {
+          return (
+            <div className={"flex justify-center"}>
+              <img
+                className="rounded-full w-[50px] h-[50px] object-cover"
+                src={blog_image}
+              ></img>
+            </div>
+          );
+        },
+      },
+      {
+        name: "view",
+        label: "view",
+        default: "N/A",
+      },
+
       {
         name: "status",
         label: "status",
+        component: Status,
         default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
       },
       {
         name: "created_at",
         label: "created_at",
+        component: CreatedAtComponent,
         default: "N/A",
-        formatDate: formatDateTime,
-        className: "text-end text-[var(--theme-light-blue)]",
       },
+
       {
         name: "updated_at",
         label: "Updated at",
         default: "N/A",
-        formatDate: formatDateTime,
-        className: "text-end text-[var(--theme-light-blue)]",
+        component: UpdatedAtComponent,
       },
     ],
     initSearch: true,
   };
-
   useMemo(() => {
     injectReducersAndSagas();
+    injectReducer("crudFilter", reducerFilter);
   }, []);
   useEffect(() => {
     injectReducersAndSagas();
     return () => {
-      console.log("eject");
       ejectReducersAndSagas();
+      ejectSaga("crudFilter");
     };
   }, []);
   return (
     <div className={styles.module}>
+      <ToastContainer containerId={"export-excel"} />
       <ContextCrudProvider
         schemaForm={schemaFormFactory("create")}
         {...crudOptions}
         classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
       >
         {selectElement}
-        <ToastContainer containerId={"export-excel"} />
         <AdminCrud
           classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
           {...crudOptions}
@@ -162,4 +202,4 @@ const Blog = () => {
     </div>
   );
 };
-export default Blog;
+export default Product;

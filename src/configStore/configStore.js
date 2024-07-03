@@ -5,13 +5,16 @@ import createSagaMiddleware from "redux-saga";
 import counterReducer, { increment } from "../modules/Test/reducer";
 import counterReducer1 from "../modules/Test/reducer1";
 import createReducer from "../utils/createReducer";
-
+// import createSagaMonitor from "redux-saga-devtools";
 const rootReducer = {
   counterReducer,
   counterReducer1,
 };
 
-export const sagaMiddleware = createSagaMiddleware();
+export const sagaMiddleware = createSagaMiddleware({
+  // sagaMonitor,
+  // sagaMonitor: sagaMonitor,
+});
 const makeStore = () => {
   const store = configureStore({
     reducer: createReducer(rootReducer),

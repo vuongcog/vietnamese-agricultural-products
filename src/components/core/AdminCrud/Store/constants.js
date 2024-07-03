@@ -19,6 +19,14 @@ export const ADD_DATA_SUCCESS = "CRUD_ADD_DATA_SUCCESS";
 export const ADD_DATA_FAILED = "CRUD_ADD_DATA_FAILED";
 export const ADD_RESET_STATUS = "CURD_ADD_RESET_STATUS";
 
+// 111 action cho delete data
+export const DELETE_DATA = "DELETE_DATA";
+export const DELETING_DATA = "DELETING_DATA";
+export const DELETED_DATA = "DELETED_DATA";
+export const DELETE_DATA_SUCCESS = "DELETE_DATA_SUCCESS";
+export const DELETE_DATA_FAILED = "DELETE_DATA_FAILED";
+export const DELETE_RESET_STATUS = "DELETE_RESET_STATUS";
+
 // * action cho gửi mail
 export const SENDING_EMAIL = "CRUD_SENDING_EMAIL";
 export const SENDED_EMAIL = "CRUD_SENDED_EMAIL";

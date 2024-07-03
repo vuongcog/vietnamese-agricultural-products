@@ -1,0 +1,34 @@
+@use "../../../../../assets/css/abstracts/mixin" as styles;
+
+.couponContainer {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  background-color: var(--light-gray);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    transition: color 0.3s ease;
+  }
+
+  .value {
+    line-height: 20px;
+    font-weight: 500;
+    color: var(--dark-gray);
+    transition: color 0.3s ease;
+
+    .couponContainer:hover & {
+      color: var(--white);
+    }
+  }
+}

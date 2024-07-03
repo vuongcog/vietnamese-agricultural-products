@@ -1,5 +1,4 @@
 import React from "react";
-import { listUser } from "../../../../constants/listUser";
 import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
 import Tag from "../../Tag";
@@ -13,12 +12,13 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import _ from "lodash";
+import { nanoid } from "nanoid";
 
 const CrudList = (props) => {
   const {
     items,
     schema,
-    classNameProps: { tableBodyRow },
+    classNameProps: { tableBodyRow, tableHeaderRow },
   } = props;
 
   const __renderDropdown = (dropdownOptions, item) => {
@@ -27,7 +27,8 @@ const CrudList = (props) => {
       const icon = _.get(option, "icon");
       const actionItem = () => {
         if (option.name === "export-excel") {
-          cb(items, `${item.email}.xlsx`);
+          cb(items, `file-bao-cao${nanoid()}.xlsx`);
+
           return;
         }
         cb(item);
@@ -90,13 +91,12 @@ const CrudList = (props) => {
       const cloned = { ...schemaItem };
 
       let contentField = _.get(item, schemaItem.name) || schemaItem.default;
-
       if (schemaItem.component) {
         let dropdownActions = _.get(schemaItem, "dropdownActions.items", null);
         return (
           <td key={schemaItem.name || schemaItem.label} {...cloned}>
             <Tag
-              className="flex"
+              className="flex  items-center gap-2"
               tagName={dropdownActions ? "div" : "Fragment"}
             >
               {schemaItem.component(item)}
@@ -125,15 +125,13 @@ const CrudList = (props) => {
 
   const _renderColumns = () => {
     const { items, isFetching } = props;
-    if (!items.length && !isFetching) {
-      // return alert("Not data");
+    if (_.isEmpty(items)) {
+      console.log("true");
+      return null;
     }
     return items.map((item, index) => {
       return (
-        <tr
-          className={classNames(styles["row-body"], tableBodyRow)}
-          key={index}
-        >
+        <tr className={classNames(styles["row-body"])} key={index}>
           {_renderColumn(item)}
         </tr>
       );
@@ -144,15 +142,20 @@ const CrudList = (props) => {
     <>
       <div
         className={classNames(
-          "h-[500px] rounded-md overflow-y-scroll",
+          "max-h-[500px] rounded-md overflow-y-scroll",
           styles.container
         )}
       >
         <table className={styles.table}>
-          <thead className={styles["heading-container"]}>
+          <thead
+            className={classNames(styles["heading-container"], tableHeaderRow)}
+          >
             <tr className={styles["row-heading"]}>{_renderHeading()}</tr>
           </thead>
-          <tbody className={styles["body-container"]}>{_renderColumns()}</tbody>
+
+          <tbody className={classNames(styles["body-container"], tableBodyRow)}>
+            {_renderColumns()}
+          </tbody>
           <tfoot></tfoot>
         </table>
       </div>
@@ -163,12 +166,11 @@ const CrudList = (props) => {
 CrudList.propTypes = {
   classNameProps: PropTypes.shape({
     tableBodyRow: PropTypes.string,
+    tableHeaderRow: PropTypes.string,
   }),
   items: PropTypes.any,
   isFetching: PropTypes.bool,
   schema: PropTypes.array,
 };
-
-CrudList.defaultProps = { items: listUser };
 
 export default CrudList;

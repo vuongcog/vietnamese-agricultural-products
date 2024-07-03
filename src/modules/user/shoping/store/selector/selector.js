@@ -11,3 +11,5 @@ export const getFetchingFailed = (state) =>
 export const getSearchFilter = (state) => state.filter.search;
 export const getPaginationFilter = (state) => state.filter.pagination;
 export const getLimitFilter = (state) => state.filter.limit;
+export const getCategoryFilter = (state) => state.filter.category;
+export const getPriceRangeFilter = (state) => state.filter.priceRange;

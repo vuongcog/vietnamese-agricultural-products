@@ -1,0 +1,16 @@
+@import "../../../../../assets/css/abstracts/mixin";
+
+.container {
+  width: 200px;
+  @include setLimitLine(1);
+  border-radius: 8px; /* Bo góc */
+  color: #333; /* Màu chữ tối hơn để dễ đọc */
+  font-weight: 500; /* Độ đậm trung bình cho chữ */
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out; /* Hiệu ứng chuyển đổi */
+  cursor: pointer; /* Con trỏ chuột thay đổi thành pointer */
+}
+
+.container:hover {
+  background-color: #e0e0e0; /* Đổi màu nền khi hover */
+  transform: translateY(-2px); /* Dịch chuyển nhẹ khi hover */
+}

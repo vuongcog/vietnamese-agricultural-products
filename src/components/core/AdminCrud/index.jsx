@@ -46,7 +46,7 @@ const AdminCrud = () => {
           ></CrudList>
         )}
         {crudOptions.mode.paging && (
-          <div className="flex justify-around mt-3">
+          <div className="flex mt-3 gap-2 items-center">
             <CrudPagination
               isTop
               itemsPerPage={2}
@@ -54,10 +54,12 @@ const AdminCrud = () => {
               page={crudOptions.page || 1}
               onChange={selectPagination}
             ></CrudPagination>
-            <YnmCrudPaginationItemsPerPage
-              value={perpage}
-              onChange={selectPerpage}
-            ></YnmCrudPaginationItemsPerPage>
+            {!_.isEmpty(items) && (
+              <YnmCrudPaginationItemsPerPage
+                value={perpage}
+                onChange={selectPerpage}
+              ></YnmCrudPaginationItemsPerPage>
+            )}
           </div>
         )}
       </div>

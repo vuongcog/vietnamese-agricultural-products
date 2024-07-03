@@ -5,19 +5,14 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogOverlay,
-  Button,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import { useEffect } from "react";
-
-const Confirm = ({ children, doneText, button, title, callbackCancel }) => {
+import styles from "./styles.module.scss";
+const Confirm = ({ children, button, title, callbackCancel }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
-  const handleConfirm = ({ onConfirm }) => {
-    onConfirm();
-    onClose();
-  };
 
   useEffect(() => {
     if (!button) {
@@ -26,7 +21,11 @@ const Confirm = ({ children, doneText, button, title, callbackCancel }) => {
   }, []);
   return (
     <>
-      {button && <Button onClick={onOpen}>{button}</Button>}
+      {button && (
+        <button className={styles.customButton} onClick={onOpen}>
+          {button}
+        </button>
+      )}
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
@@ -44,26 +43,12 @@ const Confirm = ({ children, doneText, button, title, callbackCancel }) => {
               {React.Children.map(children, (item) => {
                 const newElement = React.cloneElement(item, {
                   onClose: onClose,
+                  onOpen: onOpen,
                 });
                 return newElement;
               })}
             </AlertDialogBody>
-            <AlertDialogFooter>
-              <AlertDialogFooter>
-                <Button
-                  ref={cancelRef}
-                  onClick={() => {
-                    onClose();
-                    callbackCancel(null);
-                  }}
-                >
-                  {doneText[0]}
-                </Button>
-                <Button colorScheme="red" onClick={handleConfirm} ml={3}>
-                  {doneText[1]}
-                </Button>
-              </AlertDialogFooter>
-            </AlertDialogFooter>
+            <AlertDialogFooter></AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>

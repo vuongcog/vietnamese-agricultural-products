@@ -72,11 +72,28 @@ const httpClient = (isEndpoint = false) => {
       if (isEndpoint) {
         url = import.meta.env.VITE_API_URL_SERVER + url;
       }
-
       if (options.notAuthor) {
         delete defaultOptions.headers.Authorization;
       }
-      return axios.post(`${url}`, data, {
+      const formData = new FormData();
+      for (const key in data) {
+        formData.append(key, data[key]);
+      }
+      return axios.post(url, formData, {
+        ...defaultOptions,
+        ...options,
+        headers: {
+          ...defaultOptions.headers,
+          ...options.headers,
+          "Content-Type": "multipart/form-data", // Đảm bảo tiêu đề Content-Type là multipart/form-data
+        },
+      });
+    },
+    delete: (url, options = {}) => {
+      if (isEndpoint) {
+        url = import.meta.env.VITE_API_URL_SERVER + url;
+      }
+      return axios.delete(url, {
         ...defaultOptions,
         ...options,
       });

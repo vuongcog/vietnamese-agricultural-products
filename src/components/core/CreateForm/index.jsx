@@ -9,14 +9,30 @@ import {
   FormLabel,
   Input,
   Select,
+  Spinner,
 } from "@chakra-ui/react";
 import styles from "./styles.module.scss";
 import { ContextDialogCreateForm } from "../DialogCreateForm/context/ProviderDialogCreateForm";
 import { ADD_DATA, UPDATE_DATA } from "../AdminCrud/Store/constants";
 import { getAddingData, getUpdatingData } from "../AdminCrud/Store/selector";
 import ProgressFullScreen from "../ProgressFullScreen";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { MAPPER_NAME } from "../../../utils/mapping-name";
+import {
+  formatDate,
+  formatDefaultDate,
+  formatInputDate,
+} from "../../../utils/format-input-date";
 
-const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
+const CreateForm = ({
+  doneText = ["Cancel", "Create"],
+  endpoint,
+  type,
+  schemaForm,
+  onClose,
+  defaultValues,
+}) => {
   const { setValueForm } = useContext(ContextDialogCreateForm);
   const isAddingData = useSelector(getAddingData);
   const isUpdatingData = useSelector(getUpdatingData);
@@ -26,16 +42,38 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
       if (field.items) {
         acc[field.name] = field.items[0].value;
       }
+      if (field.type === "file") {
+        acc[field.name] = null;
+      }
       return acc;
     }, {})
   );
   const handleChange = (name, value) => {
     setFormState({ ...formState, [name]: value });
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = { ...formState };
+    schemaForm.map((field) => {
+      if (field.type === "file" && formState[field.name]) {
+        const file = formState[field.name];
+        const validImageTypes = [
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/webp",
+        ];
+        if (!validImageTypes.includes(file.type)) {
+          toast.error(`${MAPPER_NAME[field.name]} phải là một hình ảnh`);
+        }
+      }
+    });
+
+    let data = { ...formState };
+    data = Object.fromEntries(
+      Object.entries(data).filter(
+        ([key, value]) => value !== null && value !== undefined && value !== ""
+      )
+    );
     if (type === UPDATE_DATA) {
       data["endpoint"] = `${endpoint}/${defaultValues.id}?_method=PUT`;
     }
@@ -45,24 +83,82 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
     setValueForm(data);
   };
 
-  const renderField = (item, defaultValue) => {
+  const RenderField = (item, defaultValue) => {
+    const [options, setOptions] = useState(item.items || []);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    console.log(defaultValue);
+    useEffect(() => {
+      if (item.endpoint) {
+        setLoading(true);
+        axios
+          .get(item.endpoint, {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("accsessToken")}`,
+            },
+          })
+          .then((res) => {
+            setOptions(
+              res.data.data.map((option) => ({
+                value: option[item.valueField],
+                name: option[item.labelField],
+              }))
+            );
+          })
+          .catch((err) => {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              err
+            );
+            setError(err.message);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      }
+    }, [item.endpoint]);
+
     const renderInput = () => {
       switch (item.type) {
         case "select":
-          return (
+          return loading ? (
+            <Spinner size="sm" />
+          ) : (
             <Select
-              defaultValue={defaultValue || item.items[0].value}
+              defaultValue={defaultValue || options[0]?.value}
               onChange={(e) => handleChange(item.name, e.target.value)}
             >
-              {item.items.map((option) => (
+              {options.map((option) => (
                 <option key={option.value} value={option.value}>
-                  {option.value}
+                  {option.name}
                 </option>
               ))}
             </Select>
           );
+
+        case "date":
+          return (
+            <Input
+              {...item}
+              type="date"
+              defaultValue={formatDefaultDate(formState[item.name])}
+              value={formatDate(formState[item.name])}
+              onChange={(e) =>
+                handleChange(item.name, formatInputDate(e.target.value))
+              }
+              pattern="\d{4}-\d{2}-\d{2}"
+            />
+          );
         case "file":
-          return <input type="file" />;
+          return (
+            <Input
+              {...item}
+              onChange={(e) => {
+                handleChange(item.name, e.target.files[0]);
+              }}
+              type="file"
+            />
+          );
         default:
           return (
             <Input
@@ -74,8 +170,13 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
           );
       }
     };
+
     return (
-      <FormControl className={styles.field} key={item.name} isRequired>
+      <FormControl
+        className={styles.field}
+        key={item.name}
+        isRequired={item.isRequire}
+      >
         {item.label && <FormLabel htmlFor={item.name}>{item.label}</FormLabel>}
         {renderInput()}
         <FormErrorMessage>Name is required.</FormErrorMessage>
@@ -86,7 +187,7 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
   const renderListFields = () => {
     return schemaForm.map((item) => {
       const defaultValue = _.get(defaultValues, "name");
-      return renderField(item, defaultValue);
+      return RenderField(item, defaultValue);
     });
   };
   return (
@@ -95,14 +196,32 @@ const CreateForm = ({ endpoint, type, schemaForm, onClose, defaultValues }) => {
       {isUpdatingData && <ProgressFullScreen></ProgressFullScreen>}
 
       {renderListFields()}
-      <Button type="submit" leftIcon={<AddIcon />}>
-        Create
-      </Button>
+      <div className="mt-6 flex items-center gap-6">
+        <Button
+          colorScheme="red"
+          onClick={() => {
+            onClose();
+          }}
+          ml={3}
+        >
+          {doneText[0]}
+        </Button>
+        <Button
+          color={"white"}
+          fontWeight={"500"}
+          backgroundColor={"#3b82f6"}
+          type="submit"
+          leftIcon={<AddIcon />}
+        >
+          {doneText[1]}
+        </Button>
+      </div>
     </form>
   );
 };
 
 CreateForm.propTypes = {
+  doneText: [],
   endpoint: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   schemaForm: PropTypes.arrayOf(

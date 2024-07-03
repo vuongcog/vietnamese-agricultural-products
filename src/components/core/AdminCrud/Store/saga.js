@@ -6,6 +6,12 @@ import {
   ADD_DATA_FAILED,
   ADD_DATA_SUCCESS,
   ADD_RESET_STATUS,
+  DELETED_DATA,
+  DELETE_DATA,
+  DELETE_DATA_FAILED,
+  DELETE_DATA_SUCCESS,
+  DELETE_RESET_STATUS,
+  DELETING_DATA,
   REFRESH,
   SENDED_EMAIL,
   SENDING_EMAIL,
@@ -75,6 +81,34 @@ function* handlerUpdate(action) {
   }
 }
 
+function* handlerDelete(action) {
+  try {
+    yield put({ type: DELETING_DATA });
+    const { payload: endpoint } = action;
+    const http = new Http(endpoint);
+    const res = yield call(http.delete);
+    const parseData = parseObjectJson(res.data);
+    const success = _.get(parseData, "message", {});
+    toast.success(success);
+    yield put({ type: DELETE_DATA_SUCCESS });
+    yield put({ type: REFRESH });
+  } catch (err) {
+    yield put({ type: DELETE_DATA_FAILED });
+    const parseData = parseObjectJson(err.response.data);
+    const errors = _.get(parseData, "error");
+    if (errors) {
+      toast.error(errors);
+    } else {
+      toast.error(
+        "Đây là một dữ liệu đặc biệt, bạn không được phép xóa tại thời điểm này"
+      );
+    }
+  } finally {
+    yield put({ type: DELETED_DATA });
+    yield put({ type: DELETE_RESET_STATUS });
+  }
+}
+
 // 333 worker send mail
 function* handlerSendMail(action) {
   try {
@@ -98,6 +132,7 @@ function* warcherTest() {
   yield takeLatest(ADD_DATA, handlerAddData);
   yield takeLatest(UPDATE_DATA, handlerUpdate);
   yield takeLatest(SEND_EMAIL, handlerSendMail);
+  yield takeLatest(DELETE_DATA, handlerDelete);
 }
 
 export default warcherTest;

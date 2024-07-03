@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import UserName from "../components/UserName";
 import styles from "./styles.module.scss";
-import UserEmail from "../components/UserEmail";
 import formatDateTime from "../../../../utils/formateDateTime";
 import AdminCrud from "../../../../components/core/AdminCrud";
 import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudContext/CrudContext";
@@ -11,11 +9,29 @@ import {
   ejectReducersAndSagas,
   injectReducersAndSagas,
 } from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
-import { components } from "react-select";
 import ProductDes from "../components/ProductDes";
+import {
+  ejectSaga,
+  injectReducer,
+} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
+import { reducerFilter } from "../../../../components/core/AdminCrud/Store/reducerFilter";
+import ProductName from "../components/ProductName";
+import Status from "../../../../components/admin/Status";
+import ProductInfo from "../components/ProductInfo";
+import ProductUnitPrice from "../components/ProductUnitPrice";
+import { exportToExcel } from "../../../../utils/export-excel";
+import { Icon } from "@chakra-ui/react";
+import { FaFileExcel } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
+import ProductSlug from "../components/ProductSlug";
+import ProductImage from "../components/ProductImage";
+import CreatedAtComponent from "../../../../components/core/CreatedAt";
+import UpdatedAtComponent from "../../../../components/core/UpdatedAt";
+import { useDispatch } from "react-redux";
+import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
-
+  const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
       q: "",
@@ -39,34 +55,47 @@ const Product = () => {
         name: "id",
         label: "id",
         default: "N/A",
-        className: "w-[5%] text-start  text-[var(--theme-light-red)]",
       },
+
       {
         name: "product_name",
         label: "product_name",
         default: "N/A",
-        className: "w-[20%] text-start text-[var(--theme-yellow)] ",
-        component: ({ product_name }) => {
-          return <span>{product_name}</span>;
-        },
+        component: ProductName,
         dropdownActions: {
           items: [
             {
               icon: <i className="fa-regular fa-copy"></i>,
               name: "duplicate",
-              label: "Duplicaate",
+              label: <span className="font-semibold">Duplicate</span>,
               callback: () => {},
             },
             {
-              icon: <i className="fa-regular fa-delete-left"></i>,
+              icon: <i className="text-red-600 fa-regular fa-delete-left"></i>,
               name: "delete",
-              label: "Delete",
-              callback: () => {},
+              label: <span className="text-red-600 font-semibold">Delete</span>,
+              callback: (item) => {
+                dispatch({ type: DELETE_DATA, payload: `/product/${item.id}` });
+              },
             },
             {
-              icon: <i className="fa-regular fa-pen-to-square"></i>,
+              icon: <Icon color={"green"} as={FaFileExcel} />,
+              name: "export-excel",
+              label: (
+                <span className="text-green-600 font-semibold">
+                  Export Excel
+                </span>
+              ),
+              callback: (items, name) => {
+                exportToExcel(items, name);
+              },
+            },
+            {
+              icon: (
+                <i className="text-blue-500 fa-regular fa-pen-to-square"></i>
+              ),
               name: "edit",
-              label: "Edit",
+              label: <span className="text-blue-500 font-semibold">Edit</span>,
               callback: (item) => {
                 setSelectElement(
                   <DialogCreateForm
@@ -81,58 +110,79 @@ const Product = () => {
             },
           ],
         },
-        // component: UserEmail,
       },
+
       {
         name: "product_slug",
         label: "product_slug",
-        className: "text-center text-[var(--theme-light-yellow)]",
         default: "N/A",
+        component: ProductSlug,
       },
       {
         name: "product_image",
         label: "product_image",
         default: "  N/A",
-        component: ({ product_image }) => {
-          return <img src={product_image}></img>;
-        },
-        className: "text-start text-[var(--theme-green)]",
+        component: ProductImage,
       },
       {
         name: "product_des",
         label: "product_des ",
         component: ProductDes,
         default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
+      },
+      {
+        name: "product_info",
+        label: "product_ino ",
+        component: ProductInfo,
+        default: "N/A",
+      },
+      {
+        name: "quantity",
+        label: "quantity ",
+        default: "N/A",
+      },
+      {
+        name: "unit_prices",
+        label: "unit_prices",
+        component: ProductUnitPrice,
+        default: "N/A",
+      },
+      {
+        name: "status",
+        label: "status",
+        component: Status,
+        default: "N/A",
       },
       {
         name: "created_at",
         label: "created_at",
-        formatDate: formatDateTime,
         default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
+        component: CreatedAtComponent,
       },
+
       {
         name: "updated_at",
         label: "Updated at",
         default: "N/A",
-        formatDate: formatDateTime,
-        className: "text-end text-[var(--theme-light-blue)]",
+        component: UpdatedAtComponent,
       },
     ],
     initSearch: true,
   };
   useMemo(() => {
     injectReducersAndSagas();
+    injectReducer("crudFilter", reducerFilter);
   }, []);
   useEffect(() => {
     injectReducersAndSagas();
     return () => {
       ejectReducersAndSagas();
+      ejectSaga("crudFilter");
     };
   }, []);
   return (
     <div className={styles.module}>
+      <ToastContainer containerId={"export-excel"} />
       <ContextCrudProvider
         schemaForm={schemaFormFactory("create")}
         {...crudOptions}

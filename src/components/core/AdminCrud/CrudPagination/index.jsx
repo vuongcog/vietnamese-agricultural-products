@@ -6,11 +6,9 @@ import useProducerStateCrudFilter from "../utils/useProducerStateFilter";
 
 const CrudPagination = (props) => {
   const { totalPage } = useProducerStateCrudFilter();
-
   if (totalPage <= 1) {
     return null;
   }
-
   return (
     <div className={styles.paginationContainer}>
       <ReactPaginate

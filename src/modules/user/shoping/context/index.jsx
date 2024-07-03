@@ -24,6 +24,7 @@ import { refactorReducerFilter } from "../store/reducer/filterReducer";
 import { useDebounce } from "../../../../utils/useDebounce";
 import { FILTER_PAGINATION } from "../store/reducer/filterConstants";
 import { initialFilterState } from "../store/constants/initialFilterState";
+import useProducerFilter from "../utils/useProducerFilter";
 
 const redux = {
   keyReducer: "list-product-reducer",
@@ -33,16 +34,28 @@ const redux = {
 };
 
 export const ShoppingContext = createContext({});
-
+const categoryFilter = [
+  { name: "Cà chua", value: "cachua" },
+  { name: "Bắp cải", value: "bapcai" },
+  { name: "Khoai tây", value: "khoaitay" },
+  { name: "Dâu", value: "dau" },
+];
 const ShoppingProvider = ({ children }) => {
   useMemo(() => {
-    injectReducer("filter", refactorReducerFilter({ ...initialFilterState }));
+    injectReducer(
+      "filter",
+      refactorReducerFilter({
+        ...initialFilterState,
+      })
+    );
     injectReducersAndSagas(redux);
   }, []);
 
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const usedispatch = useDispatch();
-  const { items, pagination, limit, search } = useCustomSelector();
+  const { items } = useCustomSelector();
+  const { pagination, limit, search, category, priceRange } =
+    useProducerFilter();
   const debounceSearch = useDebounce(search, 500);
 
   const fetchItems = useCallback(() => {
@@ -65,7 +78,7 @@ const ShoppingProvider = ({ children }) => {
 
   useEffect(() => {
     fetchItems();
-  }, [debounceSearch]);
+  }, [debounceSearch, category, priceRange]);
 
   useEffect(() => {
     const handleScroll = () => {

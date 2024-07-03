@@ -1,15 +1,22 @@
 import { ADD_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 
 export const schemaFormCreate = {
-  title: "Create User",
-  doneText: ["Cancel", "Save"],
-  button: "Create User",
+  title: "CREATE CATEGORY",
+  doneText: ["Cancel", "Create"],
+  button: "Create Category",
   type: ADD_DATA,
   schemaForm: [
     {
       name: "category_name",
       label: "category_name",
       placeholder: "category_name",
+      isRequire: true,
+      type: "text",
+    },
+    {
+      name: "category_des",
+      label: "category_des",
+      placeholder: "category_des",
       isRequire: true,
       type: "text",
     },

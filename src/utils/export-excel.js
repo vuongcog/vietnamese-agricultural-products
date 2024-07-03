@@ -1,70 +1,107 @@
 import { toast } from "react-toastify";
-import * as XLSX from "xlsx";
+import axios from "axios";
+import ExcelJS from "exceljs";
+import Cookies from "js-cookie";
 
-export const exportToExcel = (data, fileName) => {
+export const exportToExcel = async (data, fileName) => {
   try {
     if (!Array.isArray(data)) {
       console.error("Data is not an array");
       return;
     }
 
-    const worksheet = XLSX.utils.json_to_sheet(data);
+    const token = Cookies.get("accsessToken");
 
-    const maxLengths = {};
-    data.forEach((row) => {
-      Object.keys(row).forEach((key) => {
-        const length = row[key] ? row[key].toString().length : 10;
-        maxLengths[key] = maxLengths[key] >= length ? maxLengths[key] : length;
-      });
+    const loadImage = async (url) => {
+      try {
+        const response = await axios.get(url, {
+          responseType: "arraybuffer",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const imageData = Buffer.from(response.data, "binary");
+        console.log(imageData);
+        return imageData;
+      } catch (error) {
+        console.warn(`Failed to load image from ${url}`, error);
+        return null;
+      }
+    };
+
+    const imageCache = {};
+
+    const imagePromises = [];
+    const rowsWithImageUrls = data.map((row) => {
+      const rowWithImages = { ...row };
+      for (const key in row) {
+        if (typeof row[key] === "string" && row[key].startsWith("http://")) {
+          if (!imageCache[row[key]]) {
+            const promise = loadImage(row[key]).then((imageData) => {
+              imageCache[row[key]] = imageData;
+              rowWithImages[key] = imageData || row[key];
+            });
+            imagePromises.push(promise);
+          } else {
+            rowWithImages[key] = imageCache[row[key]];
+          }
+        }
+      }
+      return rowWithImages;
     });
 
-    worksheet["!cols"] = Object.keys(maxLengths).map((key) => ({
-      wch: maxLengths[key],
-    }));
+    await Promise.all(imagePromises);
 
-    const range = XLSX.utils.decode_range(worksheet["!ref"]);
-    for (let R = range.s.r; R <= range.e.r; ++R) {
-      for (let C = range.s.c; C <= range.e.c; ++C) {
-        const cell_address = { c: C, r: R };
-        const cell_ref = XLSX.utils.encode_cell(cell_address);
-        if (!worksheet[cell_ref]) continue;
-        worksheet[cell_ref].s = {
-          font: {
-            name: "Arial",
-            sz: 12,
-            bold: R === 0 ? true : false,
-            color: { rgb: "000000" },
-          },
-          alignment: {
-            vertical: "center",
-            horizontal: "center",
-          },
-          fill: {
-            fgColor: { rgb: R === 0 ? "FFFF00" : "FFFFFF" },
-          },
-          border: {
-            top: { style: "thin", color: { rgb: "000000" } },
-            bottom: { style: "thin", color: { rgb: "000000" } },
-            left: { style: "thin", color: { rgb: "000000" } },
-            right: { style: "thin", color: { rgb: "000000" } },
-          },
-        };
-      }
-    }
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Sheet1");
 
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-    XLSX.writeFile(workbook, `${fileName}.xlsx`);
+    rowsWithImageUrls.forEach((row, rowIndex) => {
+      const rowValues = [];
+      Object.keys(row).forEach((key, colIndex) => {
+        rowValues[colIndex + 1] = row[key];
+      });
+      worksheet.addRow(rowValues);
+    });
+
+    await Promise.all(
+      rowsWithImageUrls.map(async (row, rowIndex) => {
+        for (const key in row) {
+          if (imageCache[row[key]]) {
+            const imageId = workbook.addImage({
+              buffer: imageCache[row[key]],
+              extension: "jpeg",
+            });
+            worksheet.addImage(imageId, {
+              tl: { col: Object.keys(row).indexOf(key), row: rowIndex + 1 },
+              ext: { width: 100, height: 100 },
+            });
+          }
+        }
+      })
+    );
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type: "application/octet-stream" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${fileName}.xlsx`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
     toast.success("Excel file created successfully!", {
       toastId: "successToast",
       containerId: "export-excel",
-      autoClose: 1000,
+      autoClose: 500,
+      position: "top-center",
     });
   } catch (error) {
+    console.error("Error:", error);
     toast.error("Failed to export data to Excel: " + error.message, {
       toastId: "errorToast",
       containerId: "export-excel",
-      autoClose: 1000,
+      autoClose: 500,
+      position: "top-center",
     });
   }
 };

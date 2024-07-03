@@ -4,7 +4,7 @@ import SearchInput from "../SearchInput";
 import PropTypes from "prop-types";
 import DialogCreateForm from "../../DialogCreateForm";
 import { AuthContext } from "../../../../contexts/AuthContext";
-import { useDisclosure } from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 import DialogMessage from "../../DialogMessage";
 import FormEmailContainer from "../../FormEmail/container";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,6 +62,7 @@ const BreadCrumb = ({
   return (
     <div className={styles.container}>
       <ToastContainer />
+
       {isSendingMail && <ProgressFullScreen />}
       {isSearchInput && (
         <SearchInput
@@ -80,9 +81,9 @@ const BreadCrumb = ({
         </DialogMessage>
       )}
       <DialogCreateForm endpoint={endpoint} schemaForm={schemaForm} />
-      <button className={styles.logoutButton} onClick={logout}>
+      <Button className={styles.logoutButton} onClick={logout}>
         Logout
-      </button>
+      </Button>
     </div>
   );
 };

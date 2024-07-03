@@ -18,6 +18,9 @@ class Http {
   update = (params = {}) => {
     return this.http.post(this.endpoint, params);
   };
+  delete = (options = {}) => {
+    return this.http.delete(this.endpoint, options);
+  };
   post = (params = {}, options) => {
     return this.http.post("/search", params, options);
   };

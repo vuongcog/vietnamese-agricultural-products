@@ -2,8 +2,6 @@
   display: flex;
   align-items: center;
   color: #bababa;
-  padding: 8px;
-  background-color: white;
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -16,7 +14,6 @@
     color: #8ca1a9 !important;
     font-weight: 600 !important;
     font-size: 12px;
-    line-height: 16px;
     font-family: var(--font-family);
   }
 }

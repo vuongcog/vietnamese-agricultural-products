@@ -11,7 +11,6 @@ import { crudOptionsDefault } from "../constants/curd-options-default";
 import useProducerStateCrud from "../utils/useProducerState";
 import useProducerStateCrudFilter from "../utils/useProducerStateFilter";
 import {
-  CRUD_SET_CURRENT_PAGE,
   CRUD_SET_PAGANATION,
   CRUD_SET_PER_PAGE,
   CRUD_SET_SEARCH,
@@ -80,30 +79,20 @@ const ContextCrudProvider = ({ children, ...props }) => {
     );
     return JSON.parse(res.data);
   };
-
-  const isFirstRun = useRef(true);
   useEffect(() => {
-    const timer = setTimeout(() => {
-      getItems(debounceSearch)
-        .then((res) => {
-          dispatch({ type: SET_ITEMS, payload: res.data });
-          dispatch({ type: CRUD_SET_TOTAL_PAGE, payload: res.total_pages });
-          dispatch({ type: CRUD_SET_CURRENT_PAGE, payload: res.current_page });
-          dispatch({ type: CRUD_SET_PAGANATION, payload: res.current_page });
-        })
-        .catch(() => {
-          toast.error(
-            "Không tồn tại dữ liệu hoặc bạn không có quyền truy cập vào dữ liệu này"
-          );
-        })
-        .finally(() => {
-          dispatch({ type: FETCHED_DATA });
-        });
-    }, [500]);
-    return () => {
-      isFirstRun.current = true;
-      clearTimeout(timer);
-    };
+    getItems(debounceSearch)
+      .then((res) => {
+        dispatch({ type: SET_ITEMS, payload: res.data });
+        dispatch({ type: CRUD_SET_TOTAL_PAGE, payload: res.total_pages });
+      })
+      .catch(() => {
+        toast.error(
+          "Không tồn tại dữ liệu hoặc bạn không có quyền truy cập vào dữ liệu này"
+        );
+      })
+      .finally(() => {
+        dispatch({ type: FETCHED_DATA });
+      });
   }, [debounceSearch, perpage, pagination, refresh]);
 
   return <CrudContext.Provider value={value}>{children}</CrudContext.Provider>;

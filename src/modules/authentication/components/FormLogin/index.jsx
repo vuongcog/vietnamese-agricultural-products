@@ -39,6 +39,7 @@ const FormLogin = () => {
 
     login(loginParams)
       .then((res) => {
+        console.log(res);
         const responseData = parseObjectJson(res);
         document.cookie = `accsessToken=${
           responseData.access_token

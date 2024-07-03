@@ -20,9 +20,14 @@ import {
   injectReducer,
 } from "../../../../utils/fetch-cancel-saga-reducer-with-key";
 import { reducerFilter } from "../../../../components/core/AdminCrud/Store/reducerFilter";
+import Status from "../../../../components/admin/Status";
+import UserPhone from "../components/PhoneNum";
+import UserAvatar from "../components/UserAvatar";
+import { useDispatch } from "react-redux";
+import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 const User = () => {
   const [selectElement, setSelectElement] = useState(null);
-
+  const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
       q: "",
@@ -46,48 +51,58 @@ const User = () => {
         name: "id",
         label: "Title",
         default: "N/A",
-        className: "w-[5%] text-start  text-[var(--theme-light-red)]",
       },
       {
         name: "name",
         label: "  Name",
         default: "N/A",
         component: UserName,
-        className: "w-[30%]  text-start text-[var(--theme-light-orange)]",
+      },
+      {
+        name: "url_avatar",
+        label: "Avatar",
+        default: "N/A",
+        component: UserAvatar,
       },
       {
         name: "email",
         label: "Email",
         default: "N/A",
-        className: "w-[20%] text-start text-[var(--theme-yellow)] ",
         dropdownActions: {
           items: [
             {
-              icon: <i className="fa-regular fa-copy"></i>,
+              icon: <i className="font-semibold fa-regular fa-copy"></i>,
               name: "duplicate",
               label: "Duplicaate",
               callback: () => {},
             },
             {
-              icon: <i className="fa-regular fa-delete-left"></i>,
+              icon: <i className="text-red-600 fa-regular fa-delete-left"></i>,
               name: "delete",
-              label: "Delete",
-              callback: () => {},
+              label: <span className="text-red-600 font-semibold">Delete</span>,
+              callback: (item) => {
+                dispatch({ type: DELETE_DATA, payload: `/user/${item.id}` });
+              },
             },
             {
-              icon: <Icon as={FaFileExcel} />,
+              icon: <Icon color={"green"} as={FaFileExcel} />,
               name: "export-excel",
-              label: "Export Excel",
+              label: (
+                <span className="text-green-600 font-semibold">
+                  Export Excel
+                </span>
+              ),
               callback: (items, name) => {
                 exportToExcel(items, name);
               },
             },
             {
-              icon: <i className="fa-regular fa-pen-to-square"></i>,
+              icon: (
+                <i className="text-blue-500 fa-regular fa-pen-to-square"></i>
+              ),
               name: "edit",
-              label: "Edit",
+              label: <span className="text-blue-500 font-semibold">Edit</span>,
               callback: (item) => {
-                console.log(item);
                 setSelectElement(
                   <DialogCreateForm
                     item={item}
@@ -106,33 +121,30 @@ const User = () => {
       {
         name: "email_verified_at",
         label: "Email verified at",
-        className: "text-center text-[var(--theme-light-yellow)]",
         default: "N/A",
       },
       {
         name: "phone_num",
         label: "Phone Num",
         default: "N/A",
-        className: "text-start text-[var(--theme-green)]",
+        component: UserPhone,
       },
       {
         name: "role",
-        label: "Updated at",
+        label: "Role",
         default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
       },
       {
         name: "status",
         label: "Status",
         default: "N/A",
-        className: "text-end text-[var(--theme-light-blue)]",
+        component: Status,
       },
       {
         name: "updated_at",
         label: "Updated at",
         default: "N/A",
         formatDate: formatDateTime,
-        className: "text-end text-[var(--theme-light-blue)]",
       },
     ],
     initSearch: true,
@@ -149,12 +161,16 @@ const User = () => {
       ejectSaga("crudFilter");
     };
   }, []);
+
   return (
     <div className={styles.module}>
       <ContextCrudProvider
         schemaForm={schemaFormFactory("create")}
         {...crudOptions}
-        classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
+        classNameProps={{
+          tableBodyRow: styles[`table-body-row`],
+          tableHeaderRow: styles[`table-header-row`],
+        }}
       >
         {selectElement}
         <ToastContainer containerId={"export-excel"} />

@@ -1,0 +1,28 @@
+@import "../../../../../assets/css/abstracts/mixin";
+.productSlugContainer {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.productSlugContainer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  margin-right: 10px;
+  color: #d87315;
+}
+
+.productSlug {
+  width: 100px;
+  font-weight: 500;
+  color: #333;
+  @include setLimitLine(2);
+}

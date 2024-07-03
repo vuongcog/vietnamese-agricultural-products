@@ -1,5 +1,21 @@
-.container {
+.search-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.search-icon {
+  color: #3b82f6;
+}
+
+.search-input {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  &:focus {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
 }

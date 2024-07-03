@@ -10,9 +10,9 @@ const DialogCreateForm = ({ schemaForm, callbackCancel, endpoint, item }) => {
         callbackCancel={callbackCancel}
         title={schemaForm.title}
         button={schemaForm.button}
-        doneText={schemaForm.doneText}
       >
         <CreateForm
+          doneText={schemaForm.doneText}
           endpoint={endpoint}
           type={schemaForm.type}
           defaultValues={item}

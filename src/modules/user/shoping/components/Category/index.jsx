@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import {
   Box,
   Button,
@@ -11,71 +12,110 @@ import {
   RangeSliderFilledTrack,
   RangeSliderThumb,
   Text,
+  Tag,
+  TagLabel,
+  TagCloseButton,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
+import { debounce } from "lodash";
+import useProducerFilter from "../../utils/useProducerFilter";
+import {
+  FILTER_CATEGORY,
+  FILTER_PRICE_RANGE,
+  FILTER_SEARCH,
+} from "../../store/reducer/filterConstants";
 
 const ProductFilter = ({ onSubmit }) => {
-  const [filters, setFilters] = useState({
-    keyword: "",
-    category: "",
-    priceRange: [0, 1000],
-  });
+  const { category, priceRange } = useProducerFilter();
+  const [localPriceRange, setLocalPriceRange] = useState(priceRange);
+  const [keyword, setKeyword] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState(category);
+  const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFilters({ ...filters, [name]: value });
+  const handleKeywordChange = (e) => {
+    setKeyword(e.target.value);
+    debounceSearch(e.target.value);
   };
 
+  const handleCategoryChange = (e) => {
+    const { value } = e.target;
+    if (!selectedCategories.includes(value) && value !== "") {
+      const newCategories = [...selectedCategories, value];
+      setSelectedCategories(newCategories);
+      dispatch({ type: FILTER_CATEGORY, payload: newCategories });
+    }
+  };
+
+  const debounceDispatch = useCallback(
+    debounce((value) => {
+      dispatch({ type: FILTER_PRICE_RANGE, payload: value });
+    }, 300),
+    [dispatch]
+  );
+
+  const debounceSearch = useCallback(
+    debounce((value) => {
+      dispatch({ type: FILTER_SEARCH, payload: value });
+    }, 300),
+    [dispatch]
+  );
   const handlePriceChange = (value) => {
-    setFilters({ ...filters, priceRange: value });
+    setLocalPriceRange(value);
+    debounceDispatch(value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(filters);
+  const removeCategory = (category) => {
+    const newCategories = selectedCategories.filter(
+      (item) => item !== category
+    );
+    setSelectedCategories(newCategories);
+    dispatch({ type: FILTER_CATEGORY, payload: newCategories });
   };
 
   return (
-    <Box
-      as="form"
-      onSubmit={handleSubmit}
-      p={4}
-      borderWidth={1}
-      borderRadius="md"
-    >
+    <Box as="form" p={4} borderWidth={1} borderRadius="md">
       <FormControl mb={4}>
         <FormLabel>Keyword</FormLabel>
         <Input
           type="text"
           name="keyword"
-          value={filters.keyword}
-          onChange={handleChange}
+          value={keyword}
+          onChange={handleKeywordChange}
         />
       </FormControl>
 
       <FormControl mb={4}>
         <FormLabel>Category</FormLabel>
-        <Select
-          name="category"
-          value={filters.category}
-          onChange={handleChange}
-        >
+        <Select name="category" value="" onChange={handleCategoryChange}>
           <option value="">All</option>
-          <option value="electronics">Electronics</option>
-          <option value="books">Books</option>
-          <option value="clothing">Clothing</option>
+          <option value="cachua">Cà chua</option>
+          <option value="bapcai">Bắp cải</option>
+          <option value="dau">Dâu</option>
+          <option value="khoaitay">Khoai tây</option>
         </Select>
+        <Wrap mt={2}>
+          {selectedCategories.map((category) => (
+            <WrapItem key={category}>
+              <Tag size="md" colorScheme="teal" borderRadius="full">
+                <TagLabel>{category}</TagLabel>
+                <TagCloseButton onClick={() => removeCategory(category)} />
+              </Tag>
+            </WrapItem>
+          ))}
+        </Wrap>
       </FormControl>
 
       <FormControl mb={4}>
         <FormLabel>Price Range</FormLabel>
         <RangeSlider
           aria-label={["min", "max"]}
-          defaultValue={[0, 1000]}
           min={0}
           max={1000}
           step={10}
-          onChangeEnd={handlePriceChange}
-          onChange={handlePriceChange}
+          value={localPriceRange}
+          onChange={(val) => handlePriceChange(val)}
+          onChangeEnd={(val) => handlePriceChange(val)}
         >
           <RangeSliderTrack>
             <RangeSliderFilledTrack />
@@ -84,13 +124,9 @@ const ProductFilter = ({ onSubmit }) => {
           <RangeSliderThumb index={1} />
         </RangeSlider>
         <Text mt={2}>
-          From: ${filters.priceRange[0]} - To: ${filters.priceRange[1]}
+          From: ${localPriceRange[0]} - To: ${localPriceRange[1]}
         </Text>
       </FormControl>
-
-      <Button type="submit" colorScheme="teal" width="full">
-        Filter
-      </Button>
     </Box>
   );
 };

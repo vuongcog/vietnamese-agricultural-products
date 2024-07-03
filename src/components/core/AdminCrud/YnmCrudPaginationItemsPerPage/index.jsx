@@ -3,10 +3,10 @@ import Select from "react-select";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import styles from "./styles.module.scss";
+import { border } from "@chakra-ui/react";
 
 const YnmCrudPaginationItemsPerPage = ({ value, onChange }) => {
   const [selectedOption, setSelectedOption] = useState(null);
-
   const options = [
     { value: "5", label: "5 per page" },
     { value: "10", label: "10 per page" },
@@ -33,6 +33,10 @@ const YnmCrudPaginationItemsPerPage = ({ value, onChange }) => {
   };
 
   const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: "none",
+    }),
     option: (provided, state) => ({
       ...provided,
       color: state.isSelected ? "#ffffff" : "#52575C",
