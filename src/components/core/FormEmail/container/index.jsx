@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import FormEmail from "../presentational/index";
 import { data } from "../constants";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 const initializeFormState = (schemaForm) => {
   return schemaForm.reduce((acc, field) => {

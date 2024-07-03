@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import AdminLeftSidebar from "../../components/admin/LeftSidebar";
-// import AddminTopNav from "../../components/admin/TopNav";
-// import AddminFooter from "../../components/admin/Footer";
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import PropTypes from "../../utils/prop-types";
 
 const AdminLayout = ({ children }) => {
   const location = useLocation();
@@ -29,5 +28,7 @@ const AdminLayout = ({ children }) => {
     </div>
   );
 };
-
+AdminLayout.propTypes = {
+  children: PropTypes.element,
+};
 export default AdminLayout;

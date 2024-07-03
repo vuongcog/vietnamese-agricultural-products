@@ -1,19 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.scss";
-import formatDateTime from "../../../../utils/formateDateTime";
 import AdminCrud from "../../../../components/core/AdminCrud";
 import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudContext/CrudContext";
 import DialogCreateForm from "../../../../components/core/DialogCreateForm";
 import { schemaFormFactory } from "../utils/schemaFormFactory";
-import {
-  ejectReducersAndSagas,
-  injectReducersAndSagas,
-} from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
-import {
-  ejectSaga,
-  injectReducer,
-} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
-import { reducerFilter } from "../../../../components/core/AdminCrud/Store/reducerFilter";
+import {} from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
+import {} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
 import Status from "../../../../components/admin/Status";
 import { exportToExcel } from "../../../../utils/export-excel";
 import { Icon } from "@chakra-ui/react";
@@ -27,6 +19,7 @@ import CouponStartDate from "../components/CouponStartDate";
 import CouponEndDate from "../components/CouponEndDate";
 import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 import { useDispatch } from "react-redux";
+import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
 const Coupon = () => {
   const [selectElement, setSelectElement] = useState(null);
   const dispatch = useDispatch();
@@ -156,17 +149,7 @@ const Coupon = () => {
     ],
     initSearch: true,
   };
-  useMemo(() => {
-    injectReducersAndSagas();
-    injectReducer("crudFilter", reducerFilter);
-  }, []);
-  useEffect(() => {
-    injectReducersAndSagas();
-    return () => {
-      ejectReducersAndSagas();
-      ejectSaga("crudFilter");
-    };
-  }, []);
+  useInjectReducerSaga();
   return (
     <div className={styles.module}>
       <ToastContainer containerId={"export-excel"} />

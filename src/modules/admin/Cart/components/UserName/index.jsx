@@ -12,5 +12,6 @@ const UserName = ({ name }) => {
 };
 UserName.propTypes = {
   link: PropTypes.string,
+  name: PropTypes.string,
 };
 export default UserName;

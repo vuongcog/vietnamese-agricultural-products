@@ -10,6 +10,7 @@ import {
 import React, { useRef } from "react";
 import { useEffect } from "react";
 import styles from "./styles.module.scss";
+import PropTypes from "../../../utils/prop-types";
 const Confirm = ({ children, button, title, callbackCancel }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
@@ -55,5 +56,10 @@ const Confirm = ({ children, button, title, callbackCancel }) => {
     </>
   );
 };
-
+Confirm.propTypes = {
+  children: PropTypes.element,
+  button: PropTypes.string,
+  title: PropTypes.string,
+  callbackCancel: PropTypes.func,
+};
 export default Confirm;

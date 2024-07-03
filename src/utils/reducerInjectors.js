@@ -17,6 +17,9 @@ export function injectReducerFactory(store, isValid) {
       return;
     store.injectedReducers[key] = reducer;
     store.replaceReducer(createReducer(store.injectedReducers));
+    if (key == "crudFilter") {
+      console.log(key, true);
+    }
   };
 }
 
@@ -33,6 +36,7 @@ export function ejectReducerFactory(store, isValid) {
 
     delete store.injectedReducers[key];
     store.replaceReducer(createReducer(store.injectedReducers));
+    console.log("factory", key);
   };
 }
 

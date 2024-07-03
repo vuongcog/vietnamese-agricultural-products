@@ -10,7 +10,7 @@ export const formatInputDate = (inputDate) => {
   return `${day}-${month}-${year}`;
 };
 export const formatDefaultDate = (dateTime) => {
-  const [date, time] = dateTime.split(" ");
+  const [date] = dateTime.split(" ");
   const [year, month, day] = date.split("-");
   console.log(`${day}-${month}-${year}`);
   return `${day}-${month}-${year}`;

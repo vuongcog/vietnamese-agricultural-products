@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { getCookie, removeCookie } from "../utils/cookie/parseCookie";
+import React, { createContext, useContext, useState } from "react";
+import { getCookie } from "../utils/cookie/parseCookie";
 import Cookies from "js-cookie";
+import PropTypes from "../utils/prop-types";
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
@@ -23,6 +24,9 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+AuthProvider.propTypes = {
+  children: PropTypes.element,
+};
 
 export function useAuth() {
   return useContext(AuthContext);

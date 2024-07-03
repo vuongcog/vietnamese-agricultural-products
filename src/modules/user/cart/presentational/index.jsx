@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./styles.module.scss";
-import CartItem from "../components/CartItem";
 import CartList from "../components/CartList";
 import CartHeader from "../components/CartHeader";
 

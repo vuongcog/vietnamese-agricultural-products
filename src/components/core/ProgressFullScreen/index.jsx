@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CircularProgress } from "@chakra-ui/react";
 import styles from "./styles.module.scss";
+import PropTypes from "../../../utils/prop-types";
 
 const ProgressFullScreen = ({ autoHide }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -24,6 +25,9 @@ const ProgressFullScreen = ({ autoHide }) => {
       </div>
     </div>
   );
+};
+ProgressFullScreen.propTypes = {
+  autoHide: PropTypes.string,
 };
 
 export default ProgressFullScreen;

@@ -1,8 +1,9 @@
 import React from "react";
 import BookIcon from "@mui/icons-material/Book";
 import styles from "./styles.module.scss";
+import PropTypes from "../../../../../utils/prop-types";
 
-const BlogIcon = ({ blog_title }) => {
+const BlogTitle = ({ blog_title }) => {
   return (
     <div className={styles.container}>
       <BookIcon className={styles.icon} />
@@ -10,5 +11,8 @@ const BlogIcon = ({ blog_title }) => {
     </div>
   );
 };
+BlogTitle.propTypes = {
+  blog_title: PropTypes.string,
+};
 
-export default BlogIcon;
+export default BlogTitle;

@@ -3,7 +3,6 @@ import styles from "./styles.module.scss";
 import classNames from "classnames";
 import { getCountCart } from "../../../utils/cart/get-count-cart";
 import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
 
 const Cart = () => {
   const [cartCount, setCartCount] = useState(getCountCart());

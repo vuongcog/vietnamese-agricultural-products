@@ -7,13 +7,6 @@ export const SCHEMA = [
     color: "text-[#f0414a]",
   },
   {
-    id: 2,
-    name: "Order",
-    icon: "fa fa-shopping-cart", // Icon phù hợp hơn cho "Order"
-    link: "/admin/order",
-    color: "text-[#00e9ff]",
-  },
-  {
     id: 3,
     name: "User",
     icon: "fa fa-user", // Icon phù hợp
@@ -60,13 +53,6 @@ export const SCHEMA = [
     name: "Banner",
     icon: "fa fa-image", // Icon phù hợp hơn cho "Banner"
     link: "/admin/banner",
-    color: "text-[#00e9ff]",
-  },
-  {
-    id: 11,
-    name: "Cart",
-    icon: "fa fa-shopping-basket", // Icon phù hợp hơn cho "Cart"
-    link: "/admin/cart",
     color: "text-[#00e9ff]",
   },
 ];

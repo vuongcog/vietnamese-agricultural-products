@@ -8,7 +8,6 @@ import { ShoppingCartCheckout } from "@mui/icons-material";
 import AlertMessage from "../../../core/AlertMessage";
 import _ from "lodash";
 import useCustomSelector from "../../../../modules/user/shoping/utils/useCustomSelector";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonCart from "../SkeletonCart";
 

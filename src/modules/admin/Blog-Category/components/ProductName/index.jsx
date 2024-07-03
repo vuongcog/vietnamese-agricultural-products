@@ -12,5 +12,6 @@ const ProductName = ({ product_name }) => {
 };
 ProductName.propTypes = {
   link: PropTypes.string,
+  product_name: PropTypes.string,
 };
 export default ProductName;

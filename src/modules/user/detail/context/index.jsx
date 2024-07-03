@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { createContext } from "react";
 import { useParams } from "react-router-dom";
 import HttpUserClient from "../../../../utils/http/httpUserClient";
+import PropTypes from "../../../../utils/prop-types";
 export const ContextDetailProduct = createContext({});
 
 const DetailProvider = ({ children }) => {
@@ -33,5 +34,7 @@ const DetailProvider = ({ children }) => {
     </ContextDetailProduct.Provider>
   );
 };
-
+DetailProvider.propTypes = {
+  children: PropTypes.element,
+};
 export default DetailProvider;

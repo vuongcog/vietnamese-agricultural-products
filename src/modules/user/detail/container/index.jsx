@@ -3,7 +3,7 @@ import DetailProvider from "../context";
 import itemDetail from "../../../../constants/item-detail";
 import CardDetail from "../comopnents/CardDetail";
 import styles from "./styles.module.scss";
-const DetailProduct = (props) => {
+const DetailProduct = () => {
   return (
     <DetailProvider>
       <div className={styles.layout}>

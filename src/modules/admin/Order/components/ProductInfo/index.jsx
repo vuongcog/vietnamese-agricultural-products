@@ -12,5 +12,6 @@ const ProductInfo = ({ product_info }) => {
 };
 ProductInfo.propTypes = {
   link: PropTypes.string,
+  product_info: PropTypes.string,
 };
 export default ProductInfo;

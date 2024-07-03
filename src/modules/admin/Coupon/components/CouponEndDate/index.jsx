@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCalendarAlt, FaRegCalendarAlt } from "react-icons/fa";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
 import formatDateTime from "../../../../../utils/formateDateTime";
@@ -16,7 +16,7 @@ const CouponEndDate = ({ coupon_start_date }) => {
 };
 
 CouponEndDate.propTypes = {
-  coupon_end_date: PropTypes.string.isRequired,
+  coupon_start_date: PropTypes.string,
 };
 
 export default CouponEndDate;

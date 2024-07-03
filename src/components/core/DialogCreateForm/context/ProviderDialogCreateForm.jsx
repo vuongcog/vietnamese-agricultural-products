@@ -2,10 +2,11 @@ import React, { createContext, useRef, useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ADD_DATA, UPDATE_DATA } from "../../AdminCrud/Store/constants";
+import PropTypes from "../../../../utils/prop-types";
 
 export const ContextDialogCreateForm = createContext({});
 
-const ProviderDialogCreateForm = ({ children, type, endpoint }) => {
+const ProviderDialogCreateForm = ({ children, type }) => {
   const dispatch = useDispatch();
   const [valueForm, setValueForm] = useState({});
   const firstRender = useRef(true);
@@ -37,5 +38,8 @@ const ProviderDialogCreateForm = ({ children, type, endpoint }) => {
     </ContextDialogCreateForm.Provider>
   );
 };
-
+ProviderDialogCreateForm.propTypes = {
+  children: PropTypes.element,
+  type: PropTypes.string,
+};
 export default ProviderDialogCreateForm;

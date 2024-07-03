@@ -55,7 +55,7 @@ export const exportToExcel = async (data, fileName) => {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Sheet1");
 
-    rowsWithImageUrls.forEach((row, rowIndex) => {
+    rowsWithImageUrls.forEach((row) => {
       const rowValues = [];
       Object.keys(row).forEach((key, colIndex) => {
         rowValues[colIndex + 1] = row[key];

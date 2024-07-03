@@ -1,56 +1,16 @@
-import React, {
-  createContext,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
-import { reducerProductList } from "../store/reducer/reducer";
+import React, { createContext, useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 
-import warcherSagaProducrtList from "../store/saga/saga";
-import {
-  ejectReducer,
-  ejectReducersAndSagas,
-  ejectSaga,
-  injectReducer,
-  injectReducersAndSagas,
-  injectSaga,
-} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
 import useCustomSelector from "../utils/useCustomSelector";
 import { FETCH_DATA } from "../store/reducer/constants";
 import { useDispatch } from "react-redux";
-import { refactorReducerFilter } from "../store/reducer/filterReducer";
 import { useDebounce } from "../../../../utils/useDebounce";
 import { FILTER_PAGINATION } from "../store/reducer/filterConstants";
-import { initialFilterState } from "../store/constants/initialFilterState";
 import useProducerFilter from "../utils/useProducerFilter";
 
-const redux = {
-  keyReducer: "list-product-reducer",
-  keySaga: "list-product-saga",
-  reducer: reducerProductList,
-  saga: warcherSagaProducrtList,
-};
-
 export const ShoppingContext = createContext({});
-const categoryFilter = [
-  { name: "Cà chua", value: "cachua" },
-  { name: "Bắp cải", value: "bapcai" },
-  { name: "Khoai tây", value: "khoaitay" },
-  { name: "Dâu", value: "dau" },
-];
-const ShoppingProvider = ({ children }) => {
-  useMemo(() => {
-    injectReducer(
-      "filter",
-      refactorReducerFilter({
-        ...initialFilterState,
-      })
-    );
-    injectReducersAndSagas(redux);
-  }, []);
 
+const ShoppingProvider = ({ children }) => {
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const usedispatch = useDispatch();
   const { items } = useCustomSelector();
@@ -67,14 +27,6 @@ const ShoppingProvider = ({ children }) => {
     usedispatch({ type: FILTER_PAGINATION, payload: pagination + 1 });
     usedispatch({ type: FETCH_DATA, payload: { ...filter } });
   }, [debounceSearch, limit, usedispatch, pagination]);
-  useEffect(() => {
-    injectReducersAndSagas(redux);
-    injectReducer("filter", refactorReducerFilter({ ...initialFilterState }));
-    return () => {
-      ejectReducersAndSagas(redux);
-      ejectReducer("filter");
-    };
-  }, []);
 
   useEffect(() => {
     fetchItems();

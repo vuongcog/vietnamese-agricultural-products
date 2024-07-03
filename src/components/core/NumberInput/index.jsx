@@ -6,6 +6,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react";
+import PropTypes from "../../../utils/prop-types";
 
 function QuantitySelector({ value, setValue, max, min }) {
   const handleChange = (valueString) => {
@@ -17,7 +18,7 @@ function QuantitySelector({ value, setValue, max, min }) {
     <NumberInput
       size="sm"
       maxW="100px"
-      min={0}
+      min={min ? min : 0}
       max={max}
       value={value}
       onChange={handleChange}
@@ -30,5 +31,10 @@ function QuantitySelector({ value, setValue, max, min }) {
     </NumberInput>
   );
 }
-
+QuantitySelector.propTypes = {
+  value: PropTypes.number,
+  setValue: PropTypes.func,
+  max: PropTypes.number,
+  min: PropTypes.number,
+};
 export default QuantitySelector;

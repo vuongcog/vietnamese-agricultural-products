@@ -2,7 +2,6 @@ import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import {
   Box,
-  Button,
   FormControl,
   FormLabel,
   Input,
@@ -26,7 +25,7 @@ import {
   FILTER_SEARCH,
 } from "../../store/reducer/filterConstants";
 
-const ProductFilter = ({ onSubmit }) => {
+const ProductFilter = () => {
   const { category, priceRange } = useProducerFilter();
   const [localPriceRange, setLocalPriceRange] = useState(priceRange);
   const [keyword, setKeyword] = useState("");

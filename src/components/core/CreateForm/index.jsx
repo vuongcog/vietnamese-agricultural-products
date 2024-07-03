@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { AddIcon } from "@chakra-ui/icons";
@@ -32,6 +32,7 @@ const CreateForm = ({
   schemaForm,
   onClose,
   defaultValues,
+  callbackCancel,
 }) => {
   const { setValueForm } = useContext(ContextDialogCreateForm);
   const isAddingData = useSelector(getAddingData);
@@ -69,9 +70,10 @@ const CreateForm = ({
     });
 
     let data = { ...formState };
+    // 111 hàm này dùng để xóa các filed không có dữ liệu hoặc ""
     data = Object.fromEntries(
       Object.entries(data).filter(
-        ([key, value]) => value !== null && value !== undefined && value !== ""
+        ([, value]) => value !== null && value !== undefined && value !== ""
       )
     );
     if (type === UPDATE_DATA) {
@@ -87,7 +89,6 @@ const CreateForm = ({
     const [options, setOptions] = useState(item.items || []);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    console.log(defaultValue);
     useEffect(() => {
       if (item.endpoint) {
         setLoading(true);
@@ -116,24 +117,33 @@ const CreateForm = ({
             setLoading(false);
           });
       }
+      return () => {
+        setError(null);
+      };
     }, [item.endpoint]);
+
+    if (error) toast.error(error);
 
     const renderInput = () => {
       switch (item.type) {
         case "select":
-          return loading ? (
-            <Spinner size="sm" />
-          ) : (
-            <Select
-              defaultValue={defaultValue || options[0]?.value}
-              onChange={(e) => handleChange(item.name, e.target.value)}
-            >
-              {options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.name}
-                </option>
-              ))}
-            </Select>
+          return (
+            <>
+              {loading ? (
+                <Spinner size="sm" />
+              ) : (
+                <Select
+                  defaultValue={defaultValue || options[0]?.value}
+                  onChange={(e) => handleChange(item.name, e.target.value)}
+                >
+                  {options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.name}
+                    </option>
+                  ))}
+                </Select>
+              )}
+            </>
           );
 
         case "date":
@@ -200,6 +210,7 @@ const CreateForm = ({
         <Button
           colorScheme="red"
           onClick={() => {
+            callbackCancel?.(null);
             onClose();
           }}
           ml={3}
@@ -221,6 +232,7 @@ const CreateForm = ({
 };
 
 CreateForm.propTypes = {
+  callbackCancel: PropTypes.func,
   doneText: [],
   endpoint: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,

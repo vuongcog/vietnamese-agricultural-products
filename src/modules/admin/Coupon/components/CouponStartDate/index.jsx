@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCalendarAlt, FaCalendarTimes } from "react-icons/fa";
+import { FaCalendarTimes } from "react-icons/fa";
 import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
 import formatDateTime from "../../../../../utils/formateDateTime";

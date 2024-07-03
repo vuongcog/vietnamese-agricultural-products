@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import PropTypes from "../../../utils/prop-types";
 
 const MotionAlert = chakra(motion.div, {
-  shouldForwardProp: (prop) => true,
+  shouldForwardProp: () => true,
 });
 function AlertMessage({
   status = "warning",

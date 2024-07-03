@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import UserName from "../components/UserName";
 import styles from "./styles.module.scss";
-import UserEmail from "../components/UserEmail";
 import formatDateTime from "../../../../utils/formateDateTime";
 import AdminCrud from "../../../../components/core/AdminCrud";
 import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudContext/CrudContext";

@@ -17,12 +17,14 @@ const DialogCreateForm = ({ schemaForm, callbackCancel, endpoint, item }) => {
           type={schemaForm.type}
           defaultValues={item}
           schemaForm={schemaForm.schemaForm}
+          callbackCancel={callbackCancel}
         ></CreateForm>
       </Confirm>
     </ProviderDialogCreateForm>
   );
 };
 DialogCreateForm.propTypes = {
+  item: PropTypes.object,
   itemDetail: PropTypes.object,
   endpoint: PropTypes.string,
   callbackCancel: PropTypes.func,

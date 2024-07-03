@@ -1,6 +1,7 @@
 import React from "react";
 import PhoneIcon from "@mui/icons-material/Phone";
 import styles from "./styles.module.scss";
+import PropTypes from "../../../../../utils/prop-types";
 
 const UserPhone = ({ phone_num }) => {
   return (
@@ -9,6 +10,9 @@ const UserPhone = ({ phone_num }) => {
       <span className={styles.phone}>{phone_num}</span>
     </div>
   );
+};
+UserPhone.propTypes = {
+  phone_num: PropTypes.string,
 };
 
 export default UserPhone;

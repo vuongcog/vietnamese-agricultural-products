@@ -1,20 +1,12 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.scss";
-import formatDateTime from "../../../../utils/formateDateTime";
 import AdminCrud from "../../../../components/core/AdminCrud";
 import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudContext/CrudContext";
 import DialogCreateForm from "../../../../components/core/DialogCreateForm";
 import { schemaFormFactory } from "../utils/schemaFormFactory";
-import {
-  ejectReducersAndSagas,
-  injectReducersAndSagas,
-} from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
+import {} from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
 import ProductDes from "../components/ProductDes";
-import {
-  ejectSaga,
-  injectReducer,
-} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
-import { reducerFilter } from "../../../../components/core/AdminCrud/Store/reducerFilter";
+import {} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
 import ProductName from "../components/ProductName";
 import Status from "../../../../components/admin/Status";
 import ProductInfo from "../components/ProductInfo";
@@ -29,6 +21,7 @@ import CreatedAtComponent from "../../../../components/core/CreatedAt";
 import UpdatedAtComponent from "../../../../components/core/UpdatedAt";
 import { useDispatch } from "react-redux";
 import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
+import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
   const dispatch = useDispatch();
@@ -169,17 +162,9 @@ const Product = () => {
     ],
     initSearch: true,
   };
-  useMemo(() => {
-    injectReducersAndSagas();
-    injectReducer("crudFilter", reducerFilter);
-  }, []);
-  useEffect(() => {
-    injectReducersAndSagas();
-    return () => {
-      ejectReducersAndSagas();
-      ejectSaga("crudFilter");
-    };
-  }, []);
+
+  useInjectReducerSaga();
+
   return (
     <div className={styles.module}>
       <ToastContainer containerId={"export-excel"} />

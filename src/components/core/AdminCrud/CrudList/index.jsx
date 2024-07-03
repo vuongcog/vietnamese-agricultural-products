@@ -124,7 +124,7 @@ const CrudList = (props) => {
   };
 
   const _renderColumns = () => {
-    const { items, isFetching } = props;
+    const { items } = props;
     if (_.isEmpty(items)) {
       console.log("true");
       return null;

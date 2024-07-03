@@ -21,6 +21,7 @@ module.exports = {
   },
   globals: {
     Cookies: "readonly",
+    Buffer: "readonly",
     $: true,
     _: true,
     process: true,
