@@ -4,7 +4,7 @@ import Http from "../../../../utils/http/http";
 import PropTypes from "prop-types";
 
 import { useDispatch } from "react-redux";
-import { useDebounce } from "../../../../utils/useDebounce";
+import { useDebounce } from "../../../../utils/use-debounce";
 import { FETCHED_DATA, FETCH_DATA, SET_ITEMS } from "../Store/constants";
 import { crudOptionsDefault } from "../constants/curd-options-default";
 

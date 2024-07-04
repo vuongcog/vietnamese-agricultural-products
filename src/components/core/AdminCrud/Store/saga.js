@@ -27,7 +27,7 @@ import {
   UPDATING_DATA,
 } from "./constants";
 import Http from "../../../../utils/http/http";
-import { parseObjectJson } from "../../../../utils/pareJson";
+import { parseObjectJson } from "../../../../utils/parse-json";
 import { toast } from "react-toastify";
 
 // 111 worker create data

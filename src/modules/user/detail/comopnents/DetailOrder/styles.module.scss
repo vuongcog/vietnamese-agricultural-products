@@ -1,0 +1,62 @@
+// Container chính
+.container {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  gap: 24px;
+
+  .quantity {
+    display: flex;
+    gap: 12px;
+    span {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  }
+  .order {
+    display: flex;
+    gap: 12px;
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &:first-of-type {
+        background-color: #28a745;
+
+        &:hover {
+          background-color: #218838;
+        }
+      }
+    }
+  }
+}
+
+// Styling cho ToastContainer
+.Toastify__toast-container {
+  font-size: 16px;
+  .Toastify__toast {
+    border-radius: 8px;
+  }
+  .Toastify__toast--success {
+    background-color: #28a745;
+  }
+  .Toastify__toast--error {
+    background-color: #dc3545;
+  }
+  .Toastify__toast--info {
+    background-color: #17a2b8;
+  }
+  .Toastify__toast--warning {
+    background-color: #ffc107;
+  }
+}

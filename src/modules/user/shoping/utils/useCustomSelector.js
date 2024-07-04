@@ -4,9 +4,6 @@ import {
   getFetchingFailed,
   getFetchingSuccess,
   getItemsProductList,
-  getLimitFilter,
-  getPaginationFilter,
-  getSearchFilter,
 } from "../store/selector/selector";
 
 const useCustomSelector = () => {
@@ -14,18 +11,12 @@ const useCustomSelector = () => {
   const isFetching = useSelector(getFechingStatus);
   const isFetchingSuccess = useSelector(getFetchingSuccess);
   const isFetchingFailed = useSelector(getFetchingFailed);
-  const search = useSelector(getSearchFilter);
-  const pagination = useSelector(getPaginationFilter);
-  const limit = useSelector(getLimitFilter);
 
   return {
     items,
     isFetching,
     isFetchingSuccess,
     isFetchingFailed,
-    limit,
-    pagination,
-    search,
   };
 };
 

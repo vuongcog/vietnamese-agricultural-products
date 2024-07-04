@@ -1,4 +1,4 @@
-import { generateURL } from "../generateURL";
+import { generateURL } from "../generate-url";
 import httpClient from "./httpClient";
 class HttpAuth {
   endpoint = null;

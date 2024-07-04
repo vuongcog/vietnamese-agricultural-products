@@ -7,7 +7,7 @@ import {
   injectReducer,
   injectReducersAndSagas,
 } from "../../utils/fetch-cancel-saga-reducer-with-key";
-import { refactorReducerFilter } from "../../modules/user/shoping/store/reducer/filterReducer";
+import { refactorReducerFilter } from "../../modules/user/shoping/store/reducer/reducerFilter";
 import { initialFilterState } from "../../modules/user/shoping/store/constants/initialFilterState";
 
 const useInjectReducerSagaShopping = () => {

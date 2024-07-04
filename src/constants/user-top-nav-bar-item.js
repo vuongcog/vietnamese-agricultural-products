@@ -34,6 +34,11 @@ export const SCHEMA = [
     name: "Contact Us",
     icon: "fa fa-home",
     link: "user",
-    color: "text-[#00e9ff]",
+  },
+  {
+    id: 7,
+    name: "Purchase",
+    icon: "fa fa-home",
+    link: "/purchase",
   },
 ];

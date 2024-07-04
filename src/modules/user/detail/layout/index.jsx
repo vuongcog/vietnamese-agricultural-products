@@ -1,7 +1,7 @@
 import React from "react";
 
-const DetailLayout = () => {
+const LayoutDetail = () => {
   return <div></div>;
 };
 
-export default DetailLayout;
+export default LayoutDetail;

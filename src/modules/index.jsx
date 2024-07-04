@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import AdminLayout from "../layouts/AdminLayout";
-import UserLayout from "../layouts/UserLayout";
+import LayoutAdmin from "../layouts/LayoutAdmin";
+import LayoutUser from "../layouts/LayoutUser";
 import ChartComponent from "./Test/Test";
 
 const User = React.lazy(() => {
@@ -40,7 +40,7 @@ import { AuthProvider } from "../contexts/AuthContext";
 import {
   ProtectedAuthenRoute,
   ProtectedRoute,
-} from "../components/ProtectedRoute";
+} from "../components/protected-route";
 import Product from "./admin/Product/container";
 import CartContainer from "./user/cart/container";
 import NotFound from "./page-not-found";
@@ -55,7 +55,7 @@ const App = () => {
           path="/"
           element={
             <ProtectedRoute>
-              <UserLayout></UserLayout>
+              <LayoutUser></LayoutUser>
             </ProtectedRoute>
           }
         >
@@ -63,6 +63,7 @@ const App = () => {
           <Route path="/shopping" element={<Shopping />} />
           <Route path="/cart" element={<CartContainer />} />
           <Route path="/detail/:id" element={<DetailProduct />} />
+          <Route path="/purchase" element={<DetailProduct />} />
         </Route>
         <Route
           path="/authen"
@@ -79,7 +80,7 @@ const App = () => {
           path="/admin"
           element={
             <ProtectedRoute>
-              <AdminLayout />
+              <LayoutAdmin />
             </ProtectedRoute>
           }
         >

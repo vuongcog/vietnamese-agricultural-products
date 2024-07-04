@@ -7,7 +7,7 @@ import {
   FETCH_DATA,
 } from "../reducer/constants";
 import HttpUserClient from "../../../../../utils/http/httpUserClient";
-import { parseObjectJson } from "../../../../../utils/pareJson";
+import { parseObjectJson } from "../../../../../utils/parse-json";
 
 const options = {
   notAuthor: true,
@@ -22,7 +22,7 @@ function* wokerFetchData(action) {
     yield put({ type: FETCHING_DATA });
     const { payload } = action;
 
-    const http = new HttpUserClient();
+    const http = new HttpUserClient("http://localhost:8081/products");
     const res = yield call(http.getItems, payload, options);
     const parseData = parseObjectJson(res.data);
     yield put({ type: FETCHED_DATA });

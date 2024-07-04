@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { parseObjectJson } from "../pareJson";
+import { parseObjectJson } from "../parse-json";
 export const getCountCart = () => {
   const countCart = Cookies.get("cart");
   if (countCart) {

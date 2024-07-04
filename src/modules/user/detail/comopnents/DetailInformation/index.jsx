@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import styles from "./styles.module.scss";
 import PropTypes from "prop-types";
 import { ContextDetailProduct } from "../../context";
-const CardDetail = ({ item }) => {
+import DetailOrder from "../DetailOrder";
+const DetailInformation = ({ item }) => {
   const { item: itemTemp } = useContext(ContextDetailProduct);
   return (
     <div className={styles.container}>
@@ -28,11 +29,12 @@ const CardDetail = ({ item }) => {
             Đã bán
           </div>
         </div>
+        <DetailOrder></DetailOrder>
       </div>
     </div>
   );
 };
-CardDetail.propTypes = {
+DetailInformation.propTypes = {
   item: PropTypes.object,
 };
-export default CardDetail;
+export default DetailInformation;

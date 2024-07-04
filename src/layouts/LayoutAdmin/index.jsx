@@ -3,7 +3,7 @@ import AdminLeftSidebar from "../../components/admin/LeftSidebar";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "../../utils/prop-types";
 
-const AdminLayout = ({ children }) => {
+const LayoutAdmin = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
@@ -28,7 +28,7 @@ const AdminLayout = ({ children }) => {
     </div>
   );
 };
-AdminLayout.propTypes = {
+LayoutAdmin.propTypes = {
   children: PropTypes.element,
 };
-export default AdminLayout;
+export default LayoutAdmin;

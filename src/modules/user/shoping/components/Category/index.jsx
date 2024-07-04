@@ -18,15 +18,15 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { debounce } from "lodash";
-import useProducerFilter from "../../utils/useProducerFilter";
 import {
   FILTER_CATEGORY,
   FILTER_PRICE_RANGE,
   FILTER_SEARCH,
 } from "../../store/reducer/filterConstants";
+import useProducerFilterShopping from "../../../../../useCustom/user/useProducerFilterShopping";
 
 const ProductFilter = () => {
-  const { category, priceRange } = useProducerFilter();
+  const { category, priceRange } = useProducerFilterShopping();
   const [localPriceRange, setLocalPriceRange] = useState(priceRange);
   const [keyword, setKeyword] = useState("");
   const [selectedCategories, setSelectedCategories] = useState(category);

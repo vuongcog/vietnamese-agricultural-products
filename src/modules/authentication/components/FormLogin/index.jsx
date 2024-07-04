@@ -10,7 +10,7 @@ import styles from "./styles.module.scss";
 import LOGO from "../../../../constants/logo";
 import { FormContext } from "./FormContext";
 import { useAuth } from "../../../../contexts/AuthContext";
-import { parseObjectJson } from "../../../../utils/pareJson";
+import { parseObjectJson } from "../../../../utils/parse-json";
 import ProgressFullScreen from "../../../../components/core/ProgressFullScreen";
 const FormLogin = () => {
   const [email, setEmail] = useState("");

@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { parseObjectJson } from "../pareJson";
+import { parseObjectJson } from "../parse-json";
 export const setCookieCart = (idProduct, parseCartObject) => {
   parseCartObject.push(idProduct);
   Cookies.set("cart", JSON.stringify(parseCartObject), {
@@ -12,7 +12,8 @@ export const addCart = (idProduct) => {
     const listCart = Cookies.get("cart");
     if (listCart) {
       const parseCartObject = parseObjectJson(listCart);
-
+      console.log(parseCartObject);
+      console.log(parseCartObject.includes(idProduct));
       if (parseCartObject.includes(idProduct)) {
         return {
           status: "warning",

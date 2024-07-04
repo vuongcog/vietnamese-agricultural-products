@@ -25,14 +25,13 @@
 
     li {
       list-style: none;
-
+      width: max-content;
       .navLink {
         font-weight: 500;
-        font-size: 18px;
+        font-size: 14px;
         color: #4a5568;
         text-decoration: none;
         transition: color 0.3s ease-in-out;
-
         &:hover {
           color: #38a169;
         }

@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react";
 import HttpAuth from "../../../../../utils/http/httpAuth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { parseObjectJson } from "../../../../../utils/pareJson";
+import { parseObjectJson } from "../../../../../utils/parse-json";
 import PropTypes from "../../../../../utils/prop-types";
 
 export const FormContext = createContext({});

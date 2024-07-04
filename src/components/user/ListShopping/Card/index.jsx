@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { ShoppingContext } from "../../../../modules/user/shoping/context";
-import { addCart } from "../../../../utils/cart/addCart";
+import { addCart } from "../../../../utils/cart/add-cart";
 import { ShoppingCartCheckout } from "@mui/icons-material";
 import AlertMessage from "../../../core/AlertMessage";
 import _ from "lodash";

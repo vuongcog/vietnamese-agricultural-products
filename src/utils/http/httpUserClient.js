@@ -1,14 +1,14 @@
 import httpClient from "./httpClient";
 class HttpUserClient {
-  endpoint = null;
+  url = null;
 
   http = httpClient(false);
 
-  constructor(endpoint) {
-    this.endpoint = endpoint;
+  constructor(url) {
+    this.url = url;
   }
   getItems = (param = {}, options = {}) => {
-    return this.http.post(`https://google.serper.dev/search`, param, options);
+    return this.http.get(`${this.url}`, param, options);
   };
   getItem = (params = {}) => {
     const option = {

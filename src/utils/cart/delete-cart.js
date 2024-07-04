@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import { getCart } from "./get-cart";
-import { parseStringJson } from "../pareJson";
+import { parseStringJson } from "../parse-json";
 
 export const deleteCart = (index) => {
   const listCart = getCart();

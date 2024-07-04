@@ -12,6 +12,7 @@ const CartList = () => {
     setListCart(deleteCart(index));
     setElement(<ProgressFullScreen></ProgressFullScreen>);
   };
+
   useEffect(() => {
     setTimeout(() => {
       setElement(null);

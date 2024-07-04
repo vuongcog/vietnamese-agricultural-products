@@ -1,5 +1,5 @@
 import store from "../configStore/configStore";
-import getInjectors from "./reducerInjectors";
+import getInjectors from "./reducer-injectors";
 import { cancelSaga, runSaga } from "./saga/optionsSaga";
 
 export const injectReducersAndSagas = ({

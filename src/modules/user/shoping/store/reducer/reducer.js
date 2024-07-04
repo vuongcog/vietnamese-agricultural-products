@@ -25,6 +25,7 @@ const handlerFetched = (state) => {
   return { ...state, isFetching: false };
 };
 const handlerSuccsess = (state, action) => {
+  console.log(action.payload);
   return { ...state, items: [...state.items, ...action.payload.organic] };
 };
 const handlerFailed = (state) => {
