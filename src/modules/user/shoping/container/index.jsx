@@ -1,6 +1,5 @@
 import React from "react";
 import ListShoping from "../../../../components/user/ListShopping";
-import LIST_PRODUCT from "../../../../constants/virtual-item";
 import ShoppingProvider from "../context";
 import ProductFilter from "../components/Category";
 
@@ -9,7 +8,7 @@ const Shopping = () => {
     <ShoppingProvider>
       <div className="flex  h-[10000px]">
         <ProductFilter />
-        <ListShoping items={LIST_PRODUCT}></ListShoping>
+        <ListShoping></ListShoping>
       </div>
     </ShoppingProvider>
   );

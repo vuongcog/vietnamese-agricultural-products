@@ -8,6 +8,7 @@ import {
 } from "../reducer/constants";
 import HttpUserClient from "../../../../../utils/http/httpUserClient";
 import { parseObjectJson } from "../../../../../utils/parse-json";
+import { ADD_CART } from "../constants/actionCart";
 
 const options = {
   notAuthor: true,
@@ -21,20 +22,35 @@ function* wokerFetchData(action) {
   try {
     yield put({ type: FETCHING_DATA });
     const { payload } = action;
-
     const http = new HttpUserClient("http://localhost:8081/products");
     const res = yield call(http.getItems, payload, options);
     const parseData = parseObjectJson(res.data);
-    yield put({ type: FETCHED_DATA });
     yield put({ type: FETCH_DATA_SUCCESS, payload: parseData });
   } catch (err) {
-    yield put({ type: FETCHED_DATA });
     yield put({ type: FETCH_DATA_FAILED });
+  } finally {
+    yield put({ type: FETCHED_DATA });
+  }
+}
+
+function* wokerAddCart(action) {
+  try {
+    yield put({ type: FETCHING_DATA });
+    const { payload } = action;
+    const http = new HttpUserClient("http://localhost:8081/products");
+    const res = yield call(http.getItems, payload, options);
+    const parseData = parseObjectJson(res.data);
+    yield put({ type: FETCH_DATA_SUCCESS, payload: parseData });
+  } catch (err) {
+    yield put({ type: FETCH_DATA_FAILED });
+  } finally {
+    yield put({ type: FETCHED_DATA });
   }
 }
 
 function* warcherSagaProducrtList() {
   yield takeLatest(FETCH_DATA, wokerFetchData);
+  yield takeLatest(ADD_CART, wokerAddCart);
 }
 
 export default warcherSagaProducrtList;

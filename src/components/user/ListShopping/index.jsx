@@ -4,11 +4,11 @@ import Card from "./Card";
 import styles from "./styles.module.scss";
 import { ShoppingContext } from "../../../modules/user/shoping/context";
 import useCustomSelector from "../../../modules/user/shoping/utils/useCustomSelector";
-import SkeletonCart from "./SkeletonCart";
 
-const ListShoping = ({ items }) => {
-  const { loading, items: list } = useContext(ShoppingContext);
-  const { isFetching } = useCustomSelector();
+const ListShoping = () => {
+  const { loading } = useContext(ShoppingContext);
+  const { items } = useCustomSelector();
+
   const __renderCard = (item) => {
     return <Card item={item} />;
   };
@@ -18,16 +18,6 @@ const ListShoping = ({ items }) => {
       <div className={styles.listProductContainer}>
         {items.map((item) => {
           return __renderCard(item);
-        })}
-        {list.map((item, index) => {
-          if (isFetching) {
-            return <SkeletonCart key={index}></SkeletonCart>;
-          }
-          return (
-            <div key={index} className={styles.placeholder}>
-              {item.title}
-            </div>
-          );
         })}
       </div>
     );

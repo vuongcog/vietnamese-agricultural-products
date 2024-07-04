@@ -51,11 +51,11 @@ const Card = ({ item, ...props }) => {
         className={styles.container}
       >
         <div className={styles.wrapperImg}>
-          <img src={cloneItem.linkImage} alt={cloneItem.title} />
+          <img src={cloneItem.product_image} alt={cloneItem.product_name} />
         </div>
-        <p className={styles.title}>{cloneItem.title}</p>
+        <p className={styles.title}>{cloneItem.product_name}</p>
         <span className={styles.price}>
-          {cloneItem.price.toLocaleString()} đ
+          {cloneItem?.unit_price?.toLocaleString()} đ
         </span>
         <div className={styles.sold}>{cloneItem.sold} sold</div>
       </div>
