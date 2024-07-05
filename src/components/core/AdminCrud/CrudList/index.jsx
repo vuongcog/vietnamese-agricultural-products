@@ -20,7 +20,6 @@ const CrudList = (props) => {
     schema,
     classNameProps: { tableBodyRow, tableHeaderRow },
   } = props;
-
   const __renderDropdown = (dropdownOptions, item) => {
     return dropdownOptions.map((option) => {
       const cb = _.get(option, "callback");

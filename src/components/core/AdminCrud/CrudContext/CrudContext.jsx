@@ -21,7 +21,8 @@ import { toast } from "react-toastify";
 export const CrudContext = createContext({});
 const ContextCrudProvider = ({ children, ...props }) => {
   const { classNameProps, mode, schemaForm } = props;
-  let NewCrudOptions = {
+
+  let crudOptions = {
     ...crudOptionsDefault,
     ...props,
     mode: {
@@ -29,10 +30,8 @@ const ContextCrudProvider = ({ children, ...props }) => {
       ...mode,
     },
   };
-
-  const apiParams = NewCrudOptions.endpointParams || {};
+  const apiParams = crudOptions.endpointParams || {};
   const [defaultApiParams, setDefaultParams] = useState(apiParams);
-  const [crudOptions, setCrudOptions] = useState(NewCrudOptions);
 
   const dispatch = useDispatch();
 
@@ -51,7 +50,6 @@ const ContextCrudProvider = ({ children, ...props }) => {
   const selectPagination = (value) => {
     dispatch({ type: CRUD_SET_PAGANATION, payload: value });
   };
-
   const value = {
     sendEmail: true,
     schemaForm,
@@ -63,7 +61,6 @@ const ContextCrudProvider = ({ children, ...props }) => {
     defaultApiParams,
     setDefaultParams,
     crudOptions,
-    setCrudOptions,
     classNameProps,
     mode,
     perpage,

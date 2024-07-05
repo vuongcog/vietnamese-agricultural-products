@@ -2,14 +2,14 @@ import React, { useContext, useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { ShoppingContext } from "../../../../modules/user/shoping/context";
-import { addCart } from "../../../../utils/cart/add-cart";
 import { ShoppingCartCheckout } from "@mui/icons-material";
-import AlertMessage from "../../../core/AlertMessage";
+import AlertMessage from "../../../../../../components/core/AlertMessage";
 import _ from "lodash";
-import useCustomSelector from "../../../../modules/user/shoping/utils/useCustomSelector";
 import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonCart from "../SkeletonCart";
+import { ShoppingContext } from "../../../context";
+import useCustomSelector from "../../../utils/useCustomSelector";
+import { addCart } from "../../../../../../utils/cart/add-cart";
 
 const Card = ({ item, ...props }) => {
   const navigate = useNavigate();

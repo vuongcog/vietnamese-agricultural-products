@@ -12,7 +12,6 @@ const SearchHeader = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchValue, setSearchValue] = useState(search);
-
   const debouncedSearch = debounce((value) => {
     dispatch({ type: FILTER_SEARCH, payload: value });
     if (location.pathname === "/") {

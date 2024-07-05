@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
 import styles from "./styles.module.scss";
-import { ShoppingContext } from "../../../modules/user/shoping/context";
-import useCustomSelector from "../../../modules/user/shoping/utils/useCustomSelector";
+import { ShoppingContext } from "../../context";
+import useCustomSelector from "../../utils/useCustomSelector";
 
 const ListShoping = () => {
   const { loading } = useContext(ShoppingContext);

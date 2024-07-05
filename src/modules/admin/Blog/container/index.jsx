@@ -17,8 +17,11 @@ import BlogContent from "../components/BlogContent";
 import { useDispatch } from "react-redux";
 import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
+import { useTranslation } from "react-i18next";
+import langs from "../langs";
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
@@ -41,17 +44,17 @@ const Product = () => {
     schema: [
       {
         name: "id",
-        label: "id",
+        label: t(langs.idBlog),
         default: "N/A",
       },
       {
         name: "id_user ",
-        label: "id_user ",
+        label: t(langs.idBlog),
         default: "N/A",
       },
       {
         name: "id_cat ",
-        label: "id_cat ",
+        label: t(langs.idCategory),
         default: "N/A",
         component: ({ id_cat }) => {
           return <div>{id_cat}</div>;
@@ -59,7 +62,7 @@ const Product = () => {
       },
       {
         name: "blog_title ",
-        label: "blog_title ",
+        label: t(langs.title),
         default: "N/A",
         component: BlogIcon,
         dropdownActions: {
@@ -113,23 +116,23 @@ const Product = () => {
       },
       {
         name: "blog_slug",
-        label: "blog_slug",
+        label: t(langs.slug),
         component: BlogSlug,
         default: "N/A",
       },
       {
         name: "content",
-        label: "content",
+        label: t(langs.content),
         default: "N/A",
         component: BlogContent,
       },
       {
         name: "blog_image",
-        label: "blog_image",
+        label: t(langs.image),
         default: "  N/A",
         component: ({ blog_image }) => {
           return (
-            <div className={"flex justify-center"}>
+            <div className={"flex justify-center w-14"}>
               <img
                 className="rounded-full w-[50px] h-[50px] object-cover"
                 src={blog_image}
@@ -140,26 +143,26 @@ const Product = () => {
       },
       {
         name: "view",
-        label: "view",
+        label: t(langs.view),
         default: "N/A",
       },
 
       {
         name: "status",
-        label: "status",
+        label: t(langs.status),
         component: Status,
         default: "N/A",
       },
       {
         name: "created_at",
-        label: "created_at",
+        label: t(langs.createdAt),
         component: CreatedAtComponent,
         default: "N/A",
       },
 
       {
         name: "updated_at",
-        label: "Updated at",
+        label: t(langs.updatedAt),
         default: "N/A",
         component: UpdatedAtComponent,
       },

@@ -17,7 +17,10 @@ import UserAvatar from "../components/UserAvatar";
 import { useDispatch } from "react-redux";
 import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
+import langs from "../langs";
+import { useTranslation } from "react-i18next";
 const User = () => {
+  const { t } = useTranslation();
   const [selectElement, setSelectElement] = useState(null);
   const dispatch = useDispatch();
   const crudOptions = {
@@ -41,24 +44,24 @@ const User = () => {
     schema: [
       {
         name: "id",
-        label: "Title",
+        label: t(langs.id),
         default: "N/A",
       },
       {
         name: "name",
-        label: "  Name",
+        label: t(langs.name),
         default: "N/A",
         component: UserName,
       },
       {
         name: "url_avatar",
-        label: "Avatar",
+        label: t(langs.avatar),
         default: "N/A",
         component: UserAvatar,
       },
       {
         name: "email",
-        label: "Email",
+        label: t(langs.email),
         default: "N/A",
         dropdownActions: {
           items: [
@@ -112,29 +115,29 @@ const User = () => {
       },
       {
         name: "email_verified_at",
-        label: "Email verified at",
+        label: t(langs.emailVerifiedAt),
         default: "N/A",
       },
       {
         name: "phone_num",
-        label: "Phone Num",
+        label: t(langs.phoneNum),
         default: "N/A",
         component: UserPhone,
       },
       {
         name: "role",
-        label: "Role",
+        label: t(langs.role),
         default: "N/A",
       },
       {
         name: "status",
-        label: "Status",
+        label: t(langs.status),
         default: "N/A",
         component: Status,
       },
       {
         name: "updated_at",
-        label: "Updated at",
+        label: t(langs.updatedAt),
         default: "N/A",
         formatDate: formatDateTime,
       },
@@ -143,7 +146,6 @@ const User = () => {
   };
 
   useInjectReducerSaga();
-
   return (
     <div className={styles.module}>
       <ContextCrudProvider

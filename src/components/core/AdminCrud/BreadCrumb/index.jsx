@@ -17,6 +17,7 @@ import {
 } from "../Store/selector";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SelectLanguage from "../../../user/Header/SelectLang";
 
 const BreadCrumb = ({
   isSearchInput,
@@ -62,7 +63,6 @@ const BreadCrumb = ({
   return (
     <div className={styles.container}>
       <ToastContainer />
-
       {isSendingMail && <ProgressFullScreen />}
       {isSearchInput && (
         <SearchInput
@@ -84,6 +84,7 @@ const BreadCrumb = ({
       <Button className={styles.logoutButton} onClick={logout}>
         Logout
       </Button>
+      <SelectLanguage bordered></SelectLanguage>
     </div>
   );
 };

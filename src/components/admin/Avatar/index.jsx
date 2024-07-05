@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { AVATAR } from "../../../constants/avatar";
 import styles from "./styles.module.scss";
+import SelectLanguage from "../../user/Header/SelectLang";
 
 const AdminAvatar = ({ info }) => {
   return (

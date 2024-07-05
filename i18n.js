@@ -6,8 +6,8 @@ i18n
   .use(HttpBackend)
   .use(initReactI18next)
   .init({
-    fallbackLng: "vi",
-    lng: "vi",
+    fallbackLng: "en",
+    lng: "en",
     backend: {
       loadPath: "/lang/locales/{{lng}}/{{ns}}.json",
     },

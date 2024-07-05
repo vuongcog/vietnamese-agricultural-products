@@ -95,7 +95,6 @@ const App = () => {
               </div>
             }
           />
-          {/* <Route path="/admin/test" element={<User />} /> */}
           <Route
             path="/admin/user"
             element={

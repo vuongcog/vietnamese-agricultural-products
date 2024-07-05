@@ -1,5 +1,5 @@
 export const initialFilterState = {
-  search: "apple",
+  search: "",
   limit: 10,
   pagination: 0,
   priceRange: [0, 1000000],

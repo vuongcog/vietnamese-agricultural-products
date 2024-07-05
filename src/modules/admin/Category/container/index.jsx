@@ -17,8 +17,11 @@ import CategorySlugComponent from "../components/CategorySlug";
 import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 import { useDispatch } from "react-redux";
 import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
+import { useTranslation } from "react-i18next";
+import langs from "../langs";
 const Category = () => {
   const [selectElement, setSelectElement] = useState(null);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
@@ -41,18 +44,18 @@ const Category = () => {
     schema: [
       {
         name: "id",
-        label: "Title",
+        label: t(langs.idCategory),
         default: "N/A",
       },
       {
         name: "category_name",
-        label: "  Category Name",
+        label: t(langs.name),
         default: "N/A",
         component: CategoryName,
       },
       {
         name: "category_slug",
-        label: "category_slug",
+        label: t(langs.slug),
         default: "N/A",
         component: CategorySlugComponent,
         dropdownActions: {
@@ -111,25 +114,25 @@ const Category = () => {
       },
       {
         name: "category_des",
-        label: "category_des",
+        label: t(langs.des),
         default: "N/A",
         component: CategoryDes,
       },
       {
         name: "status",
-        label: "status ",
+        label: t(langs.status),
         default: "N/A",
         component: Status,
       },
       {
         name: "created_at",
-        label: "created_at",
+        label: t(langs.createdAt),
         component: CreatedAtComponent,
         default: "N/A",
       },
       {
         name: "updated_at",
-        label: "Updated at",
+        label: t(langs.updatedAt),
         default: "N/A",
         component: UpdatedAtComponent,
       },

@@ -24,8 +24,11 @@ import {
   FILTER_SEARCH,
 } from "../../store/reducer/filterConstants";
 import useProducerFilterShopping from "../../../../../useCustom/user/useProducerFilterShopping";
+import { useTranslation } from "react-i18next";
+import langs from "../../langs";
 
 const ProductFilter = () => {
+  const { t } = useTranslation();
   const { category, priceRange } = useProducerFilterShopping();
   const [localPriceRange, setLocalPriceRange] = useState(priceRange);
   const [keyword, setKeyword] = useState("");
@@ -71,11 +74,10 @@ const ProductFilter = () => {
     setSelectedCategories(newCategories);
     dispatch({ type: FILTER_CATEGORY, payload: newCategories });
   };
-
   return (
-    <Box as="form" p={4} borderWidth={1} borderRadius="md">
+    <Box as="form" p={4} paddingTop={14} borderWidth={1} borderRadius="md">
       <FormControl mb={4}>
-        <FormLabel>Keyword</FormLabel>
+        <FormLabel>{t(langs.search)}</FormLabel>
         <Input
           type="text"
           name="keyword"
@@ -85,7 +87,7 @@ const ProductFilter = () => {
       </FormControl>
 
       <FormControl mb={4}>
-        <FormLabel>Category</FormLabel>
+        <FormLabel>{t(langs.category)}</FormLabel>
         <Select name="category" value="" onChange={handleCategoryChange}>
           <option value="">All</option>
           <option value="cachua">Cà chua</option>
@@ -106,7 +108,7 @@ const ProductFilter = () => {
       </FormControl>
 
       <FormControl mb={4}>
-        <FormLabel>Price Range</FormLabel>
+        <FormLabel>{t(langs.priceRange)}</FormLabel>
         <RangeSlider
           aria-label={["min", "max"]}
           min={0}
@@ -123,7 +125,8 @@ const ProductFilter = () => {
           <RangeSliderThumb index={1} />
         </RangeSlider>
         <Text mt={2}>
-          From: ${localPriceRange[0]} - To: ${localPriceRange[1]}
+          {t(langs.from)}: ${localPriceRange[0]} - {t(langs.to)}: $
+          {localPriceRange[1]}
         </Text>
       </FormControl>
     </Box>
