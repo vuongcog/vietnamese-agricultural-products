@@ -7,5 +7,6 @@ const langs = {
   status: ADMIN_CATEGORY + ".status",
   createdAt: ADMIN_CATEGORY + ".createdAt",
   updatedAt: ADMIN_CATEGORY + ".updatedAt",
+  createCategory: ADMIN_CATEGORY + ".createCategory",
 };
 export default langs;

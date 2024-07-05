@@ -5,12 +5,13 @@ import AdminAvatar from "../Avatar";
 import { SCHEMA } from "../../../constants/nav-bar-item";
 import { useNavigate, useLocation } from "react-router-dom";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 const AdminLeftSidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
-
+  const { t } = useTranslation();
   const handleNavigate = (link) => {
     setActiveLink(link);
     navigate(link);
@@ -33,7 +34,9 @@ const AdminLeftSidebar = () => {
             }`}
           >
             <i className={`${item.icon} ${styles.icon}`}></i>
-            <div className={`${item.color} ${styles.label}`}>{item.name}</div>
+            <div className={`${item.color} ${styles.label}`}>
+              {t(item.name)}
+            </div>
           </li>
         ))}
       </ul>

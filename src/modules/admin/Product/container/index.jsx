@@ -22,8 +22,11 @@ import UpdatedAtComponent from "../../../../components/core/UpdatedAt";
 import { useDispatch } from "react-redux";
 import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
+import { useTranslation } from "react-i18next";
+import langs from "../langs";
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
@@ -52,7 +55,7 @@ const Product = () => {
 
       {
         name: "product_name",
-        label: "product_name",
+        label: t(langs.name),
         default: "N/A",
         component: ProductName,
         dropdownActions: {
@@ -107,55 +110,55 @@ const Product = () => {
 
       {
         name: "product_slug",
-        label: "product_slug",
+        label: t(langs.slug),
         default: "N/A",
         component: ProductSlug,
       },
       {
         name: "product_image",
-        label: "product_image",
+        label: t(langs.image),
         default: "  N/A",
         component: ProductImage,
       },
       {
         name: "product_des",
-        label: "product_des ",
+        label: t(langs.des),
         component: ProductDes,
         default: "N/A",
       },
       {
         name: "product_info",
-        label: "product_ino ",
+        label: t(langs.info),
         component: ProductInfo,
         default: "N/A",
       },
       {
         name: "quantity",
-        label: "quantity ",
+        label: t(langs.quantity),
         default: "N/A",
       },
       {
         name: "unit_prices",
-        label: "unit_prices",
+        label: t(langs.unitPrices),
         component: ProductUnitPrice,
         default: "N/A",
       },
       {
         name: "status",
-        label: "status",
+        label: t(langs.status),
         component: Status,
         default: "N/A",
       },
       {
         name: "created_at",
-        label: "created_at",
+        label: t(langs.createdAt),
         default: "N/A",
         component: CreatedAtComponent,
       },
 
       {
         name: "updated_at",
-        label: "Updated at",
+        label: t(langs.updatedAt),
         default: "N/A",
         component: UpdatedAtComponent,
       },

@@ -12,5 +12,6 @@ const langs = {
   status: ADMIN_BLOG + ".status",
   createdAt: ADMIN_BLOG + ".createdAt",
   updatedAt: ADMIN_BLOG + ".updatedAt",
+  createBlog: ADMIN_BLOG + ".createBlog",
 };
 export default langs;

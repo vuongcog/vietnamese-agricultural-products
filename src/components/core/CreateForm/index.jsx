@@ -24,6 +24,7 @@ import {
   formatDefaultDate,
   formatInputDate,
 } from "../../../utils/format-input-date";
+import { useTranslation } from "react-i18next";
 
 const CreateForm = ({
   doneText = ["Cancel", "Create"],
@@ -37,6 +38,7 @@ const CreateForm = ({
   const { setValueForm } = useContext(ContextDialogCreateForm);
   const isAddingData = useSelector(getAddingData);
   const isUpdatingData = useSelector(getUpdatingData);
+  const { t } = useTranslation();
   const [formState, setFormState] = useState(
     schemaForm.reduce((acc, field) => {
       acc[field.name] = type === UPDATE_DATA ? defaultValues[field.name] : "";
@@ -187,7 +189,9 @@ const CreateForm = ({
         key={item.name}
         isRequired={item.isRequire}
       >
-        {item.label && <FormLabel htmlFor={item.name}>{item.label}</FormLabel>}
+        {item.label && (
+          <FormLabel htmlFor={item.name}>{t(item.label)}</FormLabel>
+        )}
         {renderInput()}
         <FormErrorMessage>Name is required.</FormErrorMessage>
       </FormControl>

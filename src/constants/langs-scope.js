@@ -1,4 +1,5 @@
 export const LANGUAGE_GLOBAL = "src/main";
+export const ADMIN_LAYOUT = "src/layouts/LayoutAdmin";
 export const USER_HOME = `src/modules/user/home`;
 export const USER_SHOPPING = `src/modules/user/home`;
 export const USER_HEADER = "src/components/user/Header";

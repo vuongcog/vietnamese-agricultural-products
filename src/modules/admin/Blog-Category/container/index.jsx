@@ -14,8 +14,11 @@ import CreatedAtComponent from "../../../../components/core/CreatedAt";
 import { useDispatch } from "react-redux";
 import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
+import { useTranslation } from "react-i18next";
+import langs from "../langs";
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
@@ -38,17 +41,17 @@ const Product = () => {
     schema: [
       {
         name: "id",
-        label: "id",
+        label: t(langs.id),
         default: "N/A",
       },
       {
         name: "name",
-        label: "name",
+        label: t(langs.name),
         default: "N/A",
       },
       {
         name: "slug",
-        label: "slug",
+        label: t(langs.slug),
         default: "N/A",
         component: ({ slug }) => {
           return <div>{slug}</div>;
@@ -108,20 +111,20 @@ const Product = () => {
 
       {
         name: "status",
-        label: "status",
+        label: t(langs.status),
         component: Status,
         default: "N/A",
       },
       {
         name: "created_at",
-        label: "created_at",
+        label: t(langs.createdAd),
         default: "N/A",
         component: CreatedAtComponent,
       },
 
       {
         name: "updated_at",
-        label: "Updated at",
+        label: t(langs.updatedAt),
         default: "N/A",
         component: UpdatedAtComponent,
       },

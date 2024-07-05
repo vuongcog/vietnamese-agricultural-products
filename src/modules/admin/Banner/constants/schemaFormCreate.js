@@ -1,9 +1,10 @@
 import { ADD_DATA } from "../../../../components/core/AdminCrud/Store/constants";
+import langs from "../langs";
 
 export const schemaFormCreate = {
-  title: "CREATE BANNER",
+  title: langs.CREATE_BANNER,
   doneText: ["Cancel", "Save"],
-  button: "Create Banner",
+  button: langs.createBanner,
   type: ADD_DATA,
   schemaForm: [
     {

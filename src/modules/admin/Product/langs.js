@@ -12,5 +12,6 @@ const langs = {
   status: ADMIN_PRODUCT + ".status",
   createdAt: ADMIN_PRODUCT + ".createdAt",
   updatedAt: ADMIN_PRODUCT + ".updatedAt",
+  createProduct: ADMIN_PRODUCT + ".createProduct",
 };
 export default langs;

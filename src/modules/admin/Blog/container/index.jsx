@@ -49,7 +49,7 @@ const Product = () => {
       },
       {
         name: "id_user ",
-        label: t(langs.idBlog),
+        label: t(langs.idUser),
         default: "N/A",
       },
       {
@@ -115,18 +115,6 @@ const Product = () => {
         },
       },
       {
-        name: "blog_slug",
-        label: t(langs.slug),
-        component: BlogSlug,
-        default: "N/A",
-      },
-      {
-        name: "content",
-        label: t(langs.content),
-        default: "N/A",
-        component: BlogContent,
-      },
-      {
         name: "blog_image",
         label: t(langs.image),
         default: "  N/A",
@@ -141,6 +129,19 @@ const Product = () => {
           );
         },
       },
+      {
+        name: "blog_slug",
+        label: t(langs.slug),
+        component: BlogSlug,
+        default: "N/A",
+      },
+      {
+        name: "content",
+        label: t(langs.content),
+        default: "N/A",
+        component: BlogContent,
+      },
+
       {
         name: "view",
         label: t(langs.view),

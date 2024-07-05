@@ -11,8 +11,10 @@ import React, { useRef } from "react";
 import { useEffect } from "react";
 import styles from "./styles.module.scss";
 import PropTypes from "../../../utils/prop-types";
+import { useTranslation } from "react-i18next";
 const Confirm = ({ children, button, title, callbackCancel }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { t } = useTranslation();
   const cancelRef = useRef();
 
   useEffect(() => {
@@ -24,7 +26,7 @@ const Confirm = ({ children, button, title, callbackCancel }) => {
     <>
       {button && (
         <button className={styles.customButton} onClick={onOpen}>
-          {button}
+          {t(button)}
         </button>
       )}
       <AlertDialog
@@ -38,7 +40,7 @@ const Confirm = ({ children, button, title, callbackCancel }) => {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              {title}
+              {t(title)}
             </AlertDialogHeader>
             <AlertDialogBody>
               {React.Children.map(children, (item) => {

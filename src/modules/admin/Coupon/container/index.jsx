@@ -20,8 +20,11 @@ import CouponEndDate from "../components/CouponEndDate";
 import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 import { useDispatch } from "react-redux";
 import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
+import { useTranslation } from "react-i18next";
+import langs from "../langs";
 const Coupon = () => {
   const [selectElement, setSelectElement] = useState(null);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
@@ -44,12 +47,12 @@ const Coupon = () => {
     schema: [
       {
         name: "id",
-        label: "id",
+        label: t(langs.id),
         default: "N/A",
       },
       {
         name: "coupon_code",
-        label: "coupon_code",
+        label: t(langs.code),
         default: "N/A",
         component: CouponCode,
         dropdownActions: {
@@ -106,43 +109,43 @@ const Coupon = () => {
       },
       {
         name: "discount_value",
-        label: "discount_value",
+        label: t(langs.discountValue),
         default: "N/A",
         component: CouponDiscount,
       },
       {
         name: "coupon_start_date",
-        label: "coupon_start_date",
+        label: t(langs.startDate),
         default: "  N/A",
         component: CouponEndDate,
       },
       {
         name: "coupon_end_date",
-        label: "coupon_end_date ",
+        label: t(langs.endDate),
         default: "N/A",
         component: CouponStartDate,
       },
       {
         name: "coupon_quantity",
-        label: "coupon_quantity ",
+        label: t(langs.quantity),
         default: "N/A",
       },
       {
         name: "status",
-        label: "status",
+        label: t(langs.status),
         component: Status,
         default: "N/A",
       },
       {
         name: "created_at",
-        label: "created_at",
+        label: t(langs.createdAt),
         default: "N/A",
         component: CreatedAtComponent,
       },
 
       {
         name: "updated_at",
-        label: "Updated at",
+        label: t(langs.updatedAt),
         default: "N/A",
         component: UpdatedAtComponent,
       },

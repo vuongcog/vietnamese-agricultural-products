@@ -15,8 +15,11 @@ import BannerTitle from "../components/BannerTitle";
 import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
 import { useDispatch } from "react-redux";
 import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
+import { useTranslation } from "react-i18next";
+import langs from "../langs";
 const Category = () => {
   const [selectElement, setSelectElement] = useState(null);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
@@ -39,17 +42,17 @@ const Category = () => {
     schema: [
       {
         name: "id",
-        label: "id",
+        label: t(langs.id),
         default: "N/A",
       },
       {
         name: "id_user",
-        label: "id_user",
+        label: t(langs.idUser),
         default: "N/A",
       },
       {
         name: "banner_title",
-        label: "banner_title",
+        label: t(langs.title),
         default: "N/A",
         component: BannerTitle,
         dropdownActions: {
@@ -107,7 +110,7 @@ const Category = () => {
       },
       {
         name: "banner_image",
-        label: "banner_image",
+        label: t(langs.image),
         default: "N/A",
         component: ({ banner_image }) => {
           return (
@@ -122,29 +125,24 @@ const Category = () => {
       },
       {
         name: "banner_des",
-        label: "banner_des",
+        label: t(langs.des),
         default: "N/A",
       },
       {
         name: "status",
-        label: "status ",
+        label: t(langs.status),
         default: "N/A",
         component: Status,
       },
       {
-        name: "sort",
-        label: "sort ",
-        default: "N/A",
-      },
-      {
         name: "created_at",
-        label: "created_at",
+        label: t(langs.createdAt),
         default: "N/A",
         component: CreatedAtComponent,
       },
       {
         name: "updated_at",
-        label: "Updated at",
+        label: t(langs.updatedAt),
         default: "N/A",
         component: UpdatedAtComponent,
       },

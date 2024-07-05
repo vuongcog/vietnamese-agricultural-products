@@ -1,4 +1,5 @@
 import { UPDATE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
+import langs from "../langs";
 
 export const schemaFormEdit = {
   title: "Edit User",
@@ -7,14 +8,14 @@ export const schemaFormEdit = {
   schemaForm: [
     {
       name: "name",
-      label: "Name",
+      label: langs.name,
       placeholder: "Name",
       isRequire: true,
       type: "text",
     },
     {
       name: "email",
-      label: "Email",
+      label: langs.email,
       type: "email",
       placeholder: "Email",
       isRequire: true,
@@ -28,7 +29,7 @@ export const schemaFormEdit = {
     // },
     {
       name: "role",
-      label: "Role",
+      label: langs.role,
       type: "select",
       items: [
         { value: "admin", name: "admin" },
@@ -41,28 +42,28 @@ export const schemaFormEdit = {
     },
     {
       name: "address",
-      label: "Address",
+      label: langs.address,
       type: "text",
       placeholder: "Address",
       isRequire: true,
     },
     {
       name: "phone_num",
-      label: "Phone Number",
+      label: langs.phoneNum,
       type: "number",
       placeholder: "Phone Number",
       isRequire: true,
     },
     {
       name: "avatar",
-      label: "Avatar",
+      label: langs.avatar,
       type: "file",
       placeholder: "Avatar",
       isRequire: true,
     },
     {
       name: "status",
-      label: "Status",
+      label: langs.status,
       type: "text",
       placeholder: "Status",
       isRequire: true,
