@@ -1,15 +1,16 @@
 import { ADD_DATA } from "../../../../components/core/AdminCrud/Store/constants";
+import langs from "../langs";
 
 export const schemaFormCreate = {
-  title: "CREATE BLOG",
+  title: langs.CREATE_BLOG,
   doneText: ["Cancel", "Create"],
-  button: "Create Blog",
+  button: langs.createBlog,
   type: ADD_DATA,
   schemaForm: [
     {
       name: "id_cat",
-      label: "id_cat",
-      placeholder: "id_cat",
+      label: langs.idCategory,
+      placeholder: langs.idCategory,
       endpoint: "http://127.0.0.1:8000/api/category",
       isRequire: true,
       labelField: "category_name",
@@ -18,28 +19,28 @@ export const schemaFormCreate = {
     },
     {
       name: "blog_title",
-      label: "blog_title",
-      placeholder: "blog_title",
+      label: langs.title,
+      placeholder: langs.title,
       isRequire: true,
       type: "text",
     },
     {
       name: "content",
-      label: "content",
-      placeholder: "content",
+      label: langs.content,
+      placeholder: langs.content,
       isRequire: true,
       type: "text",
     },
     {
       name: "blog_image",
-      label: "blog_image",
-      placeholder: "blog_image",
+      label: langs.image,
+      placeholder: langs.image,
       isRequire: true,
       type: "file",
     },
     {
       name: "status",
-      label: "status",
+      label: langs.status,
       type: "select",
       items: [
         {
@@ -51,7 +52,6 @@ export const schemaFormCreate = {
           value: "active",
         },
       ],
-      placeholder: "status",
       isRequire: true,
     },
   ],

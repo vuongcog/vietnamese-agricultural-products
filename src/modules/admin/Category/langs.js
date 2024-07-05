@@ -8,5 +8,7 @@ const langs = {
   createdAt: ADMIN_CATEGORY + ".createdAt",
   updatedAt: ADMIN_CATEGORY + ".updatedAt",
   createCategory: ADMIN_CATEGORY + ".createCategory",
+  CREATE_CATEGORY: ADMIN_CATEGORY + ".CREATE_CATEGORY",
+  EDIT_CATEGORY: ADMIN_CATEGORY + ".EDIT_CATEGORY",
 };
 export default langs;

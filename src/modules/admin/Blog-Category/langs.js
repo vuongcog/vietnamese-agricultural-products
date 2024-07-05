@@ -8,5 +8,7 @@ const langs = {
   createdAd: ADMIN_BLOG_CATEGORY + ".createdAd",
   updatedAt: ADMIN_BLOG_CATEGORY + ".updatedAt",
   createBlogCategory: ADMIN_BLOG_CATEGORY + ".createBlogCategory",
+  CREATE_BLOG_CATEGORY: ADMIN_BLOG_CATEGORY + ".CREATE_BLOG_CATEGORY",
+  EDIT_BLOG_CATEGORY: ADMIN_BLOG_CATEGORY + ".EDIT_BLOG_CATEGORY",
 };
 export default langs;

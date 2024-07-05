@@ -12,5 +12,6 @@ const langs = {
   updatedAt: ADMIN_BANNER + ".updatedAt",
   createBanner: ADMIN_BANNER + ".createBanner",
   CREATE_BANNER: ADMIN_BANNER + ".CREATE_BANNER",
+  EDIT_BANNER: ADMIN_BANNER + ".EDIT_BANNER",
 };
 export default langs;

@@ -13,5 +13,7 @@ const langs = {
   createdAt: ADMIN_BLOG + ".createdAt",
   updatedAt: ADMIN_BLOG + ".updatedAt",
   createBlog: ADMIN_BLOG + ".createBlog",
+  CREATE_BLOG: ADMIN_BLOG + ".CREATE_BLOG",
+  EDIT_BLOG: ADMIN_BLOG + ".EDIT_BLOG",
 };
 export default langs;

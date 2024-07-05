@@ -1,5 +1,6 @@
 {
-  "src/main.status": "Trạng thái",
+  "src/main.sendmail": "Gửi Gmail",
+  "src/main.logout": "Đăng xuất",
 
   "src/components/user/Header.home": "Trang chủ",
   "src/components/user/Header.login": "Đăng nhập",
@@ -28,7 +29,9 @@
   "src/modules/admin/User.role": "Vai trò",
   "src/modules/admin/User.status": "Trạng thái",
   "src/modules/admin/User.updatedAt": "Ngày cập nhập",
-  "src/modules/admin/User.createBanner": "Thêm Banner",
+  "src/modules/admin/User.createUser": "Thêm người dùng",
+  "src/modules/admin/User.CREATE_USER": "THÊM NGƯỜI DÙNG",
+  "src/modules/admin/User.EDIT_USER": "SỬA NGƯỜI DÙNG",
 
   "src/modules/admin/Category.idCategory": "ID",
   "src/modules/admin/Category.name": "Tên Danh Mục",
@@ -38,6 +41,8 @@
   "src/modules/admin/Category.createdAt": "Ngày tạo",
   "src/modules/admin/Category.updatedAt": "Ngày cập nhập",
   "src/modules/admin/Category.createCategory": "Thêm danh mục",
+  "src/modules/admin/Category.CREATE_CATEGORY": "THÊM DANH MỤC",
+  "src/modules/admin/Category.EDIT_CATEGORY": "SỬA DANH MỤC",
 
   "src/modules/admin/Blog.idBlog": "ID",
   "src/modules/admin/Blog.idUser": "Người đăng",
@@ -51,6 +56,8 @@
   "src/modules/admin/Blog.createdAt": "Thời điểm đăng",
   "src/modules/admin/Blog.updatedAt": "Thời điểm cập nhập",
   "src/modules/admin/Blog.createBlog": "Thêm Blog",
+  "src/modules/admin/Blog.CREATE_BLOG": "THÊM BÀI VIẾT",
+  "src/modules/admin/Blog.EDIT_BLOG": "SỬA BÀI VIẾT",
 
   "src/modules/admin/Product.id": "Id",
   "src/modules/admin/Product.name": "Tên sản phẩm",
@@ -64,6 +71,8 @@
   "src/modules/admin/Product.createdAt": "Ngày tạo",
   "src/modules/admin/Product.updatedAt": "Ngày cập nhập",
   "src/modules/admin/Product.createProduct": "Thêm Sản phẩm",
+  "src/modules/admin/Product.CREATE_PRODUCT": "THÊM SẢN PHẨM",
+  "src/modules/admin/Product.EDIT_PRODUCT": "SỬA SẢN PHẨM",
 
   "src/modules/admin/Blog-Category.id": "Id",
   "src/modules/admin/Blog-Category.name": "Danh mục",
@@ -72,6 +81,8 @@
   "src/modules/admin/Blog-Category.createdAd": "Ngày tạo",
   "src/modules/admin/Blog-Category.updatedAt": "Ngày cập nhập",
   "src/modules/admin/Blog-Category.createBlogCategory": "Thêm",
+  "src/modules/admin/Blog-Category.CREATE_BLOG_CATEGORY": "THÊM",
+  "src/modules/admin/Blog-Category.EDIT_BLOG_CATEGORY": "SỬA",
 
   "src/modules/admin/Coupon.id": "Id",
   "src/modules/admin/Coupon.code": "Mã Coupon",
@@ -83,6 +94,8 @@
   "src/modules/admin/Coupon.createdAt": "Ngày tạo",
   "src/modules/admin/Coupon.updatedAt": "Ngày cập nhập",
   "src/modules/admin/Coupon.createCoupon": "Thêm Khuyến mãi",
+  "src/modules/admin/Coupon.CREATE_COUPON": "THÊM KHUYẾN MÃI",
+  "src/modules/admin/Coupon.EDIT_COUPON": "SỬA KHUYẾN MÃI",
 
   "src/modules/admin/Banner.id": "Id",
   "src/modules/admin/Banner.idUser": "Chủ sở hữu",
@@ -95,6 +108,7 @@
   "src/modules/admin/Banner.updatedAt": "Ngày cập nhập",
   "src/modules/admin/Banner.createBanner": "Thêm Quảng cáo",
   "src/modules/admin/Banner.CREATE_BANNER": "THÊM QUẢNG CÁO",
+  "src/modules/admin/Banner.EDIT_BANNER": "SỬA QUẢNG CÁO",
 
   "src/layouts/LayoutAdmin.user": "Người dùng",
   "src/layouts/LayoutAdmin.category": "Danh mục",

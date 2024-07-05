@@ -4,16 +4,16 @@ import styles from "./styles.module.scss";
 import { useDisclosure } from "@chakra-ui/react";
 import DialogMessage from "../../../../../components/core/DialogMessage";
 
-const ProductImage = ({ product_image }) => {
+const BannerImage = ({ banner_image }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  if (!product_image) {
+  if (!banner_image) {
     return <div className={styles.avatarCell}>N/A</div>;
   }
   return (
     <div className={styles.avatarCell}>
       <img
-        src={product_image}
+        src={banner_image}
         onClick={onOpen}
         alt="Avatar"
         className={styles.avatar}
@@ -22,7 +22,7 @@ const ProductImage = ({ product_image }) => {
         <img
           className="w-full h-full object-cover"
           onClick={onOpen}
-          src={product_image}
+          src={banner_image}
           alt="Avatar"
         />
       </DialogMessage>
@@ -30,8 +30,8 @@ const ProductImage = ({ product_image }) => {
   );
 };
 
-ProductImage.propTypes = {
-  product_image: PropTypes.string,
+BannerImage.propTypes = {
+  banner_image: PropTypes.string,
 };
 
-export default ProductImage;
+export default BannerImage;

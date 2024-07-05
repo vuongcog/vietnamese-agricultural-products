@@ -1,14 +1,15 @@
 import { UPDATE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
+import langs from "../langs";
 
 export const schemaFormEdit = {
-  title: "EDIT BANNER",
+  title: langs.EDIT_BANNER,
   doneText: ["Cancel", "Save"],
   type: UPDATE_DATA,
   schemaForm: [
     {
       name: "id_user",
-      label: "id_user",
-      placeholder: "id_user",
+      label: langs.idUser,
+      placeholder: langs.idUser,
       endpoint: "http://127.0.0.1:8000/api/user",
       isRequire: true,
       labelField: "name",
@@ -17,27 +18,26 @@ export const schemaFormEdit = {
     },
     {
       name: "banner_title",
-      label: "banner_title",
-      placeholder: "banner_title",
+      label: langs.title,
+      placeholder: langs.title,
       isRequire: true,
       type: "text",
     },
     {
       name: "banner_image",
-      label: "banner_image",
-      placeholder: "banner_image",
+      label: langs.image,
       type: "file",
     },
     {
       name: "banner_des",
-      label: "banner_des",
-      placeholder: "banner_des",
+      label: langs.des,
+      placeholder: langs.des,
       isRequire: true,
       type: "text",
     },
     {
       name: "sort",
-      label: "sort",
+      label: langs.sort,
       type: "select",
       items: [
         {
@@ -49,12 +49,11 @@ export const schemaFormEdit = {
           value: "-1",
         },
       ],
-      placeholder: "status",
       isRequire: true,
     },
     {
       name: "status",
-      label: "status",
+      label: langs.status,
       type: "select",
       items: [
         {
@@ -66,7 +65,6 @@ export const schemaFormEdit = {
           value: "active",
         },
       ],
-      placeholder: "status",
       isRequire: true,
     },
   ],

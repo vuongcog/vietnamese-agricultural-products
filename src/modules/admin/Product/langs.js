@@ -13,5 +13,7 @@ const langs = {
   createdAt: ADMIN_PRODUCT + ".createdAt",
   updatedAt: ADMIN_PRODUCT + ".updatedAt",
   createProduct: ADMIN_PRODUCT + ".createProduct",
+  CREATE_PRODUCT: ADMIN_PRODUCT + ".CREATE_PRODUCT",
+  EDIT_PRODUCT: ADMIN_PRODUCT + ".EDIT_PRODUCT",
 };
 export default langs;

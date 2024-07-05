@@ -2,7 +2,7 @@ import { UPDATE_DATA } from "../../../../components/core/AdminCrud/Store/constan
 import langs from "../langs";
 
 export const schemaFormEdit = {
-  title: "Edit User",
+  title: langs.EDIT_USER,
   doneText: ["Cancel", "Save"],
   type: UPDATE_DATA,
   schemaForm: [
@@ -59,7 +59,6 @@ export const schemaFormEdit = {
       label: langs.avatar,
       type: "file",
       placeholder: "Avatar",
-      isRequire: true,
     },
     {
       name: "status",

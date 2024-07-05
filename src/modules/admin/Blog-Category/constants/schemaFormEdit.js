@@ -1,20 +1,21 @@
 import { UPDATE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
+import langs from "../langs";
 
 export const schemaFormEdit = {
-  title: "EDIT BLOG CATEGORY",
+  title: langs.EDIT_BLOG_CATEGORY,
   doneText: ["Cancel", "Save"],
   type: UPDATE_DATA,
   schemaForm: [
     {
       name: "name",
-      label: "name",
-      placeholder: "name",
+      label: langs.name,
+      placeholder: langs.name,
       isRequire: true,
       type: "text",
     },
     {
       name: "status",
-      label: "status",
+      label: langs.status,
       type: "select",
       items: [
         {

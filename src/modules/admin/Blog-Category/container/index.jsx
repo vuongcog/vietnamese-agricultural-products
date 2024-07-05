@@ -16,7 +16,7 @@ import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constan
 import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
 import { useTranslation } from "react-i18next";
 import langs from "../langs";
-const Product = () => {
+const BlogCategory = () => {
   const [selectElement, setSelectElement] = useState(null);
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -149,4 +149,4 @@ const Product = () => {
     </div>
   );
 };
-export default Product;
+export default BlogCategory;

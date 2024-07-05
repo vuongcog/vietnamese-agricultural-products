@@ -1,4 +1,7 @@
 {
+  "src/main.sendmail": "Send Mail",
+  "src/main.logout": "Logout",
+
   "src/components/user/Header.home": "Home",
   "src/components/user/Header.login": "Login",
   "src/components/user/Header.vegetables": "Vegetables",
@@ -28,15 +31,18 @@
   "src/modules/admin/User.updatedAt": "Updated At",
   "src/modules/admin/User.createUser": "Create User",
   "src/modules/admin/User.CREATE_USER": "CREATE USER",
+  "src/modules/admin/User.EDIT_USER": "EDIT USER",
 
   "src/modules/admin/Category.idCategory": "ID",
   "src/modules/admin/Category.name": "Category Name",
   "src/modules/admin/Category.slug": "Category Slug",
-  "src/modules/admin/Category.des": "Category Description",
+  "src/modules/admin/Category.des": "Description",
   "src/modules/admin/Category.status": "Status",
   "src/modules/admin/Category.createdAt": "Created At",
   "src/modules/admin/Category.updatedAt": "Updated At",
   "src/modules/admin/Category.createCategory": "Create Category",
+  "src/modules/admin/Category.CREATE_CATEGORY": "CREATE CATEGORY",
+  "src/modules/admin/Category.EDIT_CATEGORY": "EDIT CATEGORY",
 
   "src/modules/admin/Blog.idBlog": "ID",
   "src/modules/admin/Blog.idUser": "User",
@@ -50,6 +56,8 @@
   "src/modules/admin/Blog.createdAt": "Created At",
   "src/modules/admin/Blog.updatedAt": "Updated At",
   "src/modules/admin/Blog.createBlog": "Create Blog",
+  "src/modules/admin/Blog.CREATE_BLOG": "CREATE BLOG",
+  "src/modules/admin/Blog.EDIT_BLOG": "EDIT BLOG",
 
   "src/modules/admin/Product.id": "Id",
   "src/modules/admin/Product.name": "Product Name",
@@ -63,6 +71,8 @@
   "src/modules/admin/Product.createdAt": "Created At",
   "src/modules/admin/Product.updatedAt": "Updated At",
   "src/modules/admin/Product.createProduct": "Create Product",
+  "src/modules/admin/Product.CREATE_PRODUCT": "CREATE PRODUCT",
+  "src/modules/admin/Product.EDIT_PRODUCT": "EDIT PRODUCT",
 
   "src/modules/admin/Blog-Category.id": "Id",
   "src/modules/admin/Blog-Category.name": "Category Name",
@@ -71,6 +81,8 @@
   "src/modules/admin/Blog-Category.createdAd": "Created At",
   "src/modules/admin/Blog-Category.updatedAt": "Updated At",
   "src/modules/admin/Blog-Category.createBlogCategory": "Create Blog Category",
+  "src/modules/admin/Blog-Category.CREATE_BLOG_CATEGORY": "CREATE BLOG CATEGORY",
+  "src/modules/admin/Blog-Category.EDIT_BLOG_CATEGORY": "EDIT BLOG CATEGORY",
 
   "src/modules/admin/Coupon.id": "Id",
   "src/modules/admin/Coupon.code": "Coupon Code",
@@ -82,6 +94,8 @@
   "src/modules/admin/Coupon.createdAt": "Created At",
   "src/modules/admin/Coupon.updatedAt": "Updated At",
   "src/modules/admin/Coupon.createCoupon": "Create Coupon",
+  "src/modules/admin/Coupon.CREATE_COUPON": "CREATE COUPON",
+  "src/modules/admin/Coupon.EDIT_COUPON": "EDIT COUPON",
 
   "src/modules/admin/Banner.id": "Id",
   "src/modules/admin/Banner.idUser": "Owner",
@@ -94,6 +108,7 @@
   "src/modules/admin/Banner.updatedAt": "Updated At",
   "src/modules/admin/Banner.createBanner": "Create Banner",
   "src/modules/admin/Banner.CREATE_BANNER": "CREATE BANNER",
+  "src/modules/admin/Banner.EDIT_BANNER": "EDIT BANNER",
 
   "src/layouts/LayoutAdmin.user": "User",
   "src/layouts/LayoutAdmin.category": "Category",

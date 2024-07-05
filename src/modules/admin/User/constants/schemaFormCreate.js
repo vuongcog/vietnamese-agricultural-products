@@ -2,9 +2,9 @@ import { ADD_DATA } from "../../../../components/core/AdminCrud/Store/constants"
 import langs from "../langs";
 
 export const schemaFormCreate = {
-  title: "Create User",
+  title: langs.CREATE_USER,
   doneText: ["Cancel", "Save"],
-  button: "Create User",
+  button: langs.createUser,
   type: ADD_DATA,
   schemaForm: [
     {
@@ -65,8 +65,17 @@ export const schemaFormCreate = {
     {
       name: "status",
       label: langs.status,
-      type: "text",
-      placeholder: "Status",
+      type: "select",
+      items: [
+        {
+          name: "inactive",
+          value: "inactive",
+        },
+        {
+          name: "active",
+          value: "active",
+        },
+      ],
       isRequire: true,
     },
   ],

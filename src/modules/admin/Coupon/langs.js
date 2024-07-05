@@ -11,5 +11,7 @@ const langs = {
   createdAt: ADMIN_COUPON + ".createdAt",
   updatedAt: ADMIN_COUPON + ".updatedAt",
   createCoupon: ADMIN_COUPON + ".createCoupon",
+  CREATE_COUPON: ADMIN_COUPON + ".CREATE_COUPON",
+  EDIT_COUPON: ADMIN_COUPON + ".EDIT_COUPON",
 };
 export default langs;

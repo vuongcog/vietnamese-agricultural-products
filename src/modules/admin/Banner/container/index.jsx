@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
 import { useTranslation } from "react-i18next";
 import langs from "../langs";
+import BannerImage from "../components/BannerImage";
 const Category = () => {
   const [selectElement, setSelectElement] = useState(null);
   const { t } = useTranslation();
@@ -112,16 +113,7 @@ const Category = () => {
         name: "banner_image",
         label: t(langs.image),
         default: "N/A",
-        component: ({ banner_image }) => {
-          return (
-            <div className="flex justify-center">
-              <img
-                className="rounded-full object-cover w-[50px] h-[50px]"
-                src={banner_image}
-              ></img>
-            </div>
-          );
-        },
+        component: BannerImage,
       },
       {
         name: "banner_des",

@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Select } from "antd";
-
+import styles from "./styles.module.scss";
 const { Option } = Select;
 
 const languageOptions = [
@@ -14,19 +14,23 @@ const SelectLanguage = (props) => {
     i18n.changeLanguage(value);
   };
   return (
-    <Select
-      defaultValue={i18n.language}
-      style={{ width: 120 }}
-      onChange={handleChangeLanguage}
-      bordered={false}
-      {...props}
-    >
-      {languageOptions.map((option) => (
-        <Option key={option.value} value={option.value}>
-          {option.label}
-        </Option>
-      ))}
-    </Select>
+    <div className={styles.customOption}>
+      <Select
+        defaultValue={i18n.language}
+        style={{
+          width: 120,
+        }}
+        onChange={handleChangeLanguage}
+        bordered={false}
+        {...props}
+      >
+        {languageOptions.map((option) => (
+          <Option key={option.value} value={option.value}>
+            {option.label}
+          </Option>
+        ))}
+      </Select>
+    </div>
   );
 };
 

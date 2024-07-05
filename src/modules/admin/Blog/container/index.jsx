@@ -19,6 +19,7 @@ import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constan
 import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
 import { useTranslation } from "react-i18next";
 import langs from "../langs";
+import BlogImage from "../components/BlogImage";
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
   const { t } = useTranslation();
@@ -118,16 +119,7 @@ const Product = () => {
         name: "blog_image",
         label: t(langs.image),
         default: "  N/A",
-        component: ({ blog_image }) => {
-          return (
-            <div className={"flex justify-center w-14"}>
-              <img
-                className="rounded-full w-[50px] h-[50px] object-cover"
-                src={blog_image}
-              ></img>
-            </div>
-          );
-        },
+        component: BlogImage,
       },
       {
         name: "blog_slug",

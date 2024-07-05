@@ -1,21 +1,22 @@
 import { ADD_DATA } from "../../../../components/core/AdminCrud/Store/constants";
+import langs from "../langs";
 
 export const schemaFormCreate = {
-  title: "CREATE BLOG CATEGORY",
+  title: langs.CREATE_BLOG_CATEGORY,
   doneText: ["Cancel", "Create"],
-  button: "Create Blog Category",
+  button: langs.createBlogCategory,
   type: ADD_DATA,
   schemaForm: [
     {
       name: "name",
-      label: "name",
-      placeholder: "name",
+      label: langs.name,
+      placeholder: langs.name,
       isRequire: true,
       type: "text",
     },
     {
       name: "status",
-      label: "status",
+      label: langs.status,
       type: "select",
       items: [
         {

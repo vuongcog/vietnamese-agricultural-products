@@ -1,14 +1,15 @@
 import { UPDATE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
+import langs from "../langs";
 
 export const schemaFormEdit = {
-  title: "EDIT PRODUCT",
+  title: langs.EDIT_PRODUCT,
   doneText: ["Cancel", "Save"],
   type: UPDATE_DATA,
   schemaForm: [
     {
       name: "id_category",
-      label: "id_category",
-      placeholder: "id_category",
+      label: langs.id,
+      placeholder: langs.id,
       endpoint: "http://127.0.0.1:8000/api/category",
       isRequire: true,
       labelField: "category_name",
@@ -17,48 +18,48 @@ export const schemaFormEdit = {
     },
     {
       name: "product_name",
-      label: "product_name",
-      placeholder: "product_name",
+      label: langs.name,
+      placeholder: langs.name,
       isRequire: true,
       type: "text",
     },
     {
       name: "product_des",
-      label: "product_des",
-      placeholder: "product_des",
+      label: langs.des,
+      placeholder: langs.des,
       isRequire: true,
       type: "text",
     },
     {
       name: "product_image",
-      label: "product_image",
-      placeholder: "product_image",
+      label: langs.image,
+      placeholder: langs.image,
       type: "file",
     },
     {
       name: "product_info",
-      label: "product_info",
-      placeholder: "product_info",
+      label: langs.info,
+      placeholder: langs.info,
       isRequire: true,
       type: "text",
     },
     {
       name: "quantity",
-      label: "quantity",
-      placeholder: "quantity",
+      label: langs.quantity,
+      placeholder: langs.quantity,
       isRequire: true,
       type: "number",
     },
     {
       name: "unit_prices",
-      label: "unit_prices",
-      placeholder: "unit_prices",
+      label: langs.unitPrices,
+      placeholder: langs.unitPrices,
       isRequire: true,
       type: "number",
     },
     {
       name: "status",
-      label: "status",
+      label: langs.status,
       type: "select",
       items: [
         {
@@ -70,7 +71,6 @@ export const schemaFormEdit = {
           value: "active",
         },
       ],
-      placeholder: "status",
       isRequire: true,
     },
   ],

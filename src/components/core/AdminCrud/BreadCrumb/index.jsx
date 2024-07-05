@@ -18,7 +18,8 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SelectLanguage from "../../../user/Header/SelectLang";
-
+import langs from "../../../../langs";
+import { useTranslation } from "react-i18next";
 const BreadCrumb = ({
   isSearchInput,
   onChangeSearchText,
@@ -29,6 +30,7 @@ const BreadCrumb = ({
 }) => {
   const { logout } = useContext(AuthContext);
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const { t } = useTranslation();
 
   //  * lấy trạng thái của reducer
   const isSendingMail = useSelector(getIsSendingEmailStatus);
@@ -64,6 +66,7 @@ const BreadCrumb = ({
     <div className={styles.container}>
       <ToastContainer />
       {isSendingMail && <ProgressFullScreen />}
+      <SelectLanguage bordered></SelectLanguage>
       {isSearchInput && (
         <SearchInput
           onChangeSearchText={onChangeSearchText}
@@ -75,16 +78,20 @@ const BreadCrumb = ({
           isOpen={isOpen}
           onClose={onClose}
           onOpen={onOpen}
-          button={"Send Mail"}
+          button={langs.sendmail}
         >
           <FormEmailContainer handlerSubmit={handlerSendmail} />
         </DialogMessage>
       )}
       <DialogCreateForm endpoint={endpoint} schemaForm={schemaForm} />
-      <Button className={styles.logoutButton} onClick={logout}>
-        Logout
+      <Button
+        backgroundColor={"red"}
+        color={"white"}
+        className={styles.logoutButton}
+        onClick={logout}
+      >
+        {t(langs.logout)}
       </Button>
-      <SelectLanguage bordered></SelectLanguage>
     </div>
   );
 };

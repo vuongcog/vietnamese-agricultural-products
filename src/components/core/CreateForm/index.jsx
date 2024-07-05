@@ -176,6 +176,7 @@ const CreateForm = ({
             <Input
               defaultValue={defaultValue}
               {...item}
+              placeholder={t(item.placeholder)}
               value={formState[item.name]}
               onChange={(e) => handleChange(item.name, e.target.value)}
             />

@@ -13,5 +13,7 @@ const langs = {
   status: ADMIN_USER + ".status",
   updatedAt: ADMIN_USER + ".updatedAt",
   createUser: ADMIN_USER + ".createUser",
+  CREATE_USER: ADMIN_USER + ".CREATE_USER",
+  EDIT_USER: ADMIN_USER + ".EDIT_USER",
 };
 export default langs;

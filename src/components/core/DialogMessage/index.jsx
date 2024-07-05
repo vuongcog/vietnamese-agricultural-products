@@ -11,6 +11,7 @@ import {
 import React, { useRef } from "react";
 import PropTypes from "../../../utils/prop-types";
 import styles from "./styles.module.scss";
+import { useTranslation } from "react-i18next";
 const DialogMessage = ({
   button,
   children,
@@ -23,7 +24,8 @@ const DialogMessage = ({
   // * khởi tạo state cho component
   const cancelRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  // 111 tạo các utils
+  const { t } = useTranslation();
   // * hàm xử lý các action liên quan tới api
   const handleConfirm = () => {
     onClose();
@@ -51,9 +53,11 @@ const DialogMessage = ({
 
   return (
     <>
-      <button className={styles.customButton} onClick={finalOnOpen}>
-        {button}
-      </button>
+      {button && (
+        <button className={styles.customButton} onClick={finalOnOpen}>
+          {t(button)}
+        </button>
+      )}
       <AlertDialog
         isOpen={finalIsOpen}
         leastDestructiveRef={cancelRef}
