@@ -42,7 +42,7 @@
       font-weight: 600;
       color: #333;
       text-align: center;
-      @include setLimitLine(2);
+      @include setLimitLine(1);
     }
 
     .price {

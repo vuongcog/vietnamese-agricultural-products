@@ -10,6 +10,8 @@ import SkeletonCart from "../SkeletonCart";
 import { ShoppingContext } from "../../../context";
 import useCustomSelector from "../../../utils/useCustomSelector";
 import { addCart } from "../../../../../../utils/cart/add-cart";
+import { useTranslation } from "react-i18next";
+import langsGlobal from "../../../../../../langs";
 
 const Card = ({ item, ...props }) => {
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ const Card = ({ item, ...props }) => {
   const [element, setElement] = useState(null);
   const { elementRef } = useContext(ShoppingContext);
   const { isFetching } = useCustomSelector();
-
+  const { t } = useTranslation();
   useEffect(() => {
     if (element) {
       const timer = setTimeout(() => {
@@ -55,7 +57,7 @@ const Card = ({ item, ...props }) => {
         </div>
         <p className={styles.title}>{cloneItem.product_name}</p>
         <span className={styles.price}>
-          {cloneItem?.unit_price?.toLocaleString()} đ
+          {cloneItem?.unit_prices?.toLocaleString()}
         </span>
         <div className={styles.sold}>{cloneItem.sold} sold</div>
       </div>
@@ -67,7 +69,7 @@ const Card = ({ item, ...props }) => {
         }}
         className={styles.cart}
       >
-        Thêm giỏ hàng
+        {t(langsGlobal.addCart)}
         <ShoppingCartCheckout className={styles.cartIcon} />
       </button>
     </div>

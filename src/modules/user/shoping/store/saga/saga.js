@@ -22,10 +22,10 @@ function* wokerFetchData(action) {
   try {
     yield put({ type: FETCHING_DATA });
     const { payload } = action;
-    const http = new HttpUserClient("http://localhost:8081/products");
-    const res = yield call(http.getItems, payload, options);
+    const http = new HttpUserClient("http://127.0.0.1:8000/api/product");
+    const res = yield call(http.getItems, payload);
     const parseData = parseObjectJson(res.data);
-    yield put({ type: FETCH_DATA_SUCCESS, payload: parseData });
+    yield put({ type: FETCH_DATA_SUCCESS, payload: parseData.data });
   } catch (err) {
     yield put({ type: FETCH_DATA_FAILED });
   } finally {

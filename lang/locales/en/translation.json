@@ -1,6 +1,7 @@
 {
   "src/main.sendmail": "Send Mail",
   "src/main.logout": "Logout",
+  "src/main.addCart": "Add Cart",
 
   "src/components/user/Header.home": "Home",
   "src/components/user/Header.login": "Login",

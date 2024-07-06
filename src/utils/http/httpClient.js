@@ -46,6 +46,7 @@ const httpClient = (isEndpoint = false) => {
         url = import.meta.env.VITE_API_URL_SERVER + url;
       }
       const cloneParams = { ...params };
+
       _.forEach(cloneParams, (item, key) => {
         if ((!item && item !== 0) || item === "ALL") {
           delete cloneParams[key];
@@ -58,7 +59,6 @@ const httpClient = (isEndpoint = false) => {
       if (options.notAuthor) {
         delete defaultOptions.headers.Authorization;
       }
-
       return axios.get(url, {
         ...defaultOptions,
         ...options,

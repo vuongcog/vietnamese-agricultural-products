@@ -10,6 +10,7 @@ class HttpUserClient {
   getItems = (param = {}, options = {}) => {
     return this.http.get(`${this.url}`, param, options);
   };
+
   getItem = (params = {}) => {
     const option = {
       notAuthor: true,
@@ -17,6 +18,10 @@ class HttpUserClient {
     const id = params.id;
     delete params.id;
     return this.http.get(`https://api.zippopotam.us/us/${id}`, params, option);
+  };
+
+  getProduct = (params = {}, options = {}) => {
+    return this.http.get(this.url, params, options);
   };
 }
 

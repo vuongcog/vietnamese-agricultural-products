@@ -1,6 +1,7 @@
 {
   "src/main.sendmail": "Gửi Gmail",
   "src/main.logout": "Đăng xuất",
+  "src/main.addCart": "Thêm giỏ hàng",
 
   "src/components/user/Header.home": "Trang chủ",
   "src/components/user/Header.login": "Đăng nhập",

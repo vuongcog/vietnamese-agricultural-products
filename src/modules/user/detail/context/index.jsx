@@ -2,34 +2,20 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { createContext } from "react";
 import { useParams } from "react-router-dom";
-import HttpUserClient from "../../../../utils/http/httpUserClient";
 import PropTypes from "../../../../utils/prop-types";
+import { useDispatch } from "react-redux";
+import { DETAIL_FETCH_DATA } from "../constants/action";
 export const ContextDetailProduct = createContext({});
-
 const DetailProvider = ({ children }) => {
   const { id } = useParams();
-  const [item, setItem] = useState(null);
-  const [isFetching, setFetching] = useState(false);
-  const getItem = async () => {
-    setFetching(true);
-    const params = { id };
-    const http = new HttpUserClient();
-    const res = await http.getItem(params);
-    setFetching(false);
-    return JSON.parse(res.data);
-  };
+  const dispatch = useDispatch();
+  const endpoint = `http://127.0.0.1:8000/api/product/${id}`;
+
   useEffect(() => {
-    getItem()
-      .then((res) => {
-        setItem(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch({ type: DETAIL_FETCH_DATA, payload: endpoint });
   }, []);
   return (
-    <ContextDetailProduct.Provider value={{ item }}>
-      {isFetching && "...loading"}
+    <ContextDetailProduct.Provider value={{}}>
       {children}
     </ContextDetailProduct.Provider>
   );
