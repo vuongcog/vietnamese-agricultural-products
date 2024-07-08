@@ -38,7 +38,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
   // 222 get state of redux
   const { items, isFetching, refresh } = useProducerStateCrud();
   const { search, pagination, perpage } = useProducerStateCrudFilter();
-  const debounceSearch = useDebounce(search, 100);
+  const debounceSearch = useDebounce(search, 300);
 
   // 111 define handler set filter
   const handleChangeSearchtext = (value) => {

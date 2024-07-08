@@ -6,6 +6,12 @@ import {
   FETCH_RESET_STATUS_FETCHING,
 } from "./constants";
 import {
+  FETCHED_CART,
+  FETCHING_CART,
+  FETCH_CART_ERROR,
+  FETCH_CART_SUCCESS,
+  SET_CART,
+  FETCH_CART_RESET_STATUS,
   ADDING_CART,
   ADDED_CART,
   ADD_CART_CUCCESS,
@@ -23,6 +29,11 @@ export const initialState = {
   page: 0,
   items: [],
   // 222 state cart
+  carts: [],
+  isFetchingCart: false,
+  isFetchCartSuccess: false,
+  isFetchCartFailed: false,
+
   isAddingCart: false,
   isAddCartSuccess: false,
   isAddCardError: false,
@@ -37,12 +48,27 @@ const handlerAddedCart = (state) => {
 const handlerAddCartSuccess = (state) => {
   return { ...state, isAddCartSuccess: true };
 };
-const handlerAddCartError = () => {
+const handlerAddCartError = (state) => {
   return { ...state, isAddCardError: true };
 };
 const handlerResetStatusAddCart = (state) => {
   return { ...state, isAddCartSuccess: false, isAddCardError: false };
 };
+
+const handlerFetchingCart = (state) => ({ ...state, isFetchingCart: true });
+const handlerFetchedCart = (state) => ({ ...state, isFetchingCart: false });
+const handlerSetCart = (state, action) => ({ ...state, carts: action.payload });
+const handlerFetchCartCuccess = (state) => ({
+  ...state,
+  isAddCartSuccess: true,
+});
+const handlerFetchCartFailed = (state) => ({ ...state, isAddCardError: true });
+const handlerResetStatusFetchCart = (state) => ({
+  ...state,
+  isAddCartSuccess: false,
+  isAddCardError: false,
+});
+
 /// 222 handler for fetch data
 const handlerFetching = (state) => {
   return { ...state, isFetching: true };
@@ -72,6 +98,13 @@ const mapperHandle = {
   [FETCH_RESET_STATUS_FETCHING]: handlerResetStatusFetching,
 
   /// 222 action cart
+  [FETCHING_CART]: handlerFetchingCart,
+  [SET_CART]: handlerSetCart,
+  [FETCHED_CART]: handlerFetchedCart,
+  [FETCH_CART_SUCCESS]: handlerFetchCartCuccess,
+  [FETCH_CART_ERROR]: handlerFetchCartFailed,
+  [FETCH_CART_RESET_STATUS]: handlerResetStatusFetchCart,
+
   [ADDING_CART]: handlerAddingCart,
   [ADDED_CART]: handlerAddedCart,
   [ADD_CART_CUCCESS]: handlerAddCartSuccess,

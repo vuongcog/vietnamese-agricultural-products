@@ -4,7 +4,11 @@ import { getSearchFilter } from "../../../../modules/user/shoping/store/selector
 import { FILTER_SEARCH } from "../../../../modules/user/shoping/store/reducer/filterConstants";
 import { useNavigate, useLocation } from "react-router-dom";
 import { debounce } from "lodash";
+import { AutoComplete, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import styles from "./styles.module.scss";
+import { FETCH_CATEGORY } from "../../../../actions/action-category";
+import useProducerCategory from "../../../../useCustom/user/useProducerCategory";
 
 const SearchHeader = () => {
   const search = useSelector(getSearchFilter);
@@ -12,6 +16,15 @@ const SearchHeader = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchValue, setSearchValue] = useState(search);
+  const [options, setOptions] = useState([]);
+  const { categories } = useProducerCategory();
+  const suggestions = categories?.map((item) => {
+    return item.category_name;
+  });
+  useEffect(() => {
+    dispatch({ type: FETCH_CATEGORY });
+  }, []);
+
   const debouncedSearch = debounce((value) => {
     dispatch({ type: FILTER_SEARCH, payload: value });
     if (location.pathname === "/") {
@@ -20,27 +33,49 @@ const SearchHeader = () => {
       navigate(`?keyword=${encodeURIComponent(value)}`);
     }
   }, 500);
+  const handleSearchChange = (value) => {
+    setSearchValue(value);
+    const filteredSuggestions = suggestions.filter((suggestion) =>
+      suggestion.toLowerCase().includes(value.toLowerCase())
+    );
+    setOptions(
+      filteredSuggestions.map((suggestion) => ({
+        value: suggestion,
+        label: suggestion,
+      }))
+    );
+  };
 
-  useEffect(() => {
+  const handleSelect = (value) => {
+    setSearchValue(value);
+    debouncedSearch(value);
+  };
+
+  const handleSearchClick = () => {
     debouncedSearch(searchValue);
-    return () => {
-      debouncedSearch.cancel();
-    };
-  }, [searchValue]);
-
-  const handleSearchChange = (e) => {
-    setSearchValue(e.target.value);
   };
 
   return (
     <div className={styles.searchContainer}>
-      <input
+      <AutoComplete
         value={searchValue}
-        onChange={handleSearchChange}
-        className={styles.searchInput}
-        type="text"
-        placeholder="Search..."
-      />
+        onSearch={handleSearchChange}
+        onSelect={handleSelect}
+        style={{ width: "50%" }}
+        options={options}
+      >
+        <Input
+          value={searchValue}
+          onChange={(e) => handleSearchChange(e.target.value)}
+          suffix={
+            <SearchOutlined
+              onClick={handleSearchClick}
+              style={{ cursor: "pointer" }}
+            />
+          }
+          placeholder="Search..."
+        />
+      </AutoComplete>
     </div>
   );
 };

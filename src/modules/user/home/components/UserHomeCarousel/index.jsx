@@ -29,7 +29,6 @@ function BannerCarousel() {
             the readable content of a page when looking at its layout. The point
             of using Lorem Ipsum is that it has a more-or-less normal
           </div>
-          {/* <UserHomeSearch /> */}
           <div className={styles.buttonContainer}>
             <button className={styles.button}>Contact Us</button>
             <button className={styles.button}>Vegetable</button>

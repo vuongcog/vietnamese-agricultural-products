@@ -10,6 +10,9 @@ class HttpUserClient {
   getItems = (param = {}, options = {}) => {
     return this.http.get(`${this.url}`, param, options);
   };
+  getCategories = (params = {}, options = {}) => {
+    return this.http.get(this.url, param, options);
+  };
 
   getItem = (params = {}) => {
     const option = {
@@ -18,6 +21,12 @@ class HttpUserClient {
     const id = params.id;
     delete params.id;
     return this.http.get(`https://api.zippopotam.us/us/${id}`, params, option);
+  };
+  addCart = (params = {}, options = {}) => {
+    return this.http.post(this.url, params, options);
+  };
+  getCarts = (option = {}) => {
+    return this.http.get(this.url, {}, option);
   };
 
   getProduct = (params = {}, options = {}) => {

@@ -10,7 +10,6 @@ function fetchUserApi() {
 
 function* fetchUser() {
   try {
-    console.log("hello");
     yield delay(500);
     const user = yield call(fetchUserApi);
     yield put({ type: "FETCH_USER_SUCCESS", payload: user });

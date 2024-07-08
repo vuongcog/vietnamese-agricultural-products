@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   FormControl,
@@ -26,6 +26,7 @@ import {
 import useProducerFilterShopping from "../../../../../useCustom/user/useProducerFilterShopping";
 import { useTranslation } from "react-i18next";
 import langs from "../../langs";
+import useProducerCategory from "../../../../../useCustom/user/useProducerCategory";
 
 const ProductFilter = () => {
   const { t } = useTranslation();
@@ -33,6 +34,10 @@ const ProductFilter = () => {
   const [localPriceRange, setLocalPriceRange] = useState(priceRange);
   const [keyword, setKeyword] = useState("");
   const [selectedCategories, setSelectedCategories] = useState(category);
+  const { categories } = useProducerCategory();
+  const suggestions = categories?.map((item) => {
+    return item.category_name;
+  });
   const dispatch = useDispatch();
 
   const handleKeywordChange = (e) => {
@@ -90,10 +95,9 @@ const ProductFilter = () => {
         <FormLabel>{t(langs.category)}</FormLabel>
         <Select name="category" value="" onChange={handleCategoryChange}>
           <option value="">All</option>
-          <option value="cachua">Cà chua</option>
-          <option value="bapcai">Bắp cải</option>
-          <option value="dau">Dâu</option>
-          <option value="khoaitay">Khoai tây</option>
+          {suggestions.map((item) => {
+            return <option value={item}>{item}</option>;
+          })}
         </Select>
         <Wrap mt={2}>
           {selectedCategories.map((category) => (

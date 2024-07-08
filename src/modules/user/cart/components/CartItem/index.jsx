@@ -7,20 +7,21 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 
 const CartItem = ({
-  price,
-  linkImage,
-  title,
+  quantity,
+  product_image,
+  unit_prices,
+  product_name,
   voucher,
   inventory,
   oldPrice,
   handleDelete,
   ...props
 }) => {
-  const [quantity, setQuantity] = useState(1);
+  const [number, setNumber] = useState(quantity);
   const [checked, setChecked] = useState(false);
   const totalPrice = useMemo(() => {
-    return quantity * price;
-  }, [quantity, price]);
+    return number * unit_prices;
+  }, [number, unit_prices]);
 
   return (
     <div {...props} className={styles.container}>
@@ -31,20 +32,20 @@ const CartItem = ({
         className={styles.checkbox}
       />
       <div className={styles.contentWrapper}>
-        <img src={linkImage} alt={title} className={styles.image} />
+        <img src={product_image} alt={product_name} className={styles.image} />
         <div className={styles.messageWrapper}>
-          <div className={styles.title}>{title}</div>
+          <div className={styles.product_name}>{product_name}</div>
           <div className={styles.voucher}>{voucher}</div>
         </div>
       </div>
       <div className={styles.classify}></div>
       <span className={styles.oldPrice}>{formattedNumber(oldPrice)}</span>
-      <span className={styles.price}>{formattedNumber(price)}</span>
+      <span className={styles.unit_prices}>{formattedNumber(unit_prices)}</span>
       <QuantitySelector
         max={inventory}
-        setValue={setQuantity}
-        value={quantity}
-        className={styles.quantitySelector}
+        setValue={setNumber}
+        value={number}
+        className={styles.numberSelector}
       />
       <span className={classNames(styles.totalPrice, "w-[10%]")}>
         {formattedNumber(totalPrice)}
@@ -59,18 +60,18 @@ const CartItem = ({
 
 CartItem.defaultProps = {
   oldPrice: 89000,
-  price: 50000,
+  unit_prices: 50000,
   inventory: 20,
   voucher: "Giảm giá 50%",
-  title: "Gối cao su non ZARA HOME cao cấp chống ngáy ngủ, đau vai gáy",
+  product_name: "Gối cao su non ZARA HOME cao cấp chống ngáy ngủ, đau vai gáy",
   linkImage:
     "https://down-vn.img.susercontent.com/file/5585030ea3c9904e46281ad031c8ad54",
 };
 
 CartItem.propTypes = {
-  price: PropTypes.number.isRequired,
+  unit_prices: PropTypes.number.isRequired,
   linkImage: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  product_name: PropTypes.string.isRequired,
   voucher: PropTypes.string,
   inventory: PropTypes.number.isRequired,
   total: PropTypes.number,
