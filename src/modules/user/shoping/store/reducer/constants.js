@@ -1,4 +1,5 @@
 // ! action liên quan tới fetch api cho list shopping
+export const CLEAR_PRODUCTS = 'CLEAR_PRODUCTS';
 export const FETCH_DATA = 'FETCH_DATA';
 export const FETCHING_DATA = 'FETCHING_DATA';
 export const FETCHED_DATA = 'FETCHED_DATA';

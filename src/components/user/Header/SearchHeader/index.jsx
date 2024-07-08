@@ -19,9 +19,10 @@ const SearchHeader = () => {
   const [options, setOptions] = useState([]);
   const { categories } = useProducerCategory();
   const suggestions = categories?.map(item => item.category_name);
+
   useEffect(() => {
     dispatch({ type: FETCH_CATEGORY });
-  }, []);
+  }, [dispatch]);
 
   const debouncedSearch = debounce(value => {
     dispatch({ type: FILTER_SEARCH, payload: value });
@@ -30,7 +31,8 @@ const SearchHeader = () => {
     } else {
       navigate(`?keyword=${encodeURIComponent(value)}`);
     }
-  }, 500);
+  }, 1);
+
   const handleSearchChange = value => {
     setSearchValue(value);
     const filteredSuggestions = suggestions.filter(suggestion =>
@@ -53,6 +55,12 @@ const SearchHeader = () => {
     debouncedSearch(searchValue);
   };
 
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      debouncedSearch(searchValue);
+    }
+  };
+
   return (
     <div className={styles.searchContainer}>
       <AutoComplete
@@ -65,6 +73,7 @@ const SearchHeader = () => {
         <Input
           value={searchValue}
           onChange={e => handleSearchChange(e.target.value)}
+          onKeyPress={handleKeyPress}
           suffix={
             <SearchOutlined
               onClick={handleSearchClick}

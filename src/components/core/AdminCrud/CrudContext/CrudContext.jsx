@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { createContext } from "react";
-import Http from "../../../../utils/http/http";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from 'react';
+import { createContext } from 'react';
+import Http from '../../../../utils/http/http';
+import PropTypes from 'prop-types';
 
-import { useDispatch } from "react-redux";
-import { useDebounce } from "../../../../utils/use-debounce";
-import { FETCHED_DATA, FETCH_DATA, SET_ITEMS } from "../Store/constants";
-import { crudOptionsDefault } from "../constants/curd-options-default";
+import { useDispatch } from 'react-redux';
+import { useDebounce } from '../../../../utils/use-debounce';
+import { FETCHED_DATA, FETCH_DATA, SET_ITEMS } from '../Store/constants';
+import { crudOptionsDefault } from '../constants/curd-options-default';
 
-import useProducerStateCrud from "../utils/useProducerState";
-import useProducerStateCrudFilter from "../utils/useProducerStateFilter";
+import useProducerStateCrud from '../utils/useProducerState';
+import useProducerStateCrudFilter from '../utils/useProducerStateFilter';
 import {
   CRUD_SET_PAGANATION,
   CRUD_SET_PER_PAGE,
   CRUD_SET_SEARCH,
   CRUD_SET_TOTAL_PAGE,
-} from "../constants/actionFilter";
-import { toast } from "react-toastify";
+} from '../constants/actionFilter';
+import { toast } from 'react-toastify';
 
 export const CrudContext = createContext({});
 const ContextCrudProvider = ({ children, ...props }) => {
@@ -41,13 +41,13 @@ const ContextCrudProvider = ({ children, ...props }) => {
   const debounceSearch = useDebounce(search, 300);
 
   // 111 define handler set filter
-  const handleChangeSearchtext = (value) => {
+  const handleChangeSearchtext = value => {
     dispatch({ type: CRUD_SET_SEARCH, payload: value.target.value });
   };
-  const selectPerpage = (value) => {
+  const selectPerpage = value => {
     dispatch({ type: CRUD_SET_PER_PAGE, payload: value });
   };
-  const selectPagination = (value) => {
+  const selectPagination = value => {
     dispatch({ type: CRUD_SET_PAGANATION, payload: value });
   };
   const value = {
@@ -66,11 +66,11 @@ const ContextCrudProvider = ({ children, ...props }) => {
     perpage,
     selectPerpage,
   };
-  const getItems = async (debounceSearch) => {
+  const getItems = async debounceSearch => {
     dispatch({ type: FETCH_DATA });
-    crudOptions.endpointParams["search"] = debounceSearch;
-    crudOptions.endpointParams["page"] = pagination;
-    crudOptions.endpointParams["per_page"] = perpage;
+    crudOptions.endpointParams['search'] = debounceSearch;
+    crudOptions.endpointParams['page'] = pagination;
+    crudOptions.endpointParams['per_page'] = perpage;
     const res = await new Http(crudOptions.endpoint).list(
       crudOptions.endpointParams
     );
@@ -78,13 +78,13 @@ const ContextCrudProvider = ({ children, ...props }) => {
   };
   useEffect(() => {
     getItems(debounceSearch)
-      .then((res) => {
+      .then(res => {
         dispatch({ type: SET_ITEMS, payload: res.data });
         dispatch({ type: CRUD_SET_TOTAL_PAGE, payload: res.total_pages });
       })
       .catch(() => {
         toast.error(
-          "Không tồn tại dữ liệu hoặc bạn không có quyền truy cập vào dữ liệu này"
+          'Không tồn tại dữ liệu hoặc bạn không có quyền truy cập vào dữ liệu này'
         );
       })
       .finally(() => {

@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from 'redux-saga/effects';
 import {
   DETAIL_FETCH_DATA,
   DETAIL_FETCH_DATA_FAILED,
@@ -7,15 +7,15 @@ import {
   DETAIL_FETCHING_DATA,
   DETAIL_RESET_STATUS_FETCH_DATA,
   DETAIL_SET_PRODUCT,
-} from "../../constants/action";
-import { parseObjectJson } from "../../../../../utils/parse-json";
-import HttpUserClient from "../../../../../utils/http/httpUserClient";
+} from '../../constants/action';
+import { parseObjectJson } from '../../../../../utils/parse-json';
+import HttpUserClient from '../../../../../utils/http/httpUserClient';
 
 const options = {
   notAuthor: true,
   headers: {
-    "X-API-KEY": "afcc78057c77c51d7baebcadf1d147dc5a38e9c7",
-    "Content-Type": "application/json",
+    'X-API-KEY': 'afcc78057c77c51d7baebcadf1d147dc5a38e9c7',
+    'Content-Type': 'application/json',
   },
 };
 function* wokerFetchDataDetail(action) {

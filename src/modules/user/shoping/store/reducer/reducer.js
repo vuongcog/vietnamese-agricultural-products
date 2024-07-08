@@ -1,4 +1,5 @@
 import {
+  CLEAR_PRODUCTS,
   FETCHED_DATA,
   FETCHING_DATA,
   FETCH_DATA_FAILED,
@@ -17,7 +18,7 @@ export const initialState = {
   page: 0,
   items: [],
 };
-
+const handlerClearProducts = state => ({ ...state, items: [] });
 /// 222 handler for fetch data
 const handlerFetching = state => ({ ...state, isFetching: true });
 const handlerFetched = state => ({ ...state, isFetching: false });
@@ -38,6 +39,7 @@ const mapperHandle = {
   [FETCH_DATA_SUCCESS]: handlerSuccsess,
   [FETCH_DATA_FAILED]: handlerFailed,
   [FETCH_RESET_STATUS_FETCHING]: handlerResetStatusFetching,
+  [CLEAR_PRODUCTS]: handlerClearProducts,
 };
 export const reducerProductList = (state = initialState, action) => {
   const handle = mapperHandle[action.type];
