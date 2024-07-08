@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from "react";
-import styles from "./styles.module.scss";
-import QuantitySelector from "../../../../../components/core/NumberInput";
-import { formattedNumber } from "../../../../../utils/format-number";
-import { Checkbox } from "@chakra-ui/react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
+import React, { useState, useMemo } from 'react';
+import styles from './styles.module.scss';
+import QuantitySelector from '../../../../../components/core/NumberInput';
+import { formattedNumber } from '../../../../../utils/format-number';
+import { Checkbox } from '@chakra-ui/react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 const CartItem = ({
   quantity,
@@ -19,14 +19,12 @@ const CartItem = ({
 }) => {
   const [number, setNumber] = useState(quantity);
   const [checked, setChecked] = useState(false);
-  const totalPrice = useMemo(() => {
-    return number * unit_prices;
-  }, [number, unit_prices]);
+  const totalPrice = useMemo(() => number * unit_prices, [number, unit_prices]);
 
   return (
     <div {...props} className={styles.container}>
       <Checkbox
-        size={"lg"}
+        size={'lg'}
         isChecked={checked}
         onChange={() => setChecked(!checked)}
         className={styles.checkbox}
@@ -47,12 +45,12 @@ const CartItem = ({
         value={number}
         className={styles.numberSelector}
       />
-      <span className={classNames(styles.totalPrice, "w-[10%]")}>
+      <span className={classNames(styles.totalPrice, 'w-[10%]')}>
         {formattedNumber(totalPrice)}
       </span>
       <i
         onClick={handleDelete}
-        className={classNames("fa-solid fa-trash", styles.deleteIcon)}
+        className={classNames('fa-solid fa-trash', styles.deleteIcon)}
       ></i>
     </div>
   );
@@ -62,13 +60,15 @@ CartItem.defaultProps = {
   oldPrice: 89000,
   unit_prices: 50000,
   inventory: 20,
-  voucher: "Giảm giá 50%",
-  product_name: "Gối cao su non ZARA HOME cao cấp chống ngáy ngủ, đau vai gáy",
+  voucher: 'Giảm giá 50%',
+  product_name: 'Gối cao su non ZARA HOME cao cấp chống ngáy ngủ, đau vai gáy',
   linkImage:
-    "https://down-vn.img.susercontent.com/file/5585030ea3c9904e46281ad031c8ad54",
+    'https://down-vn.img.susercontent.com/file/5585030ea3c9904e46281ad031c8ad54',
 };
 
 CartItem.propTypes = {
+  quantity: PropTypes.number,
+  product_image: PropTypes.string,
   unit_prices: PropTypes.number.isRequired,
   linkImage: PropTypes.string.isRequired,
   product_name: PropTypes.string.isRequired,

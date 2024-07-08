@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
-import styles from "./styles.module.scss";
-import PropTypes from "prop-types";
-import { ContextDetailProduct } from "../../context";
-import DetailOrder from "../DetailOrder";
-import useProducerDetail from "../../../../../useCustom/user/useProducerDetail";
+import React from 'react';
+import styles from './styles.module.scss';
+import PropTypes from 'prop-types';
+import DetailOrder from '../DetailOrder';
+import useProducerDetail from '../../../../../useCustom/user/useProducerDetail';
 const DetailInformation = ({ item }) => {
-  const { item: itemTemp } = useContext(ContextDetailProduct);
   const { product } = useProducerDetail();
   return (
     <div>
@@ -20,13 +18,13 @@ const DetailInformation = ({ item }) => {
             <div className="text-[rgba(128, 120, 120, 0.7)]">
               <span className="text-black underline font-semibold">
                 {item.numberOfReviews}
-              </span>{" "}
+              </span>{' '}
               Đánh giá
             </div>
             <div className="text-[rgba(128, 120, 120, 0.7)]">
               <span className="text-black font-semibold">
                 {item.quantitySold}
-              </span>{" "}
+              </span>{' '}
               Đã bán
             </div>
           </div>

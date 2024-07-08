@@ -1,4 +1,4 @@
-import httpClient from "./httpClient";
+import httpClient from './httpClient';
 class Http {
   endpoint = null;
 
@@ -8,25 +8,14 @@ class Http {
     this.endpoint = endpoint;
   }
 
-  list = (params = {}) => {
-    return this.http.get(this.endpoint, params);
-  };
+  list = (params = {}) => this.http.get(this.endpoint, params);
 
-  create = (params = {}) => {
-    return this.http.post(this.endpoint, params);
-  };
-  update = (params = {}) => {
-    return this.http.post(this.endpoint, params);
-  };
-  delete = (options = {}) => {
-    return this.http.delete(this.endpoint, options);
-  };
-  post = (params = {}, options) => {
-    return this.http.post("/search", params, options);
-  };
-  sendMail = (params = {}, options) => {
-    return this.http.post("/sendmail", params, options);
-  };
+  create = (params = {}) => this.http.post(this.endpoint, params);
+  update = (params = {}) => this.http.post(this.endpoint, params);
+  delete = (options = {}) => this.http.delete(this.endpoint, options);
+  post = (params = {}, options) => this.http.post('/search', params, options);
+  sendMail = (params = {}, options) =>
+    this.http.post('/sendmail', params, options);
 }
 
 export default Http;

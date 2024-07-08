@@ -1,4 +1,4 @@
-import httpClient from "./httpClient";
+import httpClient from './httpClient';
 class HttpUserClient {
   url = null;
 
@@ -7,12 +7,11 @@ class HttpUserClient {
   constructor(url) {
     this.url = url;
   }
-  getItems = (param = {}, options = {}) => {
-    return this.http.get(`${this.url}`, param, options);
-  };
-  getCategories = (params = {}, options = {}) => {
-    return this.http.get(this.url, param, options);
-  };
+  getItems = (param = {}, options = {}) =>
+    this.http.get(`${this.url}`, param, options);
+
+  getCategories = (params = {}, options = {}) =>
+    this.http.get(this.url, params, options);
 
   getItem = (params = {}) => {
     const option = {
@@ -22,16 +21,10 @@ class HttpUserClient {
     delete params.id;
     return this.http.get(`https://api.zippopotam.us/us/${id}`, params, option);
   };
-  addCart = (params = {}, options = {}) => {
-    return this.http.post(this.url, params, options);
-  };
-  getCarts = (option = {}) => {
-    return this.http.get(this.url, {}, option);
-  };
+  addCart = (params = {}, options = {}) => this.http.post(this.url, params, options);
+  getCarts = (option = {}) => this.http.get(this.url, {}, option);
 
-  getProduct = (params = {}, options = {}) => {
-    return this.http.get(this.url, params, options);
-  };
+  getProduct = (params = {}, options = {}) => this.http.get(this.url, params, options);
 }
 
 export default HttpUserClient;

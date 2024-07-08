@@ -19,9 +19,7 @@ const makeStore = () => {
   const store = configureStore({
     reducer: createReducer(rootReducer),
 
-    middleware: (getDefaultMiddleware) => {
-      return [sagaMiddleware, ...getDefaultMiddleware()];
-    },
+    middleware: (getDefaultMiddleware) => [sagaMiddleware, ...getDefaultMiddleware()],
   });
   store.injectedReducers = {};
   store.injectedSagas = {};

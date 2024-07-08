@@ -7,11 +7,11 @@ import {
   AlertDialogOverlay,
   Button,
   useDisclosure,
-} from "@chakra-ui/react";
-import React, { useRef } from "react";
-import PropTypes from "../../../utils/prop-types";
-import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
+} from '@chakra-ui/react';
+import React, { useRef } from 'react';
+import PropTypes from '../../../utils/prop-types';
+import styles from './styles.module.scss';
+import { useTranslation } from 'react-i18next';
 const DialogMessage = ({
   button,
   children,
@@ -37,19 +37,17 @@ const DialogMessage = ({
   const finalOnClose = propOnClose ?? onClose;
 
   // * hàm render Footer
-  const __renderFooter = () => {
-    return (
-      <AlertDialogFooter>
-        <Button
-          ref={cancelRef}
-          onClick={() => {
-            finalOnClose();
-          }}
-        ></Button>
-        <Button colorScheme="red" onClick={handleConfirm} ml={3}></Button>
-      </AlertDialogFooter>
-    );
-  };
+  const __renderFooter = () => (
+    <AlertDialogFooter>
+      <Button
+        ref={cancelRef}
+        onClick={() => {
+          finalOnClose();
+        }}
+      ></Button>
+      <Button colorScheme="red" onClick={handleConfirm} ml={3}></Button>
+    </AlertDialogFooter>
+  );
 
   return (
     <>

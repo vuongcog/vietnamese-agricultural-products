@@ -1,5 +1,9 @@
 export const parseStringJson = (data) => {
-  return JSON.stringify(data);
+  try {
+    return JSON.stringify(data);
+  } catch (error) {
+    return data;
+  }
 };
 
 export const parseObjectJson = (data) => {

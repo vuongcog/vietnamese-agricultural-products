@@ -1,19 +1,19 @@
-import React, { useContext, useState, useEffect } from "react";
-import styles from "./styles.module.scss";
-import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
-import { ShoppingCartCheckout } from "@mui/icons-material";
-import _ from "lodash";
-import "react-loading-skeleton/dist/skeleton.css";
-import SkeletonCart from "../SkeletonCart";
-import { ShoppingContext } from "../../../context";
-import useCustomSelector from "../../../utils/useCustomSelector";
-import { useTranslation } from "react-i18next";
-import langsGlobal from "../../../../../../langs";
-import { useDispatch } from "react-redux";
-import { ADD_CART } from "../../../store/constants/actionCart";
-import { formattedNumber } from "../../../../../../utils/format-number";
-import { ToastContainer } from "react-toastify";
+import React, { useContext } from 'react';
+import styles from './styles.module.scss';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { ShoppingCartCheckout } from '@mui/icons-material';
+import _ from 'lodash';
+import 'react-loading-skeleton/dist/skeleton.css';
+import SkeletonCart from '../SkeletonCart';
+import { ShoppingContext } from '../../../context';
+import useCustomSelector from '../../../utils/useCustomSelector';
+import { useTranslation } from 'react-i18next';
+import langsGlobal from '../../../../../../langs';
+import { useDispatch } from 'react-redux';
+import { formattedNumber } from '../../../../../../utils/format-number';
+import { ToastContainer } from 'react-toastify';
+import { ADD_CART } from '../../../../../../actions/action-cart';
 
 const Card = ({ item, ...props }) => {
   const navigate = useNavigate();

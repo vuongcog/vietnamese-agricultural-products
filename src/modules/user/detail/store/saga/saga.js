@@ -18,7 +18,6 @@ const options = {
     "Content-Type": "application/json",
   },
 };
-
 function* wokerFetchDataDetail(action) {
   try {
     yield put({ type: DETAIL_FETCHING_DATA });

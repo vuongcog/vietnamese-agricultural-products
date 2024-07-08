@@ -1,7 +1,5 @@
-import React from "react";
+import React from 'react';
 
-const AddminFooter = () => {
-  return <div>Footer</div>;
-};
+const AddminFooter = () => <div>Footer</div>;
 
 export default AddminFooter;

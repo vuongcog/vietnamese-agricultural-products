@@ -14,24 +14,12 @@ import {
   CRUD_SET_CURRENT_PAGE,
   CRUD_SET_INIT_REDUCER_FILTER,
 } from "../constants/actionFilter.js";
-const handlerSetInitReducerFilter = (state, action) => {
-  return { ...state, ...action.payload };
-};
-const handlerSetSearch = (state, action) => {
-  return { ...state, search: action.payload };
-};
-const handlerSetPerPage = (state, action) => {
-  return { ...state, perpage: action.payload };
-};
-const handlerSetPagination = (state, action) => {
-  return { ...state, pagination: action.payload };
-};
-const handlerSetTotalPage = (state, action) => {
-  return { ...state, totalPage: action.payload };
-};
-const handlerSetCurrentPage = (state, action) => {
-  return { ...state, currentPage: action.payload };
-};
+const handlerSetInitReducerFilter = (state, action) => ({ ...state, ...action.payload });
+const handlerSetSearch = (state, action) => ({ ...state, search: action.payload });
+const handlerSetPerPage = (state, action) => ({ ...state, perpage: action.payload });
+const handlerSetPagination = (state, action) => ({ ...state, pagination: action.payload });
+const handlerSetTotalPage = (state, action) => ({ ...state, totalPage: action.payload });
+const handlerSetCurrentPage = (state, action) => ({ ...state, currentPage: action.payload });
 const mapperHandle = {
   [CRUD_SET_INIT_REDUCER_FILTER]: handlerSetInitReducerFilter,
   [CRUD_SET_SEARCH]: handlerSetSearch,

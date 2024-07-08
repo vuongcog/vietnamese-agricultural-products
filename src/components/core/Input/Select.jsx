@@ -1,7 +1,5 @@
-import React from "react";
+import React from 'react';
 
-const Select = () => {
-  return <div></div>;
-};
+const Select = () => <div></div>;
 
 export default Select;

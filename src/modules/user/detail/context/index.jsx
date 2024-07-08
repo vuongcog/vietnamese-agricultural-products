@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { createContext } from "react";
-import { useParams } from "react-router-dom";
-import PropTypes from "../../../../utils/prop-types";
-import { useDispatch } from "react-redux";
-import { DETAIL_FETCH_DATA } from "../constants/action";
+import React from 'react';
+import { useEffect } from 'react';
+import { createContext } from 'react';
+import { useParams } from 'react-router-dom';
+import PropTypes from '../../../../utils/prop-types';
+import { useDispatch } from 'react-redux';
+import { DETAIL_FETCH_DATA } from '../constants/action';
 export const ContextDetailProduct = createContext({});
 const DetailProvider = ({ children }) => {
   const { id } = useParams();

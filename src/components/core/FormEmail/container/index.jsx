@@ -1,25 +1,24 @@
 // FormEmailContainer.jsx
-import React, { useState } from "react";
-import FormEmail from "../presentational/index";
-import { data } from "../constants";
+import React, { useState } from 'react';
+import FormEmail from '../presentational/index';
+import { data } from '../constants';
 
-const initializeFormState = (schemaForm) => {
-  return schemaForm.reduce((acc, field) => {
-    acc[field.name] = "";
+const initializeFormState = schemaForm =>
+  schemaForm.reduce((acc, field) => {
+    acc[field.name] = '';
     return acc;
   }, {});
-};
 
 const templateProps = {
-  endpoint: "/test",
-  type: "edit",
+  endpoint: '/test',
+  type: 'edit',
   schemaForm: data.items,
   onClose: () => {},
   defaultValues: {},
-  action: "",
+  action: '',
 };
 
-const FormEmailContainer = (props) => {
+const FormEmailContainer = props => {
   // const dispatch = useDispatch();
   // * Merge default props with props passed to the component
   const { type, schemaForm, defaultValues, handlerSubmit } = {
@@ -38,7 +37,7 @@ const FormEmailContainer = (props) => {
   };
 
   // * Function to handle submit for Form
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
 
     handlerSubmit(formState);

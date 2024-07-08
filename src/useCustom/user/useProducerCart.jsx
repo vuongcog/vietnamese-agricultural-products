@@ -1,6 +1,5 @@
-import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { getCarts } from "../../modules/user/detail/store/selector/selectors";
+import { useSelector } from 'react-redux';
+import { getCarts } from '../../selectors/user/selectors-cart';
 
 const useProducerCart = () => {
   const carts = useSelector(getCarts);

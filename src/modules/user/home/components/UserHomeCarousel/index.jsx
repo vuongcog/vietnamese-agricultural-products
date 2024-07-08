@@ -1,8 +1,7 @@
-import { Image } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
-import { PICTURE } from "../../../../../constants/picture";
-import styles from "./styles.module.scss";
-import UserHomeSearch from "../UserHomeSearch";
+import { Image } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { PICTURE } from '../../../../../constants/picture';
+import styles from './styles.module.scss';
 const images = [PICTURE.vegetable, PICTURE.vegetable]; // Danh sách các hình ảnh trong carousel
 
 function BannerCarousel() {
@@ -10,7 +9,7 @@ function BannerCarousel() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
+      setCurrentIndex(prevIndex =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
     }, 3000);
@@ -40,7 +39,7 @@ function BannerCarousel() {
             key={index}
             src={image}
             alt={`Slide ${index}`}
-            display={index === currentIndex ? "block" : "none"}
+            display={index === currentIndex ? 'block' : 'none'}
             transition="opacity 0.5s ease-in-out"
           />
         ))}

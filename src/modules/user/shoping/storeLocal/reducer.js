@@ -3,7 +3,7 @@ import {
   SET_LOADING,
   SET_PAGE,
   SET_REFRESH,
-} from "../constants/constants";
+} from '../constants/constants';
 
 export const initialState = {
   refresh: false,
@@ -12,19 +12,17 @@ export const initialState = {
   page: 1,
   items: [],
 };
-const handleSetLoading = (state, action) => {
-  return { ...state, loading: action.payload };
-};
+const handleSetLoading = (state, action) => ({
+  ...state,
+  loading: action.payload,
+});
 
-const handleSetItems = (state, action) => {
-  return { ...state, items: [...state.items, ...action.payload] };
-};
-const handeSetPage = (state) => {
-  return { ...state, page: state.page + 1 };
-};
-const handleRefesh = (state) => {
-  return { ...state, refresh: !state.refresh };
-};
+const handleSetItems = (state, action) => ({
+  ...state,
+  items: [...state.items, ...action.payload],
+});
+const handeSetPage = state => ({ ...state, page: state.page + 1 });
+const handleRefesh = state => ({ ...state, refresh: !state.refresh });
 const mapperHandle = {
   [SET_LOADING]: handleSetLoading,
   [SET_ITEMS]: handleSetItems,

@@ -52,12 +52,10 @@ const intiState = {
 
 // 111 handler giành cho nạp dữ liệu global
 const setItems = (state, action) => ({ ...state, items: action.payload });
-const fetchingData = (state) => {
-  return {
+const fetchingData = (state) => ({
     ...state,
     isFetching: true,
-  };
-};
+  });
 const fetchedData = (state) => ({
   ...state,
   isFetching: false,
@@ -104,26 +102,16 @@ const handlerSendingEmail = (state) => ({
   isSendEmail: true,
 });
 
-const sendedEmail = (state) => {
-  return { ...state, isSendEmail: false };
-};
+const sendedEmail = (state) => ({ ...state, isSendEmail: false });
 
-const handlerSendMailSuccess = (state) => {
-  return { ...state, sendMailSuccsess: true };
-};
-const handlerSendMailError = (state) => {
-  return { ...state, sendMailError: true };
-};
+const handlerSendMailSuccess = (state) => ({ ...state, sendMailSuccsess: true });
+const handlerSendMailError = (state) => ({ ...state, sendMailError: true });
 
-const handlerResetEmailStatus = (state) => {
-  return { ...state, sendMailSuccsess: false, sendMailError: false };
-};
-const refresh = (state) => {
-  return {
+const handlerResetEmailStatus = (state) => ({ ...state, sendMailSuccsess: false, sendMailError: false });
+const refresh = (state) => ({
     ...state,
     refresh: !state.refresh,
-  };
-};
+  });
 
 // 555 handler giành cho delete
 

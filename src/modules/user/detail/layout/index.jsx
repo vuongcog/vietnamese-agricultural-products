@@ -1,7 +1,5 @@
-import React from "react";
+import React from 'react';
 
-const LayoutDetail = () => {
-  return <div></div>;
-};
+const LayoutDetail = () => <div></div>;
 
 export default LayoutDetail;

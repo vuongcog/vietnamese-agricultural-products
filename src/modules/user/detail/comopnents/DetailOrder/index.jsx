@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import QuantitySelector from "../../../../../components/core/NumberInput";
-import PropTypes from "../../../../../utils/prop-types";
-import { addCart } from "../../../../../utils/cart/add-cart";
-import { useParams } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import styles from "./styles.module.scss";
-import useProducerDetail from "../../../../../useCustom/user/useProducerDetail";
-import { useTranslation } from "react-i18next";
-import langsGlobal from "../../../../../langs";
-const DetailOrder = ({ quantity = 20 }) => {
+import React, { useState } from 'react';
+import QuantitySelector from '../../../../../components/core/NumberInput';
+import PropTypes from '../../../../../utils/prop-types';
+import { addCart } from '../../../../../utils/cart/add-cart';
+import { useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import styles from './styles.module.scss';
+import useProducerDetail from '../../../../../useCustom/user/useProducerDetail';
+import { useTranslation } from 'react-i18next';
+import langsGlobal from '../../../../../langs';
+const DetailOrder = () => {
   const [numbers, setNumbers] = useState(1);
   const { product } = useProducerDetail();
   const { t } = useTranslation();

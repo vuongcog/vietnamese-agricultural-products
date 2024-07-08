@@ -1,12 +1,11 @@
 import {
-  FETCH_CATEGORY,
   FETCH_CATEGORY_FAILED,
   FETCH_CATEGORY_SUCCESS,
   FETCHED_CATEGORY,
   FETCHING_CATEGORY,
   RESET_STATUS_FETCH_CATEGORY,
   SET_CATEGORIES,
-} from "../actions/action-category";
+} from '../actions/action-category';
 
 export const initialState = {
   categories: [],
@@ -14,21 +13,21 @@ export const initialState = {
   isFetchCategorySuccsess: false,
   isFetcheCategoryFailed: false,
 };
-const handlerFetchingCategory = (state) => ({ ...state });
+const handlerFetchingCategory = state => ({ ...state });
 const handlerSetCategory = (state, action) => ({
   ...state,
   categories: action.payload,
 });
-const handlerFetchedCategory = (state) => ({ ...state });
-const handlerFetchCategorySuccess = (state) => ({
+const handlerFetchedCategory = state => ({ ...state });
+const handlerFetchCategorySuccess = state => ({
   ...state,
   isFetchCategorySuccsess: true,
 });
-const handlerFetchCategoryFailed = (state) => ({
+const handlerFetchCategoryFailed = state => ({
   ...state,
   isFetcheCategoryFailed: true,
 });
-const handlerResetStatusCategory = (state) => ({
+const handlerResetStatusCategory = state => ({
   ...state,
   isFetcheCategoryFailed: false,
   isFetchCategorySuccsess: false,

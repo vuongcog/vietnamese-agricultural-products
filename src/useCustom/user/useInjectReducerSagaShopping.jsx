@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo } from "react";
-import { reducerProductList } from "../../modules/user/shoping/store/reducer/reducer";
-import warcherSagaProducrtList from "../../modules/user/shoping/store/saga/saga";
+import React, { useEffect, useMemo } from 'react';
+import { reducerProductList } from '../../modules/user/shoping/store/reducer/reducer';
+import warcherSagaProducrtList from '../../modules/user/shoping/store/saga/saga';
 import {
   ejectReducer,
   ejectReducersAndSagas,
@@ -8,37 +8,44 @@ import {
   injectReducer,
   injectReducersAndSagas,
   injectSaga,
-} from "../../utils/fetch-cancel-saga-reducer-with-key";
-import { refactorReducerFilter } from "../../modules/user/shoping/store/reducer/reducerFilter";
-import { initialFilterState } from "../../modules/user/shoping/store/constants/initialFilterState";
-import { reducerDetailProduct } from "../../modules/user/detail/store/reducer/reducer";
-import watcherSagaProductDetail from "../../modules/user/detail/store/saga/saga";
+} from '../../utils/fetch-cancel-saga-reducer-with-key';
+import { refactorReducerFilter } from '../../modules/user/shoping/store/reducer/reducerFilter';
+import { initialFilterState } from '../../modules/user/shoping/store/constants/initialFilterState';
+import { reducerDetailProduct } from '../../modules/user/detail/store/reducer/reducer';
+import watcherSagaProductDetail from '../../modules/user/detail/store/saga/saga';
 import {
+  CART_REDUCER,
   CATEGORY_REDUCER,
   DETAIL_PRODUCT_REDUCER,
-} from "../../constants/name-store/user/name-space-reducer";
+} from '../../constants/name-store/user/name-space-reducer';
 import {
+  CART_SAGA,
   CATEGORY_SAGA,
   DETAIL_PRODUCT_SAGA,
-} from "../../constants/name-store/user/name-space-saga";
-import { reducerCategoryUser } from "../../reducers/reducer-category";
-import watcherSagaCategory from "../../sagas/saga-category";
+} from '../../constants/name-store/user/name-space-saga';
+import { reducerCategoryUser } from '../../reducers/reducer-category';
+import watcherSagaCategory from '../../sagas/saga-category';
+import { reducerCartUser } from '../../reducers/reducer-cart';
+import watcherSagaCart from '../../sagas/saga-cart';
 
 const useInjectReducerSagaShopping = () => {
   const redux = {
-    keyReducer: "list-product-reducer",
-    keySaga: "list-product-saga",
+    keyReducer: 'list-product-reducer',
+    keySaga: 'list-product-saga',
     reducer: reducerProductList,
     saga: warcherSagaProducrtList,
   };
   useMemo(() => {
+    injectReducer(CART_REDUCER, reducerCartUser);
     injectReducer(CATEGORY_REDUCER, reducerCategoryUser);
     injectReducer(DETAIL_PRODUCT_REDUCER, reducerDetailProduct);
+
+    injectSaga(CART_SAGA, watcherSagaCart);
     injectSaga(CATEGORY_SAGA, watcherSagaCategory);
     injectSaga(DETAIL_PRODUCT_SAGA, watcherSagaProductDetail);
 
     injectReducer(
-      "filter",
+      'filter',
       refactorReducerFilter({
         ...initialFilterState,
       })
@@ -47,19 +54,25 @@ const useInjectReducerSagaShopping = () => {
   }, []);
 
   useEffect(() => {
+    injectReducer(CART_REDUCER, reducerCartUser);
     injectReducer(CATEGORY_REDUCER, reducerCategoryUser);
-    injectSaga(DETAIL_PRODUCT_SAGA, watcherSagaProductDetail);
-    injectSaga(CATEGORY_SAGA, watcherSagaCategory);
     injectReducer(DETAIL_PRODUCT_REDUCER, reducerDetailProduct);
 
-    injectReducer("filter", refactorReducerFilter({ ...initialFilterState }));
+    injectSaga(CART_SAGA, watcherSagaCart);
+    injectSaga(CATEGORY_SAGA, watcherSagaCategory);
+    injectSaga(DETAIL_PRODUCT_SAGA, watcherSagaProductDetail);
+
+    injectReducer('filter', refactorReducerFilter({ ...initialFilterState }));
     injectReducersAndSagas(redux);
     return () => {
+      ejectReducer(CART_REDUCER);
       ejectReducer(DETAIL_PRODUCT_REDUCER);
+
+      ejectSaga(CART_SAGA);
       ejectSaga(DETAIL_PRODUCT_SAGA);
 
       ejectReducersAndSagas(redux);
-      ejectReducer("filter");
+      ejectReducer('filter');
     };
   }, []);
   return <div></div>;
