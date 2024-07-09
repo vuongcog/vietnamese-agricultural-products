@@ -4,17 +4,15 @@ import PropTypes from '../../../../utils/prop-types';
 import BlogLayout from '../presentational';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { FETCH_BLOG } from '../../../../actions/action-blog';
+import { FETCH_BLOG_CATEGORIES } from '../../../../actions/action-blog-categories';
 
 const BlogUserContext = createContext({});
-const BlogGuestContainer = () => {
-  const { slug } = useParams();
+const BlogContainer = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
-      type: FETCH_BLOG,
-      payload: { endpoint: `/chitietbaiviet/${slug}` },
+      type: FETCH_BLOG_CATEGORIES,
+      payload: { endpoint: '/danhmucbaiviet' },
     });
   }, []);
   return (
@@ -23,8 +21,8 @@ const BlogGuestContainer = () => {
     </BlogUserContext.Provider>
   );
 };
-BlogGuestContainer.propTypes = {
+BlogContainer.propTypes = {
   children: PropTypes.element,
 };
 
-export default BlogGuestContainer;
+export default BlogContainer;

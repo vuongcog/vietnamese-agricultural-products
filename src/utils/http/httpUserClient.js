@@ -17,6 +17,8 @@ class HttpUserClient {
     this.http.post(this.url, params, options);
   deleteCart = (options = {}) => this.http.delete(this.url, options);
   getCarts = (option = {}) => this.http.get(this.url, {}, option);
+  getBlogs = (option = {}) => this.http.get(this.url, {}, option);
+  getBlog = (option = {}) => this.http.get(this.url, {}, option);
   updateCart = (params = {}, options = {}) =>
     this.http.post(this.url, params, options);
   getProduct = (params = {}, options = {}) =>

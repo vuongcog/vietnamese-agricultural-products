@@ -22,7 +22,6 @@ import FormLogin from './authentication/components/FormLogin';
 import FormRegister from './authentication/components/FormRegister';
 import DetailProduct from './user/detail/container';
 import { AuthProvider } from '../contexts/AuthContext';
-import BlogContainer from './user/blog/container';
 import {
   ProtectedAuthenRoute,
   ProtectedRoute,
@@ -32,6 +31,9 @@ import CartContainer from './user/cart/container';
 import NotFound from './page-not-found';
 import FormEmailContainer from '../components/core/FormEmail/container';
 import DialogMessage from '../components/core/DialogMessage';
+import BlogCategoyGuest from './user/blog-with-category/container';
+import BlogContainer from './user/blog-categories/container';
+import BlogGuestContainer from './user/blog/container';
 
 const App = () => (
   <AuthProvider>
@@ -46,7 +48,9 @@ const App = () => (
       >
         <Route path="/" element={<Home />} />
         <Route path="/shopping" element={<Shopping />} />
-        <Route path="/blogs" element={<BlogContainer />} />
+        <Route path="/blog-categories" element={<BlogContainer />}></Route>
+        <Route path="/blogs" element={<BlogCategoyGuest />}></Route>
+        <Route path="/blogs/blog/:slug" element={<BlogGuestContainer />} />
         <Route path="/cart" element={<CartContainer />} />
         <Route path="/detail/:id" element={<DetailProduct />} />
         <Route path="/purchase" element={<DetailProduct />} />

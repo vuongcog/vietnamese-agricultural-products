@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import styles from './styles.module.scss';
 import QuantitySelector from '../../../../../components/core/NumberInput';
 import { formattedNumber } from '../../../../../utils/format-number';
@@ -7,22 +7,32 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { CartContext } from '../../container';
+import { useEffect } from 'react';
 
 const CartItem = ({
   quantity,
-  product_image,
-  unit_prices,
-  product_name,
+  product: { unit_prices },
   voucher,
   inventory,
   oldPrice,
-  id_cart,
+  id_product,
+  product,
   ...props
 }) => {
   const [number, setNumber] = useState(quantity);
   const [checked, setChecked] = useState(false);
   const totalPrice = useMemo(() => number * unit_prices, [number, unit_prices]);
   const { handlerDeleteCart } = useContext(CartContext);
+  const { handlerUpdateCart } = useContext(CartContext);
+  const firstEffect = useRef(false);
+  useEffect(() => {
+    if (firstEffect.current) {
+      handlerUpdateCart(id_product, number);
+    }
+    return () => {
+      firstEffect.current = true;
+    };
+  }, [number]);
   return (
     <div {...props} className={styles.container}>
       <Checkbox
@@ -32,9 +42,13 @@ const CartItem = ({
         className={styles.checkbox}
       />
       <div className={styles.contentWrapper}>
-        <img src={product_image} alt={product_name} className={styles.image} />
+        <img
+          src={product.product_image}
+          alt={product.product_name}
+          className={styles.image}
+        />
         <div className={styles.messageWrapper}>
-          <div className={styles.product_name}>{product_name}</div>
+          <div className={styles.product_name}>{product.product_name}</div>
           <div className={styles.voucher}>{voucher}</div>
         </div>
       </div>
@@ -52,7 +66,7 @@ const CartItem = ({
       </span>
       <i
         onClick={() => {
-          handlerDeleteCart(id_cart);
+          handlerDeleteCart(id_product);
         }}
         className={classNames('fa-solid fa-trash', styles.deleteIcon)}
       ></i>
@@ -71,6 +85,8 @@ CartItem.defaultProps = {
 };
 
 CartItem.propTypes = {
+  id_product: PropTypes.string,
+  product: PropTypes.object,
   quantity: PropTypes.number,
   product_image: PropTypes.string,
   unit_prices: PropTypes.number.isRequired,

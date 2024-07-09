@@ -1,3 +1,4 @@
+export const RE_FETCH_CART = 'RE_FETCH_CART';
 export const FETCH_CART = 'FETCH_CART';
 export const FETCHING_CART = 'FETCHING_CART';
 export const SET_CART = 'SET_CART';

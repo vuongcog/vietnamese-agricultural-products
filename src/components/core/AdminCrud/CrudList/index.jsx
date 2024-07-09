@@ -122,16 +122,13 @@ const CrudList = props => {
   const _renderColumns = () => {
     const { items } = props;
     if (_.isEmpty(items)) {
-      console.log('true');
       return null;
     }
-    return items.map((item, index) => {
-      return (
-        <tr className={classNames(styles['row-body'])} key={index}>
-          {_renderColumn(item)}
-        </tr>
-      );
-    });
+    return items.map((item, index) => (
+      <tr className={classNames(styles['row-body'])} key={index}>
+        {_renderColumn(item)}
+      </tr>
+    ));
   };
 
   return (

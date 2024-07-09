@@ -1,11 +1,15 @@
 import { useSelector } from 'react-redux';
-import { getBlogCategories } from '../../selectors/user/selectors-blog';
-import { useEffect } from 'react';
+import {
+  getBlog,
+  getBlogCategories,
+  getBlogsWithCategory,
+} from '../../selectors/user/selectors-blog';
 
 const useProducerBlog = () => {
-  const blogCategories = useSelector(
-    state => state[`blog-reducer`].blogCategories
-  );
-  return { blogCategories };
+  const blogCategories = useSelector(getBlogCategories);
+  const blogs = useSelector(getBlogsWithCategory);
+  const blog = useSelector(getBlog);
+
+  return { blog, blogCategories, blogs };
 };
 export default useProducerBlog;

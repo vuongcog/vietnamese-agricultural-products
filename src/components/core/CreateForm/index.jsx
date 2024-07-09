@@ -128,6 +128,8 @@ const CreateForm = ({
 
     const renderInput = () => {
       switch (item.type) {
+        case 'editor':
+          return <div></div>;
         case 'select':
           return (
             <>

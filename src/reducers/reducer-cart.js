@@ -13,6 +13,7 @@ import {
   FETCH_CART_SUCCESS,
   FETCHED_CART,
   FETCHING_CART,
+  RE_FETCH_CART,
   RESET_STATUS_DELETE_CART,
   RESET_STATUS_UPDATE_CART,
   SET_CART,
@@ -28,6 +29,7 @@ export const initialState = {
   isFetchingCart: false,
   isFetchCartSuccess: false,
   isFetchCartFailed: false,
+  refresh: false,
   // 333 state add cart
   isAddingCart: false,
   isAddCartSuccess: false,
@@ -53,6 +55,7 @@ const handlerResetStatusAddCart = state => ({
   isAddCardError: false,
 });
 // 222 handler get cart
+const handlerReFetchCart = state => ({ ...state, refresh: !state.refresh });
 const handlerFetchingCart = state => ({ ...state, isFetchingCart: true });
 const handlerFetchedCart = state => ({ ...state, isFetchingCart: false });
 const handlerSetCart = (state, action) => ({ ...state, carts: action.payload });
@@ -100,6 +103,7 @@ const handlerResetStatusUpdateCart = state => ({
 });
 const mapperHandle = {
   /// 222 action cart
+  [RE_FETCH_CART]: handlerReFetchCart,
   [FETCHING_CART]: handlerFetchingCart,
   [SET_CART]: handlerSetCart,
   [FETCHED_CART]: handlerFetchedCart,

@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import {
   ADD_CART,
   ADD_CART_CUCCESS,
@@ -17,6 +17,7 @@ import {
   FETCH_CART_SUCCESS,
   FETCHED_CART,
   FETCHING_CART,
+  RE_FETCH_CART,
   RESET_STATUS_DELETE_CART,
   RESET_STATUS_UPDATE_CART,
   SET_CART,
@@ -56,16 +57,17 @@ function* wokerDeleteCart(action) {
   try {
     yield put({ type: DELETING_CART });
     const { payload } = action;
-    console.log(payload);
     const http = new HttpUserClient(payload);
     yield call(http.deleteCart);
     yield put({ type: DELETE_CART_SUCCESS });
-    toast.success('Thêm giỏ hàng thành công');
+    yield put({ type: RE_FETCH_CART });
+    toast.success('Xóa giỏ hàng thành công');
   } catch (err) {
     yield put({ type: DELETE_CART_FAILED });
-    toast.error('Sản phẩm này có lẽ đã hết hoặc không tồn tại');
+    toast.error('Xóa giỏ hàng thất bại');
   } finally {
     yield put({ type: DELETED_CART });
+    // yield delay(100); // Trì hoãn 2 giây trước khi reset trạng thái
     yield put({ type: RESET_STATUS_DELETE_CART });
   }
 }
@@ -74,13 +76,14 @@ function* wokerUpdateCart(action) {
   try {
     yield put({ type: UPDATING_CART });
     const { payload } = action;
-    const http = new HttpUserClient(payload.endpoint);
-    yield call(http.updateCart, payload.params);
+    const http = new HttpUserClient('/giohang/capnhatgiohang?_method=PUT');
+    yield call(http.updateCart, payload);
     yield put({ type: UPDATE_CART_SUCCESS });
-    toast.success('Thêm giỏ hàng thành công');
+    // toast.success('Thêm giỏ hàng thành công');
   } catch (err) {
     yield put({ type: UPDATE_CART_FAILED });
-    toast.error('Sản phẩm này có lẽ đã hết hoặc không tồn tại');
+    // const parseObject = parseObjectJson(err.response.data);
+    // toast.error(parseObject.message);
   } finally {
     yield put({ type: UPDATED_CART });
     yield put({ type: RESET_STATUS_UPDATE_CART });

@@ -39,6 +39,6 @@ export const SCHEMA = [
     id: 7,
     name: 'blogs',
     icon: 'fa fa-home',
-    link: '/blogs',
+    link: '/blog-categories',
   },
 ];

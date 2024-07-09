@@ -1,10 +1,17 @@
 import {
   FETCH_BLOG_FAILED,
   FETCH_BLOG_SUCCESS,
+  FETCH_BLOGS_WITH_CATEGORY,
+  FETCH_BLOGS_WITH_CATEGORY_FAILED,
+  FETCH_BLOGS_WITH_CATEGORY_SUCCESS,
   FETCHED_BLOG,
+  FETCHED_BLOGS_WITH_CATEGORY,
   FETCHING_BLOG,
+  FETCHING_BLOGS_WITH_CATEGORY,
   RESET_STATUS_FETCH_BLOG,
+  RESET_STATUS_FETCH_BLOGS_WITH_CATEGORY,
   SET_BLOG,
+  SET_BLOGS_WITH_CATEGORY,
 } from '../actions/action-blog';
 import {
   FETCH_BLOG_CATEGORIES_FAILED,
@@ -26,6 +33,11 @@ export const initialState = {
   isFetchingBlog: false,
   isFetchBlogSuccsess: false,
   isFetchBlogFailed: false,
+  // 333 state blogs with category
+  blogs: [],
+  isFetchingBlogsCategory: false,
+  isFetchBlogsCategorySuccsess: false,
+  isFetchBlogsCategoryFailed: false,
 };
 
 // 222 handler get blog categories
@@ -80,6 +92,32 @@ const handlerResetStatusFetchBlog = state => ({
   isFetchBlogSuccsess: false,
   isFetchBlogFailed: false,
 });
+// 444 action get blogs with category
+const handlerFetchingBlogsWithCategory = state => ({
+  ...state,
+  isFetchingBlogsCategory: true,
+});
+const handlerFetchedBlogsWithCategory = state => ({
+  ...state,
+  isFetchingBlogsCategory: false,
+});
+const handlerSetBlogsWithCategory = (state, action) => ({
+  ...state,
+  blogs: action.payload,
+});
+const handlerFetchBlogsWithCategoryCuccess = state => ({
+  ...state,
+  isFetchBlogsCategorySuccsess: true,
+});
+const handlerFetchBlogsWithCategoryFailed = state => ({
+  ...state,
+  isFetchBlogsCategoryFailed: true,
+});
+const handlerResetStatusFetchBlogsWithCategory = state => ({
+  ...state,
+  isFetchBlogsCategorySuccsess: false,
+  isFetchBlogsCategoryFailed: false,
+});
 const mapperHandle = {
   /// 222 action blog categories
   [FETCHING_BLOG_CATEGORIES]: handlerFetchingBlogCategories,
@@ -96,6 +134,15 @@ const mapperHandle = {
   [FETCH_BLOG_SUCCESS]: handlerFetchBlogCuccess,
   [FETCH_BLOG_FAILED]: handlerFetchBlogFailed,
   [RESET_STATUS_FETCH_BLOG]: handlerResetStatusFetchBlog,
+  // 444 action blogs with category
+
+  [FETCHING_BLOGS_WITH_CATEGORY]: handlerFetchingBlogsWithCategory,
+  [SET_BLOGS_WITH_CATEGORY]: handlerSetBlogsWithCategory,
+  [FETCHED_BLOGS_WITH_CATEGORY]: handlerFetchedBlogsWithCategory,
+  [FETCH_BLOGS_WITH_CATEGORY_SUCCESS]: handlerFetchBlogsWithCategoryCuccess,
+  [FETCH_BLOGS_WITH_CATEGORY_FAILED]: handlerFetchBlogsWithCategoryFailed,
+  [RESET_STATUS_FETCH_BLOGS_WITH_CATEGORY]:
+    handlerResetStatusFetchBlogsWithCategory,
 };
 export const reducerBlogsUser = (state = initialState, action) => {
   const handle = mapperHandle[action.type];
