@@ -14,11 +14,13 @@ import { initialFilterState } from '../../modules/user/shoping/store/constants/i
 import { reducerDetailProduct } from '../../modules/user/detail/store/reducer/reducer';
 import watcherSagaProductDetail from '../../modules/user/detail/store/saga/saga';
 import {
+  BLOG_REDUCER,
   CART_REDUCER,
   CATEGORY_REDUCER,
   DETAIL_PRODUCT_REDUCER,
 } from '../../constants/name-store/user/name-space-reducer';
 import {
+  BLOG_SAGA,
   CART_SAGA,
   CATEGORY_SAGA,
   DETAIL_PRODUCT_SAGA,
@@ -27,6 +29,8 @@ import { reducerCategoryUser } from '../../reducers/reducer-category';
 import watcherSagaCategory from '../../sagas/saga-category';
 import { reducerCartUser } from '../../reducers/reducer-cart';
 import watcherSagaCart from '../../sagas/saga-cart';
+import { reducerBlogsUser } from '../../reducers/reducer-blog';
+import watcherSagaBlogs from '../../sagas/saga-blog';
 
 const useInjectReducerSagaShopping = () => {
   const redux = {
@@ -36,10 +40,12 @@ const useInjectReducerSagaShopping = () => {
     saga: warcherSagaProducrtList,
   };
   useMemo(() => {
+    injectReducer(BLOG_REDUCER, reducerBlogsUser);
     injectReducer(CART_REDUCER, reducerCartUser);
     injectReducer(CATEGORY_REDUCER, reducerCategoryUser);
     injectReducer(DETAIL_PRODUCT_REDUCER, reducerDetailProduct);
 
+    injectSaga(BLOG_SAGA, watcherSagaBlogs);
     injectSaga(CART_SAGA, watcherSagaCart);
     injectSaga(CATEGORY_SAGA, watcherSagaCategory);
     injectSaga(DETAIL_PRODUCT_SAGA, watcherSagaProductDetail);
@@ -54,10 +60,12 @@ const useInjectReducerSagaShopping = () => {
   }, []);
 
   useEffect(() => {
+    injectReducer(BLOG_REDUCER, reducerBlogsUser);
     injectReducer(CART_REDUCER, reducerCartUser);
     injectReducer(CATEGORY_REDUCER, reducerCategoryUser);
     injectReducer(DETAIL_PRODUCT_REDUCER, reducerDetailProduct);
 
+    injectSaga(BLOG_SAGA, watcherSagaBlogs);
     injectSaga(CART_SAGA, watcherSagaCart);
     injectSaga(CATEGORY_SAGA, watcherSagaCategory);
     injectSaga(DETAIL_PRODUCT_SAGA, watcherSagaProductDetail);

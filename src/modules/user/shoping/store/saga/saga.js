@@ -18,7 +18,7 @@ function* wokerFetchData(action) {
   try {
     yield put({ type: FETCHING_DATA });
     const { payload } = action;
-    const http = new HttpUserClient('http://127.0.0.1:8000/api/product');
+    const http = new HttpUserClient('/sanpham');
     const res = yield call(http.getItems, payload);
     const parseData = parseObjectJson(res.data);
     yield put({ type: FETCH_DATA_SUCCESS, payload: parseData.data });

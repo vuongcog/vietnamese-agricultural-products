@@ -5,6 +5,8 @@ import DetailOrder from '../DetailOrder';
 import useProducerDetail from '../../../../../useCustom/user/useProducerDetail';
 const DetailInformation = ({ item }) => {
   const { product } = useProducerDetail();
+  console.log(product);
+  if (_.isEmpty(product)) return;
   return (
     <div>
       <div className={styles.container}>

@@ -43,7 +43,7 @@ const Card = ({ item, ...props }) => {
         ref={elementRef ? elementRef : null}
         {...props}
         onClick={() => {
-          navigate(`/detail/${item.id}`);
+          navigate(`/detail/${item.product_slug}`);
         }}
         className={styles.container}
       >
@@ -61,8 +61,8 @@ const Card = ({ item, ...props }) => {
           dispatch({
             type: ADD_CART,
             payload: {
-              endpoint: `http://localhost:8081/cart`,
-              params: { productId: cloneItem.id, quantity: 1 },
+              endpoint: `/giohang/themgiohang`,
+              params: { id_prd: cloneItem.id, quantity: 1 },
             },
           });
         }}

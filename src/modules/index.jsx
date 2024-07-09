@@ -22,7 +22,7 @@ import FormLogin from './authentication/components/FormLogin';
 import FormRegister from './authentication/components/FormRegister';
 import DetailProduct from './user/detail/container';
 import { AuthProvider } from '../contexts/AuthContext';
-
+import BlogContainer from './user/blog/container';
 import {
   ProtectedAuthenRoute,
   ProtectedRoute,
@@ -46,6 +46,7 @@ const App = () => (
       >
         <Route path="/" element={<Home />} />
         <Route path="/shopping" element={<Shopping />} />
+        <Route path="/blogs" element={<BlogContainer />} />
         <Route path="/cart" element={<CartContainer />} />
         <Route path="/detail/:id" element={<DetailProduct />} />
         <Route path="/purchase" element={<DetailProduct />} />

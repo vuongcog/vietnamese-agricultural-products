@@ -25,7 +25,7 @@ function* wokerFetchDataDetail(action) {
     const http = new HttpUserClient(payload);
     const res = yield call(http.getProduct);
     const parseData = parseObjectJson(res.data);
-    yield put({ type: DETAIL_SET_PRODUCT, payload: parseData.data });
+    yield put({ type: DETAIL_SET_PRODUCT, payload: parseData.product });
     yield put({ type: DETAIL_FETCH_DATA_SUCCESS });
   } catch (err) {
     yield put({ type: DETAIL_FETCH_DATA_FAILED });

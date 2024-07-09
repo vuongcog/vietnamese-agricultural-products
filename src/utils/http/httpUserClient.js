@@ -2,7 +2,7 @@ import httpClient from './httpClient';
 class HttpUserClient {
   url = null;
 
-  http = httpClient(false);
+  http = httpClient(true);
 
   constructor(url) {
     this.url = url;
@@ -13,18 +13,14 @@ class HttpUserClient {
   getCategories = (params = {}, options = {}) =>
     this.http.get(this.url, params, options);
 
-  getItem = (params = {}) => {
-    const option = {
-      notAuthor: true,
-    };
-    const id = params.id;
-    delete params.id;
-    return this.http.get(`https://api.zippopotam.us/us/${id}`, params, option);
-  };
-  addCart = (params = {}, options = {}) => this.http.post(this.url, params, options);
+  addCart = (params = {}, options = {}) =>
+    this.http.post(this.url, params, options);
+  deleteCart = (options = {}) => this.http.delete(this.url, options);
   getCarts = (option = {}) => this.http.get(this.url, {}, option);
-
-  getProduct = (params = {}, options = {}) => this.http.get(this.url, params, options);
+  updateCart = (params = {}, options = {}) =>
+    this.http.post(this.url, params, options);
+  getProduct = (params = {}, options = {}) =>
+    this.http.get(this.url, params, options);
 }
 
 export default HttpUserClient;

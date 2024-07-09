@@ -4,9 +4,10 @@ import styles from './styles.module.scss';
 import useProducerCart from '../../../../../useCustom/user/useProducerCart';
 const CartList = () => {
   const { carts } = useProducerCart();
+  if (_.isEmpty(carts)) return;
   return (
     <div className={styles.container}>
-      {carts?.map((item, index) => (
+      {carts.items.map((item, index) => (
         <CartItem {...item} handleDelete={() => {}} key={index}></CartItem>
       ))}
     </div>

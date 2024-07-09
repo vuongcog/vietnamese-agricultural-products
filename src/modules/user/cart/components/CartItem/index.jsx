@@ -5,6 +5,8 @@ import { formattedNumber } from '../../../../../utils/format-number';
 import { Checkbox } from '@chakra-ui/react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { CartContext } from '../../container';
 
 const CartItem = ({
   quantity,
@@ -14,13 +16,13 @@ const CartItem = ({
   voucher,
   inventory,
   oldPrice,
-  handleDelete,
+  id_cart,
   ...props
 }) => {
   const [number, setNumber] = useState(quantity);
   const [checked, setChecked] = useState(false);
   const totalPrice = useMemo(() => number * unit_prices, [number, unit_prices]);
-
+  const { handlerDeleteCart } = useContext(CartContext);
   return (
     <div {...props} className={styles.container}>
       <Checkbox
@@ -49,7 +51,9 @@ const CartItem = ({
         {formattedNumber(totalPrice)}
       </span>
       <i
-        onClick={handleDelete}
+        onClick={() => {
+          handlerDeleteCart(id_cart);
+        }}
         className={classNames('fa-solid fa-trash', styles.deleteIcon)}
       ></i>
     </div>

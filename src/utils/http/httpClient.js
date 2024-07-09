@@ -1,29 +1,29 @@
-import axios from "axios";
-import _ from "lodash";
-import $ from "jquery";
-import { getCookie } from "../cookie/parseCookie";
+import axios from 'axios';
+import _ from 'lodash';
+import $ from 'jquery';
+import { getCookie } from '../cookie/parseCookie';
 const httpClient = (isEndpoint = false) => {
   // const parseToken = JSON.parse(localStorage.getItem("accessToken"));
-  const accessToken = getCookie("accsessToken");
+  const accessToken = getCookie('accsessToken');
 
   const headers = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
     // Authorization: `Bearer ${accessToken}}`,
   };
-  if (accessToken) headers["Authorization"] = `Bearer ${accessToken}`;
+  if (accessToken) headers['Authorization'] = `Bearer ${accessToken}`;
   const cancelTokenSource = axios.CancelToken.source();
   const defaultOptions = {
-    responseType: "json",
+    responseType: 'json',
     headers,
     cancelToken: cancelTokenSource.token,
-    transformResponse: (data) => {
-      const dataEror = _.cloneDeep(data, "error.code");
+    transformResponse: data => {
+      const dataEror = _.cloneDeep(data, 'error.code');
       if (
         dataEror &&
         dataEror === 401 &&
-        !location.pathname.includes("/auth")
+        !location.pathname.includes('/auth')
       ) {
-        window.localStorage.removeItem("accessToken");
+        window.localStorage.removeItem('accessToken');
       }
       return data;
     },
@@ -48,7 +48,7 @@ const httpClient = (isEndpoint = false) => {
       const cloneParams = { ...params };
 
       _.forEach(cloneParams, (item, key) => {
-        if ((!item && item !== 0) || item === "ALL") {
+        if ((!item && item !== 0) || item === 'ALL') {
           delete cloneParams[key];
         }
       });
@@ -66,8 +66,8 @@ const httpClient = (isEndpoint = false) => {
     },
 
     post: (url, data = {}, options = {}) => {
-      if (data.status && data.status === "") {
-        data.status = "inactive";
+      if (data.status && data.status === '') {
+        data.status = 'inactive';
       }
       if (isEndpoint) {
         url = import.meta.env.VITE_API_URL_SERVER + url;
@@ -85,11 +85,12 @@ const httpClient = (isEndpoint = false) => {
         headers: {
           ...defaultOptions.headers,
           ...options.headers,
-          "Content-Type": "multipart/form-data", // Đảm bảo tiêu đề Content-Type là multipart/form-data
+          'Content-Type': 'multipart/form-data', // Đảm bảo tiêu đề Content-Type là multipart/form-data
         },
       });
     },
     delete: (url, options = {}) => {
+      console.log(url);
       if (isEndpoint) {
         url = import.meta.env.VITE_API_URL_SERVER + url;
       }

@@ -36,6 +36,7 @@ const ProductFilter = () => {
   const [selectedCategories, setSelectedCategories] = useState(category);
   const { categories } = useProducerCategory();
   const suggestions = categories?.map(item => item.category_name);
+  console.log(suggestions);
   const dispatch = useDispatch();
 
   const handleKeywordChange = e => {
@@ -91,7 +92,7 @@ const ProductFilter = () => {
         <FormLabel>{t(langs.category)}</FormLabel>
         <Select name="category" value="" onChange={handleCategoryChange}>
           <option value="">All</option>
-          {suggestions.map(item => (
+          {suggestions?.map(item => (
             <option key={item} value={item}>
               {item}
             </option>

@@ -16,10 +16,10 @@ function* wokerFetchCategory(action) {
   try {
     yield put({ type: FETCHING_CATEGORY });
     const { payload } = action;
-    const http = new HttpUserClient('http://127.0.0.1:8000/api/category');
+    const http = new HttpUserClient('/danhmuc');
     const res = yield call(http.getItems, payload);
     const parseData = parseObjectJson(res.data);
-    yield put({ type: SET_CATEGORIES, payload: parseData.data });
+    yield put({ type: SET_CATEGORIES, payload: parseData.danhmuc });
     yield put({ type: FETCH_CATEGORY_SUCCESS });
   } catch (err) {
     yield put({ type: FETCH_CATEGORY_FAILED });

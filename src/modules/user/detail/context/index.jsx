@@ -9,7 +9,7 @@ export const ContextDetailProduct = createContext({});
 const DetailProvider = ({ children }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const endpoint = `http://127.0.0.1:8000/api/product/${id}`;
+  const endpoint = `/chitietsanpham/${id}`;
 
   useEffect(() => {
     dispatch({ type: DETAIL_FETCH_DATA, payload: endpoint });

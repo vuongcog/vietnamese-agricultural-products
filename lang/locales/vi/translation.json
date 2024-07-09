@@ -11,6 +11,7 @@
   "src/components/user/Header.about": "Giới thiệu",
   "src/components/user/Header.language": "Ngôn ngữ",
   "src/components/user/Header.register": "Đăng ký",
+  "src/components/user/Header.blogs": "Bài viết",
 
   "src/modules/user/home.category": "Danh mục",
   "src/modules/user/home.priceRange": "Giá",
