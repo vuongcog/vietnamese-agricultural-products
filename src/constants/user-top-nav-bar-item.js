@@ -41,4 +41,10 @@ export const SCHEMA = [
     icon: 'fa fa-home',
     link: '/blog-categories',
   },
+  {
+    id: 8,
+    name: 'management',
+    icon: 'fa fa-home',
+    link: '/authen/signin-management',
+  },
 ];

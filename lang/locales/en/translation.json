@@ -12,6 +12,7 @@
   "src/components/user/Header.language": "Language",
   "src/components/user/Header.register": "Register",
   "src/components/user/Header.blogs": "Blogs",
+  "src/components/user/Header.management": "Management",
 
   "src/modules/user/home.category": "Category",
   "src/modules/user/home.priceRange": "Price Range",

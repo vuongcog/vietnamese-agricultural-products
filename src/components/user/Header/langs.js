@@ -10,5 +10,6 @@ const langs = {
   about: USER_HEADER + '.about',
   language: USER_HEADER + '.language',
   blogs: USER_HEADER + '.blogs',
+  management: USER_HEADER + '.management',
 };
 export default langs;

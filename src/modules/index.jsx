@@ -65,6 +65,7 @@ const App = () => (
       >
         <Route path="/authen/signin" element={<FormLogin />} />
         <Route path="/authen/signup" element={<FormRegister />} />
+        <Route path="/authen/signin-management" element={<FormRegister />} />
       </Route>
       <Route
         path="/admin"

@@ -1,34 +1,34 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState } from 'react';
 import {
   FormControl,
   Input,
   FormErrorMessage,
   Button,
   Checkbox,
-} from "@chakra-ui/react";
-import styles from "./styles.module.scss";
-import LOGO from "../../../../constants/logo";
-import { FormContext } from "./FormContext";
-import { useAuth } from "../../../../contexts/AuthContext";
-import { parseObjectJson } from "../../../../utils/parse-json";
-import ProgressFullScreen from "../../../../components/core/ProgressFullScreen";
+} from '@chakra-ui/react';
+import styles from './styles.module.scss';
+import LOGO from '../../../../constants/logo';
+import { FormContext } from './FormContext';
+import { useAuth } from '../../../../contexts/AuthContext';
+import { parseObjectJson } from '../../../../utils/parse-json';
+import ProgressFullScreen from '../../../../components/core/ProgressFullScreen';
 const FormLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [remember, setRemember] = useState(false);
   const { login } = useContext(FormContext);
   const { setIsAuthenticated } = useAuth();
   const { isLoading } = useContext(FormContext);
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     if (!email) {
-      setEmailError("Email is required");
+      setEmailError('Email is required');
       return;
     }
     if (!password) {
-      setPasswordError("Password is required");
+      setPasswordError('Password is required');
       return;
     }
 
@@ -38,7 +38,7 @@ const FormLogin = () => {
     };
 
     login(loginParams)
-      .then((res) => {
+      .then(res => {
         console.log(res);
         const responseData = parseObjectJson(res);
         document.cookie = `accsessToken=${
@@ -48,7 +48,7 @@ const FormLogin = () => {
         )};`;
         setIsAuthenticated(true);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };
@@ -64,9 +64,9 @@ const FormLogin = () => {
           type="email"
           value={email}
           placeholder="Email"
-          onChange={(e) => {
+          onChange={e => {
             setEmail(e.target.value);
-            setEmailError("");
+            setEmailError('');
           }}
         />
         <FormErrorMessage>{emailError}</FormErrorMessage>
@@ -78,9 +78,9 @@ const FormLogin = () => {
           type="password"
           value={password}
           placeholder="Password"
-          onChange={(e) => {
+          onChange={e => {
             setPassword(e.target.value);
-            setPasswordError("");
+            setPasswordError('');
           }}
         />
         <FormErrorMessage>{passwordError}</FormErrorMessage>
@@ -89,7 +89,7 @@ const FormLogin = () => {
         <Checkbox
           className={styles.remember}
           isChecked={remember}
-          onChange={(e) => setRemember(e.target.checked)}
+          onChange={e => setRemember(e.target.checked)}
         >
           Remember me
         </Checkbox>
