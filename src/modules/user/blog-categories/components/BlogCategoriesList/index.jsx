@@ -7,12 +7,12 @@ const BlogCategoriesList = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.layout}>
-      <h1>Tất cả bài viết</h1>
+      <h1>Tất cả danh mục</h1>
       <ol className={styles[`gradient-list`]}>
         {blogCategories?.map(item => (
           <li
             onClick={() => {
-              navigate(`/blogs?category=${item.id}`);
+              navigate(`/blogs?category=${item.id}&name=${item.name}`);
             }}
             key={item.name}
           >

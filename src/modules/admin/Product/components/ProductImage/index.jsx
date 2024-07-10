@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
-import { useDisclosure } from "@chakra-ui/react";
-import DialogMessage from "../../../../../components/core/DialogMessage";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './styles.module.scss';
+import { useDisclosure } from '@chakra-ui/react';
+import DialogMessage from '../../../../../components/core/DialogMessage';
 
 const ProductImage = ({ product_image }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,7 +21,6 @@ const ProductImage = ({ product_image }) => {
       <DialogMessage isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
         <img
           className="w-full h-full object-cover"
-          onClick={onOpen}
           src={product_image}
           alt="Avatar"
         />

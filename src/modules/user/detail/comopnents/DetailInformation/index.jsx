@@ -3,18 +3,15 @@ import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
 import DetailOrder from '../DetailOrder';
 import useProducerDetail from '../../../../../useCustom/user/useProducerDetail';
+import classNames from 'classnames';
 const DetailInformation = ({ item }) => {
   const { product } = useProducerDetail();
-  console.log(product);
   if (_.isEmpty(product)) return;
   return (
     <div>
       <div className={styles.container}>
         <div className={styles[`wrapper-img`]}>
           <img src={product[`product_image`]} alt="" />
-        </div>
-        <div className={styles[`wrapper-message`]}>
-          <div className={styles.title}>{product[`product_name`]}</div>
           <div className={styles[`wrapper-statistics`]}>
             <div>{item.rating}</div>
             <div className="text-[rgba(128, 120, 120, 0.7)]">
@@ -32,11 +29,20 @@ const DetailInformation = ({ item }) => {
           </div>
           <DetailOrder></DetailOrder>
         </div>
+        <div className={styles[`wrapper-message`]}>
+          <h1 className={styles.title}>{product[`product_name`]}</h1>
+          <div
+            className={classNames('prose')}
+            dangerouslySetInnerHTML={{ __html: product[`product_info`] }}
+          ></div>
+        </div>
       </div>
-      <span>Thông tin : </span>
-      <div className={styles.info}>{product[`product_info`]}</div>
-      <span>Mô tả : </span>
-      <div className={styles.info}>{product[`product_des`]}</div>
+      <div></div>
+      <hr className="mb-6" />
+      <div
+        className={classNames('prose')}
+        dangerouslySetInnerHTML={{ __html: product[`product_des`] }}
+      ></div>
     </div>
   );
 };

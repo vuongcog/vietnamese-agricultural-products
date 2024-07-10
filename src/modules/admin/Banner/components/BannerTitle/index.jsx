@@ -6,7 +6,7 @@ import PropTypes from '../../../../../utils/prop-types';
 const BannerTitle = ({ banner_title }) => (
   <div className={styles.container}>
     <CampaignIcon className={styles.icon} />
-    <h2 className={styles.title}>{banner_title}</h2>
+    <span className={styles.title}>{banner_title}</span>
   </div>
 );
 BannerTitle.propTypes = {

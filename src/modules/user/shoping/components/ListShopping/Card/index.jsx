@@ -14,6 +14,8 @@ import { useDispatch } from 'react-redux';
 import { formattedNumber } from '../../../../../../utils/format-number';
 import { ToastContainer } from 'react-toastify';
 import { ADD_CART } from '../../../../../../actions/action-cart';
+import { faBoxOpen } from '@fortawesome/free-solid-svg-icons'; // Bạn có thể chọn biểu tượng phù hợp hơn nếu có
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Card = ({ item, ...props }) => {
   const navigate = useNavigate();
@@ -50,27 +52,36 @@ const Card = ({ item, ...props }) => {
         <div className={styles.wrapperImg}>
           <img src={cloneItem.product_image} alt={cloneItem.product_name} />
         </div>
-        <p className={styles.title}>{cloneItem.product_name}</p>
+        <h5 className={styles.title}>{cloneItem.product_name}</h5>
         <span className={styles.price}>
           {formattedNumber(cloneItem?.unit_prices?.toLocaleString())}
         </span>
-        <div className={styles.sold}>{cloneItem.sold} sold</div>
       </div>
-      <button
-        onClick={() => {
-          dispatch({
-            type: ADD_CART,
-            payload: {
-              endpoint: `/giohang/themgiohang`,
-              params: { id_prd: cloneItem.id, quantity: 1 },
-            },
-          });
-        }}
-        className={styles.cart}
-      >
-        {t(langsGlobal.addCart)}
-        <ShoppingCartCheckout className={styles.cartIcon} />
-      </button>
+      <div className={styles[`wrapper-bottom`]}>
+        <div className={styles.quantity}>
+          <FontAwesomeIcon
+            color=" rgb(201, 105, 8)"
+            icon={faBoxOpen}
+            className="icon"
+          />
+          <h6 className="text-slate-600">{cloneItem.quantity}</h6>
+        </div>
+        <button
+          onClick={() => {
+            dispatch({
+              type: ADD_CART,
+              payload: {
+                endpoint: `/giohang/themgiohang`,
+                params: { id_prd: cloneItem.id, quantity: 1 },
+              },
+            });
+          }}
+          className={styles.cart}
+        >
+          {t(langsGlobal.addCart)}
+          <ShoppingCartCheckout className={styles.cartIcon} />
+        </button>
+      </div>
     </div>
   );
 };

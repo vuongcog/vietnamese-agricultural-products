@@ -6,7 +6,7 @@ import PropTypes from '../../../../../utils/prop-types';
 const BlogTitle = ({ blog_title }) => (
   <div className={styles.container}>
     <BookIcon className={styles.icon} />
-    <h2 className={styles.title}>{blog_title}</h2>
+    <span className={styles.title}>{blog_title}</span>
   </div>
 );
 BlogTitle.propTypes = {

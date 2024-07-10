@@ -23,3 +23,20 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
 }
+.customOption {
+  :global(.ant-select-outlined) {
+    height: 40px;
+  }
+  :global(.ant-select-selection-item) {
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+  }
+  :global(.ant-select-selector) {
+    display: flex;
+    align-items: center !important;
+    background-color: rgb(61, 219, 17) !important;
+    border-radius: 6px;
+    padding: 0 12px !important;
+  }
+}

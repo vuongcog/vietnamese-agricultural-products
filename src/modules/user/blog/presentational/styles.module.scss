@@ -1,0 +1,17 @@
+.layout {
+  display: flex;
+
+  padding: 24px 120px;
+  .content {
+    width: 75%;
+  }
+  .wrapper_image {
+    width: 50%;
+    img {
+      border-radius: 6px;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+}

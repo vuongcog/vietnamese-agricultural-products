@@ -1,32 +1,23 @@
-import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // import các kiểu mặc định của Quill
-
-const TextEditor = ({ onChange }) => {
-  const [editorContent, setEditorContent] = useState('');
-
-  const handleEditorChange = content => {
-    setEditorContent(content);
-    onChange(content); // gửi nội dung đã thay đổi lên component cha hoặc xử lý khác
-  };
-
-  return <ReactQuill value={editorContent} onChange={handleEditorChange} />;
-};
-
-const BlogContent = ({ content }) => {
-  return <div dangerouslySetInnerHTML={{ __html: content }} />;
-};
-
-const App = () => {
-  const [content, setContent] = useState('');
+import React from 'react';
+import useProducerBlog from '../../../../useCustom/user/useProducerBlog';
+import classNames from 'classnames';
+import styles from './styles.module.scss';
+const BlogGuestLayout = () => {
+  const { blog } = useProducerBlog();
   return (
-    <div className="App">
-      <h1>Blog Editor</h1>
-      <TextEditor onChange={setContent} />
-      <h2>Preview</h2>
-      <BlogContent content={content} />
+    <div className={styles.layout}>
+      <div className={styles.content}>
+        <h1 className="font-bold text-[48px] ">{blog.blog_title}</h1>
+        <div
+          className={(classNames('prose'), 'px-5 mt-6')}
+          dangerouslySetInnerHTML={{ __html: blog.content }}
+        ></div>
+      </div>
+      <div className={styles.wrapper_image}>
+        <img src={blog.blog_image} />
+      </div>
     </div>
   );
 };
 
-export default App;
+export default BlogGuestLayout;

@@ -1,4 +1,4 @@
-@import "../../../../../assets/css/abstracts/mixin";
+@import '../../../../../assets/css/abstracts/mixin';
 .container {
   display: flex;
   gap: 24px;
@@ -6,22 +6,12 @@
   width: 100%;
   .wrapper-img {
     width: 45%;
-    height: 480px;
     img {
       border-radius: 6px;
       width: 100%;
-      height: 100%;
+      height: 480px;
       object-fit: cover;
-    }
-  }
-  .wrapper-message {
-    width: 55%;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    .title {
-      font-size: 20px;
-      @include setLimitLine(2);
+      margin-bottom: 24px;
     }
     .wrapper-statistics {
       display: flex;
@@ -31,6 +21,15 @@
         padding-right: 12px;
         border-right: 1px solid rgba(34, 25, 25, 0.5);
       }
+    }
+  }
+  .wrapper-message {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    .title {
+      @include setLimitLine(2);
     }
   }
 }

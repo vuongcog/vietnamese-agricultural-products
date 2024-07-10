@@ -20,6 +20,7 @@ import useInjectReducerSaga from '../../../../useCustom/admin/useInjectReducerSa
 import { useTranslation } from 'react-i18next';
 import langs from '../langs';
 import BlogImage from '../components/BlogImage';
+import ReactQuill from 'react-quill';
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
   const { t } = useTranslation();

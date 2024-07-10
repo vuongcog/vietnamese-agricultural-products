@@ -1,8 +1,8 @@
-@import "../../../../../assets/css/abstracts/mixin";
+@import '../../../../../assets/css/abstracts/mixin';
 
 .container {
-  width: 200px;
-  @include setLimitLine(1);
+  max-width: 240px;
+  @include setLimitLine(2);
   border-radius: 8px; /* Bo góc */
   color: #333; /* Màu chữ tối hơn để dễ đọc */
   font-weight: 500; /* Độ đậm trung bình cho chữ */

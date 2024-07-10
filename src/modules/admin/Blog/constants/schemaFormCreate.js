@@ -29,7 +29,7 @@ export const schemaFormCreate = {
       label: langs.content,
       placeholder: langs.content,
       isRequire: true,
-      type: 'text',
+      type: 'editor',
     },
     {
       name: 'blog_image',

@@ -9,6 +9,8 @@ const BlogCategoyGuest = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get('category');
+  const name = queryParams.get('name');
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
@@ -18,7 +20,7 @@ const BlogCategoyGuest = () => {
   }, []);
   return (
     <div>
-      <BlogWithCategory></BlogWithCategory>
+      <BlogWithCategory name={name}></BlogWithCategory>
     </div>
   );
 };

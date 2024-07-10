@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { AddIcon } from '@chakra-ui/icons';
 import {
+  Box,
   Button,
   FormControl,
   FormErrorMessage,
@@ -10,6 +11,7 @@ import {
   Input,
   Select,
   Spinner,
+  useToast,
 } from '@chakra-ui/react';
 import styles from './styles.module.scss';
 import { ContextDialogCreateForm } from '../DialogCreateForm/context/ProviderDialogCreateForm';
@@ -25,6 +27,9 @@ import {
   formatInputDate,
 } from '../../../utils/format-input-date';
 import { useTranslation } from 'react-i18next';
+import ReactQuill from 'react-quill';
+import DialogMessage from '../DialogMessage';
+import 'react-quill/dist/quill.snow.css';
 
 const CreateForm = ({
   doneText = ['Cancel', 'Create'],
@@ -55,6 +60,7 @@ const CreateForm = ({
     setFormState({ ...formState, [name]: value });
   };
   const handleSubmit = event => {
+    var isEmptyEditor = false;
     event.preventDefault();
     schemaForm.map(field => {
       if (field.type === 'file' && formState[field.name]) {
@@ -69,7 +75,16 @@ const CreateForm = ({
           toast.error(`${MAPPER_NAME[field.name]} phải là một hình ảnh`);
         }
       }
+      if (field.type === 'editor') {
+        if (!formState[field.name]) {
+          isEmptyEditor = t(field.label);
+        }
+      }
     });
+    if (isEmptyEditor) {
+      toast.error('Không được để rỗng ' + isEmptyEditor);
+      return;
+    }
 
     let data = { ...formState };
     // 111 hàm này dùng để xóa các filed không có dữ liệu hoặc ""
@@ -87,10 +102,24 @@ const CreateForm = ({
     setValueForm(data);
   };
 
-  const RenderField = (item, defaultValue) => {
+  const RenderField = item => {
     const [options, setOptions] = useState(item.items || []);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const inputRef = useRef(null);
+    const toast = useToast();
+    const handleFileChange = e => {
+      const file = e.target.files[0];
+      handleChange(item.name, file);
+      toast({
+        title: 'File selected',
+        description: file ? `${file.name} selected` : 'No file selected',
+        status: 'info',
+        duration: 2000,
+        isClosable: true,
+      });
+    };
+
     useEffect(() => {
       if (item.endpoint) {
         setLoading(true);
@@ -125,11 +154,17 @@ const CreateForm = ({
     }, [item.endpoint]);
 
     if (error) toast.error(error);
-
     const renderInput = () => {
       switch (item.type) {
         case 'editor':
-          return <div></div>;
+          return (
+            <DialogMessage width={'1200px'} button={'Edit ' + t(item.label)}>
+              <ReactQuill
+                value={formState[item.name]}
+                onChange={e => handleChange(item.name, e)}
+              ></ReactQuill>
+            </DialogMessage>
+          );
         case 'select':
           return (
             <>
@@ -137,7 +172,7 @@ const CreateForm = ({
                 <Spinner size="sm" />
               ) : (
                 <Select
-                  defaultValue={defaultValue || options[0]?.value}
+                  defaultValue={options[0]?.value}
                   onChange={e => handleChange(item.name, e.target.value)}
                 >
                   {options.map(option => (
@@ -165,18 +200,25 @@ const CreateForm = ({
           );
         case 'file':
           return (
-            <Input
-              {...item}
-              onChange={e => {
-                handleChange(item.name, e.target.files[0]);
-              }}
-              type="file"
-            />
+            <Box>
+              <Button
+                onClick={() => inputRef.current.click()}
+                colorScheme="blue"
+              >
+                Choose File
+              </Button>
+              <Input
+                ref={inputRef}
+                type="file"
+                onChange={handleFileChange}
+                display="none"
+                {...item}
+              />
+            </Box>
           );
         default:
           return (
             <Input
-              defaultValue={defaultValue}
               {...item}
               placeholder={t(item.placeholder)}
               value={formState[item.name]}

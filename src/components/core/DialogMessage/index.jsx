@@ -13,6 +13,8 @@ import PropTypes from '../../../utils/prop-types';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
 const DialogMessage = ({
+  width,
+  height,
   button,
   children,
   title,
@@ -20,6 +22,7 @@ const DialogMessage = ({
   isOpen: propIsOpen,
   onOpen: propOnOpen,
   onClose: propOnClose,
+  ...props
 }) => {
   // * khởi tạo state cho component
   const cancelRef = useRef();
@@ -52,7 +55,11 @@ const DialogMessage = ({
   return (
     <>
       {button && (
-        <button className={styles.customButton} onClick={finalOnOpen}>
+        <button
+          type="button"
+          className={styles.customButton}
+          onClick={finalOnOpen}
+        >
           {t(button)}
         </button>
       )}
@@ -60,9 +67,14 @@ const DialogMessage = ({
         isOpen={finalIsOpen}
         leastDestructiveRef={cancelRef}
         onClose={finalOnClose}
+        {...props}
       >
         <AlertDialogOverlay>
-          <AlertDialogContent>
+          <AlertDialogContent
+            AlertDialogContent
+            maxWidth={width}
+            maxHeight={height}
+          >
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
               {title}
             </AlertDialogHeader>
