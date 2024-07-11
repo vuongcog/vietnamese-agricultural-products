@@ -14,7 +14,7 @@ import { parseObjectJson } from '../../../../utils/parse-json';
 import ProgressFullScreen from '../../../../components/core/ProgressFullScreen';
 import PropTypes from '../../../../utils/prop-types';
 import { Link, useNavigate } from 'react-router-dom';
-const FormLoginManagement = () => {
+const FormLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -50,6 +50,7 @@ const FormLoginManagement = () => {
           new Date().getTime() + responseData.expires_in * 1000
         )};`;
 
+        Cookies.set('name', 'value', { expires: 7 });
         setIsAuthenticated(true);
       })
       .catch(err => {
@@ -114,8 +115,8 @@ const FormLoginManagement = () => {
     </form>
   );
 };
-FormLoginManagement.propTypes = {
+FormLogin.propTypes = {
   type: PropTypes.string,
 };
 
-export default FormLoginManagement;
+export default FormLogin;

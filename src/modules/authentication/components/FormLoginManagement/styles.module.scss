@@ -1,0 +1,50 @@
+.form {
+  box-shadow: rgba(0, 0, 0, 1) 0px 0px 44px -27px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  gap: 24px;
+  padding: 48px 0px;
+  border-radius: 6px;
+  background: linear-gradient(
+    to left,
+    rgba(0, 237, 99, 0.9),
+    rgba(10, 221, 200, 0.9)
+  );
+  h1 {
+    font-weight: 600;
+    font-size: 36px;
+    color: white;
+  }
+  img {
+    width: 160px;
+    height: 160px;
+    border-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 1) 0px 0px 44px -27px;
+  }
+  .field {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    input {
+      border: none;
+      border-radius: 6px;
+      border-bottom: 1px solid white;
+      width: 80%;
+      color: white;
+      &::placeholder {
+        font-weight: 600;
+        color: rgba(118, 113, 113, 0.5);
+        color: white;
+      }
+    }
+  }
+  .remember {
+    color: white;
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+  }
+}
