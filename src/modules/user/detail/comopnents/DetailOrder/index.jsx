@@ -15,7 +15,6 @@ const DetailOrder = () => {
   const params = useParams();
   return (
     <div className={styles.container}>
-      <ToastContainer></ToastContainer>
       <div className={styles.quantity}>
         <span>Số lượng</span>
         <QuantitySelector

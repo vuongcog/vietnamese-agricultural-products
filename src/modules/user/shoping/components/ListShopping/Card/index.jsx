@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 import langsGlobal from '../../../../../../langs';
 import { useDispatch } from 'react-redux';
 import { formattedNumber } from '../../../../../../utils/format-number';
-import { ToastContainer } from 'react-toastify';
 import { ADD_CART } from '../../../../../../actions/action-cart';
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons'; // Bạn có thể chọn biểu tượng phù hợp hơn nếu có
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -40,7 +39,6 @@ const Card = ({ item, ...props }) => {
 
   return (
     <div className={styles.wrapper}>
-      <ToastContainer></ToastContainer>
       <div
         ref={elementRef ? elementRef : null}
         {...props}

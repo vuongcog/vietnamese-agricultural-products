@@ -1,38 +1,37 @@
-import React, { useState } from "react";
-import styles from "./styles.module.scss";
-import AdminCrud from "../../../../components/core/AdminCrud";
-import ContextCrudProvider from "../../../../components/core/AdminCrud/CrudContext/CrudContext";
-import DialogCreateForm from "../../../../components/core/DialogCreateForm";
-import { schemaFormFactory } from "../utils/schemaFormFactory";
-import {} from "../../../../components/core/AdminCrud/utils/inject-reducer-saga";
-import ProductDes from "../components/ProductDes";
-import {} from "../../../../utils/fetch-cancel-saga-reducer-with-key";
-import ProductName from "../components/ProductName";
-import Status from "../../../../components/admin/Status";
-import ProductInfo from "../components/ProductInfo";
-import ProductUnitPrice from "../components/ProductUnitPrice";
-import { exportToExcel } from "../../../../utils/export-excel";
-import { Icon } from "@chakra-ui/react";
-import { FaFileExcel } from "react-icons/fa";
-import { ToastContainer } from "react-toastify";
-import ProductSlug from "../components/ProductSlug";
-import ProductImage from "../components/ProductImage";
-import CreatedAtComponent from "../../../../components/core/CreatedAt";
-import UpdatedAtComponent from "../../../../components/core/UpdatedAt";
-import { useDispatch } from "react-redux";
-import { DELETE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
-import useInjectReducerSaga from "../../../../useCustom/admin/useInjectReducerSaga";
-import { useTranslation } from "react-i18next";
-import langs from "../langs";
+import React, { useState } from 'react';
+import styles from './styles.module.scss';
+import AdminCrud from '../../../../components/core/AdminCrud';
+import ContextCrudProvider from '../../../../components/core/AdminCrud/CrudContext/CrudContext';
+import DialogCreateForm from '../../../../components/core/DialogCreateForm';
+import { schemaFormFactory } from '../utils/schemaFormFactory';
+import {} from '../../../../components/core/AdminCrud/utils/inject-reducer-saga';
+import ProductDes from '../components/ProductDes';
+import {} from '../../../../utils/fetch-cancel-saga-reducer-with-key';
+import ProductName from '../components/ProductName';
+import Status from '../../../../components/admin/Status';
+import ProductInfo from '../components/ProductInfo';
+import ProductUnitPrice from '../components/ProductUnitPrice';
+import { exportToExcel } from '../../../../utils/export-excel';
+import { Icon } from '@chakra-ui/react';
+import { FaFileExcel } from 'react-icons/fa';
+import ProductSlug from '../components/ProductSlug';
+import ProductImage from '../components/ProductImage';
+import CreatedAtComponent from '../../../../components/core/CreatedAt';
+import UpdatedAtComponent from '../../../../components/core/UpdatedAt';
+import { useDispatch } from 'react-redux';
+import { DELETE_DATA } from '../../../../components/core/AdminCrud/Store/constants';
+import useInjectReducerSaga from '../../../../useCustom/admin/useInjectReducerSaga';
+import { useTranslation } from 'react-i18next';
+import langs from '../langs';
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
-      q: "",
+      q: '',
     },
-    endpoint: "/product",
+    endpoint: '/product',
     mode: {
       breadcrumb: true,
       list: true,
@@ -41,42 +40,42 @@ const Product = () => {
     },
     search: [
       {
-        name: "search",
-        label: "Title",
-        type: "text",
+        name: 'search',
+        label: 'Title',
+        type: 'text',
       },
     ],
     schema: [
       {
-        name: "id",
-        label: "id",
-        default: "N/A",
+        name: 'id',
+        label: 'id',
+        default: 'N/A',
       },
 
       {
-        name: "product_name",
+        name: 'product_name',
         label: t(langs.name),
-        default: "N/A",
+        default: 'N/A',
         component: ProductName,
         dropdownActions: {
           items: [
             {
               icon: <i className="fa-regular fa-copy"></i>,
-              name: "duplicate",
+              name: 'duplicate',
               label: <span className="font-semibold">Duplicate</span>,
               callback: () => {},
             },
             {
               icon: <i className="text-red-600 fa-regular fa-delete-left"></i>,
-              name: "delete",
+              name: 'delete',
               label: <span className="text-red-600 font-semibold">Delete</span>,
-              callback: (item) => {
+              callback: item => {
                 dispatch({ type: DELETE_DATA, payload: `/product/${item.id}` });
               },
             },
             {
-              icon: <Icon color={"green"} as={FaFileExcel} />,
-              name: "export-excel",
+              icon: <Icon color={'green'} as={FaFileExcel} />,
+              name: 'export-excel',
               label: (
                 <span className="text-green-600 font-semibold">
                   Export Excel
@@ -90,16 +89,16 @@ const Product = () => {
               icon: (
                 <i className="text-blue-500 fa-regular fa-pen-to-square"></i>
               ),
-              name: "edit",
+              name: 'edit',
               label: <span className="text-blue-500 font-semibold">Edit</span>,
-              callback: (item) => {
+              callback: item => {
                 setSelectElement(
                   <DialogCreateForm
                     item={item}
-                    endpoint={"/product"}
+                    endpoint={'/product'}
                     callbackCancel={setSelectElement}
                     title="Update User"
-                    schemaForm={schemaFormFactory("edit")}
+                    schemaForm={schemaFormFactory('edit')}
                   ></DialogCreateForm>
                 );
               },
@@ -109,57 +108,57 @@ const Product = () => {
       },
 
       {
-        name: "product_slug",
+        name: 'product_slug',
         label: t(langs.slug),
-        default: "N/A",
+        default: 'N/A',
         component: ProductSlug,
       },
       {
-        name: "product_image",
+        name: 'product_image',
         label: t(langs.image),
-        default: "  N/A",
+        default: '  N/A',
         component: ProductImage,
       },
       {
-        name: "product_des",
+        name: 'product_des',
         label: t(langs.des),
         component: ProductDes,
-        default: "N/A",
+        default: 'N/A',
       },
       {
-        name: "product_info",
+        name: 'product_info',
         label: t(langs.info),
         component: ProductInfo,
-        default: "N/A",
+        default: 'N/A',
       },
       {
-        name: "quantity",
+        name: 'quantity',
         label: t(langs.quantity),
-        default: "N/A",
+        default: 'N/A',
       },
       {
-        name: "unit_prices",
+        name: 'unit_prices',
         label: t(langs.unitPrices),
         component: ProductUnitPrice,
-        default: "N/A",
+        default: 'N/A',
       },
       {
-        name: "status",
+        name: 'status',
         label: t(langs.status),
         component: Status,
-        default: "N/A",
+        default: 'N/A',
       },
       {
-        name: "created_at",
+        name: 'created_at',
         label: t(langs.createdAt),
-        default: "N/A",
+        default: 'N/A',
         component: CreatedAtComponent,
       },
 
       {
-        name: "updated_at",
+        name: 'updated_at',
         label: t(langs.updatedAt),
-        default: "N/A",
+        default: 'N/A',
         component: UpdatedAtComponent,
       },
     ],
@@ -170,9 +169,8 @@ const Product = () => {
 
   return (
     <div className={styles.module}>
-      <ToastContainer containerId={"export-excel"} />
       <ContextCrudProvider
-        schemaForm={schemaFormFactory("create")}
+        schemaForm={schemaFormFactory('create')}
         {...crudOptions}
         classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
       >

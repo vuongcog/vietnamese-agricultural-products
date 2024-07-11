@@ -8,7 +8,6 @@ import Status from '../../../../components/admin/Status';
 import { exportToExcel } from '../../../../utils/export-excel';
 import { Icon } from '@chakra-ui/react';
 import { FaFileExcel } from 'react-icons/fa';
-import { ToastContainer } from 'react-toastify';
 import CreatedAtComponent from '../../../../components/core/CreatedAt';
 import UpdatedAtComponent from '../../../../components/core/UpdatedAt';
 import BlogIcon from '../components/BlogTitle';
@@ -164,7 +163,6 @@ const Product = () => {
   useInjectReducerSaga();
   return (
     <div className={styles.module}>
-      <ToastContainer containerId={'export-excel'} />
       <ContextCrudProvider
         schemaForm={schemaFormFactory('create')}
         {...crudOptions}

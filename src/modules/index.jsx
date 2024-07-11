@@ -19,7 +19,6 @@ import Home from './user/home/container';
 import Shopping from './user/shoping/container';
 import Authentication from './authentication/container';
 import FormLogin from './authentication/components/FormLogin';
-import FormRegister from './authentication/components/FormRegister';
 import DetailProduct from './user/detail/container';
 import { AuthProvider } from '../contexts/AuthContext';
 import {
@@ -34,6 +33,7 @@ import DialogMessage from '../components/core/DialogMessage';
 import BlogCategoyGuest from './user/blog-with-category/container';
 import BlogContainer from './user/blog-categories/container';
 import BlogGuestContainer from './user/blog/container';
+import FormRegisterContainer from './authentication/components/FormRegister/container';
 
 const App = () => (
   <AuthProvider>
@@ -64,8 +64,8 @@ const App = () => (
         }
       >
         <Route path="/authen/signin" element={<FormLogin />} />
-        <Route path="/authen/signup" element={<FormRegister />} />
-        <Route path="/authen/signin-management" element={<FormRegister />} />
+        <Route path="/authen/signup" element={<FormRegisterContainer />} />
+        <Route path="/authen/signin-management" element={<FormLogin />} />
       </Route>
       <Route
         path="/admin"

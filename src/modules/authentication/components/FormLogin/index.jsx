@@ -12,7 +12,9 @@ import { FormContext } from './FormContext';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { parseObjectJson } from '../../../../utils/parse-json';
 import ProgressFullScreen from '../../../../components/core/ProgressFullScreen';
-const FormLogin = () => {
+import PropTypes from '../../../../utils/prop-types';
+import { Link, useNavigate } from 'react-router-dom';
+const FormLogin = ({ type = 'customer' }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -21,6 +23,7 @@ const FormLogin = () => {
   const { login } = useContext(FormContext);
   const { setIsAuthenticated } = useAuth();
   const { isLoading } = useContext(FormContext);
+  const navigate = useNavigate();
   const handleSubmit = event => {
     event.preventDefault();
     if (!email) {
@@ -39,8 +42,8 @@ const FormLogin = () => {
 
     login(loginParams)
       .then(res => {
-        console.log(res);
         const responseData = parseObjectJson(res);
+        console.log(responseData.access_token);
         document.cookie = `accsessToken=${
           responseData.access_token
         } ; path = / ; expires=${new Date(
@@ -56,7 +59,12 @@ const FormLogin = () => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       {isLoading && <ProgressFullScreen></ProgressFullScreen>}
-      <img src={LOGO.login}></img>
+      <img
+        src={LOGO.login}
+        onClick={() => {
+          navigate('/');
+        }}
+      ></img>
       <h1>LOG IN</h1>
       <FormControl className={styles.field} isInvalid={!!emailError}>
         <Input
@@ -86,19 +94,27 @@ const FormLogin = () => {
         <FormErrorMessage>{passwordError}</FormErrorMessage>
       </FormControl>
       <FormControl>
-        <Checkbox
-          className={styles.remember}
-          isChecked={remember}
-          onChange={e => setRemember(e.target.checked)}
-        >
-          Remember me
-        </Checkbox>
+        <div className="flex justify-evenly">
+          <Checkbox
+            className={styles.remember}
+            isChecked={remember}
+            onChange={e => setRemember(e.target.checked)}
+          >
+            Remember me
+          </Checkbox>
+          <Link className="font-bold text-blue-600" to={'/authen/signup'}>
+            Signup
+          </Link>
+        </div>
       </FormControl>
       <Button mt={4} colorScheme="teal" type="submit">
         Login
       </Button>
     </form>
   );
+};
+FormLogin.propTypes = {
+  type: PropTypes.string,
 };
 
 export default FormLogin;

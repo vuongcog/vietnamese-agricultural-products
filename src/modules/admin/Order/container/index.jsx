@@ -22,10 +22,8 @@ import ProductUnitPrice from '../components/ProductUnitPrice';
 import { exportToExcel } from '../../../../utils/export-excel';
 import { Icon } from '@chakra-ui/react';
 import { FaFileExcel } from 'react-icons/fa';
-import { ToastContainer } from 'react-toastify';
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
-
   const crudOptions = {
     endpointParams: {
       q: '',
@@ -173,7 +171,6 @@ const Product = () => {
   }, []);
   return (
     <div className={styles.module}>
-      <ToastContainer containerId={'export-excel'} />
       <ContextCrudProvider
         schemaForm={schemaFormFactory('create')}
         {...crudOptions}

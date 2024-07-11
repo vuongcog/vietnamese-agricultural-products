@@ -16,7 +16,6 @@ import {
   getSuccessSendMail,
 } from '../Store/selector';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import SelectLanguage from '../../../user/Header/SelectLang';
 import langs from '../../../../langs';
 import { useTranslation } from 'react-i18next';
@@ -64,7 +63,6 @@ const BreadCrumb = ({
 
   return (
     <div className={styles.container}>
-      <ToastContainer />
       {isSendingMail && <ProgressFullScreen />}
 
       {isSearchInput && (

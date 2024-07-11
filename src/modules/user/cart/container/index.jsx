@@ -8,7 +8,6 @@ import {
   FETCH_CART,
   UPDATE_CART,
 } from '../../../../actions/action-cart';
-import { ToastContainer } from 'react-toastify';
 import useProducerCart from '../../../../useCustom/user/useProducerCart';
 export const CartContext = createContext({});
 
@@ -30,7 +29,6 @@ const CartContainer = () => {
 
   return (
     <CartContext.Provider value={{ handlerDeleteCart, handlerUpdateCart }}>
-      <ToastContainer></ToastContainer>
       <CartModule></CartModule>
     </CartContext.Provider>
   );

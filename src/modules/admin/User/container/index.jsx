@@ -10,7 +10,6 @@ import { schemaFormFactory } from '../utils/schemaFormFactory';
 import { FaFileExcel } from 'react-icons/fa'; // Import icon từ react-icons
 import { exportToExcel } from '../../../../utils/export-excel';
 import { Icon } from '@chakra-ui/react';
-import { ToastContainer } from 'react-toastify';
 import Status from '../../../../components/admin/Status';
 import UserPhone from '../components/PhoneNum';
 import UserAvatar from '../components/UserAvatar';
@@ -158,7 +157,6 @@ const User = () => {
         }}
       >
         {selectElement}
-        <ToastContainer containerId={'export-excel'} />
         <AdminCrud
           classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
           {...crudOptions}
