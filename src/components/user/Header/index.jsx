@@ -55,9 +55,7 @@ const UserHeader = () => {
         <li>
           <button
             onClick={() => {
-              if (window.location.hostname === 'localhost') {
-                window.location.replace('http://admin.localhost:5173'); // Thay đổi URL này thành URL đúng của bạn
-              }
+              window.location.replace(import.meta.env.VITE_DOMAIN); // Thay đổi URL này thành URL đúng của bạn
             }}
           >
             {t(langs.management)}
