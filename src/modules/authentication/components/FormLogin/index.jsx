@@ -47,12 +47,6 @@ const FormLogin = () => {
           path: '/',
           sameSite: 'Lax',
           expires: 7,
-          domain: 'admin.localhost',
-        });
-        Cookies.set('accsessToken', responseData.access_token, {
-          path: '/',
-          sameSite: 'Lax',
-          expires: 7,
         });
         setCheckauth(pre => !pre);
       })
