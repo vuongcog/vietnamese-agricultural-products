@@ -3,18 +3,25 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import HttpUserClient from '../utils/http/httpUserClient';
 import { parseObjectJson } from '../utils/parse-json';
 import {
+  FETCH_ALL_BLOG,
+  FETCH_ALL_BLOG_FAILED,
+  FETCH_ALL_BLOG_SUCCESS,
   FETCH_BLOG,
   FETCH_BLOG_FAILED,
   FETCH_BLOG_SUCCESS,
   FETCH_BLOGS_WITH_CATEGORY,
   FETCH_BLOGS_WITH_CATEGORY_FAILED,
   FETCH_BLOGS_WITH_CATEGORY_SUCCESS,
+  FETCHED_ALL_BLOG,
   FETCHED_BLOG,
   FETCHED_BLOGS_WITH_CATEGORY,
+  FETCHING_ALL_BLOG,
   FETCHING_BLOG,
   FETCHING_BLOGS_WITH_CATEGORY,
+  RESET_ALL_STATUS_FETCH_BLOG,
   RESET_STATUS_FETCH_BLOG,
   RESET_STATUS_FETCH_BLOGS_WITH_CATEGORY,
+  SET_ALL_BLOG,
   SET_BLOG,
   SET_BLOGS_WITH_CATEGORY,
 } from '../actions/action-blog';
@@ -64,6 +71,23 @@ function* wokerFetchBlog(action) {
     yield put({ type: RESET_STATUS_FETCH_BLOG });
   }
 }
+function* wokerFetchAllBlogs(action) {
+  try {
+    yield put({ type: FETCHING_ALL_BLOG });
+    const { payload } = action;
+    const http = new HttpUserClient(payload.endpoint);
+    const res = yield call(http.getAllBlog);
+    const parseObject = parseObjectJson(res.data);
+    yield put({ type: SET_ALL_BLOG, payload: parseObject.baiviet });
+    yield put({ type: FETCH_ALL_BLOG_SUCCESS });
+  } catch (err) {
+    yield put({ type: FETCH_ALL_BLOG_FAILED });
+  } finally {
+    yield put({ type: FETCHED_ALL_BLOG });
+    yield put({ type: RESET_ALL_STATUS_FETCH_BLOG });
+  }
+}
+
 function* wokerFetchBlogsWithCategory(action) {
   try {
     yield put({ type: FETCHING_BLOGS_WITH_CATEGORY });
@@ -87,6 +111,7 @@ function* watcherSagaBlogs() {
   yield takeLatest(FETCH_BLOG_CATEGORIES, wokerFetchBlogCategories);
   yield takeLatest(FETCH_BLOG, wokerFetchBlog);
   yield takeLatest(FETCH_BLOGS_WITH_CATEGORY, wokerFetchBlogsWithCategory);
+  yield takeLatest(FETCH_ALL_BLOG, wokerFetchAllBlogs);
 }
 
 export default watcherSagaBlogs;

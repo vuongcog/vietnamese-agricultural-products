@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import {
+  getAllBlog,
   getBlog,
   getBlogCategories,
   getBlogsWithCategory,
@@ -9,7 +10,8 @@ const useProducerBlog = () => {
   const blogCategories = useSelector(getBlogCategories);
   const blogs = useSelector(getBlogsWithCategory);
   const blog = useSelector(getBlog);
+  const allBlogs = useSelector(getAllBlog);
 
-  return { blog, blogCategories, blogs };
+  return { blog, blogCategories, blogs, allBlogs };
 };
 export default useProducerBlog;

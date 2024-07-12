@@ -1,3 +1,13 @@
+// action all blog
+export const FETCH_ALL_BLOG = 'FETCH_ALL_BLOG';
+export const FETCHING_ALL_BLOG = 'FETCHING_ALL_BLOG';
+export const SET_ALL_BLOG = 'SET_ALL_BLOG';
+export const FETCHED_ALL_BLOG = 'FETCHED_ALL_BLOG';
+export const FETCH_ALL_BLOG_SUCCESS = 'FETCH_ALL_BLOG_SUCCESS';
+export const FETCH_ALL_BLOG_FAILED = 'FETCH_ALL_BLOG_FAILED';
+export const RESET_ALL_STATUS_FETCH_BLOG = 'RESET_ALL_STATUS_FETCH_BLOG';
+
+// action blog
 export const FETCH_BLOG = 'FETCH_BLOG';
 export const FETCHING_BLOG = 'FETCHING_BLOG';
 export const SET_BLOG = 'SET_BLOG';
