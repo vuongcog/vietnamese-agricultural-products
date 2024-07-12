@@ -44,11 +44,7 @@ const FormLoginManagement = () => {
       .then(res => {
         const responseData = parseObjectJson(res);
         Cookies.set('accsessToken', responseData.access_token, {
-          path: '/admin',
-          expires: 7,
-        });
-        Cookies.set('accsessToken', responseData.access_token, {
-          path: '/authen/signin-management',
+          path: '/',
           expires: 7,
         });
         setCheckauth(pre => !pre);

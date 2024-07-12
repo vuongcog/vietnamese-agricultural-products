@@ -43,7 +43,7 @@ const Card = ({ item, ...props }) => {
         ref={elementRef ? elementRef : null}
         {...props}
         onClick={() => {
-          navigate(`/customer/detail/${item.product_slug}`);
+          navigate(`/detail/${item.product_slug}`);
         }}
         className={styles.container}
       >

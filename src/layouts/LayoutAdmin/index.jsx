@@ -7,8 +7,8 @@ const LayoutAdmin = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-    if (location.pathname === '/admin' || location.pathname === '/admin/') {
-      navigate('/admin/user');
+    if (location.pathname === '/') {
+      navigate('/user');
     }
   }, [location, navigate]);
   return (

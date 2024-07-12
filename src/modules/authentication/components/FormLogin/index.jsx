@@ -44,14 +44,14 @@ const FormLogin = () => {
       .then(res => {
         const responseData = parseObjectJson(res);
         Cookies.set('accsessToken', responseData.access_token, {
-          path: '/customer',
-          sameSite: 'Lax', // hoặc 'None' nếu cần thiết
-
+          path: '/',
+          sameSite: 'Lax',
           expires: 7,
+          domain: 'admin.localhost',
         });
         Cookies.set('accsessToken', responseData.access_token, {
-          path: '/authen/signin',
-          sameSite: 'Lax', // hoặc 'None' nếu cần thiết
+          path: '/',
+          sameSite: 'Lax',
           expires: 7,
         });
         setCheckauth(pre => !pre);

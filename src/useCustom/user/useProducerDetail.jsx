@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import {
   getDetailProduct,
   getFetchStatusDetailProductFailed,
   getFetchStatusDetailProductSuccess,
   getIsFetchingDetailProduct,
-} from "../../modules/user/detail/store/selector/selectors";
+} from '../../modules/user/detail/store/selector/selectors';
 
 const useProducerDetail = () => {
   const product = useSelector(getDetailProduct);

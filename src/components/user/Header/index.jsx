@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SCHEMA } from '../../../constants/user-top-nav-bar-item';
 import styles from './styles.module.scss';
 import {
@@ -9,31 +9,22 @@ import {
   MenuList,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SearchHeader from './SearchHeader';
 import Cart from '../../core/Cart';
 import SelectLanguage from './SelectLang';
 import langs from './langs';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../contexts/AuthContext';
-import { useEffect } from 'react';
 
 const UserHeader = () => {
   const { t } = useTranslation();
-  const { accessToken, logoutCustomer } = useAuth();
-  const [state, setState] = useState(false);
-  useEffect(() => {}, state);
+  const { accessToken, logout } = useAuth();
   return (
     <div className={styles.container}>
       <div className={styles.title}>Shree</div>
       <SearchHeader />
-      <button
-        onClick={() => {
-          setState(!state);
-        }}
-      >
-        Click
-      </button>
+
       <ul className={styles.navList}>
         {SCHEMA.map((item, index) => (
           <li key={index}>
@@ -49,22 +40,29 @@ const UserHeader = () => {
         </li>
         {accessToken && (
           <li>
-            <button className={styles.navLink} onClick={logoutCustomer}>
+            <button className={styles.navLink} onClick={logout}>
               {t(langs.logout)}
             </button>
           </li>
         )}
         {!accessToken && (
           <li>
-            <Link
-              to={'/authen/signin'}
-              className={styles.navLink}
-              onClick={() => {}}
-            >
+            <Link to={'/authen/signin'} className={styles.navLink}>
               {t(langs.login)}
             </Link>
           </li>
         )}
+        <li>
+          <button
+            onClick={() => {
+              if (window.location.hostname === 'localhost') {
+                window.location.replace('http://admin.localhost:5173'); // Thay đổi URL này thành URL đúng của bạn
+              }
+            }}
+          >
+            {t(langs.management)}
+          </button>
+        </li>
         <li>
           <SelectLanguage />
         </li>

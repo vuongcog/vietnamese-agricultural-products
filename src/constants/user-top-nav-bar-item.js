@@ -3,7 +3,7 @@ export const SCHEMA = [
     id: 1,
     name: 'home',
     icon: 'fa fa-home',
-    link: '/customer',
+    link: '/',
   },
   {
     id: 6,
@@ -15,7 +15,7 @@ export const SCHEMA = [
     id: 3,
     name: 'vegetables',
     icon: 'fa fa-home',
-    link: '/customer/shopping',
+    link: '/shopping',
   },
   {
     id: 5,
@@ -27,13 +27,13 @@ export const SCHEMA = [
     id: 7,
     name: 'purchase',
     icon: 'fa fa-home',
-    link: '/customer/purchase',
+    link: '/purchase',
   },
   {
     id: 7,
     name: 'blogs',
     icon: 'fa fa-home',
-    link: '/customer/blog-categories',
+    link: '/blog-categories',
   },
   {
     id: 8,

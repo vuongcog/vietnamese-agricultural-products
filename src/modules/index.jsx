@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import LayoutAdmin from '../layouts/LayoutAdmin';
 import LayoutUser from '../layouts/LayoutUser';
@@ -37,141 +37,160 @@ import FormLoginManagement from './authentication/components/FormLoginManagement
 import FormManagementProvider from './authentication/components/FormLoginManagement/FormContext';
 import FormProvider from './authentication/components/FormLogin/FormContext';
 
-const App = () => (
-  <AuthProvider>
-    <Routes>
-      <Route path="/" element={<LayoutUser />}>
-        <Route path="/customer" element={<Home />} />
-        <Route path="/customer/shopping" element={<Shopping />} />
-        <Route path="/customer/blog-categories" element={<BlogContainer />} />
-        <Route path="/customer/blogs" element={<BlogCategoyGuest />} />
-        <Route
-          path="/customer/blogs/blog/:slug"
-          element={<BlogGuestContainer />}
-        />
-        <Route path="/customer/cart" element={<CartContainer />} />
-        <Route path="/customer/detail/:id" element={<DetailProduct />} />
-        <Route path="/customer/purchase" element={<DetailProduct />} />
-      </Route>
-      <Route path="/authen" element={<Authentication />}>
-        <Route
-          path="/authen/signin"
-          element={
-            <ProtectedAuthenRoute>
-              <FormProvider>
-                <FormLogin />
-              </FormProvider>
-            </ProtectedAuthenRoute>
-          }
-        />
-        <Route
-          path="/authen/signin-management"
-          element={
-            <ProtectedAuthenRoute>
-              <FormManagementProvider>
-                <FormLoginManagement />
-              </FormManagementProvider>
-            </ProtectedAuthenRoute>
-          }
-        />
-        <Route path="/authen/signup" element={<FormRegisterContainer />} />
-      </Route>
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute>
-            <LayoutAdmin />
-          </ProtectedRoute>
-        }
-      >
-        <Route path="/admin/dashboard" element={<ChartComponent />} />
-        <Route
-          path="/admin/test"
-          element={
-            <div>
-              <DialogMessage>
-                <FormEmailContainer />
-              </DialogMessage>
-            </div>
-          }
-        />
-        <Route
-          path="/admin/user"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <User />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/admin/category"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Category />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/admin/product"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Product />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/admin/order"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Order />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/admin/blog"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Blog />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/admin/blog-category"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <BlogCategory />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/admin/banner"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Banner />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/admin/coupon"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Coupon />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/admin/cart"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Cart />
-            </Suspense>
-          }
-        />
-      </Route>
+const App = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const location = useLocation();
 
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  </AuthProvider>
-);
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    const subdomain = hostname.split('.')[0];
+    if (subdomain === 'admin') {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+    setIsLoaded(true);
+  }, [location]);
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+  return (
+    <AuthProvider>
+      <Routes>
+        {!isAdmin && (
+          <Route path="/" element={<LayoutUser />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/shopping" element={<Shopping />} />
+            <Route path="/blog-categories" element={<BlogContainer />} />
+            <Route path="/blogs" element={<BlogCategoyGuest />} />
+            <Route path="/blogs/blog/:slug" element={<BlogGuestContainer />} />
+            <Route path="/cart" element={<CartContainer />} />
+            <Route path="/detail/:id" element={<DetailProduct />} />
+            <Route path="/purchase" element={<DetailProduct />} />
+          </Route>
+        )}
+        <Route path="/authen" element={<Authentication />}>
+          <Route
+            path="/authen/signin"
+            element={
+              <ProtectedAuthenRoute>
+                <FormProvider>
+                  <FormLogin />
+                </FormProvider>
+              </ProtectedAuthenRoute>
+            }
+          />
+          <Route
+            path="/authen/signin-management"
+            element={
+              <ProtectedAuthenRoute>
+                <FormManagementProvider>
+                  <FormLoginManagement />
+                </FormManagementProvider>
+              </ProtectedAuthenRoute>
+            }
+          />
+          <Route path="/authen/signup" element={<FormRegisterContainer />} />
+        </Route>
+        {isAdmin && (
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <LayoutAdmin />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="/dashboard" element={<ChartComponent />} />
+            <Route
+              path="/test"
+              element={
+                <div>
+                  <DialogMessage>
+                    <FormEmailContainer />
+                  </DialogMessage>
+                </div>
+              }
+            />
+            <Route
+              path="/user"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <User />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/category"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Category />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/product"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Product />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/order"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Order />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/blog"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Blog />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/blog-category"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <BlogCategory />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/banner"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Banner />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/coupon"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Coupon />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Cart />
+                </Suspense>
+              }
+            />
+          </Route>
+        )}
 
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AuthProvider>
+  );
+};
 export default App;

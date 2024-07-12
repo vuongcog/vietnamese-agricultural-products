@@ -12,7 +12,7 @@ const BlogCategoriesList = () => {
         {blogCategories?.map(item => (
           <li
             onClick={() => {
-              navigate(`/customer/blogs?category=${item.id}&name=${item.name}`);
+              navigate(`/blogs?category=${item.id}&name=${item.name}`);
             }}
             key={item.name}
           >

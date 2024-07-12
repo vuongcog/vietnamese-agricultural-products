@@ -19,11 +19,10 @@ export function ProtectedAuthenRoute({ children }) {
     Cookies.get('accsessToken') &&
     location.pathname === '/authen/signin-management'
   ) {
-    console.log('true');
-    return <Navigate to="/admin" />;
+    return <Navigate to="/user" />;
   }
   if (Cookies.get('accsessToken') && location.pathname === '/authen/signin') {
-    return <Navigate to="/customer" />;
+    return <Navigate to="/" />;
   }
 
   return children;
