@@ -44,7 +44,7 @@ const App = () => {
 
   useEffect(() => {
     const hostname = window.location.hostname;
-    const subdomain = hostname.split('.')[0];
+    const subdomain = hostname.split('-')[0];
     if (subdomain === 'admin') {
       setIsAdmin(true);
     } else {
