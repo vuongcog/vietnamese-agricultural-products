@@ -1,24 +1,38 @@
-import React, { createContext, useContext, useState } from "react";
-import { getCookie } from "../utils/cookie/parseCookie";
-import Cookies from "js-cookie";
-import PropTypes from "../utils/prop-types";
+import React, { createContext, useContext, useState } from 'react';
+import Cookies from 'js-cookie';
+import PropTypes from '../utils/prop-types';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const cookie = getCookie("accsessToken");
-  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(cookie));
-  console.log(isAuthenticated);
+  const [checkAuth, setCheckauth] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [accessToken, setAcessToken] = useState(Cookies.get('accsessToken'));
+
   const logout = () => {
-    const accsessToken = Cookies.get("accsessToken");
+    const accsessToken = Cookies.get('accsessToken');
     if (accsessToken) {
-      Cookies.remove("accsessToken", { path: "/" });
-      // removeCookie("accsessToken", "/");
-      setIsAuthenticated(false);
+      setCheckauth(!checkAuth);
+      Cookies.remove('accsessToken', { path: '/admin' });
+      Cookies.remove('accsessToken', { path: '/authen/signin-management' });
     }
   };
+  const logoutCustomer = () => {
+    const accsessToken = Cookies.get('accsessToken');
+    if (accsessToken) {
+      setCheckauth(!checkAuth);
+      Cookies.remove('accsessToken', { path: '/customer' });
+      Cookies.remove('accsessToken', { path: '/authen/signin' });
+    }
+  };
+  useEffect(() => {
+    console.log(Cookies.get('accsessToken'));
+  }, [location, navigate]);
   return (
     <AuthContext.Provider
-      value={{ setIsAuthenticated, isAuthenticated, logout }}
+      value={{ checkAuth, setCheckauth, logout, logoutCustomer, accessToken }}
     >
       {children}
     </AuthContext.Provider>

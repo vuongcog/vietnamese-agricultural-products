@@ -15,7 +15,6 @@
     font-size: 24px;
     color: #ee4d2d;
     transition: color 0.2s ease-in-out;
-
     &:hover {
       color: #ff7043;
     }
@@ -23,20 +22,18 @@
 
   .cartCount {
     position: absolute;
-    top: 0;
+    top: 15px;
     left: 0;
-    padding: 0 6px;
     font-size: 14px;
     color: white;
-    background-color: #ee4d2d;
-    border: 2px solid white;
+    border: 2px solid #ee4d2d;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 20px;
-    height: 20px;
+    min-width: 13px;
+    height: 13px;
     line-height: 20px;
     transition: background-color 0.2s ease-in-out;
 

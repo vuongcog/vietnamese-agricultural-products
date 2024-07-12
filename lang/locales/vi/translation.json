@@ -13,6 +13,7 @@
   "src/components/user/Header.register": "Đăng ký",
   "src/components/user/Header.blogs": "Bài viết",
   "src/components/user/Header.management": "Quản lý",
+  "src/components/user/Header.logout": "Đăng xuất",
 
   "src/modules/user/home.category": "Danh mục",
   "src/modules/user/home.priceRange": "Giá",

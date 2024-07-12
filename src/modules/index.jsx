@@ -6,7 +6,6 @@ import ChartComponent from './Test/Test';
 
 const User = React.lazy(() => import('./admin/User/container'));
 const Category = React.lazy(() => import('./admin/Category/container'));
-
 const Order = React.lazy(() => import('./admin/Order/container'));
 const Blog = React.lazy(() => import('./admin/Blog/container'));
 const BlogCategory = React.lazy(() =>
@@ -34,155 +33,145 @@ import BlogCategoyGuest from './user/blog-with-category/container';
 import BlogContainer from './user/blog-categories/container';
 import BlogGuestContainer from './user/blog/container';
 import FormRegisterContainer from './authentication/components/FormRegister/container';
-import FormLoginManagement from './authentication/components/FormLogin';
+import FormLoginManagement from './authentication/components/FormLoginManagement';
+import FormManagementProvider from './authentication/components/FormLoginManagement/FormContext';
+import FormProvider from './authentication/components/FormLogin/FormContext';
 
-const App = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (location.pathname === '/' || location.pathname === '/') {
-      navigate('/customer');
-    }
-  }, [location, navigate]);
-
-  return (
-    <AuthProvider>
-      <Routes>
+const App = () => (
+  <AuthProvider>
+    <Routes>
+      <Route path="/" element={<LayoutUser />}>
+        <Route path="/customer" element={<Home />} />
+        <Route path="/customer/shopping" element={<Shopping />} />
+        <Route path="/customer/blog-categories" element={<BlogContainer />} />
+        <Route path="/customer/blogs" element={<BlogCategoyGuest />} />
         <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <LayoutUser></LayoutUser>
-            </ProtectedRoute>
-          }
-        >
-          <Route path="/customer/" element={<Home />} />
-          <Route path="/customer/shopping" element={<Shopping />} />
-          <Route
-            path="/customer/blog-categories"
-            element={<BlogContainer />}
-          ></Route>
-          <Route path="/customer/blogs" element={<BlogCategoyGuest />}></Route>
-          <Route
-            path="/customer/blogs/blog/:slug"
-            element={<BlogGuestContainer />}
-          />
-          <Route path="/customer/cart" element={<CartContainer />} />
-          <Route path="/customer/detail/:id" element={<DetailProduct />} />
-          <Route path="/customer/purchase" element={<DetailProduct />} />
-        </Route>
+          path="/customer/blogs/blog/:slug"
+          element={<BlogGuestContainer />}
+        />
+        <Route path="/customer/cart" element={<CartContainer />} />
+        <Route path="/customer/detail/:id" element={<DetailProduct />} />
+        <Route path="/customer/purchase" element={<DetailProduct />} />
+      </Route>
+      <Route path="/authen" element={<Authentication />}>
         <Route
-          path="/authen"
+          path="/authen/signin"
           element={
             <ProtectedAuthenRoute>
-              <Authentication />
+              <FormProvider>
+                <FormLogin />
+              </FormProvider>
             </ProtectedAuthenRoute>
           }
-        >
-          <Route path="/authen/signin" element={<FormLogin />} />
-          <Route
-            path="/authen/signin-management"
-            element={<FormLoginManagement />}
-          />
-          <Route path="/authen/signup" element={<FormRegisterContainer />} />
-        </Route>
+        />
         <Route
-          path="/admin"
+          path="/authen/signin-management"
           element={
-            <ProtectedRoute>
-              <LayoutAdmin />
-            </ProtectedRoute>
+            <ProtectedAuthenRoute>
+              <FormManagementProvider>
+                <FormLoginManagement />
+              </FormManagementProvider>
+            </ProtectedAuthenRoute>
           }
-        >
-          <Route path="/admin/dashboard" element={<ChartComponent />} />
-          <Route
-            path="/admin/test"
-            element={
-              <div>
-                <DialogMessage>
-                  <FormEmailContainer></FormEmailContainer>
-                </DialogMessage>
-              </div>
-            }
-          />
-          <Route
-            path="/admin/user"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <User />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/admin/category"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Category />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/admin/product"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Product />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/admin/order"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Order />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/admin/blog"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Blog />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/admin/blog-category"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <BlogCategory />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/admin/banner"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Banner />
-              </Suspense>
-            }
-          />{' '}
-          <Route
-            path="/admin/coupon"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Coupon />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/admin/cart"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Cart />
-              </Suspense>
-            }
-          />
-        </Route>
+        />
+        <Route path="/authen/signup" element={<FormRegisterContainer />} />
+      </Route>
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <LayoutAdmin />
+          </ProtectedRoute>
+        }
+      >
+        <Route path="/admin/dashboard" element={<ChartComponent />} />
+        <Route
+          path="/admin/test"
+          element={
+            <div>
+              <DialogMessage>
+                <FormEmailContainer />
+              </DialogMessage>
+            </div>
+          }
+        />
+        <Route
+          path="/admin/user"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <User />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/category"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Category />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/product"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Product />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/order"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Order />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/blog"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Blog />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/blog-category"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <BlogCategory />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/banner"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Banner />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/coupon"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Coupon />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/cart"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Cart />
+            </Suspense>
+          }
+        />
+      </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </AuthProvider>
-  );
-};
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </AuthProvider>
+);
 
 export default App;

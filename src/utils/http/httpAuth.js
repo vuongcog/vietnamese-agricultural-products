@@ -1,16 +1,14 @@
-import { generateURL } from "../generate-url";
-import httpClient from "./httpClient";
+import { generateURL } from '../generate-url';
+import httpClient from './httpClient';
 class HttpAuth {
   endpoint = null;
 
   http = httpClient(false);
   constructor(endpoint) {
-    console.log("authasd");
     this.endpoint = endpoint;
   }
   login = (params = {}, options) => {
-    const url = generateURL(import.meta.env.VITE_API_URL_SERVER, "/login");
-    console.log("helloasdasd");
+    const url = generateURL(import.meta.env.VITE_API_URL_SERVER, '/login');
     return this.http.post(url, params, options);
   };
 }

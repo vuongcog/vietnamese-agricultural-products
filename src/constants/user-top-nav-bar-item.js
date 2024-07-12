@@ -6,12 +6,6 @@ export const SCHEMA = [
     link: '/customer',
   },
   {
-    id: 2,
-    name: 'login',
-    icon: 'fa fa-home',
-    link: '/authen/signin',
-  },
-  {
     id: 6,
     name: 'register',
     icon: 'fa fa-home',

@@ -1,17 +1,12 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import React from 'react';
 
-const withAuth = (Component) => {
-  const AuthComponent = (props) => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      return <Navigate to="/" />;
-    }
+const withAuth = Component => {
+  const AuthComponent = props => {
     return <Component {...props} />;
   };
 
   AuthComponent.displayName = `withAuth(${
-    Component.displayName || Component.name || "Component"
+    Component.displayName || Component.name || 'Component'
   })`;
 
   return AuthComponent;

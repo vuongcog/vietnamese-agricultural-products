@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
-import AdminLeftSidebar from "../../components/admin/LeftSidebar";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import PropTypes from "../../utils/prop-types";
+import React, { useEffect } from 'react';
+import AdminLeftSidebar from '../../components/admin/LeftSidebar';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import PropTypes from '../../utils/prop-types';
 
 const LayoutAdmin = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-    if (location.pathname === "/admin" || location.pathname === "/admin/") {
-      navigate("/admin/dashboard");
+    if (location.pathname === '/admin' || location.pathname === '/admin/') {
+      navigate('/admin/user');
     }
   }, [location, navigate]);
-
   return (
     <div className="admin-app">
       <div id="admin-body" className="flex font-inter">

@@ -14,14 +14,14 @@ import { parseObjectJson } from '../../../../utils/parse-json';
 import ProgressFullScreen from '../../../../components/core/ProgressFullScreen';
 import PropTypes from '../../../../utils/prop-types';
 import { Link, useNavigate } from 'react-router-dom';
-const FormLoginManagement = () => {
+const FormLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [remember, setRemember] = useState(false);
   const { login } = useContext(FormContext);
-  const { setIsAuthenticated } = useAuth();
+  const { setCheckauth } = useAuth();
   const { isLoading } = useContext(FormContext);
   const navigate = useNavigate();
   const handleSubmit = event => {
@@ -43,14 +43,18 @@ const FormLoginManagement = () => {
     login(loginParams)
       .then(res => {
         const responseData = parseObjectJson(res);
-        console.log(responseData.access_token);
-        document.cookie = `accsessToken=${
-          responseData.access_token
-        } ; path = / ; expires=${new Date(
-          new Date().getTime() + responseData.expires_in * 1000
-        )};`;
+        Cookies.set('accsessToken', responseData.access_token, {
+          path: '/customer',
+          sameSite: 'Lax', // hoặc 'None' nếu cần thiết
 
-        setIsAuthenticated(true);
+          expires: 7,
+        });
+        Cookies.set('accsessToken', responseData.access_token, {
+          path: '/authen/signin',
+          sameSite: 'Lax', // hoặc 'None' nếu cần thiết
+          expires: 7,
+        });
+        setCheckauth(pre => !pre);
       })
       .catch(err => {
         console.log(err);
@@ -114,8 +118,8 @@ const FormLoginManagement = () => {
     </form>
   );
 };
-FormLoginManagement.propTypes = {
+FormLogin.propTypes = {
   type: PropTypes.string,
 };
 
-export default FormLoginManagement;
+export default FormLogin;

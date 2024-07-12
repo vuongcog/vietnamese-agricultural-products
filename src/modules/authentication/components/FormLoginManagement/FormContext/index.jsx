@@ -6,7 +6,7 @@ import PropTypes from '../../../../../utils/prop-types';
 
 export const FormContext = createContext({});
 
-const FormProvider = ({ children }) => {
+const FormManagementProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(false);
 
   const login = async loginParams => {
@@ -35,8 +35,8 @@ const FormProvider = ({ children }) => {
     </FormContext.Provider>
   );
 };
-FormProvider.propTypes = {
+FormManagementProvider.propTypes = {
   children: PropTypes.element,
 };
 
-export default FormProvider;
+export default FormManagementProvider;

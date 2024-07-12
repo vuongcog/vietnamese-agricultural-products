@@ -1,27 +1,39 @@
-import React from "react";
-import { SCHEMA } from "../../../constants/user-top-nav-bar-item";
-import styles from "./styles.module.scss";
+import React, { useState } from 'react';
+import { SCHEMA } from '../../../constants/user-top-nav-bar-item';
+import styles from './styles.module.scss';
 import {
   IconButton,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-} from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
-import SearchHeader from "./SearchHeader";
-import Cart from "../../core/Cart";
-import SelectLanguage from "./SelectLang";
-import langs from "./langs";
-import { useTranslation } from "react-i18next";
+} from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
+import { Link, useLocation } from 'react-router-dom';
+import SearchHeader from './SearchHeader';
+import Cart from '../../core/Cart';
+import SelectLanguage from './SelectLang';
+import langs from './langs';
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../contexts/AuthContext';
+import { useEffect } from 'react';
 
 const UserHeader = () => {
   const { t } = useTranslation();
+  const { accessToken, logoutCustomer } = useAuth();
+  const [state, setState] = useState(false);
+  useEffect(() => {}, state);
   return (
     <div className={styles.container}>
       <div className={styles.title}>Shree</div>
       <SearchHeader />
+      <button
+        onClick={() => {
+          setState(!state);
+        }}
+      >
+        Click
+      </button>
       <ul className={styles.navList}>
         {SCHEMA.map((item, index) => (
           <li key={index}>
@@ -35,6 +47,24 @@ const UserHeader = () => {
             {t(langs.about)}
           </a>
         </li>
+        {accessToken && (
+          <li>
+            <button className={styles.navLink} onClick={logoutCustomer}>
+              {t(langs.logout)}
+            </button>
+          </li>
+        )}
+        {!accessToken && (
+          <li>
+            <Link
+              to={'/authen/signin'}
+              className={styles.navLink}
+              onClick={() => {}}
+            >
+              {t(langs.login)}
+            </Link>
+          </li>
+        )}
         <li>
           <SelectLanguage />
         </li>
@@ -45,7 +75,7 @@ const UserHeader = () => {
           <MenuButton
             as={IconButton}
             aria-label="Options"
-            icon={<HamburgerIcon fontSize={"30px"} color={"green"} />}
+            icon={<HamburgerIcon fontSize={'30px'} color={'green'} />}
             variant="outline"
             className={styles.menuButton}
           />
