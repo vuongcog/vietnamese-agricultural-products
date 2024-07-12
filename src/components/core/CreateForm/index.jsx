@@ -112,6 +112,7 @@ const CreateForm = ({
       const file = e.target.files[0];
       handleChange(item.name, file);
       toast({
+        position: 'top',
         title: 'File selected',
         description: file ? `${file.name} selected` : 'No file selected',
         status: 'info',
