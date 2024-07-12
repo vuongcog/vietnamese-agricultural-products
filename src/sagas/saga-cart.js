@@ -30,6 +30,7 @@ import {
 import HttpUserClient from '../utils/http/httpUserClient';
 import { toast } from 'react-toastify';
 import { parseObjectJson } from '../utils/parse-json';
+import { error } from 'jquery';
 
 const options = {
   notAuthor: true,
@@ -46,7 +47,8 @@ function* wokerAddCart(action) {
     toast.success('Thêm giỏ hàng thành công');
   } catch (err) {
     yield put({ type: ADD_CART_FAILED });
-    toast.error('Sản phẩm này có lẽ đã hết hoặc không tồn tại');
+    const message = parseObjectJson(err.response.data);
+    toast.error(message.message);
   } finally {
     yield put({ type: ADDED_CART });
     yield put({ type: ADD_CART_RESET_STATUS_ADDING });

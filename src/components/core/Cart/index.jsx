@@ -6,8 +6,9 @@ import useProducerCart from '../../../useCustom/user/useProducerCart';
 
 const Cart = () => {
   const { carts } = useProducerCart();
+  console.log(carts?.items?.length);
   return (
-    <Link to={'/customer/cart'} className={classNames(styles.container)}>
+    <Link to={'/cart'} className={classNames(styles.container)}>
       <i className={classNames('fa fa-cart-plus', styles.cart)}></i>
       <span className={styles.cartCount}>{carts?.items?.length}</span>
     </Link>
