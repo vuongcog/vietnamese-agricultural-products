@@ -36,12 +36,15 @@ import FormRegisterContainer from './authentication/components/FormRegister/cont
 import FormLoginManagement from './authentication/components/FormLoginManagement';
 import FormManagementProvider from './authentication/components/FormLoginManagement/FormContext';
 import FormProvider from './authentication/components/FormLogin/FormContext';
+import CheckoutContainer from './user/oder/container';
+import axios from 'axios';
 
 const App = () => {
+  axios.get('https://esgoo.net/api-tinhthanh/1/0.htm');
+
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const location = useLocation();
-
   useEffect(() => {
     const hostname = window.location.hostname;
     const subdomain = hostname.split('.')[0];
@@ -68,6 +71,7 @@ const App = () => {
             <Route path="/cart" element={<CartContainer />} />
             <Route path="/detail/:id" element={<DetailProduct />} />
             <Route path="/purchase" element={<DetailProduct />} />
+            <Route path="/checkout" element={<CheckoutContainer />} />
           </Route>
         )}
         <Route path="/authen" element={<Authentication />}>

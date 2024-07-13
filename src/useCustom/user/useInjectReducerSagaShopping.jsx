@@ -18,12 +18,14 @@ import {
   CART_REDUCER,
   CATEGORY_REDUCER,
   DETAIL_PRODUCT_REDUCER,
+  ORDER_REDUCER,
 } from '../../constants/name-store/user/name-space-reducer';
 import {
   BLOG_SAGA,
   CART_SAGA,
   CATEGORY_SAGA,
   DETAIL_PRODUCT_SAGA,
+  ORDER_SAGA,
 } from '../../constants/name-store/user/name-space-saga';
 import { reducerCategoryUser } from '../../reducers/reducer-category';
 import watcherSagaCategory from '../../sagas/saga-category';
@@ -31,6 +33,8 @@ import { reducerCartUser } from '../../reducers/reducer-cart';
 import watcherSagaCart from '../../sagas/saga-cart';
 import { reducerBlogsUser } from '../../reducers/reducer-blog';
 import watcherSagaBlogs from '../../sagas/saga-blog';
+import { reducerOrder } from '../../reducers/reducer-order';
+import watcherSagaOrder from '../../sagas/saga-order';
 
 const useInjectReducerSagaShopping = () => {
   const redux = {
@@ -40,11 +44,13 @@ const useInjectReducerSagaShopping = () => {
     saga: warcherSagaProducrtList,
   };
   useMemo(() => {
+    injectReducer(ORDER_REDUCER, reducerOrder);
     injectReducer(BLOG_REDUCER, reducerBlogsUser);
     injectReducer(CART_REDUCER, reducerCartUser);
     injectReducer(CATEGORY_REDUCER, reducerCategoryUser);
     injectReducer(DETAIL_PRODUCT_REDUCER, reducerDetailProduct);
 
+    injectSaga(ORDER_SAGA, watcherSagaOrder);
     injectSaga(BLOG_SAGA, watcherSagaBlogs);
     injectSaga(CART_SAGA, watcherSagaCart);
     injectSaga(CATEGORY_SAGA, watcherSagaCategory);
@@ -60,11 +66,13 @@ const useInjectReducerSagaShopping = () => {
   }, []);
 
   useEffect(() => {
+    injectReducer(ORDER_REDUCER, reducerOrder);
     injectReducer(BLOG_REDUCER, reducerBlogsUser);
     injectReducer(CART_REDUCER, reducerCartUser);
     injectReducer(CATEGORY_REDUCER, reducerCategoryUser);
     injectReducer(DETAIL_PRODUCT_REDUCER, reducerDetailProduct);
 
+    injectSaga(ORDER_SAGA, watcherSagaOrder);
     injectSaga(BLOG_SAGA, watcherSagaBlogs);
     injectSaga(CART_SAGA, watcherSagaCart);
     injectSaga(CATEGORY_SAGA, watcherSagaCategory);
@@ -83,7 +91,7 @@ const useInjectReducerSagaShopping = () => {
       ejectReducer('filter');
     };
   }, []);
-  return <div></div>;
+  return <></>;
 };
 
 export default useInjectReducerSagaShopping;

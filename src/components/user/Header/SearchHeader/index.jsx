@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSearchFilter } from '../../../../modules/user/shoping/store/selector/selector';
 import { FILTER_SEARCH } from '../../../../modules/user/shoping/store/reducer/filterConstants';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { debounce } from 'lodash';
 import { AutoComplete, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
@@ -14,7 +14,6 @@ const SearchHeader = () => {
   const search = useSelector(getSearchFilter);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const [searchValue, setSearchValue] = useState(search);
   const [options, setOptions] = useState([]);
   const { categories } = useProducerCategory();
@@ -26,11 +25,7 @@ const SearchHeader = () => {
 
   const debouncedSearch = debounce(value => {
     dispatch({ type: FILTER_SEARCH, payload: value });
-    if (location.pathname === '/') {
-      navigate(`/shopping?keyword=${encodeURIComponent(value)}`);
-    } else {
-      navigate(`?keyword=${encodeURIComponent(value)}`);
-    }
+    navigate(`/shopping?keyword=${encodeURIComponent(value)}`);
   }, 1);
 
   const handleSearchChange = value => {

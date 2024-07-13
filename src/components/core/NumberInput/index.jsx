@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 import {
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-} from "@chakra-ui/react";
-import PropTypes from "../../../utils/prop-types";
+} from '@chakra-ui/react';
+import PropTypes from '../../../utils/prop-types';
 
-function QuantitySelector({ value, setValue, max, min }) {
-  const handleChange = (valueString) => {
+function QuantitySelector({ value, onSetNumber, max, min }) {
+  const handleChange = valueString => {
     const newValue = Number(valueString);
-    setValue(newValue);
+    onSetNumber(newValue);
   };
 
   return (

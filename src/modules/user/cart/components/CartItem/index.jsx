@@ -1,44 +1,54 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect, useContext } from 'react';
 import styles from './styles.module.scss';
 import QuantitySelector from '../../../../../components/core/NumberInput';
 import { formattedNumber } from '../../../../../utils/format-number';
 import { Checkbox } from '@chakra-ui/react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { useContext } from 'react';
 import { CartContext } from '../../container';
-import { useEffect } from 'react';
 
 const CartItem = ({
   quantity,
   product: { unit_prices },
   voucher,
-  inventory,
   oldPrice,
   id_product,
   product,
+  onSelect,
+  onDeselect,
   ...props
 }) => {
   const [number, setNumber] = useState(quantity);
   const [checked, setChecked] = useState(false);
   const totalPrice = useMemo(() => number * unit_prices, [number, unit_prices]);
-  const { handlerDeleteCart } = useContext(CartContext);
-  const { handlerUpdateCart } = useContext(CartContext);
+  const { handlerDeleteCart, handlerUpdateCart } = useContext(CartContext);
   const firstEffect = useRef(false);
   useEffect(() => {
     if (firstEffect.current) {
       handlerUpdateCart(id_product, number);
     }
-    return () => {
-      firstEffect.current = true;
-    };
+    firstEffect.current = true;
   }, [number]);
+  const handlerSetNumber = number => {
+    setNumber(number);
+  };
+  const handleCheckboxChange = () => {
+    const newChecked = !checked;
+    setChecked(newChecked);
+    if (newChecked) {
+      onSelect(id_product);
+    } else {
+      onDeselect(id_product);
+    }
+  };
+
   return (
     <div {...props} className={styles.container}>
       <Checkbox
+        value={id_product}
         size={'lg'}
         isChecked={checked}
-        onChange={() => setChecked(!checked)}
+        onChange={handleCheckboxChange}
         className={styles.checkbox}
       />
       <div className={styles.contentWrapper}>
@@ -56,8 +66,8 @@ const CartItem = ({
       <span className={styles.oldPrice}>{formattedNumber(oldPrice)}</span>
       <span className={styles.unit_prices}>{formattedNumber(unit_prices)}</span>
       <QuantitySelector
-        max={inventory}
-        setValue={setNumber}
+        max={product.quantity}
+        onSetNumber={handlerSetNumber}
         value={number}
         className={styles.numberSelector}
       />
@@ -93,10 +103,11 @@ CartItem.propTypes = {
   linkImage: PropTypes.string.isRequired,
   product_name: PropTypes.string.isRequired,
   voucher: PropTypes.string,
-  inventory: PropTypes.number.isRequired,
   total: PropTypes.number,
   oldPrice: PropTypes.number,
   handleDelete: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  onDeselect: PropTypes.func.isRequired,
 };
 
 export default CartItem;

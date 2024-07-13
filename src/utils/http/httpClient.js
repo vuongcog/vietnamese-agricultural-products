@@ -76,16 +76,26 @@ const httpClient = (isEndpoint = false) => {
         delete defaultOptions.headers.Authorization;
       }
       const formData = new FormData();
+
       for (const key in data) {
-        formData.append(key, data[key]);
+        if (key === 'items') {
+          data.items.forEach((item, index) => {
+            formData.append(`items[${index}][quantity]`, item.quantity);
+            formData.append(`items[${index}][id_product]`, item.id_product);
+            formData.append(`items[${index}][unit_prices]`, item.unit_prices);
+          });
+        } else {
+          formData.append(key, data[key]);
+        }
       }
+
       return axios.post(url, formData, {
         ...defaultOptions,
         ...options,
         headers: {
           ...defaultOptions.headers,
-          ...options.headers,
           'Content-Type': 'multipart/form-data', // Đảm bảo tiêu đề Content-Type là multipart/form-data
+          ...options.headers,
         },
       });
     },
