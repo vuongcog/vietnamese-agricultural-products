@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
+import PropTypes from '../../../../../utils/prop-types';
 import classNames from 'classnames';
 import DialogMessage from '../../../../../components/core/DialogMessage';
 import { useDisclosure } from '@chakra-ui/react';
-const ProductInfo = ({ product_info }) => {
+
+const BannerDes = ({ banner_des }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -12,24 +13,18 @@ const ProductInfo = ({ product_info }) => {
       <div
         onClick={onOpen}
         className={classNames(styles.container)}
-        dangerouslySetInnerHTML={{ __html: product_info }}
+        dangerouslySetInnerHTML={{ __html: banner_des }}
       ></div>
-      <DialogMessage
-        width={'800px'}
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-      >
-        <p
+      <DialogMessage isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+        <div
           className={classNames('prose')}
-          dangerouslySetInnerHTML={{ __html: product_info }}
-        ></p>
+          dangerouslySetInnerHTML={{ __html: banner_des }}
+        ></div>
       </DialogMessage>
     </div>
   );
 };
-ProductInfo.propTypes = {
-  link: PropTypes.string,
-  product_info: PropTypes.string,
+BannerDes.propTypes = {
+  banner_des: PropTypes.string,
 };
-export default ProductInfo;
+export default BannerDes;

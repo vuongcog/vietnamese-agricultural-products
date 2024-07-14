@@ -1,10 +1,10 @@
-@import "../../../../../assets/css/abstracts/mixin";
+@import '../../../../../assets/css/abstracts/mixin';
 
 .container {
   display: flex;
   align-items: center;
   background-color: #f9f9f9; /* Nền nhạt để làm nổi bật nội dung */
-  padding: 10px 15px;
+  padding: 8px 12px;
   border-radius: 8px;
   gap: 6px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -22,7 +22,7 @@
 }
 
 .title {
-  width: 120px;
+  width: 160px;
   color: #333; /* Màu chữ tối hơn để dễ đọc */
   font-weight: 600; /* Tăng độ đậm cho tiêu đề */
   @include setLimitLine(1);

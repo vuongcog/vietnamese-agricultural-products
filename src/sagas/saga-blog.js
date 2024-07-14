@@ -24,6 +24,7 @@ import {
   SET_ALL_BLOG,
   SET_BLOG,
   SET_BLOGS_WITH_CATEGORY,
+  SET_RELATED_BLOGS,
 } from '../actions/action-blog';
 import {
   FETCH_BLOG_CATEGORIES,
@@ -44,7 +45,7 @@ function* wokerFetchBlogCategories(action) {
     const parseObject = parseObjectJson(res.data);
     yield put({
       type: SET_BLOG_CATEGORIES,
-      payload: parseObject.danhmucbaiviet,
+      payload: parseObject[`danh-muc-bai-viet`],
     });
     yield put({ type: FETCH_BLOG_CATEGORIES_SUCCESS });
   } catch (err) {
@@ -62,7 +63,12 @@ function* wokerFetchBlog(action) {
     const http = new HttpUserClient(payload.endpoint);
     const res = yield call(http.getBlog);
     const parseObject = parseObjectJson(res.data);
-    yield put({ type: SET_BLOG, payload: parseObject.baiviet });
+    yield put({ type: SET_BLOG, payload: parseObject[`bai-viet`] });
+
+    yield put({ 
+      type: SET_RELATED_BLOGS,
+      payload: parseObject[`bai-viet-lien-quan`],
+    });
     yield put({ type: FETCH_BLOG_SUCCESS });
   } catch (err) {
     yield put({ type: FETCH_BLOG_FAILED });

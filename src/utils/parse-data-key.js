@@ -11,6 +11,7 @@ export const decryptData = (encryptedData, secretKey) => {
     return null;
   }
 };
+
 export const encrypData = (data, key) => {
   const encryptedData = CryptoJS.AES.encrypt(
     JSON.stringify(data),

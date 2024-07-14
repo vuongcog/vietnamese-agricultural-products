@@ -1,14 +1,16 @@
 @import '../../../../../../assets/css/abstracts/mixin';
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
 .wrapper {
+  font-family: 'DM Serif Display', serif;
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 16px;
-  border: 1px solid rgba(22, 17, 17, 0.2);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  gap: 24px;
+  padding: 8px;
+  // border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   background-color: #fff;
   transition: box-shadow 0.3s ease-in-out;
   span {
@@ -33,7 +35,7 @@
     width: 100%;
     height: auto;
     display: flex;
-    align-items: center;
+    // align-items: center;
     flex-direction: column;
     .wrapperImg {
       display: flex;
@@ -41,7 +43,8 @@
       width: 100%;
       height: 200px;
       overflow: hidden;
-      border-radius: 8px;
+      // border-radius: 4px;
+
       img {
         width: 100%;
         height: auto;
@@ -49,7 +52,7 @@
       }
     }
     .title {
-      font-size: 16px;
+      font-size: 12px;
       font-weight: 600;
       color: #333;
       text-align: center;
@@ -67,13 +70,13 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 8px 16px;
+    padding: 4px 8px;
     background-color: rgba(201, 105, 8, 0.7);
     color: #fff;
     font-size: 16px;
     font-weight: 600;
     border: none;
-    border-radius: 8px;
+    // border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 
@@ -88,13 +91,14 @@
   .wrapper-bottom {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    gap: 12px;
     .quantity {
       background-color: ed;
       position: relative;
       h6 {
         position: absolute;
-        top: -15px;
+        top: -20px;
+        left: 10px;
       }
     }
   }

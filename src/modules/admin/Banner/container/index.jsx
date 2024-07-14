@@ -17,6 +17,7 @@ import useInjectReducerSaga from '../../../../useCustom/admin/useInjectReducerSa
 import { useTranslation } from 'react-i18next';
 import langs from '../langs';
 import BannerImage from '../components/BannerImage';
+import BannerDes from '../components/BannerDes';
 const Category = () => {
   const [selectElement, setSelectElement] = useState(null);
   const { t } = useTranslation();
@@ -118,6 +119,7 @@ const Category = () => {
         name: 'banner_des',
         label: t(langs.des),
         default: 'N/A',
+        component: BannerDes,
       },
       {
         name: 'status',

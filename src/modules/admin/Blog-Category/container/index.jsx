@@ -15,6 +15,8 @@ import { DELETE_DATA } from '../../../../components/core/AdminCrud/Store/constan
 import useInjectReducerSaga from '../../../../useCustom/admin/useInjectReducerSaga';
 import { useTranslation } from 'react-i18next';
 import langs from '../langs';
+import BlogCategoryName from '../components/BlogCategoryName';
+import BlogCategorySlug from '../components/BlogCategorySlug';
 const BlogCategory = () => {
   const [selectElement, setSelectElement] = useState(null);
   const { t } = useTranslation();
@@ -47,12 +49,13 @@ const BlogCategory = () => {
         name: 'name',
         label: t(langs.name),
         default: 'N/A',
+        component: BlogCategoryName,
       },
       {
         name: 'slug',
         label: t(langs.slug),
         default: 'N/A',
-        component: ({ slug }) => <div>{slug}</div>,
+        component: BlogCategorySlug,
         dropdownActions: {
           items: [
             {

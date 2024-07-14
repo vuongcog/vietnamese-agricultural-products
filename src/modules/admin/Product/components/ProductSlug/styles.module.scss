@@ -1,4 +1,4 @@
-@import "../../../../../assets/css/abstracts/mixin";
+@import '../../../../../assets/css/abstracts/mixin';
 .productSlugContainer {
   display: flex;
   align-items: center;
@@ -21,8 +21,8 @@
 }
 
 .productSlug {
-  width: 100px;
+  width: 150px;
   font-weight: 500;
   color: #333;
-  @include setLimitLine(2);
+  @include setLimitLine(1);
 }

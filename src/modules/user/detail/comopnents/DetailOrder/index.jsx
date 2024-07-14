@@ -44,8 +44,13 @@ const DetailOrder = () => {
         </button>
         <button
           onClick={() => {
-            const reponse = addCart(params.id);
-            toast[reponse.status](reponse.message);
+            dispatch({
+              type: ADD_CART,
+              payload: {
+                endpoint: `/giohang/themgiohang`,
+                params: { id_prd: product.id, quantity: 1 },
+              },
+            });
           }}
         >
           {t(langsGlobal.addCart)}

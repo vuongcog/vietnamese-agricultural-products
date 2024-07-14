@@ -70,7 +70,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
     dispatch({ type: FETCH_DATA });
     crudOptions.endpointParams['search'] = debounceSearch;
     crudOptions.endpointParams['page'] = pagination;
-    crudOptions.endpointParams['per_page'] = perpage;
+    crudOptions.endpointParams['perpage'] = perpage;
     const res = await new Http(crudOptions.endpoint).list(
       crudOptions.endpointParams
     );

@@ -21,7 +21,9 @@ class HttpUserClient {
   getBlog = (option = {}) => this.http.get(this.url, {}, option);
   getAllBlog = (option = {}) => this.http.get(this.url, {}, option);
   orderProduct = (params = {}, options = {}) =>
+  
     this.http.post(this.url, params, options);
+
   updateCart = (params = {}, options = {}) =>
     this.http.post(this.url, params, options);
   getProduct = (params = {}, options = {}) =>

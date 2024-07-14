@@ -7,7 +7,6 @@ import {
   Textarea,
   Select,
   Button,
-  Container,
 } from '@chakra-ui/react';
 import styles from './styles.module.scss';
 import ProvinceSelect from '../../SelectLocation';
@@ -28,7 +27,6 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
   const handlerSetAddress = address => {
     setFormData(pre => ({ ...pre, address: address }));
   };
-  console.log(formData.address);
   const handleChange = e => {
     const { name, value } = e.target;
     setFormData({
@@ -42,13 +40,14 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
     return parts.some(part => part === 'undefined');
   };
 
-  if (checkIfAllUndefined(formData.address)) {
-    toast.error('Error');
-  } else {
-    toast.success('Success');
-  }
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (checkIfAllUndefined(formData.address)) {
+      toast.error('Xin hãy điền đầy đủ thông tin địa chỉ');
+      return;
+    }
+
     handlerSetValueRequest({
       ...formData,
       address: `${formData.address}/${otherAddress}`,
@@ -142,7 +141,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
             >
               <option value="cod">COD</option>
               <option value="credit">Credit Card</option>
-              <option value="paypal">PayPal</option>
+              <option value="vnpay">VNPAY</option>
             </Select>
           </FormControl>
           <FormControl id="payment" className={styles['form__group']}>

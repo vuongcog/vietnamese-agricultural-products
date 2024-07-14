@@ -32,6 +32,7 @@ const CheckoutContainer = () => {
   };
 
   useEffect(() => {
+    console.log(firstMount.current);
     if (firstMount.current) {
       firstMount.current = false;
     } else {

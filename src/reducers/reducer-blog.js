@@ -17,6 +17,7 @@ import {
   SET_ALL_BLOG,
   SET_BLOG,
   SET_BLOGS_WITH_CATEGORY,
+  SET_RELATED_BLOGS,
 } from '../actions/action-blog';
 import {
   FETCH_BLOG_CATEGORIES_FAILED,
@@ -35,6 +36,7 @@ export const initialState = {
   isFetchBlogCategoriesFailed: false,
   // 222 state blog categories
   blog: {},
+  relatedBlogs: [],
   isFetchingBlog: false,
   isFetchBlogSuccsess: false,
   isFetchBlogFailed: false,
@@ -115,6 +117,10 @@ const handlerSetBlog = (state, action) => ({
   ...state,
   blog: action.payload,
 });
+const handlerSetRelatedBlogs = (state, action) => ({
+  ...state,
+  relatedBlogs: action.payload,
+});
 const handlerFetchBlogCuccess = state => ({
   ...state,
   isFetchBlogSuccsess: true,
@@ -167,6 +173,7 @@ const mapperHandle = {
   // 333 action blog
   [FETCHING_BLOG]: handlerFetchingBlog,
   [SET_BLOG]: handlerSetBlog,
+  [SET_RELATED_BLOGS]: handlerSetRelatedBlogs,
   [FETCHED_BLOG]: handlerFetchedBlog,
   [FETCH_BLOG_SUCCESS]: handlerFetchBlogCuccess,
   [FETCH_BLOG_FAILED]: handlerFetchBlogFailed,

@@ -101,17 +101,17 @@ const User = () => {
         },
       },
       {
-        name: 'url_avatar',
-        label: t(langs.avatar),
-        default: 'N/A',
-        component: UserAvatar,
-      },
-      {
         name: 'email',
         label: t(langs.email),
         default: 'N/A',
 
         component: UserEmail,
+      },
+      {
+        name: 'url_avatar',
+        label: t(langs.avatar),
+        default: 'N/A',
+        component: UserAvatar,
       },
       {
         name: 'email_verified_at',

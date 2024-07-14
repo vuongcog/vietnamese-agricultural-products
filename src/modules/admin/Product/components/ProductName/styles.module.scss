@@ -1,4 +1,4 @@
-@use "../../../../../assets/css/abstracts/mixin" as styles;
+@use '../../../../../assets/css/abstracts/mixin' as styles;
 
 .container {
   width: 100%;
@@ -23,8 +23,8 @@
   }
 
   .label {
-    @include styles.setLimitLine(2);
-    width: 100px;
+    @include styles.setLimitLine(1);
+    width: 200px;
     font-size: 14px;
     line-height: 20px;
     font-weight: 500;

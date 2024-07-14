@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
-import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import CategoryIcon from '@mui/icons-material/Category';
 import classNames from 'classnames';
 import { Tooltip } from '@chakra-ui/react';
-const UserName = ({ name, role }) => {
+const BlogCategoryName = ({ name, role }) => {
   const mappingRole = {
     manager: 'text-red-600',
     admin: 'text-orange-400',
@@ -14,16 +14,16 @@ const UserName = ({ name, role }) => {
   return (
     <Tooltip placement="top" label={name} aria-label="Full text">
       <div className={styles.container}>
-        <SupportAgentIcon
+        <CategoryIcon
           className={classNames(styles.icon, mappingRole[role])}
-        ></SupportAgentIcon>
+        ></CategoryIcon>
         <span className={`${styles.label}`}>{name}</span>
       </div>
     </Tooltip>
   );
 };
-UserName.propTypes = {
+BlogCategoryName.propTypes = {
   role: PropTypes.string,
-  name: PropTypes.string,
+  slug: PropTypes.string,
 };
-export default UserName;
+export default BlogCategoryName;

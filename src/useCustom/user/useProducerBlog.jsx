@@ -4,14 +4,16 @@ import {
   getBlog,
   getBlogCategories,
   getBlogsWithCategory,
+  getRelatedBlogs,
 } from '../../selectors/user/selectors-blog';
 
 const useProducerBlog = () => {
   const blogCategories = useSelector(getBlogCategories);
   const blogs = useSelector(getBlogsWithCategory);
   const blog = useSelector(getBlog);
+  const relatedBlogs = useSelector(getRelatedBlogs);
   const allBlogs = useSelector(getAllBlog);
 
-  return { blog, blogCategories, blogs, allBlogs };
+  return { relatedBlogs, blog, blogCategories, blogs, allBlogs };
 };
 export default useProducerBlog;

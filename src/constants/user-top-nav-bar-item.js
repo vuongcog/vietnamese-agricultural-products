@@ -17,18 +17,18 @@ export const SCHEMA = [
     icon: 'fa fa-home',
     link: '/shopping',
   },
-  {
-    id: 5,
-    name: 'contactUs',
-    icon: 'fa fa-home',
-    link: 'user',
-  },
-  {
-    id: 7,
-    name: 'purchase',
-    icon: 'fa fa-home',
-    link: '/purchase',
-  },
+  // {
+  //   id: 5,
+  //   name: 'contactUs',
+  //   icon: 'fa fa-home',
+  //   link: 'user',
+  // },
+  // {
+  //   id: 7,
+  //   name: 'purchase',
+  //   icon: 'fa fa-home',
+  //   link: '/purchase',
+  // },
   {
     id: 7,
     name: 'blogs',

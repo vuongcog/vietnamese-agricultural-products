@@ -1,4 +1,4 @@
-@use "../../../../../assets/css/abstracts/mixin" as styles;
+@use '../../../../../assets/css/abstracts/mixin' as styles;
 .container {
   display: flex;
   align-items: center;
@@ -9,7 +9,7 @@
     color: #1877f2;
   }
   .label {
-    @include styles.setLimitLine(2);
+    @include styles.setLimitLine(1);
     font-size: 13px;
     line-height: 18px;
     font-weight: 500;

@@ -23,7 +23,7 @@ function* wokerOrder(action) {
 
     yield call(http.orderProduct, payload, option);
     yield put({ type: ORDER_PRODUCT_SUCCESS });
-    toast.success('Thành công');
+    toast.success('Thành công, xin vui lòng hãy kiểm tra lại thông báo ở mail');
   } catch (err) {
     yield put({ type: ORDER_PRODUCT_FAILED });
     toast.error('Thất bại');

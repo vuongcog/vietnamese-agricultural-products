@@ -1,7 +1,8 @@
-@use "../../../../../assets/css/abstracts/mixin" as styles;
+@use '../../../../../assets/css/abstracts/mixin' as styles;
 .container {
   display: flex;
   align-items: center;
+  width: 150px;
   gap: 12px;
   .icon {
     font-size: 20px;

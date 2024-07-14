@@ -5,6 +5,9 @@
   padding: 24px;
   width: 100%;
   .wrapper-img {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     width: 45%;
     img {
       border-radius: 6px;

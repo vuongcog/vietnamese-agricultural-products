@@ -50,20 +50,15 @@ const Card = ({ item, ...props }) => {
         <div className={styles.wrapperImg}>
           <img src={cloneItem.product_image} alt={cloneItem.product_name} />
         </div>
-        <h5 className={styles.title}>{cloneItem.product_name}</h5>
-        <span className={styles.price}>
-          {formattedNumber(cloneItem?.unit_prices?.toLocaleString())}
-        </span>
+        <div className="flex">
+          <h5 className={styles.title}>{cloneItem.product_name}</h5>
+          <span className={styles.price}>
+            {'/'}
+            {formattedNumber(cloneItem?.unit_prices?.toLocaleString())}
+          </span>
+        </div>
       </div>
       <div className={styles[`wrapper-bottom`]}>
-        <div className={styles.quantity}>
-          <FontAwesomeIcon
-            color=" rgb(201, 105, 8)"
-            icon={faBoxOpen}
-            className="icon"
-          />
-          <h6 className="text-slate-600">{cloneItem.quantity}</h6>
-        </div>
         <button
           onClick={() => {
             dispatch({
@@ -79,6 +74,15 @@ const Card = ({ item, ...props }) => {
           {t(langsGlobal.addCart)}
           <ShoppingCartCheckout className={styles.cartIcon} />
         </button>
+        <div className={styles.quantity}>
+          <FontAwesomeIcon
+            fontSize={25}
+            color=" rgb(201, 76, 8)"
+            icon={faBoxOpen}
+            className="icon"
+          />
+          <h6 className="text-slate-600">{cloneItem.quantity}</h6>
+        </div>
       </div>
     </div>
   );

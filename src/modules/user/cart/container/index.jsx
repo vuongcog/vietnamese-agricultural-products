@@ -9,11 +9,10 @@ import {
   UPDATE_CART,
 } from '../../../../actions/action-cart';
 import useProducerCart from '../../../../useCustom/user/useProducerCart';
-import CryptoJS from 'crypto-js';
 import { SECRET_KEY } from '../../../../constants/secret-key';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { decryptData, encrypData } from '../../../../utils/parse-data-key';
+import { encrypData } from '../../../../utils/parse-data-key';
 export const CartContext = createContext({});
 
 const CartContainer = () => {

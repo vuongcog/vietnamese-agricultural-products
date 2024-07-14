@@ -1,17 +1,12 @@
 @use '../../../../../assets/css/abstracts/mixin' as styles;
 
 .container {
-  @include styles.setLimitLine(2);
-  width: 200px;
+  @include styles.setLimitLine(1);
+  max-width: 240px;
+  min-width: 100px;
   align-items: center;
   gap: 12px;
-  .icon {
-    font-size: 20px;
-    color: #1877f2;
-  }
-  .label {
-    font-size: 13px;
-    line-height: 18px;
-    font-weight: 500;
+  * {
+    font-size: 12px;
   }
 }

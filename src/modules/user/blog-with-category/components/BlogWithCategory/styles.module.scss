@@ -1,4 +1,5 @@
 /*** FONTS ***/
+@import '../../../../../assets/css/abstracts/mixin';
 @import url(https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i);
 
 $black: #1d1f20;
@@ -30,9 +31,24 @@ ol.gradient-list {
     @extend %boxshadow;
     counter-increment: gradient-counter;
     margin-top: 1rem;
-    min-height: 3rem;
-    padding: 1rem 1rem 1rem 3rem;
+    min-height: 6rem;
+    padding: 6px 3rem;
     position: relative;
+    .title {
+      @include setLimitLine(1);
+      font-weight: 800;
+    }
+    .content {
+      @include setLimitLine(3);
+      :hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      * {
+        font-size: 12px;
+        color: rgb(5, 49, 122);
+      }
+    }
     &::before,
     &::after {
       background: linear-gradient(135deg, $blue 0%, $green 100%);

@@ -21,7 +21,7 @@ const SearchHeader = () => {
 
   useEffect(() => {
     dispatch({ type: FETCH_CATEGORY });
-  }, [dispatch]);
+  }, []);
 
   const debouncedSearch = debounce(value => {
     dispatch({ type: FILTER_SEARCH, payload: value });

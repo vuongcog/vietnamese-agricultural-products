@@ -6,6 +6,7 @@ import { CLEAR_PRODUCTS, FETCH_DATA } from '../store/reducer/constants';
 import { useDispatch } from 'react-redux';
 import { FILTER_PAGINATION } from '../store/reducer/filterConstants';
 import useProducerFilterShopping from '../../../../useCustom/user/useProducerFilterShopping';
+import { useLocation } from 'react-router-dom';
 
 export const ShoppingContext = createContext({});
 
@@ -13,11 +14,15 @@ const ShoppingProvider = ({ children }) => {
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const dispatch = useDispatch();
   const { items } = useCustomSelector();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const querySearch = queryParams.get('keyword');
+
   const { pagination, limit, search, category, priceRange } =
     useProducerFilterShopping();
   const fetchItems = useCallback(() => {
     const filter = {
-      search,
+      search: querySearch,
       per_perpage: limit,
       // page: pagination,
       page: 1,
