@@ -17,7 +17,7 @@
 
 .slugText {
   font-weight: 600;
-  color: #555;
+  color: var(--coreColorBlackAdmin);
   width: 160px;
   @include styles.setLimitLine(1);
 }

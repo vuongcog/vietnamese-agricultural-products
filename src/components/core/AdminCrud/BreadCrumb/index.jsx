@@ -19,6 +19,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import SelectLanguage from '../../../user/Header/SelectLang';
 import langs from '../../../../langs';
 import { useTranslation } from 'react-i18next';
+import SearchWithId from '../SearchWithId';
 const BreadCrumb = ({
   isSearchInput,
   onChangeSearchText,
@@ -26,6 +27,7 @@ const BreadCrumb = ({
   schemaForm,
   endpoint,
   sendEmail,
+  handleChangeSearchId,
 }) => {
   const { logout } = useContext(AuthContext);
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -71,7 +73,7 @@ const BreadCrumb = ({
           searchText={searchText}
         />
       )}
-
+      <SearchWithId onChangeSearchText={handleChangeSearchId}></SearchWithId>
       {sendEmail && (
         <DialogMessage
           isOpen={isOpen}
@@ -100,6 +102,7 @@ const BreadCrumb = ({
 };
 
 BreadCrumb.propTypes = {
+  handleChangeSearchId: PropTypes.func,
   sendEmail: PropTypes.bool,
   schemaForm: PropTypes.object,
   endpoint: PropTypes.string,

@@ -1,25 +1,46 @@
 export const initialFilterState = {
-  search: "",
+  search: '',
   perpage: 5,
   pagination: 1,
   totalPage: 0,
   currentPage: 1,
+  id: '',
 };
 
 import {
   CRUD_SET_PAGANATION,
   CRUD_SET_PER_PAGE,
   CRUD_SET_SEARCH,
+  CRUD_SET_ID,
   CRUD_SET_TOTAL_PAGE,
   CRUD_SET_CURRENT_PAGE,
   CRUD_SET_INIT_REDUCER_FILTER,
-} from "../constants/actionFilter.js";
-const handlerSetInitReducerFilter = (state, action) => ({ ...state, ...action.payload });
-const handlerSetSearch = (state, action) => ({ ...state, search: action.payload });
-const handlerSetPerPage = (state, action) => ({ ...state, perpage: action.payload });
-const handlerSetPagination = (state, action) => ({ ...state, pagination: action.payload });
-const handlerSetTotalPage = (state, action) => ({ ...state, totalPage: action.payload });
-const handlerSetCurrentPage = (state, action) => ({ ...state, currentPage: action.payload });
+} from '../constants/actionFilter.js';
+const handlerSetInitReducerFilter = (state, action) => ({
+  ...state,
+  ...action.payload,
+});
+const handlerSetSearch = (state, action) => ({
+  ...state,
+  search: action.payload,
+});
+const handlerSetPerPage = (state, action) => ({
+  ...state,
+  perpage: action.payload,
+});
+const handlerSetPagination = (state, action) => ({
+  ...state,
+  pagination: action.payload,
+});
+const handlerSetID = (state, action) => ({ ...state, id: action.payload });
+const handlerSetTotalPage = (state, action) => ({
+  ...state,
+  totalPage: action.payload,
+});
+const handlerSetCurrentPage = (state, action) => ({
+  ...state,
+  currentPage: action.payload,
+});
 const mapperHandle = {
   [CRUD_SET_INIT_REDUCER_FILTER]: handlerSetInitReducerFilter,
   [CRUD_SET_SEARCH]: handlerSetSearch,
@@ -27,6 +48,7 @@ const mapperHandle = {
   [CRUD_SET_PAGANATION]: handlerSetPagination,
   [CRUD_SET_TOTAL_PAGE]: handlerSetTotalPage,
   [CRUD_SET_CURRENT_PAGE]: handlerSetCurrentPage,
+  [CRUD_SET_ID]: handlerSetID,
 };
 //
 

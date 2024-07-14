@@ -3,7 +3,7 @@ import { Input, InputGroup, InputLeftElement, Box } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa'; // Sử dụng biểu tượng tìm kiếm từ react-icons
 
-const SearchInput = ({ placeHolder, onChangeSearchText }) => (
+const SearchWithId = ({ searchText, placeHolder, onChangeSearchText }) => (
   <Box className="search-container">
     <InputGroup>
       <InputLeftElement pointerEvents="none">
@@ -11,8 +11,9 @@ const SearchInput = ({ placeHolder, onChangeSearchText }) => (
       </InputLeftElement>
       <Input
         color={'black'}
+        value={searchText}
         onChange={onChangeSearchText}
-        width="300px"
+        width="150px"
         variant="filled"
         type="text"
         placeholder={placeHolder}
@@ -23,14 +24,14 @@ const SearchInput = ({ placeHolder, onChangeSearchText }) => (
   </Box>
 );
 
-SearchInput.propTypes = {
+SearchWithId.propTypes = {
   searchText: PropTypes.string,
   placeHolder: PropTypes.string,
   onChangeSearchText: PropTypes.func.isRequired,
 };
 
-SearchInput.defaultProps = {
-  placeHolder: 'Nhập dữ liệu...',
+SearchWithId.defaultProps = {
+  placeHolder: 'Tìm ID...',
 };
 
-export default SearchInput;
+export default SearchWithId;

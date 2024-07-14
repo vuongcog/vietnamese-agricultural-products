@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import CrudList from "./CrudList";
-import PropTypes from "prop-types";
-import BreadCrumb from "./BreadCrumb";
-import styles from "./styles.module.scss";
-import CrudPagination from "./CrudPagination";
-import YnmCrudPaginationItemsPerPage from "./YnmCrudPaginationItemsPerPage";
-import { CrudContext } from "./CrudContext/CrudContext";
-import SekeletonCrudList from "./SekeletonCrudList";
-import ProgressFeching from "./Progress";
+import React, { useContext } from 'react';
+import CrudList from './CrudList';
+import PropTypes from 'prop-types';
+import BreadCrumb from './BreadCrumb';
+import styles from './styles.module.scss';
+import CrudPagination from './CrudPagination';
+import YnmCrudPaginationItemsPerPage from './YnmCrudPaginationItemsPerPage';
+import { CrudContext } from './CrudContext/CrudContext';
+import SekeletonCrudList from './SekeletonCrudList';
+import ProgressFeching from './Progress';
 const AdminCrud = () => {
   const {
     searchText,
@@ -21,12 +21,13 @@ const AdminCrud = () => {
     selectPerpage,
     selectPagination,
     schemaForm,
+    handleChangeSearchId,
   } = useContext(CrudContext);
   const actionSendMail = {};
   return (
     <div className="relative">
       {isFetching && <ProgressFeching></ProgressFeching>}
-      <div className={`${isFetching && "opacity-30"} ${styles[`main-crud`]}`}>
+      <div className={`${isFetching && 'opacity-30'} ${styles[`main-crud`]}`}>
         <BreadCrumb
           sendEmail={sendEmail}
           actionSendMail={actionSendMail}
@@ -35,6 +36,7 @@ const AdminCrud = () => {
           searchText={searchText}
           onChangeSearchText={handleChangeSearchtext}
           isSearchInput
+          handleChangeSearchId={handleChangeSearchId}
         ></BreadCrumb>
         {isFetching ? (
           <SekeletonCrudList></SekeletonCrudList>

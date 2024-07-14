@@ -1,3 +1,4 @@
+import { FETCH_DATA_FAILED } from '../../../../modules/user/shoping/store/reducer/constants';
 import {
   ADDED_DATA,
   ADDING_DATA,
@@ -11,6 +12,7 @@ import {
   DELETING_DATA,
   FETCHED_DATA,
   FETCH_DATA,
+  FETCH_DATA_SUCCESS,
   REFRESH,
   SENDED_EMAIL,
   SENDING_EMAIL,
@@ -23,13 +25,15 @@ import {
   UPDATE_RESET_STATUS,
   UPDATE_SUCCESS,
   UPDATING_DATA,
-} from "./constants";
+} from './constants';
 const intiState = {
   // 111 state giành cho các trạng thái global
   loading: true,
   isFetching: false,
   items: [],
   refresh: false,
+  isFetchDataSuccess: false,
+  isFetchDataFailed: false,
   // 222 state giành cho create data
   isAddingData: false,
   isAddDataSuccess: false,
@@ -52,44 +56,52 @@ const intiState = {
 
 // 111 handler giành cho nạp dữ liệu global
 const setItems = (state, action) => ({ ...state, items: action.payload });
-const fetchingData = (state) => ({
-    ...state,
-    isFetching: true,
-  });
-const fetchedData = (state) => ({
+const fetchingData = state => ({
+  ...state,
+  isFetching: true,
+});
+const fetchedData = state => ({
   ...state,
   isFetching: false,
 });
+const handlerFetchDataSuccess = state => ({
+  ...state,
+  isDeletedDataSuccess: true,
+});
+const handlerFetchDataFailed = state => ({
+  ...state,
+  isDeletedDataFailed: true,
+});
 
 // 222 handler giành cho create data
-const handlerAddingData = (state) => ({ ...state, isAddingData: true });
-const handlerAddedData = (state) => ({ ...state, isAddingData: false });
-const handlerAddSuccess = (state) => ({
+const handlerAddingData = state => ({ ...state, isAddingData: true });
+const handlerAddedData = state => ({ ...state, isAddingData: false });
+const handlerAddSuccess = state => ({
   ...state,
   isAddDataSuccess: true,
 });
-const handlerAddFailed = (state) => ({
+const handlerAddFailed = state => ({
   ...state,
   isUpdatedDataFailed: true,
 });
-const handlerResetStatusAddData = (state) => ({
+const handlerResetStatusAddData = state => ({
   ...state,
   isAddDataSuccess: false,
   isUpdatedDataFailed: false,
 });
 
 // 333 handler giành cho update data
-const handlerUpdatingData = (state) => ({ ...state, isUpdateData: true });
-const handlerUpdatedData = (state) => ({ ...state, isUpdateData: false });
-const handlerUpdateSuccess = (state) => ({
+const handlerUpdatingData = state => ({ ...state, isUpdateData: true });
+const handlerUpdatedData = state => ({ ...state, isUpdateData: false });
+const handlerUpdateSuccess = state => ({
   ...state,
   isAddDataSuccess: true,
 });
-const handlerUpdatedFailed = (state) => ({
+const handlerUpdatedFailed = state => ({
   ...state,
   isUpdatedDataFailed: true,
 });
-const handlerResetStatusUpdateData = (state) => ({
+const handlerResetStatusUpdateData = state => ({
   ...state,
   isUpdatedDataSuccess: false,
   isUpdatedDataFailed: false,
@@ -97,35 +109,39 @@ const handlerResetStatusUpdateData = (state) => ({
 
 // 444 handler giành cho send mail
 
-const handlerSendingEmail = (state) => ({
+const handlerSendingEmail = state => ({
   ...state,
   isSendEmail: true,
 });
 
-const sendedEmail = (state) => ({ ...state, isSendEmail: false });
+const sendedEmail = state => ({ ...state, isSendEmail: false });
 
-const handlerSendMailSuccess = (state) => ({ ...state, sendMailSuccsess: true });
-const handlerSendMailError = (state) => ({ ...state, sendMailError: true });
+const handlerSendMailSuccess = state => ({ ...state, sendMailSuccsess: true });
+const handlerSendMailError = state => ({ ...state, sendMailError: true });
 
-const handlerResetEmailStatus = (state) => ({ ...state, sendMailSuccsess: false, sendMailError: false });
-const refresh = (state) => ({
-    ...state,
-    refresh: !state.refresh,
-  });
+const handlerResetEmailStatus = state => ({
+  ...state,
+  sendMailSuccsess: false,
+  sendMailError: false,
+});
+const refresh = state => ({
+  ...state,
+  refresh: !state.refresh,
+});
 
 // 555 handler giành cho delete
 
-const handlerDeletingData = (state) => ({ ...state, isDeleteData: true });
-const handlerDeleteddData = (state) => ({ ...state, isDeleteData: false });
-const handlerDeletedSuccess = (state) => ({
+const handlerDeletingData = state => ({ ...state, isDeleteData: true });
+const handlerDeleteddData = state => ({ ...state, isDeleteData: false });
+const handlerDeletedSuccess = state => ({
   ...state,
   isDeletedDataSuccess: true,
 });
-const handlerDeletedFailed = (state) => ({
+const handlerDeletedFailed = state => ({
   ...state,
   isDeletedDataFailed: true,
 });
-const handlerResetStatusDeleteData = (state) => ({
+const handlerResetStatusDeleteData = state => ({
   ...state,
   isDeletedDataSuccess: false,
   isDeletedDataFailed: false,
@@ -138,7 +154,8 @@ const handlers = {
   [FETCHED_DATA]: fetchedData,
   [REFRESH]: refresh,
   [SET_ITEMS]: setItems,
-
+  [FETCH_DATA_SUCCESS]: handlerFetchDataSuccess,
+  [FETCH_DATA_FAILED]: handlerFetchDataFailed,
   // 333 action giành cho add data
   [ADDING_DATA]: handlerAddingData,
   [ADDED_DATA]: handlerAddedData,

@@ -60,37 +60,33 @@ const Product = () => {
         dropdownActions: {
           items: [
             {
-              icon: <i className="fa-regular fa-copy"></i>,
+              icon: <i className="font-semibold fa-regular fa-copy"></i>,
               name: 'duplicate',
               label: <span className="font-semibold">Duplicate</span>,
               callback: () => {},
             },
             {
-              icon: <i className="text-red-600 fa-regular fa-delete-left"></i>,
+              icon: <i className=" fa fa-trash"></i>,
               name: 'delete',
-              label: <span className="text-red-600 font-semibold">Delete</span>,
+              label: <span className=" font-semibold">Delete</span>,
               callback: item => {
                 dispatch({ type: DELETE_DATA, payload: `/product/${item.id}` });
               },
             },
             {
-              icon: <Icon color={'green'} as={FaFileExcel} />,
+              icon: <Icon as={FaFileExcel} />,
               name: 'export-excel',
-              label: (
-                <span className="text-green-600 font-semibold">
-                  Export Excel
-                </span>
-              ),
+              label: <span className="font-semibold">Export Excel</span>,
               callback: (items, name) => {
                 exportToExcel(items, name);
               },
             },
             {
               icon: (
-                <i className="text-blue-500 fa-regular fa-pen-to-square"></i>
+                <i className="font-semibold fa-regular fa-pen-to-square"></i>
               ),
               name: 'edit',
-              label: <span className="text-blue-500 font-semibold">Edit</span>,
+              label: <span className="font-semibold">Edit</span>,
               callback: item => {
                 setSelectElement(
                   <DialogCreateForm

@@ -6,9 +6,9 @@ import classNames from 'classnames';
 import { Tooltip } from '@chakra-ui/react';
 const UserName = ({ name, role }) => {
   const mappingRole = {
-    manager: 'text-red-600',
-    admin: 'text-orange-400',
-    staff: 'text-yellow-600',
+    manager: 'text-indigo-600',
+    admin: 'text-blue-500',
+    staff: 'text-teal-500',
     customer: 'text-green-600',
   };
   return (

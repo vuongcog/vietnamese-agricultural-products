@@ -1,12 +1,13 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   getFilterPerPage,
   getFilterPagination,
   getFilterSearch,
   getFilterTotalPage,
   getFilterCurrentPage,
-} from "../Store/selectorFilter";
+  getFilterID,
+} from '../Store/selectorFilter';
 
 const useProducerStateCrudFilter = () => {
   const search = useSelector(getFilterSearch);
@@ -14,7 +15,9 @@ const useProducerStateCrudFilter = () => {
   const perpage = useSelector(getFilterPerPage);
   const totalPage = useSelector(getFilterTotalPage);
   const currentPage = useSelector(getFilterCurrentPage);
+  const id = useSelector(getFilterID);
   return {
+    id,
     currentPage,
     totalPage,
     search,

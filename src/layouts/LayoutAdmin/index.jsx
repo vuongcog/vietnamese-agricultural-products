@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import AdminLeftSidebar from '../../components/admin/LeftSidebar';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import PropTypes from '../../utils/prop-types';
-
+import classNames from 'classnames';
+import styles from './styles.module.scss';
 const LayoutAdmin = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -15,7 +16,10 @@ const LayoutAdmin = ({ children }) => {
     <div className="admin-app">
       <div id="admin-body" className="flex font-inter">
         <AdminLeftSidebar></AdminLeftSidebar>
-        <main id="admin-content" className="w-full">
+        <main
+          id="admin-content"
+          className={classNames(`w-full`, styles.content)}
+        >
           {/* <AddminTopNav></AddminTopNav> */}
           {children}
           <Outlet></Outlet>

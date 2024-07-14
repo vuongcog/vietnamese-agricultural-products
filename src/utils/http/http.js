@@ -9,6 +9,7 @@ class Http {
   }
 
   list = (params = {}) => this.http.get(this.endpoint, params);
+  withId = () => this.http.get(this.endpoint);
 
   create = (params = {}) => this.http.post(this.endpoint, params);
   update = (params = {}) => this.http.post(this.endpoint, params);

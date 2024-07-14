@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createContext } from 'react';
 import Http from '../../../../utils/http/http';
 import PropTypes from 'prop-types';
 
 import { useDispatch } from 'react-redux';
 import { useDebounce } from '../../../../utils/use-debounce';
-import { FETCHED_DATA, FETCH_DATA, SET_ITEMS } from '../Store/constants';
+import {
+  FETCHED_DATA,
+  FETCH_DATA,
+  FETCH_DATA_WITH_ID,
+  SET_ITEMS,
+} from '../Store/constants';
 import { crudOptionsDefault } from '../constants/curd-options-default';
 
 import useProducerStateCrud from '../utils/useProducerState';
 import useProducerStateCrudFilter from '../utils/useProducerStateFilter';
 import {
+  CRUD_SET_ID,
   CRUD_SET_PAGANATION,
   CRUD_SET_PER_PAGE,
   CRUD_SET_SEARCH,
@@ -30,20 +36,23 @@ const ContextCrudProvider = ({ children, ...props }) => {
       ...mode,
     },
   };
+  const dispatch = useDispatch();
   const apiParams = crudOptions.endpointParams || {};
   const [defaultApiParams, setDefaultParams] = useState(apiParams);
-
-  const dispatch = useDispatch();
-
+  const firstMount = useRef(true);
   // 222 get state of redux
   const { items, isFetching, refresh } = useProducerStateCrud();
-  const { search, pagination, perpage } = useProducerStateCrudFilter();
-  const debounceSearch = useDebounce(search, 300);
-
+  const { search, pagination, perpage, id } = useProducerStateCrudFilter();
+  const debounceSearch = useDebounce(search, 400);
+  const debounceID = useDebounce(id, 400);
   // 111 define handler set filter
   const handleChangeSearchtext = value => {
     dispatch({ type: CRUD_SET_SEARCH, payload: value.target.value });
   };
+  const handleChangeSearchId = value => {
+    dispatch({ type: CRUD_SET_ID, payload: value.target.value });
+  };
+
   const selectPerpage = value => {
     dispatch({ type: CRUD_SET_PER_PAGE, payload: value });
   };
@@ -65,6 +74,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
     mode,
     perpage,
     selectPerpage,
+    handleChangeSearchId,
   };
   const getItems = async debounceSearch => {
     dispatch({ type: FETCH_DATA });
@@ -76,6 +86,37 @@ const ContextCrudProvider = ({ children, ...props }) => {
     );
     return JSON.parse(res.data);
   };
+  useEffect(() => {
+    if (firstMount.current) {
+      firstMount.current = false;
+    } else {
+      if (debounceID) {
+        dispatch({
+          type: FETCH_DATA_WITH_ID,
+          payload: `${crudOptions.endpoint}/${debounceID}`,
+        });
+      }
+      if (!debounceID) {
+        getItems(debounceSearch)
+          .then(res => {
+            dispatch({ type: SET_ITEMS, payload: res.data });
+            dispatch({ type: CRUD_SET_TOTAL_PAGE, payload: res.total_pages });
+          })
+          .catch(() => {
+            toast.error(
+              'Không tồn tại dữ liệu hoặc bạn không có quyền truy cập vào dữ liệu này'
+            );
+          })
+          .finally(() => {
+            dispatch({ type: FETCHED_DATA });
+          });
+      }
+    }
+    () => {
+      firstMount.current = true;
+    };
+  }, [debounceID]);
+
   useEffect(() => {
     getItems(debounceSearch)
       .then(res => {
