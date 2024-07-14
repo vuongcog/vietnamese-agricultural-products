@@ -3,6 +3,8 @@ import { Select } from '@chakra-ui/react';
 import axios from 'axios';
 import styles from './styles.module.scss';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import langs from '../langs';
 
 const ProvinceSelect = ({ handlerSetAddress }) => {
   const [provinces, setProvinces] = useState([]);
@@ -11,6 +13,7 @@ const ProvinceSelect = ({ handlerSetAddress }) => {
   const [selectedProvince, setSelectedProvince] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [selectedWard, setSelectedWard] = useState('');
+  const { t } = useTranslation();
   useMemo(() => {
     const province = _.find(provinces, { id: selectedProvince });
     const district = _.find(districts, { id: selectedDistrict });
@@ -46,7 +49,7 @@ const ProvinceSelect = ({ handlerSetAddress }) => {
   return (
     <div className={styles.container}>
       <Select
-        placeholder="Tỉnh/Thành"
+        placeholder={`${t(langs.province)}/${t(langs.city)}`}
         onChange={e => setSelectedProvince(e.target.value)}
       >
         {provinces.map(province => (
@@ -56,7 +59,7 @@ const ProvinceSelect = ({ handlerSetAddress }) => {
         ))}
       </Select>
       <Select
-        placeholder="Quận/Huyện"
+        placeholder={t(langs.district)}
         onChange={e => setSelectedDistrict(e.target.value)}
       >
         {districts?.map(district => (
@@ -69,7 +72,7 @@ const ProvinceSelect = ({ handlerSetAddress }) => {
         onChange={e => {
           setSelectedWard(e.target.value);
         }}
-        placeholder="Phường/Xã"
+        placeholder={`${t(langs.township)}/${t(langs.ward)}`}
       >
         {wards?.map(ward => (
           <option key={ward.id} value={ward.id}>

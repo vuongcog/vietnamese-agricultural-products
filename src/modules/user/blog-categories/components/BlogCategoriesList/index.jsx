@@ -2,12 +2,15 @@ import React from 'react';
 import styles from './styles.module.scss';
 import useProducerBlog from '../../../../../useCustom/user/useProducerBlog';
 import { useNavigate } from 'react-router-dom';
+import langsGlobal from '../../../../../langs';
+import { useTranslation } from 'react-i18next';
 const BlogCategoriesList = () => {
   const { blogCategories } = useProducerBlog();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className={styles.layout}>
-      <h1>Tất cả danh mục</h1>
+      <h1>{t(langsGlobal.blogCategories)}</h1>
       <ol className={styles[`gradient-list`]}>
         {blogCategories?.map(item => (
           <li

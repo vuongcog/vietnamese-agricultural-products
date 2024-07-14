@@ -15,7 +15,7 @@ import {
   getIsSendingEmailStatus,
   getSuccessSendMail,
 } from '../Store/selector';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import SelectLanguage from '../../../user/Header/SelectLang';
 import langs from '../../../../langs';
 import { useTranslation } from 'react-i18next';
@@ -66,14 +66,16 @@ const BreadCrumb = ({
   return (
     <div className={styles.container}>
       {isSendingMail && <ProgressFullScreen />}
-
       {isSearchInput && (
         <SearchInput
+          placeholder={t(langs.placeholderSearch)}
           onChangeSearchText={onChangeSearchText}
-          searchText={searchText}
         />
       )}
-      <SearchWithId onChangeSearchText={handleChangeSearchId}></SearchWithId>
+      <SearchWithId
+        placeholder={t(langs.placeholderId)}
+        onChangeSearchText={handleChangeSearchId}
+      ></SearchWithId>
       {sendEmail && (
         <DialogMessage
           isOpen={isOpen}

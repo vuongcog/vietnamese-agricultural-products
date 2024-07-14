@@ -44,6 +44,7 @@ function* wokerAddCart(action) {
     const http = new HttpUserClient(payload.endpoint);
     yield call(http.addCart, payload.params);
     yield put({ type: ADD_CART_CUCCESS });
+    yield put({ type: RE_FETCH_CART });
     toast.success('Thêm giỏ hàng thành công');
   } catch (err) {
     yield put({ type: ADD_CART_FAILED });

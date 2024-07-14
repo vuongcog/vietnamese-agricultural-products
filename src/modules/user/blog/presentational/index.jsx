@@ -2,10 +2,11 @@ import React from 'react';
 import useProducerBlog from '../../../../useCustom/user/useProducerBlog';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import langsGlobal from '../../../../langs';
 const BlogGuestLayout = ({ handlerClickOthersBlog }) => {
   const { blog, allBlogs, relatedBlogs } = useProducerBlog();
-  const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className={styles.layout}>
       <div className={styles.content}>
@@ -17,7 +18,7 @@ const BlogGuestLayout = ({ handlerClickOthersBlog }) => {
       </div>
       <div className={styles.wrapper_image}>
         <img src={blog.blog_image} />
-        <h1>Các bài viết có liên quan</h1>
+        <h1>{t(langsGlobal.relatedBlogs)}</h1>
         <div style={{ listStyle: 'none' }}>
           {relatedBlogs?.map(item => (
             <div

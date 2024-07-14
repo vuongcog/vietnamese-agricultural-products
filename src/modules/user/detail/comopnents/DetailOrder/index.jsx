@@ -15,8 +15,10 @@ const DetailOrder = () => {
   const { product } = useProducerDetail();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const params = useParams();
   const navigate = useNavigate();
+  const handlerSetNumber = number => {
+    setNumbers(number);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.quantity}>
@@ -25,6 +27,7 @@ const DetailOrder = () => {
           max={product.quantity}
           value={numbers}
           setValue={setNumbers}
+          onSetNumber={handlerSetNumber}
         ></QuantitySelector>
       </div>
       <div className={styles.order}>
@@ -40,7 +43,7 @@ const DetailOrder = () => {
             navigate('/cart');
           }}
         >
-          Mua ngay
+          {t(langsGlobal.byNow)}
         </button>
         <button
           onClick={() => {

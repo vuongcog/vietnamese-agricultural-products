@@ -12,6 +12,8 @@ import styles from './styles.module.scss';
 import ProvinceSelect from '../../SelectLocation';
 import { formattedNumber } from '../../../../../utils/format-number';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+import langs from '../../langs';
 
 const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
   const [formData, setFormData] = useState({
@@ -24,6 +26,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
     payment: 'cod',
   });
   const [otherAddress, setOtherAdress] = useState('');
+  const { t } = useTranslation();
   const handlerSetAddress = address => {
     setFormData(pre => ({ ...pre, address: address }));
   };
@@ -58,7 +61,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
       <Box borderWidth="1px" p={6} boxShadow="lg">
         <form onSubmit={handleSubmit} className={styles['form']}>
           <FormControl id="first_name" className={styles['form__group']}>
-            <FormLabel>First Name</FormLabel>
+            <FormLabel>{t(langs.firstName)}</FormLabel>
             <Input
               type="text"
               name="first_name"
@@ -69,7 +72,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
             />
           </FormControl>
           <FormControl id="last_name" className={styles['form__group']}>
-            <FormLabel>Last Name</FormLabel>
+            <FormLabel>{t(langs.lastName)}</FormLabel>
             <Input
               type="text"
               name="last_name"
@@ -80,7 +83,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
             />
           </FormControl>
           <FormControl id="email" className={styles['form__group']}>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>{t(langs.email)}</FormLabel>
             <Input
               type="email"
               name="email"
@@ -91,7 +94,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
             />
           </FormControl>
           <FormControl id="phone" className={styles['form__group']}>
-            <FormLabel>Phone</FormLabel>
+            <FormLabel>{t(langs.phone)}</FormLabel>
             <Input
               type="tel"
               name="phone"
@@ -104,13 +107,15 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
           <FormControl id="address" className={styles['form__group']}>
             <div className="flex gap-3">
               <div>
-                <FormLabel>Address</FormLabel>
+                <FormLabel>{t(langs.address)}</FormLabel>
                 <ProvinceSelect
                   handlerSetAddress={handlerSetAddress}
                 ></ProvinceSelect>
               </div>
               <div>
-                <FormLabel>Số nhà/ Tên đường</FormLabel>
+                <FormLabel>{`${t(langs.houseNumber)}/${t(
+                  langs.street
+                )}`}</FormLabel>
                 <Textarea
                   value={otherAddress}
                   onChange={e => {
@@ -123,7 +128,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
             </div>
           </FormControl>
           <FormControl id="notes" className={styles['form__group']}>
-            <FormLabel>Notes</FormLabel>
+            <FormLabel>{t(langs.notes)}</FormLabel>
             <Textarea
               name="notes"
               value={formData.notes}
@@ -132,7 +137,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
             />
           </FormControl>
           <FormControl id="payment" className={styles['form__group']}>
-            <FormLabel>Payment</FormLabel>
+            <FormLabel>{t(langs.order)}</FormLabel>
             <Select
               name="payment"
               value={formData.payment}
@@ -157,7 +162,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
               width="full"
               className={styles['form__button']}
             >
-              Submit
+              {t(langs.order)}
             </Button>
           </Box>
         </form>

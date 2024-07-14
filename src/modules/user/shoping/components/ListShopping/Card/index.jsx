@@ -15,6 +15,7 @@ import { formattedNumber } from '../../../../../../utils/format-number';
 import { ADD_CART } from '../../../../../../actions/action-cart';
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons'; // Bạn có thể chọn biểu tượng phù hợp hơn nếu có
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Inventory2Outlined } from '@mui/icons-material';
 
 const Card = ({ item, ...props }) => {
   const navigate = useNavigate();
@@ -75,12 +76,7 @@ const Card = ({ item, ...props }) => {
           <ShoppingCartCheckout className={styles.cartIcon} />
         </button>
         <div className={styles.quantity}>
-          <FontAwesomeIcon
-            fontSize={25}
-            color=" rgb(201, 76, 8)"
-            icon={faBoxOpen}
-            className="icon"
-          />
+          <Inventory2Outlined htmlColor="rgb(201, 76, 8)" />
           <h6 className="text-slate-600">{cloneItem.quantity}</h6>
         </div>
       </div>
