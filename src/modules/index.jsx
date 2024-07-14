@@ -172,14 +172,6 @@ const App = () => {
                 </Suspense>
               }
             />
-            <Route
-              path="/cart"
-              element={
-                <Suspense fallback={<div>Loading...</div>}>
-                  <Cart />
-                </Suspense>
-              }
-            />
           </Route>
         )}
 
