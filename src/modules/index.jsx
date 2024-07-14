@@ -6,13 +6,11 @@ import ChartComponent from './Test/Test';
 
 const User = React.lazy(() => import('./admin/User/container'));
 const Category = React.lazy(() => import('./admin/Category/container'));
-const Order = React.lazy(() => import('./admin/Order/container'));
 const Blog = React.lazy(() => import('./admin/Blog/container'));
 const BlogCategory = React.lazy(() =>
   import('./admin/Blog-Category/container')
 );
 const Banner = React.lazy(() => import('./admin/Banner/container'));
-const Cart = React.lazy(() => import('./admin/Cart/container'));
 const Coupon = React.lazy(() => import('./admin/Coupon/container'));
 import Home from './user/home/container';
 import Shopping from './user/shoping/container';
@@ -141,14 +139,7 @@ const App = () => {
                 </Suspense>
               }
             />
-            <Route
-              path="/order"
-              element={
-                <Suspense fallback={<div>Loading...</div>}>
-                  <Order />
-                </Suspense>
-              }
-            />
+
             <Route
               path="/blog"
               element={
