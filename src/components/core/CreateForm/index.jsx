@@ -75,14 +75,22 @@ const CreateForm = ({
           toast.error(`${MAPPER_NAME[field.name]} phải là một hình ảnh`);
         }
       }
+
       if (field.type === 'editor') {
         if (!formState[field.name]) {
           isEmptyEditor = t(field.label);
         }
       }
+
+      if (field.type === 'file' && field.isRequire) {
+        if (!formState[field.name]) {
+          isEmptyEditor = t(field.label);
+        }
+      }
     });
+
     if (isEmptyEditor) {
-      toast.error('Không được để rỗng ' + isEmptyEditor);
+      toast.error('Không được để trống ' + isEmptyEditor);
       return;
     }
 
@@ -137,6 +145,7 @@ const CreateForm = ({
                 name: option[item.labelField],
               }))
             );
+            handleChange(item.name, res.data.data[0][item.valueField]);
           })
           .catch(err => {
             console.error(
@@ -233,7 +242,7 @@ const CreateForm = ({
       <FormControl
         className={styles.field}
         key={item.name}
-        isRequired={item.isRequire}
+        isRequired={item.type !== 'file' ? item.isRequire : null}
       >
         {item.label && (
           <FormLabel htmlFor={item.name}>{t(item.label)}</FormLabel>

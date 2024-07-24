@@ -8,7 +8,11 @@ import { Button, useDisclosure } from '@chakra-ui/react';
 import DialogMessage from '../../DialogMessage';
 import FormEmailContainer from '../../FormEmail/container';
 import { useDispatch, useSelector } from 'react-redux';
-import { SEND_EMAIL, resetEmailStatus } from '../Store/constants';
+import {
+  CHANGE_PASSWORD,
+  SEND_EMAIL,
+  resetEmailStatus,
+} from '../Store/constants';
 import ProgressFullScreen from '../../ProgressFullScreen';
 import {
   getErrorSendMail,
@@ -20,6 +24,7 @@ import SelectLanguage from '../../../user/Header/SelectLang';
 import langs from '../../../../langs';
 import { useTranslation } from 'react-i18next';
 import SearchWithId from '../SearchWithId';
+import { schemaChangePassword } from './constants/schema-form-change-password';
 const BreadCrumb = ({
   isSearchInput,
   onChangeSearchText,
@@ -31,6 +36,7 @@ const BreadCrumb = ({
 }) => {
   const { logout } = useContext(AuthContext);
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const { isOpenCB, onCloseCB, onOpenCB } = useDisclosure();
   const { t } = useTranslation();
 
   //  * lấy trạng thái của reducer
@@ -43,6 +49,12 @@ const BreadCrumb = ({
     dispatch({ type: SEND_EMAIL, payload: { ...data, endpoint: '/sendmail' } });
   };
 
+  const handlerChangePassword = data => {
+    dispatch({
+      type: CHANGE_PASSWORD,
+      payload: { ...data, endpoint: '/change/password' },
+    });
+  };
   useEffect(() => {
     if (errorSendMailMessage) {
       toast.error(`Error: ${errorSendMailMessage}`, {
@@ -86,7 +98,21 @@ const BreadCrumb = ({
           <FormEmailContainer handlerSubmit={handlerSendmail} />
         </DialogMessage>
       )}
+
+      <DialogMessage
+        isOpen={isOpenCB}
+        onClose={onCloseCB}
+        onOpen={onOpenCB}
+        button={langs.changePassword}
+      >
+        <FormEmailContainer
+          schemaForm={schemaChangePassword}
+          handlerSubmit={handlerChangePassword}
+        />
+      </DialogMessage>
+
       <DialogCreateForm endpoint={endpoint} schemaForm={schemaForm} />
+
       <SelectLanguage
         classNameProps={styles.customOption}
         bordered

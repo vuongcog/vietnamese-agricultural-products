@@ -10,9 +10,8 @@ const initializeFormState = schemaForm =>
   }, {});
 
 const templateProps = {
-  endpoint: '/test',
   type: 'edit',
-  schemaForm: data.items,
+  schemaForm: data,
   onClose: () => {},
   defaultValues: {},
   action: '',
@@ -25,10 +24,11 @@ const FormEmailContainer = props => {
     ...templateProps,
     ...props,
   };
+  console.log(schemaForm);
 
   // * Define state cho container FormEmail
   const [formState, setFormState] = useState(() =>
-    initializeFormState(schemaForm, defaultValues, type)
+    initializeFormState(schemaForm.items, defaultValues, type)
   );
 
   // * Function to handle onchange input
@@ -46,7 +46,8 @@ const FormEmailContainer = props => {
 
   return (
     <FormEmail
-      schemaForm={schemaForm}
+      doneText={schemaForm.doneText}
+      schemaForm={schemaForm.items}
       formState={formState}
       handleChange={handleChange}
       handleSubmit={handleSubmit}

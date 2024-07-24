@@ -46,7 +46,7 @@ const FormLogin = () => {
         Cookies.set('accsessToken', responseData.access_token, {
           path: '/',
           sameSite: 'Lax',
-          expires: 7,
+          expires: responseData.expires_in / 1440,
         });
         setCheckauth(pre => !pre);
       })
@@ -58,12 +58,9 @@ const FormLogin = () => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       {isLoading && <ProgressFullScreen></ProgressFullScreen>}
-      <img
-        src={LOGO.login}
-        onClick={() => {
-          navigate('/');
-        }}
-      ></img>
+      <Link to={'/'}>
+        <img src={LOGO.login}></img>
+      </Link>
       <h1>LOG IN</h1>
       <FormControl className={styles.field} isInvalid={!!emailError}>
         <Input
@@ -101,8 +98,12 @@ const FormLogin = () => {
           >
             Remember me
           </Checkbox>
-          <Link className="font-bold text-blue-600" to={'/authen/signup'}>
-            Signup
+
+          <Link
+            className="font-bold text-blue-500 underline"
+            to={'/authen/signup'}
+          >
+            Register
           </Link>
         </div>
       </FormControl>

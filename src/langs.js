@@ -5,7 +5,7 @@ const langsGlobal = {
   logout: LANGUAGE_GLOBAL_ADMIN + '.logout',
   addCart: LANGUAGE_GLOBAL_ADMIN + '.addCart',
   byNow: LANGUAGE_GLOBAL_ADMIN + '.byNow',
-
+  changePassword: LANGUAGE_GLOBAL_ADMIN + '.changePassword',
   blogCategories: LANGUAGE_GLOBAL_ADMIN + '.blogCategories',
   blogsWithCategory: LANGUAGE_GLOBAL_ADMIN + '.blogsWithCategory',
   relatedBlogs: LANGUAGE_GLOBAL_ADMIN + '.relatedBlogs',

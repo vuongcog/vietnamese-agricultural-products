@@ -1,17 +1,35 @@
 import React, { createContext, useContext, useState } from 'react';
 import Cookies from 'js-cookie';
 import PropTypes from '../utils/prop-types';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [checkAuth, setCheckauth] = useState(false);
   const accessToken = Cookies.get('accsessToken');
   const logout = () => {
-    const accsessToken = Cookies.get('accsessToken');
-    if (accsessToken) {
-      setCheckauth(!checkAuth);
-      Cookies.remove('accsessToken');
-    }
+    axios
+      .post(
+        import.meta.env.VITE_API_URL_SERVER + '/logout',
+        {},
+        {
+          headers: {
+            Authorization: `bearer ${accessToken}`,
+          },
+        }
+      )
+      .then(res => {
+        if (accessToken) {
+          setCheckauth(!checkAuth);
+          Cookies.remove('accsessToken');
+          console.log(res);
+        }
+        toast.success('Đăng xuất thành công');
+      })
+      .catch(err => {
+        toast.error('Đăng xuất thất bại');
+      });
   };
 
   return (

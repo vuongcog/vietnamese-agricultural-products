@@ -96,7 +96,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
           <FormControl id="phone" className={styles['form__group']}>
             <FormLabel>{t(langs.phone)}</FormLabel>
             <Input
-              type="tel"
+              type="number"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
@@ -104,7 +104,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
               className={styles['form__input']}
             />
           </FormControl>
-          <FormControl id="address" className={styles['form__group']}>
+          <FormControl required id="address" className={styles['form__group']}>
             <div className="flex gap-3">
               <div>
                 <FormLabel>{t(langs.address)}</FormLabel>
@@ -127,7 +127,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
               </div>
             </div>
           </FormControl>
-          <FormControl id="notes" className={styles['form__group']}>
+          <FormControl isRequired id="notes" className={styles['form__group']}>
             <FormLabel>{t(langs.notes)}</FormLabel>
             <Textarea
               name="notes"

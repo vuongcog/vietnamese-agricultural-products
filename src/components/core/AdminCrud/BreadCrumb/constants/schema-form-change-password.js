@@ -1,22 +1,22 @@
-export const data = {
+export const schemaChangePassword = {
   items: [
     {
-      name: 'title',
-      label: 'Title',
+      name: 'old_password',
+      label: 'Mật khẩu cũ',
       placeholder: 'Title...',
       isRequire: true,
       type: 'text',
     },
     {
-      name: 'email',
-      label: 'Email',
-      type: 'email',
+      name: 'new_password',
+      label: 'Mật khẩu mới',
+      type: 'text',
       placeholder: 'Email',
       isRequire: true,
     },
     {
-      name: 'message',
-      label: 'Message',
+      name: 'new_password_confirmation',
+      label: 'Xác nhận lại mật khẩu',
       placeholder: 'Message...',
       isRequire: true,
       type: 'text',
@@ -24,7 +24,7 @@ export const data = {
   ],
   doneText: [
     {
-      label: 'Send',
+      label: 'Đổi mật khẩu',
       name: 'name',
       callback: () => {},
     },

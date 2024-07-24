@@ -37,7 +37,7 @@ const DetailOrder = () => {
               type: ADD_CART,
               payload: {
                 endpoint: `/giohang/themgiohang`,
-                params: { id_prd: product.id, quantity: 1 },
+                params: { id_prd: product.id, quantity: numbers },
               },
             });
             navigate('/cart');

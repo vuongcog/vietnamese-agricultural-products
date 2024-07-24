@@ -1,21 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AVATAR } from '../../../constants/avatar';
 import styles from './styles.module.scss';
+import useProducerDataUser from '../../../useCustom/admin/useProducerDataUser';
 
-const AdminAvatar = ({ info }) => (
-  <div className={styles['admin-avatar']}>
-    <Avatar />
-    <Info name={info.name} phone={info.phone} />
-  </div>
-);
+const AdminAvatar = () => {
+  const { inforUser } = useProducerDataUser();
+  return (
+    <div className={styles['admin-avatar']}>
+      <Avatar url={inforUser.url_avatar} />
+      <Info name={inforUser.name} phone={inforUser.phone_num} />
+    </div>
+  );
+};
 
-const Avatar = () => (
-  <img
-    className={styles['admin-avatar__image']}
-    src={AVATAR.admin}
-    alt="Admin"
-  />
+const Avatar = ({ url }) => (
+  <img className={styles['admin-avatar__image']} src={url} alt="Admin" />
 );
 
 const Info = ({ name, phone }) => (

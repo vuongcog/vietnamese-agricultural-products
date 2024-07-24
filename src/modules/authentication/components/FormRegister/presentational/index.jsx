@@ -8,12 +8,13 @@ import {
 } from '@chakra-ui/react';
 import styles from './styles.module.scss';
 import LOGO from '../../../../../constants/logo';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { parseObjectJson } from '../../../../../utils/parse-json';
 import PropTypes from '../../../../../utils/prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-const FormRegister = ({ handlerSubmitForm, setIsRegisting }) => {
+import ProgressFullScreen from '../../../../../components/core/ProgressFullScreen';
+const FormRegister = ({ isRegisting, handlerSubmitForm, setIsRegisting }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,6 +33,7 @@ const FormRegister = ({ handlerSubmitForm, setIsRegisting }) => {
     handlerSubmitForm({ name, email, password, password_confirmation })
       .then(res => {
         toast.success(res.message);
+        navigate('/authen/signin');
       })
       .catch(err => {
         const parseData = parseObjectJson(err.response.data);
@@ -48,13 +50,11 @@ const FormRegister = ({ handlerSubmitForm, setIsRegisting }) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <img
-        src={LOGO.login}
-        onClick={() => {
-          navigate('/');
-        }}
-      ></img>
-      <h1>SIGNUP</h1>
+      {isRegisting && <ProgressFullScreen></ProgressFullScreen>}
+      <Link to={'/'}>
+        <img src={LOGO.login}></img>
+      </Link>
+      <h3>SIGNUP</h3>
       <FormControl className={styles.field} isInvalid={!!nameError}>
         <Input
           id="name"
@@ -119,8 +119,11 @@ const FormRegister = ({ handlerSubmitForm, setIsRegisting }) => {
           >
             Remember me
           </Checkbox>
-          <Link className="font-bold text-blue-600" to={'/authen/signin'}>
-            Signin
+          <Link
+            className="font-bold text-blue-500 underline"
+            to={'/authen/signin'}
+          >
+            Login
           </Link>
         </div>
       </FormControl>

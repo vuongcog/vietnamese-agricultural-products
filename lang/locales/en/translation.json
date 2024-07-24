@@ -8,6 +8,7 @@
   "src/main.relatedBlogs": "Related blogs",
   "src/main.placeholderSearch": "Search with name...",
   "src/main.placeholderId": "Search with id...",
+  "src/main.changePassword": "Change Password",
 
   "src/components/user/Header.home": "Home",
   "src/components/user/Header.login": "Login",

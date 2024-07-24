@@ -6,6 +6,8 @@ import { Checkbox } from '@chakra-ui/react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { CartContext } from '../../container';
+import { debounce } from 'lodash';
+import { useDebounce } from '../../../../../utils/use-debounce';
 
 const CartItem = ({
   quantity,
@@ -23,12 +25,18 @@ const CartItem = ({
   const totalPrice = useMemo(() => number * unit_prices, [number, unit_prices]);
   const { handlerDeleteCart, handlerUpdateCart } = useContext(CartContext);
   const firstEffect = useRef(false);
+  const debounceNumber = useDebounce(number, 300);
+
+  useEffect(() => {
+    setNumber(quantity);
+  }, [quantity]);
   useEffect(() => {
     if (firstEffect.current) {
-      handlerUpdateCart(id_product, number);
+      handlerUpdateCart(id_product, debounceNumber);
     }
     firstEffect.current = true;
-  }, [number]);
+  }, [debounceNumber]);
+
   const handlerSetNumber = number => {
     setNumber(number);
   };

@@ -76,7 +76,7 @@ const Card = ({ item, ...props }) => {
           <ShoppingCartCheckout className={styles.cartIcon} />
         </button>
         <div className={styles.quantity}>
-          <Inventory2Outlined htmlColor="rgba(125, 95, 67, 0.7)" />
+          <Inventory2Outlined htmlColor="rgba(190, 79, 39, 0.7)" />
           <h6 className="text-slate-600">{cloneItem.quantity}</h6>
         </div>
       </div>

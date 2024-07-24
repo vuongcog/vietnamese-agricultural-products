@@ -130,7 +130,7 @@ const Product = () => {
       {
         name: 'quantity',
         label: t(langs.quantity),
-        default: 'N/A',
+        default: 0,
       },
       {
         name: 'unit_prices',

@@ -30,12 +30,6 @@ import {
 import HttpUserClient from '../utils/http/httpUserClient';
 import { toast } from 'react-toastify';
 import { parseObjectJson } from '../utils/parse-json';
-import { error } from 'jquery';
-
-const options = {
-  notAuthor: true,
-  withCredentials: true,
-};
 
 function* wokerAddCart(action) {
   try {
@@ -82,11 +76,9 @@ function* wokerUpdateCart(action) {
     const http = new HttpUserClient('/giohang/capnhatgiohang?_method=PUT');
     yield call(http.updateCart, payload);
     yield put({ type: UPDATE_CART_SUCCESS });
-    // toast.success('Thêm giỏ hàng thành công');
+    yield put({ type: RE_FETCH_CART });
   } catch (err) {
     yield put({ type: UPDATE_CART_FAILED });
-    // const parseObject = parseObjectJson(err.response.data);
-    // toast.error(parseObject.message);
   } finally {
     yield put({ type: UPDATED_CART });
     yield put({ type: RESET_STATUS_UPDATE_CART });

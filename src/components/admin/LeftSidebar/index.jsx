@@ -6,10 +6,12 @@ import { SCHEMA } from '../../../constants/nav-bar-item';
 import { useNavigate, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
+import useProducerDataUser from '../../../useCustom/admin/useProducerDataUser';
 
 const AdminLeftSidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { inforUser } = useProducerDataUser();
   const [activeLink, setActiveLink] = useState(location.pathname);
   const { t } = useTranslation();
   const handleNavigate = link => {
@@ -21,7 +23,7 @@ const AdminLeftSidebar = () => {
     <nav className={classNames(styles.leftSideBar)}>
       <div className={styles.wrapperTitle}>
         <i className={`fas fa-paw ${styles.titleIcon}`}></i>
-        <h1 className={styles.titleText}>Administrator</h1>
+        <h1 className={styles.titleText}>{inforUser.role}</h1>
       </div>
       <AdminAvatar />
       <ul className={styles.sidebarMenu}>

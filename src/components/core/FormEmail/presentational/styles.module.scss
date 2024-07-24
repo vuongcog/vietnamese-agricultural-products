@@ -25,7 +25,7 @@
     align-items: center;
     width: 100%;
     label {
-      flex: 0 0 100px;
+      flex: 0 0 150px;
     }
 
     input {
@@ -41,7 +41,7 @@
       flex: 0 1 auto;
     }
 
-    input[type="file"] {
+    input[type='file'] {
       border: none;
       height: auto;
     }

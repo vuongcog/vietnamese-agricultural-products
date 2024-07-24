@@ -45,7 +45,7 @@ const FormLoginManagement = () => {
         const responseData = parseObjectJson(res);
         Cookies.set('accsessToken', responseData.access_token, {
           path: '/',
-          expires: 7,
+          expires: responseData.expires_in / 1440,
         });
         setCheckauth(pre => !pre);
       })
@@ -57,13 +57,10 @@ const FormLoginManagement = () => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       {isLoading && <ProgressFullScreen></ProgressFullScreen>}
-      <img
-        src={LOGO.login}
-        onClick={() => {
-          navigate('/');
-        }}
-      ></img>
-      <h1>LOG IN</h1>
+      <Link to={import.meta.env.VITE_HOST_CUSTOMER}>
+        <img src={LOGO.login}></img>
+      </Link>
+      <h1>LOGIN MANAGER</h1>
       <FormControl className={styles.field} isInvalid={!!emailError}>
         <Input
           id="email"
@@ -100,8 +97,11 @@ const FormLoginManagement = () => {
           >
             Remember me
           </Checkbox>
-          <Link className="font-bold text-blue-600" to={'/authen/signup'}>
-            Signup
+          <Link
+            className="text-[13px] font-bold text-blue-500 underline"
+            to={`${import.meta.env.VITE_HOST_CUSTOMER}/authen/signup`}
+          >
+            Signup for customer
           </Link>
         </div>
       </FormControl>

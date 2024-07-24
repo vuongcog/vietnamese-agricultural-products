@@ -19,7 +19,7 @@ const BlogGuestLayout = ({ handlerClickOthersBlog }) => {
       <div className={styles.wrapper_image}>
         <img src={blog.blog_image} />
         <h1>{t(langsGlobal.relatedBlogs)}</h1>
-        <div style={{ listStyle: 'none' }}>
+        <div>
           {relatedBlogs?.map(item => (
             <div
               onClick={() => handlerClickOthersBlog(item)}
@@ -36,7 +36,7 @@ const BlogGuestLayout = ({ handlerClickOthersBlog }) => {
               </div>
             </div>
           ))}
-          {allBlogs?.map(item => (
+          {/* {allBlogs?.map(item => (
             <div
               onClick={() => handlerClickOthersBlog(item)}
               key={item.blog_slug}
@@ -48,7 +48,7 @@ const BlogGuestLayout = ({ handlerClickOthersBlog }) => {
                 <p dangerouslySetInnerHTML={{ __html: item.content }}></p>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

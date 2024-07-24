@@ -6,6 +6,11 @@ import {
   ADD_DATA_FAILED,
   ADD_DATA_SUCCESS,
   ADD_RESET_STATUS,
+  CHANGED_PASSWORD,
+  CHANGE_PASSWORD,
+  CHANGE_PASSWORD_ERROR,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGING_PASSWORD,
   DELETED_DATA,
   DELETE_DATA,
   DELETE_DATA_FAILED,
@@ -33,6 +38,7 @@ import {
 import Http from '../../../../utils/http/http';
 import { parseObjectJson } from '../../../../utils/parse-json';
 import { toast } from 'react-toastify';
+import { object } from 'prop-types';
 
 // 111 worker create data
 function* handlerAddData(action) {
@@ -132,6 +138,7 @@ function* handlerDelete(action) {
     }
   } finally {
     yield put({ type: DELETED_DATA });
+    yield put({ type: REFRESH });
     yield put({ type: DELETE_RESET_STATUS });
   }
 }
@@ -155,12 +162,36 @@ function* handlerSendMail(action) {
   }
 }
 
+// 333 worker send mailza
+function* handlerChangePassword(action) {
+  try {
+    yield put({ type: CHANGING_PASSWORD });
+    const { payload } = action;
+    const http = new Http(payload.endpoint);
+    delete payload.endpoint;
+    yield call(http.update, payload);
+    toast.success('Đổi mật khẩu thành công');
+    yield put({ type: CHANGE_PASSWORD_SUCCESS });
+  } catch (err) {
+    const errors = parseObjectJson(parseObjectJson(err.response.data));
+    for (let key in errors) {
+      if (errors[key].length > 0) {
+        errors[key].forEach(errMsg => toast.error(errMsg));
+      }
+    }
+    yield put({ type: CHANGE_PASSWORD_ERROR });
+  } finally {
+    yield put({ type: CHANGED_PASSWORD });
+  }
+}
+
 function* warcherTest() {
   yield takeLatest(ADD_DATA, handlerAddData);
   yield takeLatest(UPDATE_DATA, handlerUpdate);
   yield takeLatest(SEND_EMAIL, handlerSendMail);
   yield takeLatest(DELETE_DATA, handlerDelete);
   yield takeLatest(FETCH_DATA_WITH_ID, handlerFetchDataWithId);
+  yield takeLatest(CHANGE_PASSWORD, handlerChangePassword);
 }
 
 export default warcherTest;

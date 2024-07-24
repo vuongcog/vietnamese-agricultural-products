@@ -1,7 +1,7 @@
 // FormEmail.jsx
-import React from "react";
-import PropTypes from "prop-types";
-import { AddIcon } from "@chakra-ui/icons";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { AddIcon } from '@chakra-ui/icons';
 import {
   Button,
   FormControl,
@@ -9,26 +9,32 @@ import {
   FormLabel,
   Input,
   Select,
-} from "@chakra-ui/react";
-import styles from "./styles.module.scss";
+} from '@chakra-ui/react';
+import styles from './styles.module.scss';
 
-const FormEmail = ({ schemaForm, formState, handleChange, handleSubmit }) => {
+const FormEmail = ({
+  schemaForm,
+  formState,
+  doneText,
+  handleChange,
+  handleSubmit,
+}) => {
   const renderInput = (item, defaultValue) => {
     switch (item.type) {
-      case "select":
+      case 'select':
         return (
           <Select
             defaultValue={defaultValue || item.items[0].value}
-            onChange={(e) => handleChange(item.name, e.target.value)}
+            onChange={e => handleChange(item.name, e.target.value)}
           >
-            {item.items.map((option) => (
+            {item.items.map(option => (
               <option key={option.value} value={option.value}>
                 {option.value}
               </option>
             ))}
           </Select>
         );
-      case "file":
+      case 'file':
         return <input type="file" />;
       default:
         return (
@@ -36,7 +42,7 @@ const FormEmail = ({ schemaForm, formState, handleChange, handleSubmit }) => {
             defaultValue={defaultValue}
             {...item}
             value={formState[item.name]}
-            onChange={(e) => handleChange(item.name, e.target.value)}
+            onChange={e => handleChange(item.name, e.target.value)}
           />
         );
     }
@@ -51,17 +57,33 @@ const FormEmail = ({ schemaForm, formState, handleChange, handleSubmit }) => {
   );
 
   const renderListFields = () =>
-    schemaForm.map((item) => {
-      const defaultValue = formState[item.name] || "";
+    schemaForm.map(item => {
+      const defaultValue = formState[item.name] || '';
       return renderField(item, defaultValue);
     });
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       {renderListFields()}
-      <Button type="submit" leftIcon={<AddIcon />}>
-        Create
+      <Button
+        backgroundColor={'blue'}
+        type="submit"
+        leftIcon={<AddIcon fontWeight={'700'} color={'white'} />}
+        color={'white'}
+      >
+        {doneText[0].label || 'Save'}
       </Button>
+
+      {doneText[1] && (
+        <Button
+          backgroundColor={'blue'}
+          type="submit"
+          leftIcon={<AddIcon fontWeight={'700'} color={'white'} />}
+          color={'white'}
+        >
+          {doneText[1].label}
+        </Button>
+      )}
     </form>
   );
 };

@@ -25,6 +25,10 @@ import {
   UPDATE_RESET_STATUS,
   UPDATE_SUCCESS,
   UPDATING_DATA,
+  CHANGING_PASSWORD,
+  CHANGED_PASSWORD,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_ERROR,
 } from './constants';
 const intiState = {
   // 111 state giành cho các trạng thái global
@@ -52,6 +56,10 @@ const intiState = {
   isDeleteData: false,
   isDeletedDataSuccess: false,
   isDeletedDataFailed: false,
+  // 666 state giành cho đổi mật khẩu
+  isChangePassword: false,
+  isChangePasswordSuccess: false,
+  isChangePasswordError: false,
 };
 
 // 111 handler giành cho nạp dữ liệu global
@@ -146,6 +154,18 @@ const handlerResetStatusDeleteData = state => ({
   isDeletedDataSuccess: false,
   isDeletedDataFailed: false,
 });
+// 666 handler giành cho đổi mật khẩu
+
+const handlerChangingPassword = state => ({ ...state, isChangePassword: true });
+const handlerChangedPassword = state => ({ ...state, isChangePassword: false });
+const handlerChangePasswordSuccess = state => ({
+  ...state,
+  isChangePasswordSuccess: true,
+});
+const handlerChangedPasswrodError = state => ({
+  ...state,
+  isChangePasswordError: true,
+});
 
 // 111 mapping handlers
 const handlers = {
@@ -183,6 +203,11 @@ const handlers = {
   [DELETE_DATA_SUCCESS]: handlerDeletedSuccess,
   [DELETE_DATA_FAILED]: handlerDeletedFailed,
   [DELETE_RESET_STATUS]: handlerResetStatusDeleteData,
+
+  [CHANGING_PASSWORD]: handlerChangingPassword,
+  [CHANGED_PASSWORD]: handlerChangedPassword,
+  [CHANGE_PASSWORD_SUCCESS]: handlerChangePasswordSuccess,
+  [CHANGE_PASSWORD_ERROR]: handlerChangedPasswrodError,
 };
 export const reducerList = (state = intiState, action) => {
   const handler = handlers[action.type];

@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const FormRegisterContainer = () => {
   const [isRegisting, setIsRegisting] = useState(false);
-
   const registerUser = async params => {
     setIsRegisting(true);
     const res = await axios.post(
@@ -17,6 +16,7 @@ const FormRegisterContainer = () => {
   };
   return (
     <FormRegister
+      isRegisting={isRegisting}
       setIsRegisting={setIsRegisting}
       handlerSubmitForm={registerUser}
     ></FormRegister>

@@ -8,6 +8,7 @@
   "src/main.relatedBlogs": "Các bài viết liên quan",
   "src/main.placeholderSearch": "Tìm theo tên",
   "src/main.placeholderId": "Tìm theo id",
+  "src/main.changePassword": "Đổi mật khẩu",
 
   "src/components/user/Header.home": "Trang chủ",
   "src/components/user/Header.login": "Đăng nhập",

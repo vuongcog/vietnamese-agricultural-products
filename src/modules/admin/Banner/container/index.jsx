@@ -69,6 +69,7 @@ const Category = () => {
               name: 'delete',
               label: <span className=" font-semibold">Delete</span>,
               callback: item => {
+                console.log(item);
                 dispatch({
                   type: DELETE_DATA,
                   payload: `/banner/${item.id}`,
