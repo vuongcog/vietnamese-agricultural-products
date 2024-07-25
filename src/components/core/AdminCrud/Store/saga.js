@@ -39,6 +39,7 @@ import Http from '../../../../utils/http/http';
 import { parseObjectJson } from '../../../../utils/parse-json';
 import { toast } from 'react-toastify';
 import { object } from 'prop-types';
+import { message } from 'antd';
 
 // 111 worker create data
 function* handlerAddData(action) {
@@ -174,12 +175,18 @@ function* handlerChangePassword(action) {
     yield put({ type: CHANGE_PASSWORD_SUCCESS });
   } catch (err) {
     const errors = parseObjectJson(parseObjectJson(err.response.data));
-    for (let key in errors) {
-      if (errors[key].length > 0) {
-        errors[key].forEach(errMsg => toast.error(errMsg));
+
+    try {
+      if (errors.message) {
+        toast.error(errors.message);
       }
-    }
-    yield put({ type: CHANGE_PASSWORD_ERROR });
+      for (let key in errors) {
+        if (errors[key].length > 0) {
+          errors[key].forEach(errMsg => toast.error(errMsg));
+        }
+      }
+      yield put({ type: CHANGE_PASSWORD_ERROR });
+    } catch {}
   } finally {
     yield put({ type: CHANGED_PASSWORD });
   }
