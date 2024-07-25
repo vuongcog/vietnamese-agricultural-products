@@ -6,6 +6,7 @@ import useProducerDataUser from '../../../../../useCustom/user/useProducerDataUs
 import { useDisclosure } from '@chakra-ui/react';
 import DialogMessage from '../../../../../components/core/DialogMessage';
 import { formattedNumber } from '../../../../../utils/format-number';
+import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line arrow-body-style
 const ProfilePurchaseUser = () => {
   const product = {
@@ -29,20 +30,28 @@ const ProfilePurchaseUser = () => {
     );
   };
   const RenderRowBodyProduct = ({ item }) => {
+    const navigate = useNavigate();
     return (
       <tr>
         <td>
           <div className="flex items-center justify-center ">
             <img
               className="w-[60px] h-[60px] object-cover rounded-full"
-              src={product.product_image}
+              src={item.products.product_image}
             ></img>
           </div>
         </td>
-        <td>{product.product_name}</td>
+        <td
+          className="hover:underline hover:text-blue-400 hover:font-semibold hover:cursor-pointer"
+          onClick={() => {
+            navigate(`/detail/${item.products.product_slug}`);
+          }}
+        >
+          {item.products.product_name}
+        </td>
         <td>{item.quantity}</td>
         <td>{formattedNumber(item.unit_prices)}</td>
-        <td>{formattedNumber(item.unit_prices)}</td>
+        <td>{formattedNumber(item.unit_prices * item.quantity)}</td>
       </tr>
     );
   };
