@@ -17,6 +17,7 @@ import {
   BLOG_REDUCER,
   CART_REDUCER,
   CATEGORY_REDUCER,
+  DATA_USER_REDUCER,
   DETAIL_PRODUCT_REDUCER,
   ORDER_REDUCER,
 } from '../../constants/name-store/user/name-space-reducer';
@@ -24,6 +25,7 @@ import {
   BLOG_SAGA,
   CART_SAGA,
   CATEGORY_SAGA,
+  DATA_USER_SAGA,
   DETAIL_PRODUCT_SAGA,
   ORDER_SAGA,
 } from '../../constants/name-store/user/name-space-saga';
@@ -35,6 +37,8 @@ import { reducerBlogsUser } from '../../reducers/reducer-blog';
 import watcherSagaBlogs from '../../sagas/saga-blog';
 import { reducerOrder } from '../../reducers/reducer-order';
 import watcherSagaOrder from '../../sagas/saga-order';
+import { reducerDataUser } from '../../reducers/reducer-data-user';
+import watcherSagaDataUser from '../../sagas/saga-data-user';
 
 const useInjectReducerSagaShopping = () => {
   const redux = {
@@ -44,12 +48,14 @@ const useInjectReducerSagaShopping = () => {
     saga: warcherSagaProducrtList,
   };
   useMemo(() => {
+    injectReducer(DATA_USER_REDUCER, reducerDataUser);
     injectReducer(ORDER_REDUCER, reducerOrder);
     injectReducer(BLOG_REDUCER, reducerBlogsUser);
     injectReducer(CART_REDUCER, reducerCartUser);
     injectReducer(CATEGORY_REDUCER, reducerCategoryUser);
     injectReducer(DETAIL_PRODUCT_REDUCER, reducerDetailProduct);
 
+    injectSaga(DATA_USER_SAGA, watcherSagaDataUser);
     injectSaga(ORDER_SAGA, watcherSagaOrder);
     injectSaga(BLOG_SAGA, watcherSagaBlogs);
     injectSaga(CART_SAGA, watcherSagaCart);

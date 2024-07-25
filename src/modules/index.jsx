@@ -36,6 +36,7 @@ import FormManagementProvider from './authentication/components/FormLoginManagem
 import FormProvider from './authentication/components/FormLogin/FormContext';
 import CheckoutContainer from './user/oder/container';
 import axios from 'axios';
+import Profile from './user/profile';
 
 const App = () => {
   axios.get('https://esgoo.net/api-tinhthanh/1/0.htm');
@@ -70,6 +71,7 @@ const App = () => {
             <Route path="/detail/:id" element={<DetailProduct />} />
             <Route path="/purchase" element={<DetailProduct />} />
             <Route path="/checkout" element={<CheckoutContainer />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
         )}
         <Route path="/authen" element={<Authentication />}>

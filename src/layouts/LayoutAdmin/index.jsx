@@ -20,7 +20,6 @@ const LayoutAdmin = ({ children }) => {
     }
   }, []);
   useInjectReducerSagaDataUser();
-
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {

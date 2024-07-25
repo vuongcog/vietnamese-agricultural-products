@@ -27,27 +27,22 @@ import useProducerFilterShopping from '../../../../../useCustom/user/useProducer
 import { useTranslation } from 'react-i18next';
 import langs from '../../langs';
 import useProducerCategory from '../../../../../useCustom/user/useProducerCategory';
+import { formattedNumber } from '../../../../../utils/format-number';
 
 const ProductFilter = () => {
   const { t } = useTranslation();
   const { category, priceRange } = useProducerFilterShopping();
   const [localPriceRange, setLocalPriceRange] = useState(priceRange);
-  const [keyword, setKeyword] = useState('');
   const [selectedCategories, setSelectedCategories] = useState(category);
   const { categories } = useProducerCategory();
   const suggestions = categories?.map(item => item.category_name);
-  console.log(suggestions);
   const dispatch = useDispatch();
-
-  const handleKeywordChange = e => {
-    setKeyword(e.target.value);
-    debounceSearch(e.target.value);
-  };
 
   const handleCategoryChange = e => {
     const { value } = e.target;
     if (!selectedCategories.includes(value) && value !== '') {
-      const newCategories = [...selectedCategories, value];
+      // const newCategories = [...selectedCategories, value];
+      const newCategories = [value];
       setSelectedCategories(newCategories);
       dispatch({ type: FILTER_CATEGORY, payload: newCategories });
     }
@@ -60,12 +55,6 @@ const ProductFilter = () => {
     [dispatch]
   );
 
-  const debounceSearch = useCallback(
-    debounce(value => {
-      dispatch({ type: FILTER_SEARCH, payload: value });
-    }, 300),
-    [dispatch]
-  );
   const handlePriceChange = value => {
     setLocalPriceRange(value);
     debounceDispatch(value);
@@ -77,17 +66,14 @@ const ProductFilter = () => {
     dispatch({ type: FILTER_CATEGORY, payload: newCategories });
   };
   return (
-    <Box as="form" p={4} paddingTop={14} borderWidth={1} borderRadius="md">
-      <FormControl mb={4}>
-        <FormLabel>{t(langs.search)}</FormLabel>
-        <Input
-          type="text"
-          name="keyword"
-          value={keyword}
-          onChange={handleKeywordChange}
-        />
-      </FormControl>
-
+    <Box
+      as="form"
+      p={4}
+      paddingTop={14}
+      w={200}
+      borderWidth={1}
+      borderRadius="md"
+    >
       <FormControl mb={4}>
         <FormLabel>{t(langs.category)}</FormLabel>
         <Select name="category" value="" onChange={handleCategoryChange}>
@@ -115,7 +101,7 @@ const ProductFilter = () => {
         <RangeSlider
           aria-label={['min', 'max']}
           min={0}
-          max={1000}
+          max={10000000}
           step={10}
           value={localPriceRange}
           onChange={val => handlePriceChange(val)}
@@ -127,9 +113,9 @@ const ProductFilter = () => {
           <RangeSliderThumb index={0} />
           <RangeSliderThumb index={1} />
         </RangeSlider>
-        <Text mt={2}>
-          {t(langs.from)}: ${localPriceRange[0]} - {t(langs.to)}: $
-          {localPriceRange[1]}
+        <Text fontSize={14} mt={2}>
+          {formattedNumber(localPriceRange[0])} đồng -{' '}
+          {formattedNumber(localPriceRange[1])} đồng
         </Text>
       </FormControl>
     </Box>

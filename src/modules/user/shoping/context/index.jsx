@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-
 import useCustomSelector from '../utils/useCustomSelector';
 import { CLEAR_PRODUCTS, FETCH_DATA } from '../store/reducer/constants';
 import { useDispatch } from 'react-redux';
@@ -18,26 +17,27 @@ const ShoppingProvider = ({ children }) => {
   const queryParams = new URLSearchParams(location.search);
   const querySearch = queryParams.get('keyword');
 
-  const { pagination, limit, search, category, priceRange } =
+  const { pagination, limit, category, priceRange, lastPage } =
     useProducerFilterShopping();
-  const fetchItems = useCallback(() => {
-    const filter = {
-      search: querySearch,
-      per_perpage: limit,
-      // page: pagination,
-      page: 1,
-    };
-    dispatch({ type: FILTER_PAGINATION, payload: pagination + 1 });
-    dispatch({ type: FETCH_DATA, payload: { ...filter } });
-  }, [search, limit, dispatch, pagination]);
+  const fetchItems = useCallback(
+    (page = pagination) => {
+      const filter = {
+        product_name: querySearch,
+        category_name: category[0],
+        page: page,
+        price_from: priceRange[0],
+        price_to: priceRange[1],
+      };
+      dispatch({ type: FILTER_PAGINATION, payload: page });
+      dispatch({ type: FETCH_DATA, payload: filter });
+    },
+    [querySearch, limit, dispatch, pagination, priceRange, category]
+  );
 
   useEffect(() => {
     dispatch({ type: CLEAR_PRODUCTS });
-  }, [search]);
-
-  useEffect(() => {
-    fetchItems();
-  }, [search, category, priceRange]);
+    fetchItems(1);
+  }, [querySearch, category, priceRange]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,19 +45,19 @@ const ShoppingProvider = ({ children }) => {
         window.pageYOffset || document.documentElement.scrollTop;
       const windowHeight = window.innerHeight;
 
-      if (scrollTop - lastScrollTop >= windowHeight) {
-        fetchItems();
+      if (scrollTop - lastScrollTop >= windowHeight && lastPage < pagination) {
+        fetchItems(pagination + 1);
         setLastScrollTop(scrollTop);
-        dispatch({ type: FILTER_PAGINATION, payload: pagination + 1 });
       }
     };
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [lastScrollTop, pagination]);
+  }, [lastScrollTop, pagination, fetchItems]);
+
   return (
-    <ShoppingContext.Provider value={{ items: items }}>
+    <ShoppingContext.Provider value={{ items }}>
       {children}
     </ShoppingContext.Provider>
   );

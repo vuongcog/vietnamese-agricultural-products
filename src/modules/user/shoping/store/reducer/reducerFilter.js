@@ -4,8 +4,12 @@ import {
   FILTER_LIMIT,
   FILTER_PRICE_RANGE,
   FILTER_CATEGORY,
+  FILTER_LAST_PAGE,
 } from './filterConstants';
-
+const handlerSetLastPage = (state, action) => ({
+  ...state,
+  lastPage: action.payload,
+});
 const handlerSetSearch = (state, action) => ({
   ...state,
   search: action.payload,
@@ -32,6 +36,7 @@ const mapperHandle = {
   [FILTER_PAGINATION]: handlerSetPagination,
   [FILTER_PRICE_RANGE]: handlerSetPriceRange,
   [FILTER_CATEGORY]: handlerSetCategory,
+  [FILTER_LAST_PAGE]: handlerSetLastPage,
 };
 //
 

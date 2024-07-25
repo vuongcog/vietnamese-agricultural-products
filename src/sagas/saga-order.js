@@ -9,6 +9,7 @@ import {
   ORDERING_PRODUCT,
 } from '../actions/action-order';
 import { toast } from 'react-toastify';
+import { parseObjectJson } from '../utils/parse-json';
 
 function* wokerOrder(action) {
   try {
@@ -20,12 +21,18 @@ function* wokerOrder(action) {
         'Content-Type': 'application/json',
       },
     };
-
-    yield call(http.orderProduct, payload, option);
+    const res = yield call(http.orderProduct, payload, option);
+    const parseObject = parseObjectJson(res.data);
     yield put({ type: ORDER_PRODUCT_SUCCESS });
-    toast.success('Thành công, xin vui lòng hãy kiểm tra lại thông báo ở mail');
+    if (Array.isArray(parseObject)) {
+      toast.success('Đặt hàng thành công ,xin hãy kiểm tra lại email');
+    } else {
+      const urlRedirect = parseObject.data;
+      window.location.href = urlRedirect;
+    }
   } catch (err) {
     yield put({ type: ORDER_PRODUCT_FAILED });
+    console.log('thất bại');
     toast.error('Thất bại');
   } finally {
     yield put({ type: ORDERED_PRODUCT });

@@ -19,7 +19,7 @@ const SelectLanguage = ({ classNameProps, ...props }) => {
       <Select
         defaultValue={i18n.language}
         style={{
-          width: 120,
+          width: 90,
         }}
         onChange={handleChangeLanguage}
         bordered={false}

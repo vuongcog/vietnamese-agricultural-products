@@ -7,6 +7,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Tooltip,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
@@ -16,9 +17,11 @@ import SelectLanguage from './SelectLang';
 import langs from './langs';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../contexts/AuthContext';
+import useProducerDataUser from '../../../useCustom/user/useProducerDataUser';
 
 const UserHeader = () => {
   const { t } = useTranslation();
+  const { dataUser } = useProducerDataUser();
   const { accessToken, logout } = useAuth();
   return (
     <div className={styles.container}>
@@ -61,35 +64,52 @@ const UserHeader = () => {
             {t(langs.management)}
           </button>
         </li>
+
         <li>
           <SelectLanguage />
         </li>
+
+        {!_.isEmpty(dataUser) && (
+          <li>
+            <Tooltip placement="top" label={'Profile'} aria-label="Full text">
+              <Link to={'/profile'}>
+                <img
+                  className="cursor-pointer w-12 h-12 rounded-full"
+                  src={dataUser.url_avatar}
+                  alt="profile"
+                />
+              </Link>
+            </Tooltip>
+          </li>
+        )}
         <li>
           <Cart />
         </li>
-        <Menu>
-          <MenuButton
-            as={IconButton}
-            aria-label="Options"
-            icon={<HamburgerIcon fontSize={'30px'} color={'green'} />}
-            variant="outline"
-            className={styles.menuButton}
-          />
-          <MenuList>
-            {SCHEMA.map((item, index) => (
-              <MenuItem key={index}>
-                <Link className={styles.menuLink} to={item.link}>
-                  {item.name}
-                </Link>
+        <li>
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              icon={<HamburgerIcon fontSize={'30px'} color={'green'} />}
+              variant="outline"
+              className={styles.menuButton}
+            />
+            <MenuList>
+              {SCHEMA.map((item, index) => (
+                <MenuItem key={index}>
+                  <Link className={styles.menuLink} to={item.link}>
+                    {item.name}
+                  </Link>
+                </MenuItem>
+              ))}
+              <MenuItem>
+                <a className={styles.menuLink} href="#about">
+                  About
+                </a>
               </MenuItem>
-            ))}
-            <MenuItem>
-              <a className={styles.menuLink} href="#about">
-                About
-              </a>
-            </MenuItem>
-          </MenuList>
-        </Menu>
+            </MenuList>
+          </Menu>
+        </li>
       </ul>
     </div>
   );

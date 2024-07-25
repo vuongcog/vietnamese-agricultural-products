@@ -149,7 +149,6 @@ const CrudList = props => {
           <tbody className={classNames(styles['body-container'], tableBodyRow)}>
             {_renderColumns()}
           </tbody>
-          <tfoot></tfoot>
         </table>
       </div>
     </>

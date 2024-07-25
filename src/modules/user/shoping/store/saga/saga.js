@@ -8,20 +8,17 @@ import {
 } from '../reducer/constants';
 import HttpUserClient from '../../../../../utils/http/httpUserClient';
 import { parseObjectJson } from '../../../../../utils/parse-json';
-
-const options = {
-  notAuthor: true,
-  withCredentials: true,
-};
+import { FILTER_LAST_PAGE } from '../reducer/filterConstants';
 
 function* wokerFetchData(action) {
   try {
     yield put({ type: FETCHING_DATA });
     const { payload } = action;
-    const http = new HttpUserClient('/sanpham');
+    const http = new HttpUserClient('/timkiem');
     const res = yield call(http.getItems, payload);
     const parseData = parseObjectJson(res.data);
-    yield put({ type: FETCH_DATA_SUCCESS, payload: parseData.data });
+    yield put({ type: FILTER_LAST_PAGE, payload: parseData.last_page });
+    yield put({ type: FETCH_DATA_SUCCESS, payload: parseData.data.data });
   } catch (err) {
     yield put({ type: FETCH_DATA_FAILED });
   } finally {
