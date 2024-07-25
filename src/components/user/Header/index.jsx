@@ -22,12 +22,12 @@ import useProducerDataUser from '../../../useCustom/user/useProducerDataUser';
 const UserHeader = () => {
   const { t } = useTranslation();
   const { dataUser } = useProducerDataUser();
+
   const { accessToken, logout } = useAuth();
   return (
     <div className={styles.container}>
       <div className={styles.title}>Shree</div>
       <SearchHeader />
-
       <ul className={styles.navList}>
         {SCHEMA.map((item, index) => (
           <li key={index}>
@@ -55,16 +55,17 @@ const UserHeader = () => {
             </Link>
           </li>
         )}
-        <li>
-          <button
-            onClick={() => {
-              window.location.replace(import.meta.env.VITE_DOMAIN); // Thay đổi URL này thành URL đúng của bạn
-            }}
-          >
-            {t(langs.management)}
-          </button>
-        </li>
-
+        {dataUser && dataUser.role !== 'customer' && (
+          <li>
+            <button
+              onClick={() => {
+                window.location.replace(import.meta.env.VITE_DOMAIN); // Thay đổi URL này thành URL đúng của bạn
+              }}
+            >
+              {t(langs.management)}
+            </button>
+          </li>
+        )}
         <li>
           <SelectLanguage />
         </li>

@@ -2,7 +2,6 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import HttpUserClient from '../utils/http/httpUserClient';
 
-import { toast } from 'react-toastify';
 import { parseObjectJson } from '../utils/parse-json';
 import {
   FETCH_DATA_USER,
@@ -20,9 +19,10 @@ function* wokerDataUser(action) {
     const http = new HttpUserClient(payload.endpoint);
     const res = yield call(http.getDataUser);
     const parseObject = parseObjectJson(res.data);
+    console.log(parseObject);
     yield put({
       type: SET_DATA_USER,
-      payload: parseObject[`thong-tin-nguoi-dung`][0],
+      payload: parseObject[`thong-tin-nguoi-dung`],
     });
     yield put({ type: FETCH_DATA_USER_SUCCESS });
   } catch (err) {

@@ -9,6 +9,7 @@ export function AuthProvider({ children }) {
   const [checkAuth, setCheckauth] = useState(false);
   const accessToken = Cookies.get('accsessToken');
   const logout = () => {
+    Cookies.remove('accsessToken');
     axios
       .post(
         import.meta.env.VITE_API_URL_SERVER + '/logout',
@@ -22,13 +23,12 @@ export function AuthProvider({ children }) {
       .then(res => {
         if (accessToken) {
           setCheckauth(!checkAuth);
-          Cookies.remove('accsessToken');
           console.log(res);
         }
         toast.success('Đăng xuất thành công');
       })
       .catch(err => {
-        toast.error('Đăng xuất thất bại');
+        // toast.error('Đăng xuất thất bại');
       });
   };
 
