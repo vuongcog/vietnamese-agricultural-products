@@ -1,7 +1,9 @@
 .container {
-  td {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  div {
     border: none;
     font-size: 20px;
-    font-weight: 100 !important;
   }
 }

@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next';
 import SearchWithId from '../SearchWithId';
 import { schemaChangePassword } from './constants/schema-form-change-password';
 const BreadCrumb = ({
+  mode,
   isSearchInput,
   onChangeSearchText,
   searchText,
@@ -88,7 +89,7 @@ const BreadCrumb = ({
         placeholder={t(langs.placeholderId)}
         onChangeSearchText={handleChangeSearchId}
       ></SearchWithId>
-      {sendEmail && (
+      {/* {sendEmail && (
         <DialogMessage
           isOpen={isOpen}
           onClose={onClose}
@@ -97,7 +98,7 @@ const BreadCrumb = ({
         >
           <FormEmailContainer handlerSubmit={handlerSendmail} />
         </DialogMessage>
-      )}
+      )} */}
 
       <DialogMessage
         isOpen={isOpenCB}
@@ -111,7 +112,9 @@ const BreadCrumb = ({
         />
       </DialogMessage>
 
-      <DialogCreateForm endpoint={endpoint} schemaForm={schemaForm} />
+      {mode.create && (
+        <DialogCreateForm endpoint={endpoint} schemaForm={schemaForm} />
+      )}
 
       <SelectLanguage
         classNameProps={styles.customOption}

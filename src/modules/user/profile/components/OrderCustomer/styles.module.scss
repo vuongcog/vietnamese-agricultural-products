@@ -1,0 +1,32 @@
+@use '../../../../../assets/css/abstracts/mixin' as styles;
+
+.container {
+  width: 100%;
+  max-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    background-color: #e6f7ff;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .label {
+    @include styles.setLimitLine(1);
+    width: 200px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #333;
+  }
+}

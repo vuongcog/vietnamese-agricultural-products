@@ -24,11 +24,13 @@ const AdminCrud = () => {
     handleChangeSearchId,
   } = useContext(CrudContext);
   const actionSendMail = {};
+  const { mode } = crudOptions;
   return (
     <div className="relative">
       {isFetching && <ProgressFeching></ProgressFeching>}
       <div className={`${isFetching && 'opacity-30'} ${styles[`main-crud`]}`}>
         <BreadCrumb
+          mode={mode}
           sendEmail={sendEmail}
           actionSendMail={actionSendMail}
           endpoint={crudOptions.endpoint}

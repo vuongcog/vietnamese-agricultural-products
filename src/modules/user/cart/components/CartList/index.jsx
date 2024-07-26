@@ -21,24 +21,28 @@ const CartList = () => {
   if (_.isEmpty(carts)) return null;
   return (
     <div className={styles.container}>
-      <Button onClick={findCommonItems} width={'100px'} color="blue">
-        Mua ngay
-      </Button>
-      <Checkbox
-        onChange={handleSelectAll}
-        isChecked={selectedItems.length === carts.items.length}
-      >
-        Chọn tất cả
-      </Checkbox>
+      <div className="flex items-center gap-3">
+        <Checkbox
+          onChange={handleSelectAll}
+          isChecked={selectedItems.length === carts.items.length}
+        >
+          Chọn tất cả
+        </Checkbox>
+        <Button onClick={findCommonItems} width={'100px'} color="blue">
+          Mua ngay
+        </Button>
+      </div>
       <CheckboxGroup value={selectedItems} onChange={handleChange}>
-        {carts.items.map((item, index) => (
-          <CartItem
-            {...item}
-            key={index}
-            onSelect={handleSelect}
-            onDeselect={handleDeselect}
-          />
-        ))}
+        <div className={styles[`container-cart-list`]}>
+          {carts.items.map((item, index) => (
+            <CartItem
+              {...item}
+              key={index}
+              onSelect={handleSelect}
+              onDeselect={handleDeselect}
+            />
+          ))}
+        </div>
       </CheckboxGroup>
     </div>
   );

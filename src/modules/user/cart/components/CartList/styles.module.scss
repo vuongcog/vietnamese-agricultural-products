@@ -1,5 +1,10 @@
 .container {
+  gap: 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  .container-cart-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
 }

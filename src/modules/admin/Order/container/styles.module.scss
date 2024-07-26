@@ -1,0 +1,12 @@
+.table-body-row {
+  td[name='status'] {
+    text-transform: capitalize;
+  }
+}
+
+.module {
+  background-color: var(--admin-background);
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+}

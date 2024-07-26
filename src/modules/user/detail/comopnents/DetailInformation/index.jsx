@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import DetailOrder from '../DetailOrder';
 import useProducerDetail from '../../../../../useCustom/user/useProducerDetail';
 import classNames from 'classnames';
+import FeedbackList from '../DetailFeedback';
 const DetailInformation = ({ item }) => {
   const { product } = useProducerDetail();
   if (_.isEmpty(product)) return;
@@ -43,6 +44,8 @@ const DetailInformation = ({ item }) => {
         className={classNames('prose')}
         dangerouslySetInnerHTML={{ __html: product[`product_des`] }}
       ></div>
+
+      <FeedbackList></FeedbackList>
     </div>
   );
 };

@@ -9,7 +9,7 @@ const languageOptions = [
   { value: 'en', label: 'English' },
   { value: 'vi', label: 'Tiếng Việt' },
 ];
-const SelectLanguage = ({ classNameProps, ...props }) => {
+const SelectLanguage = ({ classNameProps, width = 150, ...props }) => {
   const { i18n } = useTranslation();
   const handleChangeLanguage = value => {
     i18n.changeLanguage(value);
@@ -19,7 +19,7 @@ const SelectLanguage = ({ classNameProps, ...props }) => {
       <Select
         defaultValue={i18n.language}
         style={{
-          width: 90,
+          width: width,
         }}
         onChange={handleChangeLanguage}
         bordered={false}

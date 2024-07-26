@@ -29,6 +29,10 @@ class HttpUserClient {
     this.http.post(this.url, params, options);
   getProduct = (params = {}, options = {}) =>
     this.http.get(this.url, params, options);
+  getFeedback = (params = {}, options = {}) =>
+    this.http.get(this.url, params, options);
+  createFeedback = (params = {}, options = {}) =>
+    this.http.post(this.url, params, options);
 }
 
 export default HttpUserClient;

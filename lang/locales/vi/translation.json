@@ -144,5 +144,20 @@
   "src/layouts/LayoutAdmin.blog": "Bài viết",
   "src/layouts/LayoutAdmin.blogCategory": "Bài viết danh mục",
   "src/layouts/LayoutAdmin.coupon": "Khuyến mãi",
-  "src/layouts/LayoutAdmin.banner": "Quảng cáo"
+  "src/layouts/LayoutAdmin.banner": "Quảng cáo",
+
+  "src/modules/admin/Order.id": "Id",
+  "src/modules/admin/Order.order_code": "Mã đơn hàng",
+  "src/modules/admin/Order.order_total_prices": "Tổng giá đơn hàng",
+  "src/modules/admin/Order.status": "Trạng thái",
+  "src/modules/admin/Order.id_user": "Người đặt",
+  "src/modules/admin/Order.customer": "Khách hàng",
+  "src/modules/admin/Order.payment_type": "Phương thức",
+  "src/modules/admin/Order.payment_status": "Trạng thái thanh toán",
+  "src/modules/admin/Order.email": "Email",
+  "src/modules/admin/Order.delivery_address": "Địa chỉ vận chuyển",
+  "src/modules/admin/Order.id_coupon": "Mã khuyến mãi",
+  "src/modules/admin/Order.id_payment": "Mã thanh toán",
+  "src/modules/admin/Order.created_at": "Ngày tạo",
+  "src/modules/admin/Order.updated_at": "Ngày cập nhập"
 }

@@ -163,7 +163,7 @@ function* handlerSendMail(action) {
   }
 }
 
-// 333 worker send mailza
+// 333 worker đổi mật khẩu
 function* handlerChangePassword(action) {
   try {
     yield put({ type: CHANGING_PASSWORD });

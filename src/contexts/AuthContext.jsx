@@ -10,26 +10,28 @@ export function AuthProvider({ children }) {
   const accessToken = Cookies.get('accsessToken');
   const logout = () => {
     Cookies.remove('accsessToken');
-    axios
-      .post(
-        import.meta.env.VITE_API_URL_SERVER + '/logout',
-        {},
-        {
-          headers: {
-            Authorization: `bearer ${accessToken}`,
-          },
-        }
-      )
-      .then(res => {
-        if (accessToken) {
-          setCheckauth(!checkAuth);
-          console.log(res);
-        }
-        toast.success('Đăng xuất thành công');
-      })
-      .catch(err => {
-        // toast.error('Đăng xuất thất bại');
-      });
+    setCheckauth(!checkAuth);
+
+    // axios
+    //   .post(
+    //     import.meta.env.VITE_API_URL_SERVER + '/logout',
+    //     {},
+    //     {
+    //       headers: {
+    //         Authorization: `bearer ${accessToken}`,
+    //       },
+    //     }
+    //   )
+    //   .then(res => {
+    //     if (accessToken) {
+    //       setCheckauth(!checkAuth);
+    //       console.log(res);
+    //     }
+    //     toast.success('Đăng xuất thành công');
+    //   })
+    //   .catch(err => {
+    //     // toast.error('Đăng xuất thất bại');
+    //   });
   };
 
   return (

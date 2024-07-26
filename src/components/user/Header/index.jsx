@@ -18,6 +18,10 @@ import langs from './langs';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../contexts/AuthContext';
 import useProducerDataUser from '../../../useCustom/user/useProducerDataUser';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import classNames from 'classnames';
 
 const UserHeader = () => {
   const { t } = useTranslation();
@@ -36,11 +40,6 @@ const UserHeader = () => {
             </Link>
           </li>
         ))}
-        <li>
-          <a className={styles.navLink} href="#about">
-            {t(langs.about)}
-          </a>
-        </li>
         {accessToken && (
           <li>
             <button className={styles.navLink} onClick={logout}>
@@ -55,21 +54,9 @@ const UserHeader = () => {
             </Link>
           </li>
         )}
-        {dataUser && dataUser.role !== 'customer' && (
-          <li>
-            <button
-              onClick={() => {
-                window.location.replace(import.meta.env.VITE_DOMAIN); // Thay đổi URL này thành URL đúng của bạn
-              }}
-            >
-              {t(langs.management)}
-            </button>
-          </li>
-        )}
         <li>
-          <SelectLanguage />
+          <SelectLanguage width={90} />
         </li>
-
         {!_.isEmpty(dataUser) && (
           <li>
             <Tooltip placement="top" label={'Profile'} aria-label="Full text">
@@ -98,16 +85,50 @@ const UserHeader = () => {
             <MenuList>
               {SCHEMA.map((item, index) => (
                 <MenuItem key={index}>
-                  <Link className={styles.menuLink} to={item.link}>
-                    {item.name}
+                  <Link
+                    className={classNames(styles.menuLink, 'italic')}
+                    to={item.link}
+                  >
+                    <item.icon></item.icon>
+                    {t(langs[item.name])}
                   </Link>
                 </MenuItem>
               ))}
               <MenuItem>
-                <a className={styles.menuLink} href="#about">
-                  About
-                </a>
+                {dataUser && dataUser.role !== 'customer' && (
+                  <button
+                    className={classNames(styles.menuLink, 'italic')}
+                    onClick={() => {
+                      window.location.replace(import.meta.env.VITE_DOMAIN); // Thay đổi URL này thành URL đúng của bạn
+                    }}
+                  >
+                    <ManageAccountsOutlinedIcon></ManageAccountsOutlinedIcon>
+                    {t(langs.management)}
+                  </button>
+                )}
               </MenuItem>
+              {!accessToken && (
+                <MenuItem>
+                  <Link
+                    to={'/authen/signin'}
+                    className={classNames(styles.menuLink, 'italic')}
+                  >
+                    <LoginOutlinedIcon></LoginOutlinedIcon>
+                    {t(langs.login)}
+                  </Link>
+                </MenuItem>
+              )}
+              {accessToken && (
+                <MenuItem>
+                  <button
+                    className={classNames(styles.menuLink, 'italic')}
+                    onClick={logout}
+                  >
+                    <LogoutOutlinedIcon></LogoutOutlinedIcon>
+                    {t(langs.logout)}
+                  </button>
+                </MenuItem>
+              )}
             </MenuList>
           </Menu>
         </li>

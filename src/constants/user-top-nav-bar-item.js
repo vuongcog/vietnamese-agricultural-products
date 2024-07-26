@@ -1,38 +1,31 @@
+import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+
 export const SCHEMA = [
   {
     id: 1,
     name: 'home',
-    icon: 'fa fa-home',
+    icon: HomeOutlinedIcon,
     link: '/',
   },
   {
     id: 6,
     name: 'register',
-    icon: 'fa fa-home',
+    icon: AppRegistrationOutlinedIcon,
     link: '/authen/signup',
   },
   {
     id: 3,
     name: 'vegetables',
-    icon: 'fa fa-home',
+    icon: ShoppingCartOutlinedIcon,
     link: '/shopping',
   },
-  // {
-  //   id: 5,
-  //   name: 'contactUs',
-  //   icon: 'fa fa-home',
-  //   link: 'user',
-  // },
-  // {
-  //   id: 7,
-  //   name: 'purchase',
-  //   icon: 'fa fa-home',
-  //   link: '/purchase',
-  // },
   {
     id: 7,
     name: 'blogs',
-    icon: 'fa fa-home',
+    icon: ArticleOutlinedIcon,
     link: '/blog-categories',
   },
 ];

@@ -33,17 +33,19 @@ const ShoppingProvider = ({ children }) => {
     },
     [querySearch, limit, dispatch, pagination, priceRange, category]
   );
+
   useEffect(() => {
     dispatch({ type: CLEAR_PRODUCTS });
     fetchItems(1);
-  }, [querySearch, category, priceRange]);
+    setLastScrollTop(0);
+    window.scrollTo(0, 0);
+  }, [querySearch, category, priceRange, lastPage]);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
       const windowHeight = window.innerHeight;
-      console.log(lastPage > pagination);
       if (scrollTop - lastScrollTop >= windowHeight && lastPage > pagination) {
         fetchItems(pagination + 1);
         setLastScrollTop(scrollTop);
@@ -53,7 +55,7 @@ const ShoppingProvider = ({ children }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [lastScrollTop, pagination, fetchItems, lastPage]);
+  }, [querySearch, lastScrollTop, pagination, fetchItems, lastPage]);
 
   return (
     <ShoppingContext.Provider value={{ items }}>

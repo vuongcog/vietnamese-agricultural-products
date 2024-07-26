@@ -46,7 +46,7 @@ const FormLogin = () => {
         Cookies.set('accsessToken', responseData.access_token, {
           path: '/',
           sameSite: 'Lax',
-          expires: responseData.expires_in / 1440,
+          expires: 0.0416667,
         });
         setCheckauth(pre => !pre);
       })

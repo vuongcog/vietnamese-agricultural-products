@@ -144,5 +144,20 @@
   "src/layouts/LayoutAdmin.blog": "Blog",
   "src/layouts/LayoutAdmin.blogCategory": "Blog Category",
   "src/layouts/LayoutAdmin.coupon": "Coupon",
-  "src/layouts/LayoutAdmin.banner": "Banner"
+  "src/layouts/LayoutAdmin.banner": "Banner",
+
+  "src/modules/admin/Order.id": "Id",
+  "src/modules/admin/Order.order_code": "Order Code",
+  "src/modules/admin/Order.order_total_prices": "Total Prices",
+  "src/modules/admin/Order.status": "Status",
+  "src/modules/admin/Order.id_user": "User",
+  "src/modules/admin/Order.customer": "Customer",
+  "src/modules/admin/Order.payment_type": "Payment Type",
+  "src/modules/admin/Order.payment_status": "Payment Status",
+  "src/modules/admin/Order.email": "Email",
+  "src/modules/admin/Order.delivery_address": "Delivery Address",
+  "src/modules/admin/Order.id_coupon": "Id Coupon",
+  "src/modules/admin/Order.id_payment": "Id Payment",
+  "src/modules/admin/Order.created_at": "Created At",
+  "src/modules/admin/Order.updated_at": "Updated At"
 }

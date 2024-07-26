@@ -12,6 +12,7 @@ const BlogCategory = React.lazy(() =>
 );
 const Banner = React.lazy(() => import('./admin/Banner/container'));
 const Coupon = React.lazy(() => import('./admin/Coupon/container'));
+const Order = React.lazy(() => import('./admin/Order/container'));
 import Home from './user/home/container';
 import Shopping from './user/shoping/container';
 import Authentication from './authentication/container';
@@ -68,7 +69,7 @@ const App = () => {
             <Route path="/blogs" element={<BlogCategoyGuest />} />
             <Route path="/blogs/blog/:slug" element={<BlogGuestContainer />} />
             <Route path="/cart" element={<CartContainer />} />
-            <Route path="/detail/:id" element={<DetailProduct />} />
+            <Route path="/detail" element={<DetailProduct />} />
             <Route path="/purchase" element={<DetailProduct />} />
             <Route path="/checkout" element={<CheckoutContainer />} />
             <Route path="/profile" element={<Profile />} />
@@ -171,6 +172,14 @@ const App = () => {
               element={
                 <Suspense fallback={<div>Loading...</div>}>
                   <Coupon />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/order"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Order />
                 </Suspense>
               }
             />

@@ -4,75 +4,42 @@ import styles from './styles.module.scss';
 import classNames from 'classnames';
 import useProducerDataUser from '../../../../../useCustom/user/useProducerDataUser';
 import { useDisclosure } from '@chakra-ui/react';
+import { Divider } from '@chakra-ui/react';
+
 import DialogMessage from '../../../../../components/core/DialogMessage';
-import { formattedNumber } from '../../../../../utils/format-number';
-import { useNavigate } from 'react-router-dom';
+import ProfileProductCard from '../ProfileProductCard';
+import OrderCode from '../OrderCode';
+import OrderNotes from '../../../../admin/Order/components/OrderNotes';
+import OrderCustomer from '../../../../admin/Order/components/OrderCustomer';
+import OrderPaymentType from '../../../../admin/Order/components/OrderPaymentType';
+import OrderPaymentStatus from '../../../../admin/Order/components/PaymentStatus';
+import OrderDeliveryAddress from '../../../../admin/Order/components/OrderDeliveryAddress';
+import OrderTotalPrice from '../../../../admin/Order/components/OrderTotalPrices';
+import CreatedAtComponent from '../../../../../components/core/CreatedAt';
+import UpdatedAtComponent from '../../../../../components/core/UpdatedAt';
 // eslint-disable-next-line arrow-body-style
 const ProfilePurchaseUser = () => {
-  const product = {
-    product_name: 'Cam sấy khô',
-    product_image:
-      'https://esupplychain.vn/data/product/mainimages/original/product6362.jpg',
-    unit_prices: '10000',
-  };
   const {
     dataUser: { orders },
   } = useProducerDataUser();
-  const RenderRowHeaderProduct = () => {
-    return (
-      <tr className={styles['row-heading']}>
-        <th>Ảnh</th>
-        <th>Tên sản phẩm</th>
-        <th>Số lượng</th>
-        <th>Đơn giá</th>
-        <th>Tổng giá</th>
-      </tr>
-    );
-  };
+
   const RenderRowBodyProduct = ({ item }) => {
-    const navigate = useNavigate();
-    return (
-      <tr>
-        <td>
-          <div className="flex items-center justify-center ">
-            <img
-              className="w-[60px] h-[60px] object-cover rounded-full"
-              src={item.products.product_image}
-            ></img>
-          </div>
-        </td>
-        <td
-          className="hover:underline hover:text-blue-400 hover:font-semibold hover:cursor-pointer"
-          onClick={() => {
-            navigate(`/detail/${item.products.product_slug}`);
-          }}
-        >
-          {item.products.product_name}
-        </td>
-        <td>{item.quantity}</td>
-        <td>{formattedNumber(item.unit_prices)}</td>
-        <td>{formattedNumber(item.unit_prices * item.quantity)}</td>
-      </tr>
-    );
+    return <ProfileProductCard item={item}></ProfileProductCard>;
   };
   const RenderTableProduct = ({ products }) => {
     return (
-      <div>
-        <table className={styles[`table-product`]}>
-          <thead>
-            <RenderRowHeaderProduct></RenderRowHeaderProduct>
-          </thead>
-          <tbody>
-            {products.map(item => {
-              return (
-                <RenderRowBodyProduct
-                  key={item.id}
-                  item={item}
-                ></RenderRowBodyProduct>
-              );
-            })}
-          </tbody>
-        </table>
+      <div className="flex flex-col pl-60 gap-6">
+        {products.map(item => {
+          return (
+            <>
+              <RenderRowBodyProduct
+                key={item.id}
+                item={item}
+              ></RenderRowBodyProduct>
+              <Divider borderWidth="1px" />
+            </>
+          );
+        })}
       </div>
     );
   };
@@ -80,27 +47,51 @@ const ProfilePurchaseUser = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
       <tr className="cursor-pointer" onClick={onOpen}>
-        <td>{item.order_code}</td>
-        <td>{item.order_total_prices}</td>
-        <td>{item.order_notes}</td>
-        <td>{item.customer}</td>
-        <td>{item.payment_type}</td>
-        <td>{item.payment_status}</td>
-        <td>{item.delivery_address}</td>
-        <td>{item.phone}</td>
-        <td>{item.id_coupon || 'N/A'}</td>
-        <td>{item.id_payment || 'N/A'}</td>
-        <td>{item.created_at}</td>
         <td>
-          <DialogMessage
-            width={'auto'}
-            isOpen={isOpen}
-            onOpen={onOpen}
-            onClose={onClose}
-          >
-            <RenderTableProduct products={item.items}></RenderTableProduct>
-          </DialogMessage>
+          <OrderCode order_code={item.order_code}></OrderCode>
         </td>
+        <td>
+          <OrderTotalPrice
+            order_total_prices={item.order_total_prices}
+          ></OrderTotalPrice>
+        </td>
+        <td>
+          <OrderNotes order_notes={item.order_notes}></OrderNotes>
+        </td>
+        <td>
+          <OrderCustomer customer={item.customer}></OrderCustomer>
+        </td>
+        <td>
+          <OrderPaymentType payment_type={item.payment_type}></OrderPaymentType>
+        </td>
+        <td>
+          <OrderPaymentStatus
+            payment_status={item.payment_status}
+          ></OrderPaymentStatus>
+        </td>
+        <td>
+          <OrderDeliveryAddress
+            delivery_address={item.delivery_address}
+          ></OrderDeliveryAddress>
+        </td>
+        <td>
+          <CreatedAtComponent created_at={item.created_at}></CreatedAtComponent>
+        </td>
+        <td>
+          <UpdatedAtComponent updated_at={item.updated_at}></UpdatedAtComponent>
+        </td>
+        <td> {item.phone}</td>
+        <td> {item.id_coupon || 'N/A'}</td>
+        <td> {item.id_payment || 'N/A'}</td>
+
+        <DialogMessage
+          width={'auto'}
+          isOpen={isOpen}
+          onOpen={onOpen}
+          onClose={onClose}
+        >
+          <RenderTableProduct products={item.items}></RenderTableProduct>
+        </DialogMessage>
       </tr>
     );
   };

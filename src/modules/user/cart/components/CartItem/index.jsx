@@ -2,18 +2,16 @@ import React, { useState, useMemo, useRef, useEffect, useContext } from 'react';
 import styles from './styles.module.scss';
 import QuantitySelector from '../../../../../components/core/NumberInput';
 import { formattedNumber } from '../../../../../utils/format-number';
-import { Checkbox } from '@chakra-ui/react';
+import { Checkbox, Divider } from '@chakra-ui/react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { CartContext } from '../../container';
-import { debounce } from 'lodash';
 import { useDebounce } from '../../../../../utils/use-debounce';
+import { useNavigate } from 'react-router-dom';
 
 const CartItem = ({
   quantity,
   product: { unit_prices },
-  voucher,
-  oldPrice,
   id_product,
   product,
   onSelect,
@@ -26,6 +24,7 @@ const CartItem = ({
   const { handlerDeleteCart, handlerUpdateCart } = useContext(CartContext);
   const firstEffect = useRef(false);
   const debounceNumber = useDebounce(number, 300);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setNumber(quantity);
@@ -60,19 +59,26 @@ const CartItem = ({
         className={styles.checkbox}
       />
       <div className={styles.contentWrapper}>
-        <img
-          src={product.product_image}
-          alt={product.product_name}
-          className={styles.image}
-        />
+        <div className={styles.wrapper__image}>
+          <img
+            src={product.product_image}
+            alt={product.product_name}
+            className={styles.image}
+          />
+        </div>
         <div className={styles.messageWrapper}>
-          <div className={styles.product_name}>{product.product_name}</div>
-          <div className={styles.voucher}>{voucher}</div>
+          <div
+            className={styles.title}
+            onClick={() => {
+              navigate(`/detail?slug=${product.product_slug}&id=${product.id}`);
+            }}
+          >
+            {product.product_name} asd asd asd asd asd asd asd asd asd
+          </div>
         </div>
       </div>
-      <div className={styles.classify}></div>
-      <span className={styles.oldPrice}>{formattedNumber(oldPrice)}</span>
-      <span className={styles.unit_prices}>{formattedNumber(unit_prices)}</span>
+      <Divider orientation="vertical" borderWidth={1}></Divider>
+      <span className={styles.price}>{formattedNumber(unit_prices)}</span>
       <QuantitySelector
         max={product.quantity}
         onSetNumber={handlerSetNumber}
@@ -96,7 +102,6 @@ CartItem.defaultProps = {
   oldPrice: 89000,
   unit_prices: 50000,
   inventory: 20,
-  voucher: 'Giảm giá 50%',
   product_name: 'Gối cao su non ZARA HOME cao cấp chống ngáy ngủ, đau vai gáy',
   linkImage:
     'https://down-vn.img.susercontent.com/file/5585030ea3c9904e46281ad031c8ad54',

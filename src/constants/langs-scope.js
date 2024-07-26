@@ -13,3 +13,4 @@ export const ADMIN_BLOG = 'src/modules/admin/Blog';
 export const ADMIN_BLOG_CATEGORY = 'src/modules/admin/Blog-Category';
 export const ADMIN_COUPON = 'src/modules/admin/Coupon';
 export const ADMIN_BANNER = 'src/modules/admin/Banner';
+export const ADMIN_ORDER = 'src/modules/admin/Order';

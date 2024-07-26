@@ -7,6 +7,7 @@ import {
   FolderOpenOutlined,
   ConfirmationNumberOutlined,
   ImageOutlined,
+  ReceiptOutlined,
 } from '@mui/icons-material';
 import langs from '../layouts/LayoutAdmin/langs';
 
@@ -17,6 +18,13 @@ export const SCHEMA = [
     icon: DashboardOutlined, // Icon outline phù hợp
     link: '/dashboard',
     color: 'text-[#f0414a]',
+  },
+  {
+    id: 10,
+    name: 'Order',
+    icon: ReceiptOutlined, // Icon outline phù hợp hơn cho "Banner"
+    link: '/order',
+    color: 'text-[#00e9ff]',
   },
   {
     id: 3,
