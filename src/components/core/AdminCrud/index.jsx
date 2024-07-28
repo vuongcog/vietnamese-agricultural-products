@@ -24,7 +24,8 @@ const AdminCrud = () => {
     handleChangeSearchId,
   } = useContext(CrudContext);
   const actionSendMail = {};
-  const { mode } = crudOptions;
+
+  const { mode, onClickRow } = crudOptions;
   return (
     <div className="relative">
       {isFetching && <ProgressFeching></ProgressFeching>}
@@ -44,6 +45,7 @@ const AdminCrud = () => {
           <SekeletonCrudList></SekeletonCrudList>
         ) : (
           <CrudList
+            onClickRow={onClickRow}
             items={items}
             classNameProps={classNameProps}
             schema={crudOptions.schema}

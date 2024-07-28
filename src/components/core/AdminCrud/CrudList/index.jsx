@@ -125,7 +125,13 @@ const CrudList = props => {
       return null;
     }
     return items.map((item, index) => (
-      <tr className={classNames(styles['row-body'])} key={index}>
+      <tr
+        onClick={() => {
+          props.onClickRow(item);
+        }}
+        className={classNames(styles['row-body'])}
+        key={index}
+      >
         {_renderColumn(item)}
       </tr>
     ));

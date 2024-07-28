@@ -74,8 +74,8 @@ const DialogMessage = ({
         <AlertDialogOverlay>
           <AlertDialogContent
             AlertDialogContent
-            maxWidth={width}
-            maxHeight={height}
+            minWidth={width}
+            minHeight={height}
           >
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
               {title}

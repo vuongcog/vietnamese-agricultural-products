@@ -31,7 +31,6 @@ const BillOrder = React.forwardRef(({ order }, ref) => {
   return (
     <Container
       maxW="container.md"
-      p={4}
       ref={ref}
       bg={useColorModeValue('gray.50', 'gray.700')}
       borderRadius="md"
@@ -144,7 +143,7 @@ const BillOrderPrintable = ({ order }) => {
   });
 
   return (
-    <Container maxW="container.md" p={4} position="relative">
+    <Container maxW="container.md" position="relative">
       <Button
         onClick={handlePrint}
         mb={4}
