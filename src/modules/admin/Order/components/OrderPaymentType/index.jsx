@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
-import classNames from 'clzzzassnames';
+import classNames from 'classnames';
 import { Tooltip } from '@chakra-ui/react';
 import { PICTURE } from '../../../../../constants/picture';
 

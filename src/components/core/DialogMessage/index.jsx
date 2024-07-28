@@ -12,6 +12,8 @@ import React, { useRef } from 'react';
 import PropTypes from '../../../utils/prop-types';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
+import './styles.scss';
+
 const DialogMessage = ({
   width,
   height,
@@ -53,7 +55,7 @@ const DialogMessage = ({
   );
 
   return (
-    <>
+    <div className="dialog-message-scope-container">
       {button && (
         <button
           type="button"
@@ -83,7 +85,7 @@ const DialogMessage = ({
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
-    </>
+    </div>
   );
 };
 DialogMessage.propTypes = {

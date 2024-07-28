@@ -8,6 +8,8 @@ import classNames from 'classnames';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FETCH_DATA_USER } from '../../actions/action-infor-user';
+import BillOrderPrintable from '../../modules/user/profile/components/BillOrder';
+
 const LayoutUser = ({ children }) => {
   const dispatch = useDispatch();
 

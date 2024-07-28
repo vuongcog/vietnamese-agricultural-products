@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import DataTable from 'react-data-table-component';
-import tableStyles from './styles.module.scss';
 import useProducerDataUser from '../../../../../useCustom/user/useProducerDataUser';
 import { useDisclosure } from '@chakra-ui/react';
-import { Divider } from '@chakra-ui/react';
 
 import DialogMessage from '../../../../../components/core/DialogMessage';
-import ProfileProductCard from '../ProfileProductCard';
 import OrderCode from '../OrderCode';
 import OrderNotes from '../../../../admin/Order/components/OrderNotes';
 import OrderCustomer from '../../../../admin/Order/components/OrderCustomer';
@@ -15,8 +12,8 @@ import OrderDeliveryAddress from '../../../../admin/Order/components/OrderDelive
 import OrderTotalPrice from '../../../../admin/Order/components/OrderTotalPrices';
 import CreatedAtComponent from '../../../../../components/core/CreatedAt';
 import UpdatedAtComponent from '../../../../../components/core/UpdatedAt';
-import classNames from 'classnames';
 import OrderPaymentType from '../OrderPaymentType';
+import BillOrderPrintable from '../BillOrder';
 
 const ProfilePurchaseUser = () => {
   const {
@@ -114,7 +111,7 @@ const ProfilePurchaseUser = () => {
     return (
       <>
         <div onClick={onOpen} className="cursor-pointer">
-          Xem chi tiết sản phẩm
+          Xem chi tiết
         </div>
         <DialogMessage
           width={'auto'}
@@ -122,22 +119,9 @@ const ProfilePurchaseUser = () => {
           onOpen={onOpen}
           onClose={onClose}
         >
-          <RenderTableProduct products={data.items} />
+          <BillOrderPrintable order={data}></BillOrderPrintable>
         </DialogMessage>
       </>
-    );
-  };
-
-  const RenderTableProduct = ({ products }) => {
-    return (
-      <div className="flex flex-col pl-60 gap-6">
-        {products.map(item => (
-          <React.Fragment key={item.id}>
-            <ProfileProductCard item={item} />
-            <Divider borderWidth="1px" />
-          </React.Fragment>
-        ))}
-      </div>
     );
   };
 
@@ -165,24 +149,21 @@ const ProfilePurchaseUser = () => {
   };
 
   return (
-    <div className={tableStyles.container}>
-      <DataTable
-        title="Profile Purchase User"
-        columns={columns}
-        data={orders.slice((currentPage - 1) * perPage, currentPage * perPage)} // Slicing data for pagination
-        pagination
-        paginationServer
-        paginationTotalRows={orders.length}
-        paginationPerPage={perPage}
-        onChangeRowsPerPage={handlePerRowsChange}
-        onChangePage={handlePageChange}
-        expandableRows
-        expandableRowsComponent={ExpandedComponent}
-        highlightOnHover
-        className={classNames(tableStyles.table)}
-        customStyles={customStyles}
-      />
-    </div>
+    <DataTable
+      title="Profile Purchase User"
+      columns={columns}
+      data={orders.slice((currentPage - 1) * perPage, currentPage * perPage)} // Slicing data for pagination
+      pagination
+      paginationServer
+      paginationTotalRows={orders.length}
+      paginationPerPage={perPage}
+      onChangeRowsPerPage={handlePerRowsChange}
+      onChangePage={handlePageChange}
+      expandableRows
+      expandableRowsComponent={ExpandedComponent}
+      highlightOnHover
+      customStyles={customStyles}
+    />
   );
 };
 
