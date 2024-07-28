@@ -1,9 +1,10 @@
-@use "../../../../../assets/css/abstracts/mixin" as styles;
+@use '../../../../../assets/css/abstracts/mixin' as styles;
 
 .couponContainer {
   display: flex;
   align-items: center;
   padding: 6px;
+  width: max-content;
   background-color: var(--light-gray);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

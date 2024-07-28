@@ -1,8 +1,20 @@
 import React from 'react';
-import { Box, Avatar, Text, Flex, HStack, Icon } from '@chakra-ui/react';
+import {
+  Box,
+  Avatar,
+  Text,
+  Flex,
+  HStack,
+  Icon,
+  Tooltip,
+  useDisclosure,
+} from '@chakra-ui/react';
+import styles from './styles.module.scss';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
+import DialogMessage from '../../../../../components/core/DialogMessage';
 
 const DetailFeedbackCart = ({ feedback }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const renderStars = rating => {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 >= 0.5;
@@ -33,9 +45,16 @@ const DetailFeedbackCart = ({ feedback }) => {
           {renderStars(feedback.pivot.rate)}
         </div>
       </Text>
-      <Text>
-        <strong>Bình luận:</strong> {feedback.pivot.comment}
-      </Text>
+      <div className={styles.comment}>
+        <Text onClick={onOpen} className="cursor-pointer">
+          <strong>Bình luận:</strong> {feedback.pivot.comment}
+        </Text>
+        <DialogMessage isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+          <Text>
+            <strong>Bình luận:</strong> {feedback.pivot.comment}
+          </Text>
+        </DialogMessage>
+      </div>
       <Text fontSize="sm" color="gray.500">
         Ngày tạo: {new Date(feedback.pivot.created_at).toLocaleDateString()}
       </Text>

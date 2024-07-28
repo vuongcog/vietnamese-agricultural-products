@@ -22,12 +22,13 @@ import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import classNames from 'classnames';
+import CartNotToken from '../../core/CartNotToken';
 
 const UserHeader = () => {
   const { t } = useTranslation();
+  const { accessToken, logout } = useAuth();
   const { dataUser } = useProducerDataUser();
 
-  const { accessToken, logout } = useAuth();
   return (
     <div className={styles.container}>
       <div className={styles.title}>Shree</div>
@@ -54,25 +55,33 @@ const UserHeader = () => {
             </Link>
           </li>
         )}
-        <li>
-          <SelectLanguage width={90} />
-        </li>
+
         {!_.isEmpty(dataUser) && (
           <li>
             <Tooltip placement="top" label={'Profile'} aria-label="Full text">
               <Link to={'/profile'}>
-                <img
-                  className="cursor-pointer w-12 h-12 rounded-full"
-                  src={dataUser.url_avatar}
-                  alt="profile"
-                />
+                <div className="border-[1px] rounded-full border-solid border-black">
+                  <img
+                    className="cursor-pointer w-8 h-8 rounded-full"
+                    src={dataUser.url_avatar}
+                    alt="profile"
+                  />
+                </div>
               </Link>
             </Tooltip>
           </li>
         )}
         <li>
-          <Cart />
+          <SelectLanguage width={90} />
         </li>
+        <li>
+          {Cookies.get('accsessToken') ? (
+            <Cart />
+          ) : (
+            <CartNotToken></CartNotToken>
+          )}
+        </li>
+
         <li>
           <Menu>
             <MenuButton

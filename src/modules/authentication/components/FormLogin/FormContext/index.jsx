@@ -12,7 +12,6 @@ const FormProvider = ({ children }) => {
   const login = async loginParams => {
     setLoading(true);
     const http = new HttpAuth();
-
     try {
       const res = await http.login(loginParams);
       setLoading(false);

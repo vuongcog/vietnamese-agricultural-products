@@ -10,12 +10,7 @@ export const SCHEMA = [
     icon: HomeOutlinedIcon,
     link: '/',
   },
-  {
-    id: 6,
-    name: 'register',
-    icon: AppRegistrationOutlinedIcon,
-    link: '/authen/signup',
-  },
+
   {
     id: 3,
     name: 'vegetables',
@@ -27,5 +22,11 @@ export const SCHEMA = [
     name: 'blogs',
     icon: ArticleOutlinedIcon,
     link: '/blog-categories',
+  },
+  {
+    id: 6,
+    name: 'register',
+    icon: AppRegistrationOutlinedIcon,
+    link: '/authen/signup',
   },
 ];

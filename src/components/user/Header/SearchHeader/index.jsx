@@ -36,6 +36,7 @@ const SearchHeader = () => {
   return (
     <div className={styles.searchContainer}>
       <Input
+        width={'200px'}
         value={searchValue}
         onChange={e => handleSearchChange(e.target.value)}
         placeholder="Search..."

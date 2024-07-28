@@ -1,23 +1,23 @@
-import { UPDATE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
-import langs from "../langs";
+import { UPDATE_DATA } from '../../../../components/core/AdminCrud/Store/constants';
+import langs from '../langs';
 
 export const schemaFormEdit = {
   title: langs.EDIT_USER,
-  doneText: ["Cancel", "Save"],
+  doneText: ['Cancel', 'Save'],
   type: UPDATE_DATA,
   schemaForm: [
     {
-      name: "name",
+      name: 'name',
       label: langs.name,
-      placeholder: "Name",
+      placeholder: 'Name',
       isRequire: true,
-      type: "text",
+      type: 'text',
     },
     {
-      name: "email",
+      name: 'email',
       label: langs.email,
-      type: "email",
-      placeholder: "Email",
+      type: 'email',
+      placeholder: 'Email',
       isRequire: true,
     },
     // {
@@ -28,43 +28,52 @@ export const schemaFormEdit = {
     //   isRequire: true,
     // },
     {
-      name: "role",
+      name: 'role',
       label: langs.role,
-      type: "select",
+      type: 'select',
       items: [
-        { value: "admin", name: "admin" },
-        { value: "customer", name: "Customer" },
-        { value: "staff", name: "Staff" },
-        { value: "manager", name: "Manager" },
+        { value: 'admin', name: 'admin' },
+        { value: 'customer', name: 'Customer' },
+        { value: 'staff', name: 'Staff' },
+        { value: 'manager', name: 'Manager' },
       ],
-      placeholder: "Role",
+      placeholder: 'Role',
       isRequire: true,
     },
     {
-      name: "address",
+      name: 'address',
       label: langs.address,
-      type: "text",
-      placeholder: "Address",
+      type: 'text',
+      placeholder: 'Address',
       isRequire: true,
     },
     {
-      name: "phone_num",
+      name: 'phone_num',
       label: langs.phoneNum,
-      type: "number",
-      placeholder: "Phone Number",
+      type: 'number',
+      placeholder: 'Phone Number',
       isRequire: true,
     },
     {
-      name: "avatar",
+      name: 'avatar',
       label: langs.avatar,
-      type: "file",
-      placeholder: "Avatar",
+      type: 'file',
+      placeholder: 'Avatar',
     },
     {
-      name: "status",
+      name: 'status',
       label: langs.status,
-      type: "text",
-      placeholder: "Status",
+      type: 'select',
+      items: [
+        {
+          name: 'active',
+          value: 'active',
+        },
+        {
+          name: 'inactive',
+          value: 'inactive',
+        },
+      ],
       isRequire: true,
     },
   ],

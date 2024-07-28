@@ -4,9 +4,11 @@ import classNames from 'classnames';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
 import langsGlobal from '../../../../langs';
+import { INACTIVE } from '../../../../constants/mapper-status';
 const BlogGuestLayout = ({ handlerClickOthersBlog }) => {
   const { blog, allBlogs, relatedBlogs } = useProducerBlog();
   const { t } = useTranslation();
+  if (blog.status === INACTIVE) return null;
   return (
     <div className={styles.layout}>
       <div className={styles.content}>

@@ -18,6 +18,8 @@ import { DELETE_DATA } from '../../../../components/core/AdminCrud/Store/constan
 import useInjectReducerSaga from '../../../../useCustom/admin/useInjectReducerSaga';
 import langs from '../langs';
 import { useTranslation } from 'react-i18next';
+import CreatedAtComponent from '../../../../components/core/CreatedAt';
+import UpdatedAtComponent from '../../../../components/core/UpdatedAt';
 const User = () => {
   const { t } = useTranslation();
   const [selectElement, setSelectElement] = useState(null);
@@ -132,10 +134,16 @@ const User = () => {
         component: Status,
       },
       {
+        name: 'created_at',
+        label: t(langs.updatedAt),
+        default: 'N/A',
+        component: CreatedAtComponent,
+      },
+      {
         name: 'updated_at',
         label: t(langs.updatedAt),
         default: 'N/A',
-        formatDate: formatDateTime,
+        component: UpdatedAtComponent,
       },
     ],
     initSearch: true,

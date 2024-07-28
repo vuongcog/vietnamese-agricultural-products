@@ -1,9 +1,9 @@
-import Cookies from "js-cookie";
-import { parseObjectJson } from "../parse-json";
+import Cookies from 'js-cookie';
+
 export const getCart = () => {
-  const listCart = Cookies.get("cart");
+  const listCart = Cookies.get('cart');
   if (listCart) {
-    return parseObjectJson(listCart);
+    return JSON.parse(listCart);
   }
   return [];
 };

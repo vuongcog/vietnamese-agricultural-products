@@ -13,6 +13,7 @@ import { SECRET_KEY } from '../../../../constants/secret-key';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { encrypData } from '../../../../utils/parse-data-key';
+import { ACTIVE } from '../../../../constants/mapper-status';
 export const CartContext = createContext({});
 
 const CartContainer = () => {
@@ -20,6 +21,14 @@ const CartContainer = () => {
   const { refesh } = useProducerCart();
   const [selectedItems, setSelectedItems] = useState([]);
   const { carts } = useProducerCart();
+
+  let filterCarts = [];
+
+  if (!_.isEmpty(carts)) {
+    filterCarts = carts.items.filter(
+      item => item.product.quantity > 0 && item.product.status === ACTIVE
+    );
+  }
   const navigate = useNavigate();
 
   // 111 handler giành cho list cart
@@ -38,14 +47,14 @@ const CartContainer = () => {
 
   const handleSelectAll = e => {
     if (e.target.checked) {
-      const allItemIds = carts.items.map(item => item.id_product);
+      const allItemIds = filterCarts.map(item => item.id_product);
       setSelectedItems(allItemIds);
     } else {
       setSelectedItems([]);
     }
   };
   const findCommonItems = () => {
-    const data = carts.items.filter(item =>
+    const data = filterCarts.filter(item =>
       selectedItems.includes(item.id_product)
     );
     if (!_.isEmpty(data)) {

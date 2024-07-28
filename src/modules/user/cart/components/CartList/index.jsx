@@ -6,9 +6,11 @@ import { CheckboxGroup, Checkbox, Button } from '@chakra-ui/react';
 import _ from 'lodash';
 import { useContext } from 'react';
 import { CartContext } from '../../container';
+import { ACTIVE, INACTIVE } from '../../../../../constants/mapper-status';
 
 const CartList = () => {
   const { carts } = useProducerCart();
+
   const {
     handleChange,
     handleDeselect,
@@ -19,12 +21,16 @@ const CartList = () => {
   } = useContext(CartContext);
 
   if (_.isEmpty(carts)) return null;
+  const filterCarts = carts.items.filter(
+    item => item.product.quantity > 0 && item.product.status === ACTIVE
+  );
+
   return (
     <div className={styles.container}>
       <div className="flex items-center gap-3">
         <Checkbox
           onChange={handleSelectAll}
-          isChecked={selectedItems.length === carts.items.length}
+          isChecked={selectedItems.length === filterCarts.length}
         >
           Chọn tất cả
         </Checkbox>
@@ -34,14 +40,19 @@ const CartList = () => {
       </div>
       <CheckboxGroup value={selectedItems} onChange={handleChange}>
         <div className={styles[`container-cart-list`]}>
-          {carts.items.map((item, index) => (
-            <CartItem
-              {...item}
-              key={index}
-              onSelect={handleSelect}
-              onDeselect={handleDeselect}
-            />
-          ))}
+          {filterCarts.map((item, index) => {
+            console.log(item);
+            if (item.product.status === INACTIVE || item.product.quantity <= 0)
+              return null;
+            return (
+              <CartItem
+                {...item}
+                key={index}
+                onSelect={handleSelect}
+                onDeselect={handleDeselect}
+              />
+            );
+          })}
         </div>
       </CheckboxGroup>
     </div>

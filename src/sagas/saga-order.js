@@ -32,8 +32,8 @@ function* wokerOrder(action) {
     }
   } catch (err) {
     yield put({ type: ORDER_PRODUCT_FAILED });
-    console.log('thất bại');
-    toast.error('Thất bại');
+    const parseData = parseObjectJson(err.response.data);
+    toast.error(parseData.message);
   } finally {
     yield put({ type: ORDERED_PRODUCT });
   }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { AddIcon } from '@chakra-ui/icons';
+import './styles.scss';
 import {
   Box,
   Button,
@@ -169,10 +170,13 @@ const CreateForm = ({
         case 'editor':
           return (
             <DialogMessage width={'1200px'} button={'Edit ' + t(item.label)}>
-              <ReactQuill
-                value={formState[item.name]}
-                onChange={e => handleChange(item.name, e)}
-              ></ReactQuill>
+              <div className={styles[`react-quill`]}>
+                <ReactQuill
+                  className={styles['react-quill']}
+                  value={formState[item.name]}
+                  onChange={e => handleChange(item.name, e)}
+                ></ReactQuill>
+              </div>
             </DialogMessage>
           );
         case 'select':

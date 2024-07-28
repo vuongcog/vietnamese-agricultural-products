@@ -12,7 +12,7 @@ const ProfileProductCard = ({ item }) => {
   const { dataUser } = useProducerDataUser();
   const navigate = useNavigate();
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-6 ">
       <DialogMessage isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
         <FormCreateFeedback
           id_product={item.id_product}

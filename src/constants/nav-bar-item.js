@@ -15,63 +15,63 @@ export const SCHEMA = [
   {
     id: 1,
     name: 'Dashboard',
-    icon: DashboardOutlined, // Icon outline phù hợp
+    icon: DashboardOutlined,
     link: '/dashboard',
     color: 'text-[#f0414a]',
   },
   {
     id: 10,
     name: 'Order',
-    icon: ReceiptOutlined, // Icon outline phù hợp hơn cho "Banner"
+    icon: ReceiptOutlined,
     link: '/order',
     color: 'text-[#00e9ff]',
   },
   {
     id: 3,
     name: langs.user,
-    icon: PersonOutline, // Icon outline phù hợp
+    icon: PersonOutline,
     link: '/user',
     color: 'text-[#ffce00]',
   },
   {
     id: 4,
     name: langs.category,
-    icon: CategoryOutlined, // Icon outline phù hợp
+    icon: CategoryOutlined,
     link: '/category',
     color: 'text-[#00eca3]',
   },
   {
     id: 5,
     name: langs.product,
-    icon: Inventory2Outlined, // Icon outline phù hợp hơn cho "Product"
+    icon: Inventory2Outlined,
     link: '/product',
     color: 'text-[#00e9ff]',
   },
   {
     id: 6,
     name: langs.blog,
-    icon: EditOutlined, // Icon outline phù hợp hơn cho "Blog"
+    icon: EditOutlined,
     link: '/blog',
     color: 'text-[#00e9ff]',
   },
   {
     id: 7,
     name: langs.blogCategory,
-    icon: FolderOpenOutlined, // Icon outline phù hợp hơn cho "Blog Category"
+    icon: FolderOpenOutlined,
     link: '/blog-category',
     color: 'text-[#00e9ff]',
   },
   {
     id: 9,
     name: langs.coupon,
-    icon: ConfirmationNumberOutlined, // Icon outline phù hợp hơn cho "Coupon"
+    icon: ConfirmationNumberOutlined,
     link: '/coupon',
     color: 'text-[#00e9ff]',
   },
   {
     id: 10,
     name: langs.banner,
-    icon: ImageOutlined, // Icon outline phù hợp hơn cho "Banner"
+    icon: ImageOutlined,
     link: '/banner',
     color: 'text-[#00e9ff]',
   },

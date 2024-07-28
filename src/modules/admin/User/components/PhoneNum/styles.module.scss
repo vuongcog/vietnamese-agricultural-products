@@ -1,36 +1,36 @@
-@use "../../../../../assets/css/abstracts/mixin" as styles;
+@use '../../../../../assets/css/abstracts/mixin' as styles;
 
 .container {
   display: flex;
   align-items: center;
-  gap: 8px; // Giảm khoảng cách giữa biểu tượng và số điện thoại
-  padding: 8px 12px; // Thêm khoảng đệm cho container
-  background-color: var(--light-gray); // Thêm màu nền nhẹ nhàng
-  border-radius: 4px; // Bo tròn các góc
-  transition: background-color 0.3s ease; // Thêm hiệu ứng chuyển đổi màu nền
-  cursor: pointer; // Thêm con trỏ chuột khi hover
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--light-gray);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 
   &:hover {
-    background-color: #3b82f6; // Thay đổi màu nền khi hover (màu xanh)
+    background-color: #3b82f6;
   }
 
   .icon {
-    width: 24px; // Tăng kích thước biểu tượng
+    width: 24px;
     height: 24px;
-    color: #3b82f6; // Màu xanh cho biểu tượng
-    transition: color 0.3s ease; // Thêm hiệu ứng chuyển đổi màu cho biểu tượng
+    color: #3b82f6;
+    transition: color 0.3s ease;
   }
 
   .phone {
-    @include styles.setLimitLine(1); // Giới hạn dòng cho số điện thoại
-    font-size: 14px; // Tăng kích thước font chữ
-    line-height: 20px; // Điều chỉnh line-height
+    @include styles.setLimitLine(1);
+    font-size: 14px;
+    line-height: 20px;
     font-weight: 500;
-    color: var(--dark-gray); // Thêm màu chữ
-    transition: color 0.3s ease; // Thêm hiệu ứng chuyển đổi màu cho chữ
+    color: var(--dark-gray);
+    transition: color 0.3s ease;
 
     .container:hover & {
-      color: var(--white); // Thay đổi màu chữ khi hover
+      color: var(--white);
     }
   }
 }

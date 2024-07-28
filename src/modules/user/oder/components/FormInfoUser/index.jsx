@@ -17,12 +17,12 @@ import langs from '../../langs';
 
 const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
   const [formData, setFormData] = useState({
-    first_name: 'Nguyen',
-    last_name: 'Van Huynh',
-    email: 'huynhnhatvuong01012002@gmail.com',
-    phone: '092362637',
-    address: '123 Ho Ngoc Lam Tan Tao Binh Tan',
-    notes: 'Giao gio hanh chinh',
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone: '',
+    address: 'tphmc/quan8/taquangbuu',
+    notes: '',
     payment: 'cod',
   });
   const [otherAddress, setOtherAdress] = useState('');
@@ -46,10 +46,10 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (checkIfAllUndefined(formData.address)) {
-      toast.error('Xin hãy điền đầy đủ thông tin địa chỉ');
-      return;
-    }
+    // if (checkIfAllUndefined(formData.address)) {
+    //   toast.error('Xin hãy điền đầy đủ thông tin địa chỉ');
+    //   return;
+    // }
 
     handlerSetValueRequest({
       ...formData,

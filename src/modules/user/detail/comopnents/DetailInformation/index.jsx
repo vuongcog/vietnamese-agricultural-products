@@ -5,9 +5,17 @@ import DetailOrder from '../DetailOrder';
 import useProducerDetail from '../../../../../useCustom/user/useProducerDetail';
 import classNames from 'classnames';
 import FeedbackList from '../DetailFeedback';
+import useProducerCategory from '../../../../../useCustom/user/useProducerCategory';
 const DetailInformation = ({ item }) => {
   const { product } = useProducerDetail();
-  if (_.isEmpty(product)) return;
+  const { categories } = useProducerCategory();
+  if (_.isEmpty(categories)) return;
+  if (_.isEmpty(product) || product.status === 'inactive') return;
+
+  const index = categories.filter(
+    category => category.id === product.id_category
+  );
+  if (index.length === 0) return;
   return (
     <div>
       <div className={styles.container}>

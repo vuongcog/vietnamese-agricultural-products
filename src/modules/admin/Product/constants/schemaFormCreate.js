@@ -65,12 +65,12 @@ export const schemaFormCreate = {
       type: 'select',
       items: [
         {
-          name: 'inactive',
-          value: 'inactive',
-        },
-        {
           name: 'active',
           value: 'active',
+        },
+        {
+          name: 'inactive',
+          value: 'inactive',
         },
       ],
       placeholder: langs.status,

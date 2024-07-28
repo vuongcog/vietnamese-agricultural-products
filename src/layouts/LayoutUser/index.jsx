@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { FETCH_DATA_USER } from '../../actions/action-infor-user';
 const LayoutUser = ({ children }) => {
   const dispatch = useDispatch();
+
   useInjectReducerSagaShopping();
   useEffect(() => {
     try {

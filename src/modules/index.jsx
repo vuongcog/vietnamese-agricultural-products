@@ -38,6 +38,7 @@ import FormProvider from './authentication/components/FormLogin/FormContext';
 import CheckoutContainer from './user/oder/container';
 import axios from 'axios';
 import Profile from './user/profile';
+import CartNotToken from './user/cart-not-token/container';
 
 const App = () => {
   axios.get('https://esgoo.net/api-tinhthanh/1/0.htm');
@@ -68,7 +69,16 @@ const App = () => {
             <Route path="/blog-categories" element={<BlogContainer />} />
             <Route path="/blogs" element={<BlogCategoyGuest />} />
             <Route path="/blogs/blog/:slug" element={<BlogGuestContainer />} />
-            <Route path="/cart" element={<CartContainer />} />
+            <Route
+              path="/cart"
+              element={
+                Cookies.get('accsessToken') ? (
+                  <CartContainer />
+                ) : (
+                  <CartNotToken />
+                )
+              }
+            />{' '}
             <Route path="/detail" element={<DetailProduct />} />
             <Route path="/purchase" element={<DetailProduct />} />
             <Route path="/checkout" element={<CheckoutContainer />} />

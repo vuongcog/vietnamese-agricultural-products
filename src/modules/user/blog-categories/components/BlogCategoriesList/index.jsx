@@ -12,16 +12,19 @@ const BlogCategoriesList = () => {
     <div className={styles.layout}>
       <h1>{t(langsGlobal.blogCategories)}</h1>
       <ol className={styles[`gradient-list`]}>
-        {blogCategories?.map(item => (
-          <li
-            onClick={() => {
-              navigate(`/blogs?category=${item.id}&name=${item.name}`);
-            }}
-            key={item.name}
-          >
-            {item.name}
-          </li>
-        ))}
+        {blogCategories?.map(item => {
+          if (item.status === 'inactive') return null;
+          return (
+            <li
+              onClick={() => {
+                navigate(`/blogs?category=${item.id}&name=${item.name}`);
+              }}
+              key={item.name}
+            >
+              {item.name}
+            </li>
+          );
+        })}
       </ol>
     </div>
   );

@@ -63,12 +63,12 @@ export const schemaFormEdit = {
       type: 'select',
       items: [
         {
-          name: 'inactive',
-          value: 'inactive',
-        },
-        {
           name: 'active',
           value: 'active',
+        },
+        {
+          name: 'inactive',
+          value: 'inactive',
         },
       ],
       isRequire: true,

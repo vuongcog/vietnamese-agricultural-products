@@ -1,7 +1,6 @@
-/* eslint-disable arrow-body-style */
-import React from 'react';
-import styles from './styles.module.scss';
-import classNames from 'classnames';
+import React, { useState } from 'react';
+import DataTable from 'react-data-table-component';
+import tableStyles from './styles.module.scss';
 import useProducerDataUser from '../../../../../useCustom/user/useProducerDataUser';
 import { useDisclosure } from '@chakra-ui/react';
 import { Divider } from '@chakra-ui/react';
@@ -11,124 +10,178 @@ import ProfileProductCard from '../ProfileProductCard';
 import OrderCode from '../OrderCode';
 import OrderNotes from '../../../../admin/Order/components/OrderNotes';
 import OrderCustomer from '../../../../admin/Order/components/OrderCustomer';
-import OrderPaymentType from '../../../../admin/Order/components/OrderPaymentType';
 import OrderPaymentStatus from '../../../../admin/Order/components/PaymentStatus';
 import OrderDeliveryAddress from '../../../../admin/Order/components/OrderDeliveryAddress';
 import OrderTotalPrice from '../../../../admin/Order/components/OrderTotalPrices';
 import CreatedAtComponent from '../../../../../components/core/CreatedAt';
 import UpdatedAtComponent from '../../../../../components/core/UpdatedAt';
-// eslint-disable-next-line arrow-body-style
+import classNames from 'classnames';
+import OrderPaymentType from '../OrderPaymentType';
+
 const ProfilePurchaseUser = () => {
   const {
-    dataUser: { orders },
+    dataUser: { orders = [] }, // Cung cấp giá trị mặc định rỗng cho orders
   } = useProducerDataUser();
 
-  const RenderRowBodyProduct = ({ item }) => {
-    return <ProfileProductCard item={item}></ProfileProductCard>;
-  };
-  const RenderTableProduct = ({ products }) => {
-    return (
-      <div className="flex flex-col pl-60 gap-6">
-        {products.map(item => {
-          return (
-            <>
-              <RenderRowBodyProduct
-                key={item.id}
-                item={item}
-              ></RenderRowBodyProduct>
-              <Divider borderWidth="1px" />
-            </>
-          );
-        })}
-      </div>
-    );
-  };
-  const RenderRowBodyTable = ({ item }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
+
+  const columns = [
+    {
+      name: 'Mã đơn hàng',
+      selector: row => row.order_code,
+      sortable: true,
+      minWidth: '200px',
+      cell: row => <OrderCode order_code={row.order_code} />,
+    },
+    {
+      name: 'Tổng giá',
+      selector: row => row.order_total_prices,
+      sortable: true,
+      cell: row => (
+        <OrderTotalPrice order_total_prices={row.order_total_prices} />
+      ),
+    },
+    {
+      name: 'Ghi chú',
+      selector: row => row.order_notes,
+      sortable: true,
+      cell: row => <OrderNotes order_notes={row.order_notes} />,
+    },
+    {
+      name: 'Tên người nhận',
+      selector: row => row.customer,
+      sortable: true,
+      cell: row => <OrderCustomer customer={row.customer} />,
+    },
+    {
+      name: 'Hình thức thanh toán',
+      minWidth: '300px',
+      selector: row => row.payment_type,
+      sortable: true,
+      cell: row => <OrderPaymentType payment_type={row.payment_type} />,
+    },
+    {
+      name: 'Trạng thái thanh toán',
+      selector: row => row.payment_status,
+      sortable: true,
+      cell: row => <OrderPaymentStatus payment_status={row.payment_status} />,
+    },
+    {
+      name: 'Địa chỉ vận chuyển',
+      selector: row => row.delivery_address,
+      sortable: true,
+      cell: row => (
+        <OrderDeliveryAddress delivery_address={row.delivery_address} />
+      ),
+    },
+    {
+      name: 'Số điện thoại',
+      selector: row => row.phone,
+      sortable: true,
+      cell: row => row.phone,
+    },
+    {
+      name: 'Mã khuyến mãi',
+      selector: row => row.id_coupon,
+      sortable: true,
+      cell: row => row.id_coupon || 'N/A',
+    },
+    {
+      name: 'Mã thanh toán',
+      selector: row => row.id_payment,
+      sortable: true,
+      cell: row => row.id_payment || 'N/A',
+    },
+    {
+      name: 'Ngày tạo',
+      selector: row => row.created_at,
+      sortable: true,
+      minWidth: '200px',
+      cell: row => <CreatedAtComponent created_at={row.created_at} />,
+    },
+    {
+      name: 'Ngày cập nhật',
+      selector: row => row.updated_at,
+      sortable: true,
+      minWidth: '200px',
+      cell: row => <UpdatedAtComponent updated_at={row.updated_at} />,
+    },
+  ];
+
+  const ExpandedComponent = ({ data }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
-      <tr className="cursor-pointer" onClick={onOpen}>
-        <td>
-          <OrderCode order_code={item.order_code}></OrderCode>
-        </td>
-        <td>
-          <OrderTotalPrice
-            order_total_prices={item.order_total_prices}
-          ></OrderTotalPrice>
-        </td>
-        <td>
-          <OrderNotes order_notes={item.order_notes}></OrderNotes>
-        </td>
-        <td>
-          <OrderCustomer customer={item.customer}></OrderCustomer>
-        </td>
-        <td>
-          <OrderPaymentType payment_type={item.payment_type}></OrderPaymentType>
-        </td>
-        <td>
-          <OrderPaymentStatus
-            payment_status={item.payment_status}
-          ></OrderPaymentStatus>
-        </td>
-        <td>
-          <OrderDeliveryAddress
-            delivery_address={item.delivery_address}
-          ></OrderDeliveryAddress>
-        </td>
-        <td>
-          <CreatedAtComponent created_at={item.created_at}></CreatedAtComponent>
-        </td>
-        <td>
-          <UpdatedAtComponent updated_at={item.updated_at}></UpdatedAtComponent>
-        </td>
-        <td> {item.phone}</td>
-        <td> {item.id_coupon || 'N/A'}</td>
-        <td> {item.id_payment || 'N/A'}</td>
-
+      <>
+        <div onClick={onOpen} className="cursor-pointer">
+          Xem chi tiết sản phẩm
+        </div>
         <DialogMessage
           width={'auto'}
           isOpen={isOpen}
           onOpen={onOpen}
           onClose={onClose}
         >
-          <RenderTableProduct products={item.items}></RenderTableProduct>
+          <RenderTableProduct products={data.items} />
         </DialogMessage>
-      </tr>
+      </>
     );
   };
-  const RenderRowHeaderTable = () => {
+
+  const RenderTableProduct = ({ products }) => {
     return (
-      <tr className={styles['row-heading']}>
-        <th>Mã đơn hàng</th>
-        <th>Tổng giá</th>
-        <th>Ghi chú</th>
-        <th>Tên người nhận</th>
-        <th>Hình thức thanh toán</th>
-        <th>Trạng thái thanh toán</th>
-        <th>Địa chỉ vận chuyển</th>
-        <th>Số điện thoại</th>
-        <th>Mã khuyến mãi</th>
-        <th>Mã thanh toán</th>
-        <th>Ngày tạo</th>
-      </tr>
+      <div className="flex flex-col pl-60 gap-6">
+        {products.map(item => (
+          <React.Fragment key={item.id}>
+            <ProfileProductCard item={item} />
+            <Divider borderWidth="1px" />
+          </React.Fragment>
+        ))}
+      </div>
     );
   };
+
+  const handlePageChange = page => {
+    setCurrentPage(page);
+  };
+
+  const handlePerRowsChange = (newPerPage, page) => {
+    setPerPage(newPerPage);
+    setCurrentPage(page);
+  };
+
+  const customStyles = {
+    pagination: {
+      style: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+      },
+    },
+    rowsPerPage: {
+      style: {
+        marginRight: 'auto',
+      },
+    },
+  };
+
   return (
-    <div className={styles.container}>
-      <table className={styles.table}>
-        <thead className={classNames(styles['heading-container'])}>
-          <RenderRowHeaderTable></RenderRowHeaderTable>
-        </thead>
-        <tbody className={classNames(styles['body-container'])}>
-          {orders?.map(item => {
-            return (
-              <RenderRowBodyTable
-                key={item.order_code}
-                item={item}
-              ></RenderRowBodyTable>
-            );
-          })}
-        </tbody>
-      </table>
+    <div className={tableStyles.container}>
+      <DataTable
+        title="Profile Purchase User"
+        columns={columns}
+        data={orders.slice((currentPage - 1) * perPage, currentPage * perPage)} // Slicing data for pagination
+        pagination
+        paginationServer
+        paginationTotalRows={orders.length}
+        paginationPerPage={perPage}
+        onChangeRowsPerPage={handlePerRowsChange}
+        onChangePage={handlePageChange}
+        expandableRows
+        expandableRowsComponent={ExpandedComponent}
+        highlightOnHover
+        className={classNames(tableStyles.table)}
+        customStyles={customStyles}
+      />
     </div>
   );
 };

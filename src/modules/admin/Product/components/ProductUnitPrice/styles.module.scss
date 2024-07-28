@@ -9,19 +9,9 @@
   transition: background-color 0.3s, box-shadow 0.3s;
 
   span {
-    position: relative;
-    color: #007bff;
+    width: max-content;
     font-weight: 600;
     font-size: 12px;
-
-    &::before {
-      content: '₫';
-      font-size: 8px;
-      position: absolute;
-      top: 0;
-      left: -10px;
-      color: #ff4500;
-    }
   }
 
   &:hover {

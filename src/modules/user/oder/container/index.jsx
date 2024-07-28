@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { ORDER_PRODUCT } from '../../../../actions/action-order';
 import useProducerOrder from '../../../../useCustom/user/useProducerOrder';
 import ProgressFullScreen from '../../../../components/core/ProgressFullScreen';
+import { toast } from 'react-toastify';
 
 const CheckoutContainer = () => {
   const location = useLocation();
@@ -32,7 +33,6 @@ const CheckoutContainer = () => {
   };
 
   useEffect(() => {
-    console.log(firstMount.current);
     if (firstMount.current) {
       firstMount.current = false;
     } else {
@@ -43,6 +43,11 @@ const CheckoutContainer = () => {
     };
   }, [valueRequest]);
   const handlerSetValueRequest = form => {
+    const filterProducts = products.filter(item => item.quantity <= 0);
+    if (filterProducts.length) {
+      toast.success('Xin hãy điền số lượng sản phẩm mua lên ít nhất 1');
+      return;
+    }
     const newProducts = products.map(item => ({
       quantity: item.quantity,
       id_product: item.id_product,

@@ -6,6 +6,7 @@ import {
   RESET_STATUS_FETCH_CATEGORY,
   SET_CATEGORIES,
 } from '../actions/action-category';
+import { ACTIVE } from '../constants/mapper-status';
 
 export const initialState = {
   categories: [],
@@ -14,10 +15,16 @@ export const initialState = {
   isFetcheCategoryFailed: false,
 };
 const handlerFetchingCategory = state => ({ ...state });
-const handlerSetCategory = (state, action) => ({
-  ...state,
-  categories: action.payload,
-});
+const handlerSetCategory = (state, action) => {
+  let filterCategories = [];
+  if (action.payload)
+    filterCategories = action.payload.filter(item => item.status === ACTIVE);
+
+  return {
+    ...state,
+    categories: filterCategories,
+  };
+};
 const handlerFetchedCategory = state => ({ ...state });
 const handlerFetchCategorySuccess = state => ({
   ...state,

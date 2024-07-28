@@ -13,9 +13,8 @@ import langsGlobal from '../../../../../../langs';
 import { useDispatch } from 'react-redux';
 import { formattedNumber } from '../../../../../../utils/format-number';
 import { ADD_CART } from '../../../../../../actions/action-cart';
-import { faBoxOpen } from '@fortawesome/free-solid-svg-icons'; // Bạn có thể chọn biểu tượng phù hợp hơn nếu có
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Inventory2Outlined } from '@mui/icons-material';
+import { toast } from 'react-toastify';
+import { addCart } from '../../../../../../utils/cart/add-cart';
 
 const Card = ({ item, ...props }) => {
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ const Card = ({ item, ...props }) => {
   const { isFetching } = useCustomSelector();
   const dispatch = useDispatch();
   const { t } = useTranslation();
-
   if (isFetching) {
     return (
       <div className={styles.wrapper}>
@@ -62,6 +60,14 @@ const Card = ({ item, ...props }) => {
       <div className={styles[`wrapper-bottom`]}>
         <button
           onClick={() => {
+            if (!Cookies.get('accsessToken')) {
+              addCart(item, 1);
+              return;
+            }
+            if (cloneItem.quantity <= 0) {
+              toast.warning('Sản phẩm này đã hết hàng');
+              return;
+            }
             dispatch({
               type: ADD_CART,
               payload: {
@@ -76,8 +82,9 @@ const Card = ({ item, ...props }) => {
           <ShoppingCartCheckout className={styles.cartIcon} />
         </button>
         <div className={styles.quantity}>
-          <Inventory2Outlined htmlColor="rgba(190, 79, 39, 0.7)" />
-          <h6 className="text-slate-600">{cloneItem.quantity}</h6>
+          <h6 className="text-slate-600">
+            {cloneItem.quantity <= 0 ? 'Hết hàng' : cloneItem.quantity}
+          </h6>
         </div>
       </div>
     </div>

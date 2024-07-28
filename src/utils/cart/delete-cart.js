@@ -1,12 +1,27 @@
-import Cookies from "js-cookie";
-import { getCart } from "./get-cart";
-import { parseStringJson } from "../parse-json";
+import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
-export const deleteCart = (index) => {
-  const listCart = getCart();
-  if (index !== -1) {
-    listCart.splice(index, 1);
-    Cookies.set("cart", parseStringJson(listCart), { path: "/", expires: 365 });
-    return listCart;
+export const deleteCartItem = idProduct => {
+  try {
+    const listCart = Cookies.get('cart');
+    if (!listCart) {
+      toast.error('Giỏ hàng trống');
+      return;
+    }
+
+    const parseCartObject = JSON.parse(listCart);
+    const updatedCart = parseCartObject.filter(
+      item => item.id_product !== idProduct
+    );
+
+    if (updatedCart.length === parseCartObject.length) {
+      toast.error('Sản phẩm không có trong giỏ hàng');
+      return;
+    }
+
+    Cookies.set('cart', JSON.stringify(updatedCart));
+    toast.success('Xóa sản phẩm khỏi giỏ hàng thành công');
+  } catch (error) {
+    toast.error('Có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng');
   }
 };
