@@ -19,11 +19,11 @@ import {
 import { useReactToPrint } from 'react-to-print';
 
 const BillOrder = React.forwardRef(({ order }, ref) => {
-  const calculateTotal = () => {
-    return order.items.reduce((total, item) => {
-      return total + parseFloat(item.unit_prices) * item.quantity;
-    }, 0);
-  };
+  const calculateTotal = () =>
+    order.items.reduce(
+      (total, item) => total + parseFloat(item.unit_prices) * item.quantity,
+      0
+    );
 
   const tableBgColor = useColorModeValue('white', 'gray.800');
   const tableBorderColor = useColorModeValue('gray.200', 'gray.600');
@@ -135,6 +135,7 @@ const BillOrder = React.forwardRef(({ order }, ref) => {
     </Container>
   );
 });
+BillOrder.displayName = 'BillOrder';
 
 const BillOrderPrintable = ({ order }) => {
   const componentRef = useRef();

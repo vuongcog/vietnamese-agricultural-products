@@ -45,6 +45,7 @@ const Product = () => {
         type: 'text',
       },
     ],
+    sort: [`product_name`, `unit_prices`],
     schema: [
       {
         name: 'id',

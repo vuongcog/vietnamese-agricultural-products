@@ -19,77 +19,7 @@ import OrderCustomer from '../components/OrderCustomer';
 import { useDisclosure } from '@chakra-ui/react';
 import BillOrderPrintable from '../../../user/profile/components/BillOrder';
 import DialogMessage from '../../../../components/core/DialogMessage';
-const orderItem = {
-  id: 11,
-  order_code: 'COD-ORDER-278135',
-  order_total_prices: '9700000.000',
-  status: 'ordered',
-  order_notes: 'Giao gio hanh chinh',
-  id_user: 1,
-  customer: 'Nguyen Van Huynh',
-  payment_type: 'THANH TOÁN KHI NHẬN HÀNG',
-  payment_status: 'chưa thanh toán',
-  email: 'huynhnhatvuong01012002@gmail.com',
-  delivery_address: 'Hồ Chí Minh/Bình Thạnh/05//4/8b',
-  phone: '092362637',
-  id_coupon: null,
-  id_payment: null,
-  created_at: '2024-07-23T13:08:24.000000Z',
-  updated_at: '2024-07-23T13:08:24.000000Z',
-  items: [
-    {
-      id: 8,
-      id_order: 11,
-      id_product: 2,
-      unit_prices: '100000.000',
-      quantity: 5,
-      created_at: '2024-07-23T13:08:24.000000Z',
-      updated_at: '2024-07-23T13:08:24.000000Z',
-      products: {
-        id: 2,
-        id_category: 1,
-        product_name: 'Cam sấy khô',
-        product_slug: 'cam-say-kho',
-        product_image: 'http://127.0.0.1:8000/img/cam-say-kho.jpg',
-        product_des:
-          '<h3>Mô tả chung</h3><p>Cà chua là một loại quả thuộc họ cà (Solanaceae)...</p>',
-        product_info:
-          '<h3>Mô tả chung</h3><p>Cà chua là một loại quả thuộc họ cà (Solanaceae)...</p>',
-        quantity: 0,
-        unit_prices: '100000.000',
-        status: 'active',
-        created_at: '2024-06-01T09:23:14.000000Z',
-        updated_at: '2024-07-27T04:56:06.000000Z',
-      },
-    },
-    {
-      id: 9,
-      id_order: 11,
-      id_product: 3,
-      unit_prices: '1150000.000',
-      quantity: 1,
-      created_at: '2024-07-23T13:08:24.000000Z',
-      updated_at: '2024-07-23T13:08:24.000000Z',
-      products: {
-        id: 3,
-        id_category: 1,
-        product_name: 'Vỏ bưởi sấy khô',
-        product_slug: 'vo-buoi-say-kho',
-        product_image: 'http://127.0.0.1:8000/img/vo-buoi-say-kho.jpg',
-        product_des:
-          '<h3>Mô tả chung</h3><p>Cà chua là một loại quả thuộc họ cà (Solanaceae)...</p>',
-        product_info:
-          '<h3>Mô tả chung</h3><p>Cà chua là một loại quả thuộc họ cà (Solanaceae)...</p>',
-        quantity: 998,
-        unit_prices: '1150000.000',
-        status: 'active',
-        created_at: '2024-07-19T18:55:03.000000Z',
-        updated_at: '2024-07-27T04:57:30.000000Z',
-      },
-    },
-    // Các sản phẩm khác tương tự
-  ],
-};
+
 const Oder = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -113,7 +43,6 @@ const Oder = () => {
       },
     ],
     onClickRow: item => {
-      console.log(item);
       setOder(item);
       onOpen();
     },

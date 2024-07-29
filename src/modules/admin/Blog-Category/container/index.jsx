@@ -39,6 +39,7 @@ const BlogCategory = () => {
         type: 'text',
       },
     ],
+    sort: ['name'],
     schema: [
       {
         name: 'id',

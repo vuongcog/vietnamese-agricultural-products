@@ -114,7 +114,7 @@ const ProfilePurchaseUser = () => {
           Xem chi tiết
         </div>
         <DialogMessage
-          width={'auto'}
+          width={1000}
           isOpen={isOpen}
           onOpen={onOpen}
           onClose={onClose}

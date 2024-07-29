@@ -42,6 +42,7 @@ const User = () => {
         type: 'text',
       },
     ],
+    sort: [`name`, `email`],
     schema: [
       {
         name: 'id',

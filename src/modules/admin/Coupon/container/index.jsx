@@ -43,6 +43,7 @@ const Coupon = () => {
         type: 'text',
       },
     ],
+    sort: [`coupon_code`, 'discount_value'],
     schema: [
       {
         name: 'id',

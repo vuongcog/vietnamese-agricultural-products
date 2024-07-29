@@ -138,6 +138,10 @@ const CreateForm = ({
         setLoading(true);
         axios
           .get(item.endpoint, {
+            params: {
+              sort_by: 'created_at',
+              sort_direction: 'asc',
+            },
             headers: {
               Authorization: `Bearer ${Cookies.get('accsessToken')}`,
             },

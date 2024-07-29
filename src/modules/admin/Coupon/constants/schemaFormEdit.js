@@ -1,52 +1,53 @@
-import { UPDATE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
-import langs from "../langs";
+import { UPDATE_DATA } from '../../../../components/core/AdminCrud/Store/constants';
+import langs from '../langs';
 
 export const schemaFormEdit = {
   title: langs.EDIT_COUPON,
-  doneText: ["Cancel", "Create"],
+  doneText: ['Cancel', 'Save'],
+
   type: UPDATE_DATA,
   schemaForm: [
     {
-      name: "discount_value",
+      name: 'discount_value',
       label: langs.discountValue,
       placeholder: langs.discountValue,
       isRequire: true,
-      type: "text",
+      type: 'number',
     },
     {
-      name: "coupon_start_date",
+      name: 'coupon_start_date',
       label: langs.startDate,
       placeholder: langs.startDate,
-      type: "date",
+      type: 'date',
     },
     {
-      name: "coupon_end_date",
+      name: 'coupon_end_date',
       label: langs.endDate,
       placeholder: langs.endDate,
-      type: "date",
+      type: 'date',
     },
     {
-      name: "coupon_quantity",
+      name: 'coupon_quantity',
       label: langs.quantity,
       placeholder: langs.quantity,
       isRequire: true,
-      type: "number",
+      type: 'number',
     },
     {
-      name: "status",
+      name: 'status',
       label: langs.status,
-      type: "select",
+      type: 'select',
       items: [
         {
-          name: "inactive",
-          value: "inactive",
+          name: 'inactive',
+          value: 'inactive',
         },
         {
-          name: "active",
-          value: "active",
+          name: 'active',
+          value: 'active',
         },
       ],
-      placeholder: "status",
+      placeholder: 'status',
       isRequire: true,
     },
   ],

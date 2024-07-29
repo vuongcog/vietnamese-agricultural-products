@@ -40,6 +40,7 @@ const Category = () => {
         type: 'text',
       },
     ],
+    sort: ['category_name'],
     schema: [
       {
         name: 'id',

@@ -31,6 +31,7 @@ import {
   CRUD_SET_SORT_DIRECTION,
 } from '../constants/actionFilter';
 const BreadCrumb = ({
+  sort = [],
   mode,
   isSearchInput,
   onChangeSearchText,
@@ -44,11 +45,6 @@ const BreadCrumb = ({
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { isOpenCB, onCloseCB, onOpenCB } = useDisclosure();
   const handlerSortChange = (newSortField, sortDirection) => {
-    console.log(
-      '🚀 ~ handlerSortChange ~ newSortField, sortDirection:',
-      newSortField,
-      sortDirection
-    );
     dispatch({ type: CRUD_SET_SORT_BY, payload: newSortField });
     dispatch({ type: CRUD_SET_SORT_DIRECTION, payload: sortDirection });
   };
@@ -89,10 +85,12 @@ const BreadCrumb = ({
       dispatch(resetEmailStatus());
     }
   }, [successSendMailMessage, dispatch]);
-
   return (
     <div className={styles.container}>
-      <SortSelector onSortChange={handlerSortChange}></SortSelector>
+      <SortSelector
+        extraFields={sort}
+        onSortChange={handlerSortChange}
+      ></SortSelector>
       {isSendingMail && <ProgressFullScreen />}
       {isSearchInput && (
         <SearchInput

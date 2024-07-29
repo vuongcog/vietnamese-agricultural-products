@@ -42,6 +42,7 @@ const Product = () => {
         type: 'text',
       },
     ],
+    sort: ['blog_title'],
     schema: [
       {
         name: 'id',
