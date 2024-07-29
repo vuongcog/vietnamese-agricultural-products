@@ -9,6 +9,7 @@ export function AuthProvider({ children }) {
   const [checkAuth, setCheckauth] = useState(false);
   const accessToken = Cookies.get('accsessToken');
   const logout = () => {
+    window.location.reload();
     Cookies.remove('accsessToken');
     setCheckauth(!checkAuth);
 

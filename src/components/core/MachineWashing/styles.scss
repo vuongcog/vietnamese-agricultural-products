@@ -145,7 +145,7 @@ body {
 
     &::before {
       @include size(1.25em, 0.2em);
-      content: "";
+      content: '';
       top: -0.2em;
       background-color: #d4d8da;
       border-radius: 0.05em 0.05em 0 0;
@@ -229,7 +229,7 @@ body {
   &::before {
     @include size(100%);
     --opacity-color: rgba(255, 255, 255, 0.15);
-    content: "";
+    content: '';
     box-shadow: 0 0 0 1.5em var(--border-color) inset;
     border-radius: 50%;
     z-index: 10;
@@ -248,7 +248,7 @@ body {
 
   &::after {
     @include size(4em);
-    content: "";
+    content: '';
     right: -0.55em;
     top: 50%;
     transform: translateY(-50%);
@@ -400,7 +400,7 @@ body {
 
   &::before {
     @include size(1.15em, 1.925em);
-    content: "";
+    content: '';
     border-radius: 0.1em 0.1em 0 0.1em;
     background: linear-gradient(
       var(--bg-color) 25%,
@@ -414,7 +414,7 @@ body {
 
   &::after {
     @include size(1.15em, 1.75em);
-    content: "";
+    content: '';
     background: radial-gradient(
         circle 0.55em at 50% 100%,
         var(--bg-color) 100%,
@@ -510,7 +510,6 @@ body {
 
     @for $i from 1 through 20 {
       &:nth-of-type(#{$i}) {
-        // Me dio hueva hacer una función para esto. Perdonen
         --bounce: #{randomNum(10, 20) / 10 * -1}em;
         --bounce-two: #{randomNum(10, 20) / 10 * -1}em;
         --size: #{randomNum(5, 9) / 10}em;

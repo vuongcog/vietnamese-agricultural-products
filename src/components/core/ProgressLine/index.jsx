@@ -13,12 +13,10 @@ function ProgressLine({ isFetching }) {
           if (oldProgress >= 100) {
             return 100;
           }
-          // Tăng giá trị ngẫu nhiên từ 1 đến 10 để mô phỏng tiến trình tải
           return Math.min(oldProgress + Math.random() * 10, 100);
         });
-      }, 500); // Cập nhật mỗi nửa giây
-    } else {
-      setProgress(100); // Đặt giá trị thành 100 khi hoàn tất
+      }, 500);
+      setProgress(100);
       clearInterval(timer);
     }
 

@@ -9,7 +9,6 @@ import {
   CategoryScale,
 } from 'chart.js';
 
-// Đăng ký các thành phần cho biểu đồ dạng đường và thang đo "category"
 Chart.register(
   LineController,
   LinearScale,
@@ -18,7 +17,6 @@ Chart.register(
   CategoryScale
 );
 
-// Dữ liệu và cấu hình cho biểu đồ
 const lineChartData = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
