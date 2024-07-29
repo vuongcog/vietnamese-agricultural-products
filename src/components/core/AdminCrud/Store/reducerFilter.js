@@ -5,6 +5,8 @@ export const initialFilterState = {
   totalPage: 0,
   currentPage: 1,
   id: '',
+  sort_by: 'created_at',
+  sort_direction: 'asc',
 };
 
 import {
@@ -15,7 +17,17 @@ import {
   CRUD_SET_TOTAL_PAGE,
   CRUD_SET_CURRENT_PAGE,
   CRUD_SET_INIT_REDUCER_FILTER,
+  CRUD_SET_SORT_BY,
+  CRUD_SET_SORT_DIRECTION,
 } from '../constants/actionFilter.js';
+const handlerSetSortBy = (state, action) => ({
+  ...state,
+  sort_by: action.payload,
+});
+const handlerSetSortDirection = (state, action) => ({
+  ...state,
+  sort_direction: action.payload,
+});
 const handlerSetInitReducerFilter = (state, action) => ({
   ...state,
   ...action.payload,
@@ -49,6 +61,8 @@ const mapperHandle = {
   [CRUD_SET_TOTAL_PAGE]: handlerSetTotalPage,
   [CRUD_SET_CURRENT_PAGE]: handlerSetCurrentPage,
   [CRUD_SET_ID]: handlerSetID,
+  [CRUD_SET_SORT_BY]: handlerSetSortBy,
+  [CRUD_SET_SORT_DIRECTION]: handlerSetSortDirection,
 };
 //
 

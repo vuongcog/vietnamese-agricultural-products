@@ -53,7 +53,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
 
     handlerSetValueRequest({
       ...formData,
-      address: `${formData.address}/${otherAddress}`,
+      address: `${formData.address}${otherAddress}`,
     });
   };
   return (

@@ -42,7 +42,8 @@ const ContextCrudProvider = ({ children, ...props }) => {
   const firstMount = useRef(true);
   // 222 get state of redux
   const { items, isFetching, refresh } = useProducerStateCrud();
-  const { search, pagination, perpage, id } = useProducerStateCrudFilter();
+  const { search, pagination, perpage, id, sort_by, sort_direction } =
+    useProducerStateCrudFilter();
   const debounceSearch = useDebounce(search, 400);
   const debounceID = useDebounce(id, 400);
   // 111 define handler set filter
@@ -78,9 +79,12 @@ const ContextCrudProvider = ({ children, ...props }) => {
   };
   const getItems = async debounceSearch => {
     dispatch({ type: FETCH_DATA });
+
     crudOptions.endpointParams['search'] = debounceSearch;
     crudOptions.endpointParams['page'] = pagination;
     crudOptions.endpointParams['perpage'] = perpage;
+    crudOptions.endpointParams['sort_by'] = sort_by;
+    crudOptions.endpointParams['sort_direction'] = sort_direction;
     const res = await new Http(crudOptions.endpoint).list(
       crudOptions.endpointParams
     );
@@ -131,7 +135,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
       .finally(() => {
         dispatch({ type: FETCHED_DATA });
       });
-  }, [debounceSearch, perpage, pagination, refresh]);
+  }, [debounceSearch, perpage, pagination, refresh, sort_by, sort_direction]);
 
   return <CrudContext.Provider value={value}>{children}</CrudContext.Provider>;
 };

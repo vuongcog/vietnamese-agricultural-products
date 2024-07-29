@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+import { Box, Select, FormControl, FormLabel } from '@chakra-ui/react';
 
-const SortSelector = ({ onSortChange }) => {
+const SortSelector = ({ onSortChange, options }) => {
+  options = [
+    { label: 'Ngày tạo', value: 'created_at' },
+    { label: 'Ngày cập nhập', value: 'updated_at' },
+    { label: 'Trạng thái', value: 'status' },
+  ];
   const [sortField, setSortField] = useState('created_at');
   const [sortDirection, setSortDirection] = useState('asc');
 
@@ -17,22 +23,20 @@ const SortSelector = ({ onSortChange }) => {
   };
 
   return (
-    <div>
-      <label>
-        Sort By:
-        <select value={sortField} onChange={handleSortFieldChange}>
-          <option value="created_at">Date Created</option>
-          <option value="updated_at">Date Updated</option>
-          <option value="status">Status</option>
-        </select>
-      </label>
-      <label>
-        Direction:
-        <select value={sortDirection} onChange={handleSortDirectionChange}>
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
-      </label>
+    <div className="flex text-black">
+      <Select value={sortField} onChange={handleSortFieldChange}>
+        {options.map(item => {
+          return (
+            <option key={item.label} value={item.value}>
+              <span>{item.label}</span>
+            </option>
+          );
+        })}
+      </Select>
+      <Select value={sortDirection} onChange={handleSortDirectionChange}>
+        <option value="asc">Tăng dần</option>
+        <option value="desc">Giảm dần</option>
+      </Select>
     </div>
   );
 };

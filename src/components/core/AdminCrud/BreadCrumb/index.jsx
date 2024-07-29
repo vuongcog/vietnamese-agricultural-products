@@ -25,6 +25,11 @@ import langs from '../../../../langs';
 import { useTranslation } from 'react-i18next';
 import SearchWithId from '../SearchWithId';
 import { schemaChangePassword } from './constants/schema-form-change-password';
+import SortSelector from '../SortSelector';
+import {
+  CRUD_SET_SORT_BY,
+  CRUD_SET_SORT_DIRECTION,
+} from '../constants/actionFilter';
 const BreadCrumb = ({
   mode,
   isSearchInput,
@@ -38,6 +43,15 @@ const BreadCrumb = ({
   const { logout } = useContext(AuthContext);
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { isOpenCB, onCloseCB, onOpenCB } = useDisclosure();
+  const handlerSortChange = (newSortField, sortDirection) => {
+    console.log(
+      '🚀 ~ handlerSortChange ~ newSortField, sortDirection:',
+      newSortField,
+      sortDirection
+    );
+    dispatch({ type: CRUD_SET_SORT_BY, payload: newSortField });
+    dispatch({ type: CRUD_SET_SORT_DIRECTION, payload: sortDirection });
+  };
   const { t } = useTranslation();
 
   //  * lấy trạng thái của reducer
@@ -78,6 +92,7 @@ const BreadCrumb = ({
 
   return (
     <div className={styles.container}>
+      <SortSelector onSortChange={handlerSortChange}></SortSelector>
       {isSendingMail && <ProgressFullScreen />}
       {isSearchInput && (
         <SearchInput
@@ -100,7 +115,7 @@ const BreadCrumb = ({
         </DialogMessage>
       )} */}
 
-      <DialogMessage
+      {/* <DialogMessage
         isOpen={isOpenCB}
         onClose={onCloseCB}
         onOpen={onOpenCB}
@@ -110,7 +125,7 @@ const BreadCrumb = ({
           schemaForm={schemaChangePassword}
           handlerSubmit={handlerChangePassword}
         />
-      </DialogMessage>
+      </DialogMessage> */}
 
       {mode.create && (
         <DialogCreateForm endpoint={endpoint} schemaForm={schemaForm} />

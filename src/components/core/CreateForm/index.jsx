@@ -31,6 +31,7 @@ import { useTranslation } from 'react-i18next';
 import ReactQuill from 'react-quill';
 import DialogMessage from '../DialogMessage';
 import 'react-quill/dist/quill.snow.css';
+import { Check } from '@mui/icons-material';
 
 const CreateForm = ({
   doneText = ['Cancel', 'Create'],
@@ -48,7 +49,8 @@ const CreateForm = ({
   const [formState, setFormState] = useState(
     schemaForm.reduce((acc, field) => {
       acc[field.name] = type === UPDATE_DATA ? defaultValues[field.name] : '';
-      if (field.items) {
+      console.log(acc[field.name]);
+      if (field.items && type !== UPDATE_DATA) {
         acc[field.name] = field.items[0].value;
       }
       if (field.type === 'file') {
@@ -117,6 +119,7 @@ const CreateForm = ({
     const [error, setError] = useState(null);
     const inputRef = useRef(null);
     const toast = useToast();
+
     const handleFileChange = e => {
       const file = e.target.files[0];
       handleChange(item.name, file);
@@ -169,15 +172,15 @@ const CreateForm = ({
       switch (item.type) {
         case 'editor':
           return (
-            <DialogMessage width={'1200px'} button={'Edit ' + t(item.label)}>
-              <div className={styles[`react-quill`]}>
-                <ReactQuill
-                  className={styles['react-quill']}
-                  value={formState[item.name]}
-                  onChange={e => handleChange(item.name, e)}
-                ></ReactQuill>
-              </div>
-            </DialogMessage>
+            // <DialogMessage width={'1200px'} button={'Edit ' + t(item.label)}>
+            <div className={styles[`react-quill`]}>
+              <ReactQuill
+                className={styles['react-quill']}
+                value={formState[item.name]}
+                onChange={e => handleChange(item.name, e)}
+              ></ReactQuill>
+            </div>
+            // </DialogMessage>
           );
         case 'select':
           return (
@@ -186,14 +189,17 @@ const CreateForm = ({
                 <Spinner size="sm" />
               ) : (
                 <Select
-                  defaultValue={options[0]?.value}
+                  defaultValue={formState[item.name]}
                   onChange={e => handleChange(item.name, e.target.value)}
                 >
-                  {options.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.name}
-                    </option>
-                  ))}
+                  {options.map(option => {
+                    console.log(options[0]?.value);
+                    return (
+                      <option key={option.value} value={option.value}>
+                        {option.name}
+                      </option>
+                    );
+                  })}
                 </Select>
               )}
             </>
@@ -218,9 +224,11 @@ const CreateForm = ({
               <Button
                 onClick={() => inputRef.current.click()}
                 colorScheme="blue"
+                marginRight={2}
               >
                 Choose File
               </Button>
+              {formState[item.name] ? <Check></Check> : 'No selected'}
               <Input
                 ref={inputRef}
                 type="file"
