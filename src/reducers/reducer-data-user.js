@@ -7,11 +7,9 @@ import {
   FETCHING_DATA_USER,
   SET_DATA_USER,
 } from '../actions/action-infor-user';
-
 export const initialState = {
   isFetchDataUser: false,
   dataUser: [],
-
   isChangePassword: false,
   isChangePasswordSuccess: false,
   isChangePasswordError: false,

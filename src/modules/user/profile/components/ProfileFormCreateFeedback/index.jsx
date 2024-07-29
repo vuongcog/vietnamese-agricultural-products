@@ -16,8 +16,11 @@ import {
 import axios from 'axios';
 import HttpUserClient from '../../../../../utils/http/httpUserClient';
 import { toast } from 'react-toastify';
+import { parseObjectJson } from '../../../../../utils/parse-json';
+import { useNavigate } from 'react-router-dom';
 
-const FormCreateFeedback = ({ id_user, id_product }) => {
+const FormCreateFeedback = ({ id_user, id_product, slug }) => {
+  const navigate = useNavigate();
   const handleSubmit = event => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -27,13 +30,19 @@ const FormCreateFeedback = ({ id_user, id_product }) => {
       rate: formData.get('rate'),
       comment: formData.get('comment'),
     };
-    try {
-      const http = new HttpUserClient('/danhgiasanpham/themdanhgia');
-      const res = http.createFeedback(data);
-      toast.success('Thành công');
-    } catch (error) {
-      toast.error('Thất bại');
-    }
+    const http = new HttpUserClient('/danhgiasanpham/themdanhgia');
+    http
+      .createFeedback(data)
+      .then(res => {
+        if (res.status === 201) toast.success('Thêm đánh giá thành công');
+        if (res.status === 403)
+          toast.success(
+            'Người dùng cần phải mua sản phẩm này trước khi đánh giá'
+          );
+      })
+      .catch(err => {
+        toast.error('Hệ thống đang bị trục trặc, xin vui lòng thử lại sau');
+      });
   };
 
   return (
@@ -53,9 +62,25 @@ const FormCreateFeedback = ({ id_user, id_product }) => {
           <FormLabel>Bình luận</FormLabel>
           <Textarea name="comment" placeholder="Nhập bình luận của bạn" />
         </FormControl>
-        <Button mt={6} colorScheme="teal" type="submit">
-          Gửi
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            mt={6}
+            type="submit"
+            className="hover:text-blue-500 hover:underline hover:cursor-pointer"
+          >
+            Gửi
+          </Button>
+          <Button
+            className="hover:text-blue-500 hover:underline hover:cursor-pointer"
+            mt={6}
+            onClick={() => {
+              navigate(`/detail?slug=${slug}&id=${id_product}`);
+            }}
+            type="submit"
+          >
+            Xem sản phẩm
+          </Button>
+        </div>
       </form>
     </Box>
   );

@@ -74,20 +74,13 @@ const UserHeader = () => {
         <li>
           <SelectLanguage width={90} />
         </li>
-        <li>
-          {Cookies.get('accsessToken') ? (
-            <Cart />
-          ) : (
-            <CartNotToken></CartNotToken>
-          )}
-        </li>
 
         <li>
           <Menu>
             <MenuButton
               as={IconButton}
               aria-label="Options"
-              icon={<HamburgerIcon fontSize={'30px'} color={'green'} />}
+              icon={<HamburgerIcon fontSize={'22'} />}
               variant="outline"
               className={styles.menuButton}
             />
@@ -140,6 +133,13 @@ const UserHeader = () => {
               )}
             </MenuList>
           </Menu>
+        </li>
+        <li>
+          {Cookies.get('accsessToken') ? (
+            <Cart />
+          ) : (
+            <CartNotToken></CartNotToken>
+          )}
         </li>
       </ul>
     </div>

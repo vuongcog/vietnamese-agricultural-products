@@ -9,14 +9,17 @@ export const SORT_FIELD_OPTIONS = [
   { label: 'Giá', value: 'unit_prices' },
   { label: 'Mã khuyến mãi', value: 'coupon_code' },
   { label: 'Giá', value: 'discount_value' },
+
+  { label: 'Mã đơn', value: 'order_code' },
+  { label: 'Tổng giá', value: 'order_total_prices' },
 ];
 
 export const DEFAULT_SORT_FIELDS = ['created_at', 'status'];
 
 export const SORT_DIRECTION_OPTIONS = {
   created_at: [
-    { label: 'Mới nhất', value: 'asc' },
-    { label: 'Cũ nhất', value: 'desc' },
+    { label: 'Mới nhất', value: 'desc' },
+    { label: 'Cũ nhất', value: 'asc' },
   ],
   status: [
     { label: 'Hoạt động', value: 'asc' },
@@ -52,6 +55,15 @@ export const SORT_DIRECTION_OPTIONS = {
     { label: 'Giảm dần', value: 'desc' },
   ],
   discount_value: [
+    { label: 'Tăng dần', value: 'asc' },
+    { label: 'Giảm dần', value: 'desc' },
+  ],
+
+  order_code: [
+    { label: 'COD', value: 'asc' },
+    { label: 'VNPAY', value: 'desc' },
+  ],
+  order_total_prices: [
     { label: 'Tăng dần', value: 'asc' },
     { label: 'Giảm dần', value: 'desc' },
   ],

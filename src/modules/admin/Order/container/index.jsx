@@ -123,21 +123,21 @@ const Oder = () => {
         default: 'N/A',
         component: UpdatedAtComponent,
       },
-      {
-        name: 'id_coupon',
-        label: t(langs.id_coupon),
-        default: 'N/A',
-      },
-      {
-        name: 'id_user',
-        label: t(langs.id_user),
-        default: 'N/A',
-      },
-      {
-        name: 'id_payment',
-        label: t(langs.id_payment),
-        default: 'N/A',
-      },
+      // {
+      //   name: 'id_coupon',
+      //   label: t(langs.id_coupon),
+      //   default: 'N/A',
+      // },
+      // {
+      //   name: 'id_user',
+      //   label: t(langs.id_user),
+      //   default: 'N/A',
+      // },
+      // {
+      //   name: 'id_payment',
+      //   label: t(langs.id_payment),
+      //   default: 'N/A',
+      // },
     ],
     initSearch: true,
   };

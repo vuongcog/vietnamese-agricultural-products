@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DataTable from 'react-data-table-component';
 import useProducerDataUser from '../../../../../useCustom/user/useProducerDataUser';
-import { useDisclosure } from '@chakra-ui/react';
+import { Divider, useDisclosure } from '@chakra-ui/react';
 
 import DialogMessage from '../../../../../components/core/DialogMessage';
 import OrderCode from '../OrderCode';
@@ -14,15 +14,46 @@ import CreatedAtComponent from '../../../../../components/core/CreatedAt';
 import UpdatedAtComponent from '../../../../../components/core/UpdatedAt';
 import OrderPaymentType from '../OrderPaymentType';
 import BillOrderPrintable from '../BillOrder';
+import SortSelector from '../../../../../components/core/AdminCrud/SortSelector';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { FETCH_DATA_USER } from '../../../../../actions/action-infor-user';
+import ProgressFullScreen from '../../../../../components/core/ProgressFullScreen';
+import SearchInput from '../../../../../components/core/AdminCrud/SearchInput';
+import { useDebounce } from '../../../../../utils/use-debounce';
+import ProfileProductCard from '../ProfileProductCard';
 
 const ProfilePurchaseUser = () => {
   const {
-    dataUser: { orders = [] }, // Cung cấp giá trị mặc định rỗng cho orders
+    dataUser: { orders = [] },
+    isFetchingDataUser,
   } = useProducerDataUser();
-
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
-
+  const [sortBy, setSortBy] = useState('created_at');
+  const [sortDirection, setSortDirection] = useState('asc');
+  const [search, setSearch] = useState('');
+  const debounceSearch = useDebounce(search, 300);
+  const dispatch = useDispatch();
+  const handlerSetSearch = e => {
+    setSearch(e.target.value);
+  };
+  const handlerSortChange = (newSortField, sortDirection) => {
+    setSortBy(newSortField);
+    setSortDirection(sortDirection);
+  };
+  useEffect(() => {
+    try {
+      dispatch({
+        type: FETCH_DATA_USER,
+        payload: {
+          endpoint: `/taikhoan/thongtin-nguoidung?sort_by=${sortBy}&sort_direction=${sortDirection}&search=${debounceSearch}`,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [sortBy, sortDirection, debounceSearch]);
   const columns = [
     {
       name: 'Mã đơn hàng',
@@ -78,18 +109,18 @@ const ProfilePurchaseUser = () => {
       sortable: true,
       cell: row => row.phone,
     },
-    {
-      name: 'Mã khuyến mãi',
-      selector: row => row.id_coupon,
-      sortable: true,
-      cell: row => row.id_coupon || 'N/A',
-    },
-    {
-      name: 'Mã thanh toán',
-      selector: row => row.id_payment,
-      sortable: true,
-      cell: row => row.id_payment || 'N/A',
-    },
+    // {
+    //   name: 'Mã khuyến mãi',
+    //   selector: row => row.id_coupon,
+    //   sortable: true,
+    //   cell: row => row.id_coupon || 'N/A',
+    // },
+    // {
+    //   name: 'Mã thanh toán',
+    //   selector: row => row.id_payment,
+    //   sortable: true,
+    //   cell: row => row.id_payment || 'N/A',
+    // },
     {
       name: 'Ngày tạo',
       selector: row => row.created_at,
@@ -107,12 +138,47 @@ const ProfilePurchaseUser = () => {
   ];
 
   const ExpandedComponent = ({ data }) => {
+    console.log(data);
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const {
+      isOpen: isOpen1,
+      onOpen: onOpen1,
+      onClose: onClose1,
+    } = useDisclosure();
     return (
-      <>
-        <div onClick={onOpen} className="cursor-pointer">
-          Xem chi tiết
+      <div className="flex gap-2 ">
+        <div
+          onClick={onOpen}
+          className="hover:text-blue-500 hover:underline hover:italic cursor-pointer"
+        >
+          Xem chi tiết đơn hàng
         </div>
+        {'/'}
+        <div
+          onClick={onOpen1}
+          className="hover:text-blue-500 hover:underline hover:italic cursor-pointer"
+        >
+          Xem sản phẩm có trong đơn hàng
+        </div>
+        <DialogMessage
+          width={1000}
+          isOpen={isOpen1}
+          onOpen={onOpen1}
+          onClose={onClose1}
+        >
+          <div>
+            {data.items.map(item => (
+              <div className="flex flex-col gap-2">
+                <ProfileProductCard
+                  key={item.id}
+                  item={item}
+                ></ProfileProductCard>
+                <Divider borderWidth={1} borderColor={'black'}></Divider>
+              </div>
+            ))}
+          </div>
+        </DialogMessage>
+
         <DialogMessage
           width={1000}
           isOpen={isOpen}
@@ -121,7 +187,7 @@ const ProfilePurchaseUser = () => {
         >
           <BillOrderPrintable order={data}></BillOrderPrintable>
         </DialogMessage>
-      </>
+      </div>
     );
   };
 
@@ -149,21 +215,34 @@ const ProfilePurchaseUser = () => {
   };
 
   return (
-    <DataTable
-      title="Profile Purchase User"
-      columns={columns}
-      data={orders.slice((currentPage - 1) * perPage, currentPage * perPage)} // Slicing data for pagination
-      pagination
-      paginationServer
-      paginationTotalRows={orders.length}
-      paginationPerPage={perPage}
-      onChangeRowsPerPage={handlePerRowsChange}
-      onChangePage={handlePageChange}
-      expandableRows
-      expandableRowsComponent={ExpandedComponent}
-      highlightOnHover
-      customStyles={customStyles}
-    />
+    <div>
+      {isFetchingDataUser && <ProgressFullScreen></ProgressFullScreen>}
+      <div className="flex gap-2 items-center">
+        <SortSelector
+          defaultOptions={[`created_at`]}
+          extraFields={['order_code', 'order_total_prices']}
+          onSortChange={handlerSortChange}
+        ></SortSelector>
+        <SearchInput
+          placeholder={'Tìm mã đơn hàng'}
+          onChangeSearchText={handlerSetSearch}
+        ></SearchInput>
+      </div>
+      <DataTable
+        columns={columns}
+        data={orders.slice((currentPage - 1) * perPage, currentPage * perPage)} // Slicing data for pagination
+        pagination
+        paginationServer
+        paginationTotalRows={orders.length}
+        paginationPerPage={perPage}
+        onChangeRowsPerPage={handlePerRowsChange}
+        onChangePage={handlePageChange}
+        expandableRows
+        expandableRowsComponent={ExpandedComponent}
+        highlightOnHover
+        customStyles={customStyles}
+      />
+    </div>
   );
 };
 
