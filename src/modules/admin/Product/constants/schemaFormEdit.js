@@ -29,7 +29,7 @@ export const schemaFormEdit = {
       name: 'product_des',
       label: langs.des,
       placeholder: langs.des,
-      isRequire: true,
+      // isRequire: true,
       type: 'editor',
     },
 
@@ -37,7 +37,7 @@ export const schemaFormEdit = {
       name: 'product_info',
       label: langs.info,
       placeholder: langs.info,
-      isRequire: true,
+      // isRequire: true,
       type: 'editor',
     },
     {
@@ -45,6 +45,7 @@ export const schemaFormEdit = {
       label: langs.image,
       placeholder: langs.image,
       type: 'file',
+      // isRequire: true,
     },
     {
       name: 'quantity',

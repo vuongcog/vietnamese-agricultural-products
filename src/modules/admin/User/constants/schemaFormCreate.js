@@ -64,7 +64,7 @@ export const schemaFormCreate = {
       label: langs.avatar,
       type: 'file',
       placeholder: 'Avatar',
-      isRequire: true,
+      // isRequire: true,
     },
     {
       name: 'status',

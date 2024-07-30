@@ -21,7 +21,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
     last_name: '',
     email: '',
     phone: '',
-    address: 'tphmc/quan8/taquangbuu',
+    address: '',
     notes: '',
     payment: 'cod',
   });
@@ -53,7 +53,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
 
     handlerSetValueRequest({
       ...formData,
-      address: `${formData.address}${otherAddress}`,
+      // address: `${formData.address}${otherAddress}`,
     });
   };
   return (
@@ -106,21 +106,24 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
           </FormControl>
           <FormControl required id="address" className={styles['form__group']}>
             <div className="flex gap-3">
-              <div>
+              {/* <div>
                 <FormLabel>{t(langs.address)}</FormLabel>
                 <ProvinceSelect
                   handlerSetAddress={handlerSetAddress}
                 ></ProvinceSelect>
-              </div>
+              </div> */}
               <div>
                 <FormLabel>{`${t(langs.houseNumber)}/${t(
                   langs.street
                 )}`}</FormLabel>
                 <Textarea
-                  value={otherAddress}
-                  onChange={e => {
-                    setOtherAdress(e.target.value);
-                  }}
+                  name="address"
+                  // value={otherAddress}
+                  value={formData.address}
+                  // onChange={e => {
+                  //   setOtherAdress(e.target.value);
+                  // }}
+                  onChange={handleChange}
                   required
                   className={styles['form__input']}
                 />

@@ -31,6 +31,7 @@ import { useTranslation } from 'react-i18next';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Check } from '@mui/icons-material';
+import { transformNumber } from '../../../utils/parse-number';
 
 const CreateForm = ({
   doneText = ['Cancel', 'Create'],
@@ -48,7 +49,10 @@ const CreateForm = ({
   const [formState, setFormState] = useState(
     schemaForm.reduce((acc, field) => {
       acc[field.name] = type === UPDATE_DATA ? defaultValues[field.name] : '';
-      console.log(acc[field.name]);
+
+      if (type === UPDATE_DATA && field.type === 'number') {
+        acc[field.name] = transformNumber(defaultValues[field.name]);
+      }
       if (field.items && type !== UPDATE_DATA) {
         acc[field.name] = field.items[0].value;
       }
@@ -78,7 +82,7 @@ const CreateForm = ({
         }
       }
 
-      if (field.type === 'editor') {
+      if (field.type === 'editor' && field.isRequire) {
         if (!formState[field.name]) {
           isEmptyEditor = t(field.label);
         }
@@ -118,7 +122,6 @@ const CreateForm = ({
     const [error, setError] = useState(null);
     const inputRef = useRef(null);
     const toast = useToast();
-
     const handleFileChange = e => {
       const file = e.target.files[0];
       handleChange(item.name, file);
@@ -232,11 +235,12 @@ const CreateForm = ({
                 Choose File
               </Button>
               {formState[item.name] ? <Check></Check> : 'No selected'}
-              <Input
+              <input
+                className="hidden"
                 ref={inputRef}
                 type="file"
                 onChange={handleFileChange}
-                display="none"
+                // display="none"
                 {...item}
               />
             </Box>
@@ -257,7 +261,7 @@ const CreateForm = ({
       <FormControl
         className={styles.field}
         key={item.name}
-        isRequired={item.type !== 'file' ? item.isRequire : null}
+        isRequired={item.isRequire}
       >
         {item.label && (
           <FormLabel htmlFor={item.name}>{t(item.label)}</FormLabel>

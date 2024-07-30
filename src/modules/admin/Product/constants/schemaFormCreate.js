@@ -28,14 +28,14 @@ export const schemaFormCreate = {
       name: 'product_des',
       label: langs.des,
       placeholder: langs.des,
-      isRequire: true,
+      // isRequire: true,
       type: 'editor',
     },
     {
       name: 'product_info',
       label: langs.info,
       placeholder: langs.info,
-      isRequire: true,
+      // isRequire: true,
       type: 'editor',
     },
     {
