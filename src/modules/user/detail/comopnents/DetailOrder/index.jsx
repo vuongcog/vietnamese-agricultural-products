@@ -31,22 +31,28 @@ const DetailOrder = () => {
         ></QuantitySelector>
       </div>
       <div className={styles.order}>
+        {Cookies.get('accsessToken') && (
+          <button
+            onClick={() => {
+              dispatch({
+                type: ADD_CART,
+                payload: {
+                  endpoint: `/giohang/themgiohang`,
+                  params: { id_prd: product.id, quantity: numbers },
+                },
+              });
+              navigate('/cart');
+            }}
+          >
+            {t(langsGlobal.byNow)}
+          </button>
+        )}
         <button
           onClick={() => {
-            dispatch({
-              type: ADD_CART,
-              payload: {
-                endpoint: `/giohang/themgiohang`,
-                params: { id_prd: product.id, quantity: numbers },
-              },
-            });
-            navigate('/cart');
-          }}
-        >
-          {t(langsGlobal.byNow)}
-        </button>
-        <button
-          onClick={() => {
+            if (!Cookies.get('accsessToken')) {
+              addCart(product, numbers);
+              return;
+            }
             dispatch({
               type: ADD_CART,
               payload: {

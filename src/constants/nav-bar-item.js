@@ -12,16 +12,16 @@ import {
 import langs from '../layouts/LayoutAdmin/langs';
 
 export const SCHEMA = [
-  {
-    id: 1,
-    name: 'Dashboard',
-    icon: DashboardOutlined,
-    link: '/dashboard',
-    color: 'text-[#f0414a]',
-  },
+  // {
+  //   id: 1,
+  //   name: 'Dashboard',
+  //   icon: DashboardOutlined,
+  //   link: '/dashboard',
+  //   color: 'text-[#f0414a]',
+  // },
   {
     id: 10,
-    name: 'Order',
+    name: 'Đơn hàng',
     icon: ReceiptOutlined,
     link: '/order',
     color: 'text-[#00e9ff]',

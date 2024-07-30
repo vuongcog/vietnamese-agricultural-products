@@ -74,7 +74,7 @@ const CartItem = ({
               navigate(`/detail?slug=${product.product_slug}&id=${product.id}`);
             }}
           >
-            {product.product_name} asd asd asd asd asd asd asd asd asd
+            {product.product_name}
           </div>
         </div>
       </div>
