@@ -23,6 +23,7 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import classNames from 'classnames';
 import CartNotToken from '../../core/CartNotToken';
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 
 const UserHeader = () => {
   const { t } = useTranslation();
@@ -31,7 +32,7 @@ const UserHeader = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Shree</div>
+      <div className={styles.title}>Trang chủ</div>
       <SearchHeader />
       <ul className={styles.navList}>
         {SCHEMA.map((item, index) => (
@@ -56,6 +57,13 @@ const UserHeader = () => {
           </li>
         )}
 
+        {!accessToken && (
+          <li>
+            <Link to={'/authen/signup'} className={styles.navLink}>
+              {t(langs.register)}
+            </Link>
+          </li>
+        )}
         {!_.isEmpty(dataUser) && (
           <li>
             <Tooltip placement="top" label={'Profile'} aria-label="Full text">
@@ -96,19 +104,21 @@ const UserHeader = () => {
                   </Link>
                 </MenuItem>
               ))}
-              <MenuItem>
-                {dataUser && dataUser.role !== 'customer' && (
-                  <button
-                    className={classNames(styles.menuLink, 'italic')}
-                    onClick={() => {
-                      window.location.replace(import.meta.env.VITE_DOMAIN); // Thay đổi URL này thành URL đúng của bạn
-                    }}
-                  >
-                    <ManageAccountsOutlinedIcon></ManageAccountsOutlinedIcon>
-                    {t(langs.management)}
-                  </button>
+              {accessToken &&
+                !_.isEmpty(dataUser) &&
+                dataUser.role !== 'customer' && (
+                  <MenuItem>
+                    <button
+                      className={classNames(styles.menuLink, 'italic')}
+                      onClick={() => {
+                        window.location.replace(import.meta.env.VITE_DOMAIN);
+                      }}
+                    >
+                      <ManageAccountsOutlinedIcon></ManageAccountsOutlinedIcon>
+                      {t(langs.management)}
+                    </button>
+                  </MenuItem>
                 )}
-              </MenuItem>
               {!accessToken && (
                 <MenuItem>
                   <Link
@@ -117,6 +127,18 @@ const UserHeader = () => {
                   >
                     <LoginOutlinedIcon></LoginOutlinedIcon>
                     {t(langs.login)}
+                  </Link>
+                </MenuItem>
+              )}
+
+              {!accessToken && (
+                <MenuItem>
+                  <Link
+                    to={'/authen/signup'}
+                    className={classNames(styles.menuLink, 'italic')}
+                  >
+                    <PersonAddAltOutlinedIcon></PersonAddAltOutlinedIcon>
+                    {t(langs.register)}
                   </Link>
                 </MenuItem>
               )}

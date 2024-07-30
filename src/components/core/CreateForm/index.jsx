@@ -170,7 +170,7 @@ const CreateForm = ({
       };
     }, [item.endpoint]);
 
-    if (error) toast.error(error);
+    // if (error) toast.error(error);
     const renderInput = () => {
       switch (item.type) {
         case 'editor':

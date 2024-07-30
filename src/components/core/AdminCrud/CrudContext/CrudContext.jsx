@@ -46,6 +46,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
     useProducerStateCrudFilter();
   const debounceSearch = useDebounce(search, 400);
   const debounceID = useDebounce(id, 400);
+  const { formatData } = crudOptions;
   // 111 define handler set filter
   const handleChangeSearchtext = value => {
     dispatch({ type: CRUD_SET_SEARCH, payload: value.target.value });
@@ -85,6 +86,7 @@ const ContextCrudProvider = ({ children, ...props }) => {
     crudOptions.endpointParams['perpage'] = perpage;
     crudOptions.endpointParams['sort_by'] = sort_by;
     crudOptions.endpointParams['sort_direction'] = sort_direction;
+
     const res = await new Http(crudOptions.endpoint).list(
       crudOptions.endpointParams
     );
@@ -103,7 +105,11 @@ const ContextCrudProvider = ({ children, ...props }) => {
       if (!debounceID) {
         getItems(debounceSearch)
           .then(res => {
-            dispatch({ type: SET_ITEMS, payload: res.data });
+            if (formatData) {
+              dispatch({ type: SET_ITEMS, payload: res.data.data });
+            } else {
+              dispatch({ type: SET_ITEMS, payload: res.data });
+            }
             dispatch({ type: CRUD_SET_TOTAL_PAGE, payload: res.total_pages });
           })
           .catch(() => {
@@ -124,7 +130,11 @@ const ContextCrudProvider = ({ children, ...props }) => {
   useEffect(() => {
     getItems(debounceSearch)
       .then(res => {
-        dispatch({ type: SET_ITEMS, payload: res.data });
+        if (formatData) {
+          dispatch({ type: SET_ITEMS, payload: res.data.data });
+        } else {
+          dispatch({ type: SET_ITEMS, payload: res.data });
+        }
         dispatch({ type: CRUD_SET_TOTAL_PAGE, payload: res.total_pages });
       })
       .catch(() => {

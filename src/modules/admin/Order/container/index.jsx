@@ -19,10 +19,13 @@ import OrderCustomer from '../components/OrderCustomer';
 import { useDisclosure } from '@chakra-ui/react';
 import BillOrderPrintable from '../../../user/profile/components/BillOrder';
 import DialogMessage from '../../../../components/core/DialogMessage';
+import DialogCreateForm from '../../../../components/core/DialogCreateForm';
+import { schemaFormFactory } from '../utils/schemaFormFactory';
 
 const Oder = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectElement, setSelectElement] = useState(null);
   const [order, setOder] = useState({});
   const crudOptions = {
     endpointParams: {
@@ -42,10 +45,12 @@ const Oder = () => {
         type: 'text',
       },
     ],
-    onClickRow: item => {
-      setOder(item);
-      onOpen();
-    },
+    // onClickRow: item => {
+    //   setOder(item);
+    //   onOpen();
+    // },
+    sort: ['order_code'],
+    formatData: true,
     schema: [
       {
         name: 'id',
@@ -57,6 +62,37 @@ const Oder = () => {
         label: t(langs.order_code),
         default: 'N/A',
         component: OrderCode,
+        dropdownActions: {
+          items: [
+            {
+              icon: <i className="fa-brands fa-first-order-alt"></i>,
+              name: 'view',
+              label: <span className="font-semibold">Xem hóa đơn</span>,
+              callback: item => {
+                setOder(item);
+                onOpen();
+              },
+            },
+            {
+              icon: (
+                <i className="font-semibold fa-regular fa-pen-to-square"></i>
+              ),
+              name: 'edit',
+              label: <span className="font-semibold">Edit</span>,
+              callback: item => {
+                setSelectElement(
+                  <DialogCreateForm
+                    item={item}
+                    endpoint={'/order'}
+                    callbackCancel={setSelectElement}
+                    title="Update User"
+                    schemaForm={schemaFormFactory('edit')}
+                  ></DialogCreateForm>
+                );
+              },
+            },
+          ],
+        },
       },
       {
         name: 'order_total_prices',
@@ -151,6 +187,7 @@ const Oder = () => {
         classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
       >
         <div>
+          {selectElement}
           <DialogMessage
             width={1000}
             onClose={onClose}

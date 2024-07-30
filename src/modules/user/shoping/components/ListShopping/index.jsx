@@ -11,6 +11,7 @@ const ListShoping = () => {
   const { loading } = useContext(ShoppingContext);
   const { items } = useCustomSelector();
   const { categories } = useProducerCategory();
+
   if (_.isEmpty(items) || _.isEmpty(categories)) return null;
   const __renderCard = item => <Card item={item} />;
 

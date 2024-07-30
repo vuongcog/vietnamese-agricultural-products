@@ -23,10 +23,4 @@ export const SCHEMA = [
     icon: ArticleOutlinedIcon,
     link: '/blog-categories',
   },
-  {
-    id: 6,
-    name: 'register',
-    icon: AppRegistrationOutlinedIcon,
-    link: '/authen/signup',
-  },
 ];

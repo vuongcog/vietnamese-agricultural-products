@@ -6,7 +6,7 @@ export const initialFilterState = {
   currentPage: 1,
   id: '',
   sort_by: 'created_at',
-  sort_direction: 'asc',
+  sort_direction: 'desc',
 };
 
 import {

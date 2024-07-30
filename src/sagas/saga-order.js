@@ -15,7 +15,12 @@ function* wokerOrder(action) {
   try {
     yield put({ type: ORDERING_PRODUCT });
     const { payload } = action;
-    const http = new HttpUserClient('/donhang');
+    let http;
+    if (Cookies.get('accsessToken')) {
+      http = new HttpUserClient('/thanhvien/donhang');
+    } else {
+      http = new HttpUserClient('/khach/donhang');
+    }
     const option = {
       headers: {
         'Content-Type': 'application/json',
@@ -24,11 +29,13 @@ function* wokerOrder(action) {
     const res = yield call(http.orderProduct, payload, option);
     const parseObject = parseObjectJson(res.data);
     yield put({ type: ORDER_PRODUCT_SUCCESS });
-    if (Array.isArray(parseObject)) {
-      toast.success('Đặt hàng thành công ,xin hãy kiểm tra lại email');
-    } else {
-      const urlRedirect = parseObject.data;
+    console.log(payload.payment);
+    if (payload.payment === 'vnpay') {
+      const urlRedirect = parseObject[0]?.data;
       window.location.href = urlRedirect;
+    }
+    if (payload.payment === 'cod') {
+      toast.success('Đặt hàng thành công, xin hãy kiểm tra lại email');
     }
   } catch (err) {
     yield put({ type: ORDER_PRODUCT_FAILED });
