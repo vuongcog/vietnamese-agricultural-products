@@ -49,14 +49,14 @@ export const schemaFormEdit = {
       label: langs.address,
       type: 'text',
       placeholder: 'Address',
-      isRequire: true,
+      // isRequire: true,
     },
     {
       name: 'phone_num',
       label: langs.phoneNum,
       type: 'number',
       placeholder: 'Phone Number',
-      isRequire: true,
+      // isRequire: true,
       max: 9999999999,
     },
     {

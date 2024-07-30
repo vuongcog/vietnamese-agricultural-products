@@ -26,17 +26,8 @@ const BillOrder = React.forwardRef(({ order }, ref) => {
       0
     );
 
-  const tableBgColor = useColorModeValue('white', 'gray.800');
-  const tableBorderColor = useColorModeValue('gray.200', 'gray.600');
-
   return (
-    <Container
-      maxW="container.md"
-      ref={ref}
-      bg={useColorModeValue('gray.50', 'gray.700')}
-      borderRadius="md"
-      boxShadow="xl"
-    >
+    <Container maxW="container.md" ref={ref} borderRadius="md" boxShadow="xl">
       <Box p={6} borderWidth={1} borderRadius="lg" boxShadow="lg" bg="white">
         <VStack spacing={4} align="stretch">
           <Text
@@ -79,13 +70,8 @@ const BillOrder = React.forwardRef(({ order }, ref) => {
             </Box>
           </Grid>
           <Divider mb={6} />
-          <Table
-            variant="simple"
-            bg={tableBgColor}
-            border="1px solid"
-            borderColor={tableBorderColor}
-          >
-            <Thead bg="gray.200">
+          <Table variant="simple" border="1px solid">
+            <Thead>
               <Tr>
                 <Th fontFamily="serif">Sản phẩm</Th>
                 <Th fontFamily="serif">Số lượng</Th>
