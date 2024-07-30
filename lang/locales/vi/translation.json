@@ -11,7 +11,7 @@
   "src/main.changePassword": "Đổi mật khẩu",
 
   "src/components/user/Header.home": "Trang chủ",
-  "src/components/user/Header.login": "Đăng nhật",
+  "src/components/user/Header.login": "Đăng nhập",
   "src/components/user/Header.vegetables": "Sản phẩm",
   "src/components/user/Header.contactUs": "Liên hệ",
   "src/components/user/Header.purchase": "Đã mua",

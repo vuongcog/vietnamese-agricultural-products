@@ -32,6 +32,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Check } from '@mui/icons-material';
 import { transformNumber } from '../../../utils/parse-number';
+import moment from 'moment';
 
 const CreateForm = ({
   doneText = ['Cancel', 'Create'],
@@ -216,12 +217,15 @@ const CreateForm = ({
             <Input
               {...item}
               type="date"
-              defaultValue={formatDefaultDate(formState[item.name])}
-              value={formatDate(formState[item.name])}
-              onChange={e =>
-                handleChange(item.name, formatInputDate(e.target.value))
-              }
-              pattern="\d{4}-\d{2}-\d{2}"
+              // defaultValue={formatDefaultDate(formState[item.name])}
+              // value={formatDate(formState[item.name])}
+              onChange={e => {
+                const selectedDate = e.target.value;
+                const formattedDate = moment(selectedDate).format('DD-MM-YYYY');
+
+                handleChange(item.name, formattedDate);
+              }}
+              // pattern="\d{4}-\d{2}-\d{2}"
             />
           );
         case 'file':

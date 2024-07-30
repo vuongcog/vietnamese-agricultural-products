@@ -6,17 +6,12 @@ export const formatDate = date => {
 
 export const formatInputDate = inputDate => {
   if (!inputDate) return '';
-  const [datePart] = inputDate.split(' ');
-  const [year, month, day] = datePart.split('-');
+  const [year, month, day] = inputDate.split('-');
   return `${day}-${month}-${year}`;
 };
-
 export const formatDefaultDate = dateTime => {
-  if (!dateTime) return '';
   const [date] = dateTime.split(' ');
   const [year, month, day] = date.split('-');
+  console.log(`${day}-${month}-${year}`);
   return `${day}-${month}-${year}`;
-};
-export const formatDateTest = date => {
-  return moment(date).format('YYYY-MM-DD HH:mm:ss');
 };
