@@ -39,6 +39,8 @@ import CheckoutContainer from './user/oder/container';
 import axios from 'axios';
 import Profile from './user/profile';
 import CartNotToken from './user/cart-not-token/container';
+import PaymentSuccsess from './mayment-succsess/PaymentSuccsess';
+import PaymentFailed from './PaymentFailed';
 
 const App = () => {
   axios.get('https://esgoo.net/api-tinhthanh/1/0.htm');
@@ -65,6 +67,8 @@ const App = () => {
         {!isAdmin && (
           <Route path="/" element={<LayoutUser />}>
             <Route path="/" element={<Home />} />
+            <Route path="/thanhcong" element={<PaymentSuccsess />} />
+            <Route path="/thatbai" element={<PaymentFailed />} />
             <Route path="/shopping" element={<Shopping />} />
             <Route path="/blog-categories" element={<BlogContainer />} />
             <Route path="/blogs" element={<BlogCategoyGuest />} />
