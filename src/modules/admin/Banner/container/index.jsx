@@ -33,6 +33,7 @@ const Category = () => {
       create: true,
       paging: true,
     },
+    placeholderSearch: 'Search with title banner',
     search: [
       {
         name: 'search',
@@ -41,16 +42,17 @@ const Category = () => {
       },
     ],
     schema: [
-      {
-        name: 'id',
-        label: t(langs.id),
-        default: 'N/A',
-      },
-      {
-        name: 'id_user',
-        label: t(langs.idUser),
-        default: 'N/A',
-      },
+      // {
+      //   name: 'id',
+      //   label: t(langs.id),
+      //   default: 'N/A',
+      // },
+
+      // {
+      //   name: 'id_user',
+      //   label: t(langs.idUser),
+      //   default: 'N/A',
+      // },
       {
         name: 'banner_title',
         label: t(langs.title),

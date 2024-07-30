@@ -15,7 +15,13 @@ const BannerDes = ({ banner_des }) => {
         className={classNames(styles.container)}
         dangerouslySetInnerHTML={{ __html: banner_des }}
       ></div>
-      <DialogMessage isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+      <DialogMessage
+        width={800}
+        height={200}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+      >
         <div
           className={classNames('prose')}
           dangerouslySetInnerHTML={{ __html: banner_des }}

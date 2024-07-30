@@ -15,7 +15,13 @@ const BlogContent = ({ content }) => {
         className={classNames(styles.container)}
         dangerouslySetInnerHTML={{ __html: content }}
       ></div>
-      <DialogMessage isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+      <DialogMessage
+        width={800}
+        height={200}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+      >
         <div
           className={classNames('prose')}
           dangerouslySetInnerHTML={{ __html: content }}

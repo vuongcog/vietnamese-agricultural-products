@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SearchHeader from './SearchHeader';
 import Cart from '../../core/Cart';
 import SelectLanguage from './SelectLang';
@@ -29,10 +29,18 @@ const UserHeader = () => {
   const { t } = useTranslation();
   const { accessToken, logout } = useAuth();
   const { dataUser } = useProducerDataUser();
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Trang chủ</div>
+      <div
+        onClick={() => {
+          navigate('/');
+        }}
+        className={styles.title}
+      >
+        Trang chủ
+      </div>
       <SearchHeader />
       <ul className={styles.navList}>
         {SCHEMA.map((item, index) => (

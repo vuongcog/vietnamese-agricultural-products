@@ -36,6 +36,7 @@ const Coupon = () => {
       create: true,
       paging: true,
     },
+    placeholderSearch: 'Search with coupon code...',
     search: [
       {
         name: 'search',
@@ -45,11 +46,11 @@ const Coupon = () => {
     ],
     sort: [`coupon_code`, 'discount_value'],
     schema: [
-      {
-        name: 'id',
-        label: t(langs.id),
-        default: 'N/A',
-      },
+      // {
+      //   name: 'id',
+      //   label: t(langs.id),
+      //   default: 'N/A',
+      // },
       {
         name: 'coupon_code',
         label: t(langs.code),

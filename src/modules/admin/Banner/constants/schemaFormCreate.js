@@ -8,16 +8,6 @@ export const schemaFormCreate = {
   type: ADD_DATA,
   schemaForm: [
     {
-      name: 'id_user',
-      label: langs.idUser,
-      placeholder: langs.idUser,
-      endpoint: 'http://127.0.0.1:8000/api/user',
-      isRequire: true,
-      labelField: 'name',
-      valueField: 'id',
-      type: 'select',
-    },
-    {
       name: 'banner_title',
       label: langs.title,
       placeholder: langs.title,
@@ -25,18 +15,18 @@ export const schemaFormCreate = {
       type: 'text',
     },
     {
-      name: 'banner_image',
-      label: langs.image,
-      placeholder: langs.image,
-      isRequire: true,
-      type: 'file',
-    },
-    {
       name: 'banner_des',
       label: langs.des,
       placeholder: langs.des,
       isRequire: true,
       type: 'editor',
+    },
+    {
+      name: 'banner_image',
+      label: langs.image,
+      placeholder: langs.image,
+      isRequire: true,
+      type: 'file',
     },
     {
       name: 'sort',

@@ -6,8 +6,8 @@ i18n
   .use(HttpBackend)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'en',
-    lng: 'en',
+    fallbackLng: 'vi',
+    lng: 'vi',
     backend: {
       loadPath: '/lang/locales/{{lng}}/{{ns}}.json', // Đường dẫn tới các tệp ngôn ngữ
     },

@@ -42,19 +42,19 @@ const ProfileProductCard = ({ item }) => {
             {item.products.product_name}
           </h5>
           <div className="flex gap-5">
-            <div className="font-serif font-semibold">
+            <div className="">
               Số lượng đã đặt:{' '}
               <span className="text-blue-500">
                 {formattedNumber(item.quantity)}
               </span>
             </div>
-            <div className="font-serif font-semibold">
+            <div className="">
               Đơn giá:{' '}
               <span className="text-red-600">
                 {formattedNumber(item.products.unit_prices)} VND
               </span>
             </div>
-            <div className=" font-serif font-semibold">
+            <div className=" ">
               Tổng giá:{' '}
               <span className="text-green-600">
                 {formattedNumber(item.quantity * item.products.unit_prices)} VND

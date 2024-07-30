@@ -6,19 +6,18 @@ import { PICTURE } from '../../../../../constants/picture';
 const UserHomeAdvertise = () => (
   <div className={styles.container}>
     <div className={styles.header}>
-      FRESH <span className={styles.highlight}>VEGETABLE</span>
+      SẢN PHẨM <span className={styles.highlight}>SẠCH</span>
     </div>
     <div className={styles.contentContainer}>
       <div className={styles.messages}>
-        <div className={styles.title}>Best Vegetables Shop</div>
+        <div className={styles.title}>Nguồn cung nông sản sạch</div>
         <div className={styles.description}>
-          Best Vegetables Shop It is a long established fact that a reader will
-          be distracted by the readable content of a page when looking at its
-          layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal distribution of letters, as opposed to using "Content here,
-          content here", making it look like readable English. Many desktop
-          publishing packages andIt is a long established fact that a reader
-          will be distracted
+          Nơi cung cấp các sản phẩm nông sản sạch và an toàn hàng đầu. Chúng tôi
+          cam kết mang đến cho khách hàng những sản phẩm nông sản sấy khô được
+          sản xuất theo quy trình tự nhiên, không sử dụng chất bảo quản hay hóa
+          chất độc hại. Với tiêu chí "sạch từ trang trại đến bàn ăn," chúng tôi
+          luôn đặt chất lượng và an toàn sức khỏe của người tiêu dùng lên hàng
+          đầu.
         </div>
       </div>
       <div className={styles.images}>
@@ -26,11 +25,6 @@ const UserHomeAdvertise = () => (
           className={styles.picture1}
           src={PICTURE.picture1}
           alt="Vegetable 1"
-        />
-        <img
-          className={styles.picture2}
-          src={PICTURE.picture2}
-          alt="Vegetable 2"
         />
       </div>
     </div>

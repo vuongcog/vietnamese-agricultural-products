@@ -21,6 +21,7 @@ import BillOrderPrintable from '../../../user/profile/components/BillOrder';
 import DialogMessage from '../../../../components/core/DialogMessage';
 import DialogCreateForm from '../../../../components/core/DialogCreateForm';
 import { schemaFormFactory } from '../utils/schemaFormFactory';
+import OrderStatus from '../components/OrderStatus';
 
 const Oder = () => {
   const { t } = useTranslation();
@@ -38,6 +39,7 @@ const Oder = () => {
       create: false,
       paging: true,
     },
+    placeholderSearch: 'Search with order code',
     search: [
       {
         name: 'search',
@@ -52,11 +54,6 @@ const Oder = () => {
     sort: ['order_code'],
     formatData: true,
     schema: [
-      {
-        name: 'id',
-        label: t(langs.id),
-        default: 'N/A',
-      },
       {
         name: 'order_code',
         label: t(langs.order_code),
@@ -109,6 +106,7 @@ const Oder = () => {
         name: 'status',
         label: t(langs.status),
         default: 'N/A',
+        component: OrderStatus,
       },
       {
         name: 'payment_type',

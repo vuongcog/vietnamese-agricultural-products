@@ -39,7 +39,7 @@ const SearchHeader = () => {
         width={'200px'}
         value={searchValue}
         onChange={e => handleSearchChange(e.target.value)}
-        placeholder="Search..."
+        placeholder="Tìm kiếm..."
       />
     </div>
   );

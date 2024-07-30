@@ -40,6 +40,7 @@ const BreadCrumb = ({
   endpoint,
   sendEmail,
   handleChangeSearchId,
+  placeholderSearch,
 }) => {
   const { logout } = useContext(AuthContext);
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -92,16 +93,19 @@ const BreadCrumb = ({
         onSortChange={handlerSortChange}
       ></SortSelector>
       {isSendingMail && <ProgressFullScreen />}
+
       {isSearchInput && (
         <SearchInput
-          placeholder={t(langs.placeholderSearch)}
+          placeholder={placeholderSearch || t(langs.placeholderSearch)}
           onChangeSearchText={onChangeSearchText}
         />
       )}
-      <SearchWithId
+
+      {/* <SearchWithId
         placeholder={t(langs.placeholderId)}
         onChangeSearchText={handleChangeSearchId}
-      ></SearchWithId>
+      ></SearchWithId> */}
+
       {/* {sendEmail && (
         <DialogMessage
           isOpen={isOpen}
@@ -133,14 +137,9 @@ const BreadCrumb = ({
         classNameProps={styles.customOption}
         bordered
       ></SelectLanguage>
-      <Button
-        backgroundColor={'red'}
-        color={'white'}
-        className={styles.logoutButton}
-        onClick={logout}
-      >
+      <button color={'black'} className={styles.logoutButton} onClick={logout}>
         {t(langs.logout)}
-      </Button>
+      </button>
     </div>
   );
 };

@@ -14,13 +14,29 @@
 }
 
 .logoutButton {
-  border: 1px solid white;
+  color: black;
   padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.2s ease;
+
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #2563eb;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    background-color: #1d4ed8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
   }
 }
 .customOption {
@@ -28,14 +44,16 @@
     height: 40px;
   }
   :global(.ant-select-selection-item) {
-    font-weight: bold;
-    font-size: 16px;
-    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    font-family: serif;
+    color: black;
   }
   :global(.ant-select-selector) {
     display: flex;
     align-items: center !important;
-    background-color: rgb(61, 219, 17) !important;
+
+    // background-color: rgb(61, 219, 17) !important;
     border-radius: 6px;
     padding: 0 12px !important;
   }

@@ -2,7 +2,9 @@
 
 .container {
   max-width: 240px;
-  @include setLimitLine(2);
+  min-width: 240px;
+
+  @include setLimitLine(1);
   border-radius: 8px;
   color: #333;
   font-weight: 500;

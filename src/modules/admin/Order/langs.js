@@ -14,6 +14,7 @@ const langs = {
   id_coupon: ADMIN_ORDER + '.id_coupon',
   id_payment: ADMIN_ORDER + '.id_payment',
   created_at: ADMIN_ORDER + '.created_at',
+  updated_at: ADMIN_ORDER + '.updated_at',
 
   CREATE_PRODUCT: ADMIN_PRODUCT + '.CREATE_PRODUCT',
   EDIT_PRODUCT: ADMIN_PRODUCT + '.EDIT_PRODUCT',

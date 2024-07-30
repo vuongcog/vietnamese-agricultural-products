@@ -25,12 +25,13 @@ const AdminCrud = () => {
   } = useContext(CrudContext);
   const actionSendMail = {};
 
-  const { mode, onClickRow, sort, formatData } = crudOptions;
+  const { mode, onClickRow, sort, formatData, placeholderSearch } = crudOptions;
   return (
     <div className="relative">
       {isFetching && <ProgressFeching></ProgressFeching>}
       <div className={`${isFetching && 'opacity-30'} ${styles[`main-crud`]}`}>
         <BreadCrumb
+          placeholderSearch={placeholderSearch}
           umb
           sort={sort}
           mode={mode}

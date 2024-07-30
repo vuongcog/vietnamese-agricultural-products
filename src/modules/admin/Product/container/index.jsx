@@ -48,12 +48,6 @@ const Product = () => {
     sort: [`product_name`, `unit_prices`],
     schema: [
       {
-        name: 'id',
-        label: 'id',
-        default: 'N/A',
-      },
-
-      {
         name: 'product_name',
         label: t(langs.name),
         default: 'N/A',
@@ -104,12 +98,13 @@ const Product = () => {
         },
       },
 
-      {
-        name: 'product_slug',
-        label: t(langs.slug),
-        default: 'N/A',
-        component: ProductSlug,
-      },
+      // {
+      //   name: 'product_slug',
+      //   label: t(langs.slug),
+      //   default: 'N/A',
+      //   component: ProductSlug,
+      // },
+
       {
         name: 'product_image',
         label: t(langs.image),

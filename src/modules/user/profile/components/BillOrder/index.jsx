@@ -17,6 +17,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { useReactToPrint } from 'react-to-print';
+import { MAPPER_STATUS_ORDER } from '../../../../../constants/mapper-status-order';
 
 const BillOrder = React.forwardRef(({ order }, ref) => {
   const calculateTotal = () =>
@@ -67,7 +68,7 @@ const BillOrder = React.forwardRef(({ order }, ref) => {
                 Trạng thái thanh toán: {order.payment_status}
               </Text>
               <Text fontFamily="serif">
-                Trạng thái đơn hàng: {order.status}
+                Trạng thái đơn hàng: {MAPPER_STATUS_ORDER[order.status]}
               </Text>
               <Text fontFamily="serif">
                 Ghi chú đơn hàng: {order.order_notes}

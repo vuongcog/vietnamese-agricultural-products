@@ -41,22 +41,16 @@ const BlogCategory = () => {
     ],
     sort: ['name'],
     schema: [
-      {
-        name: 'id',
-        label: t(langs.id),
-        default: 'N/A',
-      },
+      // {
+      //   name: 'id',
+      //   label: t(langs.id),
+      //   default: 'N/A',
+      // },
       {
         name: 'name',
         label: t(langs.name),
         default: 'N/A',
         component: BlogCategoryName,
-      },
-      {
-        name: 'slug',
-        label: t(langs.slug),
-        default: 'N/A',
-        component: BlogCategorySlug,
         dropdownActions: {
           items: [
             {
@@ -105,6 +99,12 @@ const BlogCategory = () => {
           ],
         },
       },
+      // {
+      //   name: 'slug',
+      //   label: t(langs.slug),
+      //   default: 'N/A',
+      //   component: BlogCategorySlug,
+      // },
 
       {
         name: 'status',

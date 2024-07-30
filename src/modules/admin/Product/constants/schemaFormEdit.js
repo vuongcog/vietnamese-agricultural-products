@@ -30,18 +30,19 @@ export const schemaFormEdit = {
       isRequire: true,
       type: 'editor',
     },
-    {
-      name: 'product_image',
-      label: langs.image,
-      placeholder: langs.image,
-      type: 'file',
-    },
+
     {
       name: 'product_info',
       label: langs.info,
       placeholder: langs.info,
       isRequire: true,
       type: 'editor',
+    },
+    {
+      name: 'product_image',
+      label: langs.image,
+      placeholder: langs.image,
+      type: 'file',
     },
     {
       name: 'quantity',

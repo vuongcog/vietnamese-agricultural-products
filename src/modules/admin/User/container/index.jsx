@@ -45,11 +45,6 @@ const User = () => {
     sort: [`name`, `email`],
     schema: [
       {
-        name: 'id',
-        label: t(langs.id),
-        default: 'N/A',
-      },
-      {
         name: 'name',
         label: t(langs.name),
         default: 'N/A',

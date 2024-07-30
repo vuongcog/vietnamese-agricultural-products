@@ -12,7 +12,7 @@
 
   "src/components/user/Header.home": "Home",
   "src/components/user/Header.login": "Login",
-  "src/components/user/Header.vegetables": "Vegetables",
+  "src/components/user/Header.vegetables": "Products",
   "src/components/user/Header.contactUs": "ContactUs",
   "src/components/user/Header.purchase": "Purchase",
   "src/components/user/Header.about": "About",
@@ -46,7 +46,7 @@
   "src/modules/user/oder.totalPrices": "Total Prices",
   "src/modules/user/oder.order": "Order",
 
-  "src/modules/admin/User.id": "ID",
+  "src/modules/admin/User.id": "Id User",
   "src/modules/admin/User.name": "User Name",
   "src/modules/admin/User.password": "User password",
   "src/modules/admin/User.address": "User Address",
@@ -87,7 +87,7 @@
   "src/modules/admin/Blog.CREATE_BLOG": "CREATE BLOG",
   "src/modules/admin/Blog.EDIT_BLOG": "EDIT BLOG",
 
-  "src/modules/admin/Product.id": "Id",
+  "src/modules/admin/Product.id": "Category",
   "src/modules/admin/Product.name": "Product Name",
   "src/modules/admin/Product.slug": "Slug",
   "src/modules/admin/Product.image": "Product Image",
@@ -130,8 +130,8 @@
   "src/modules/admin/Banner.title": "Title",
   "src/modules/admin/Banner.image": "Banner Image",
   "src/modules/admin/Banner.des": "Description",
-  "src/modules/admin/Banner.sort": "Status",
-  "src/modules/admin/Banner.status": "Sort",
+  "src/modules/admin/Banner.sort": "Sort",
+  "src/modules/admin/Banner.status": "Status",
   "src/modules/admin/Banner.createdAt": "Created At",
   "src/modules/admin/Banner.updatedAt": "Updated At",
   "src/modules/admin/Banner.createBanner": "Create Banner",
@@ -159,5 +159,6 @@
   "src/modules/admin/Order.id_coupon": "Id Coupon",
   "src/modules/admin/Order.id_payment": "Id Payment",
   "src/modules/admin/Order.created_at": "Created At",
-  "src/modules/admin/Order.updated_at": "Updated At"
+  "src/modules/admin/Order.updated_at": "Updated At",
+  "src/modules/admin/Order.EDIT_PRODUCT": "EDIT ORDER"
 }

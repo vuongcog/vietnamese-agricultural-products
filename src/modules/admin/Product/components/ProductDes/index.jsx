@@ -14,7 +14,8 @@ const ProductDes = ({ product_des }) => {
         dangerouslySetInnerHTML={{ __html: product_des }}
       ></div>
       <DialogMessage
-        width={10000}
+        width={800}
+        height={200}
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}

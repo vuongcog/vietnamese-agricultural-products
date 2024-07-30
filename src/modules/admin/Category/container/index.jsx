@@ -43,21 +43,10 @@ const Category = () => {
     sort: ['category_name'],
     schema: [
       {
-        name: 'id',
-        label: t(langs.idCategory),
-        default: 'N/A',
-      },
-      {
         name: 'category_name',
         label: t(langs.name),
         default: 'N/A',
         component: CategoryName,
-      },
-      {
-        name: 'category_slug',
-        label: t(langs.slug),
-        default: 'N/A',
-        component: CategorySlugComponent,
         dropdownActions: {
           items: [
             {
@@ -106,8 +95,13 @@ const Category = () => {
             },
           ],
         },
-        // component: UserEmail,
       },
+      // {
+      //   name: 'category_slug',
+      //   label: t(langs.slug),
+      //   default: 'N/A',
+      //   component: CategorySlugComponent,
+      // },
       {
         name: 'category_des',
         label: t(langs.des),

@@ -16,6 +16,7 @@ const BlogCategoriesList = () => {
           if (item.status === 'inactive') return null;
           return (
             <li
+              className="hover:cursor-pointer"
               onClick={() => {
                 navigate(`/blogs?category=${item.id}&name=${item.name}`);
               }}

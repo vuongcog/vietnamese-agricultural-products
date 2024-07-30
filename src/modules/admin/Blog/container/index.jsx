@@ -35,6 +35,7 @@ const Product = () => {
       create: true,
       paging: true,
     },
+    placeholderSearch: 'Search with title blog...',
     search: [
       {
         name: 'search',
@@ -44,12 +45,6 @@ const Product = () => {
     ],
     sort: ['blog_title'],
     schema: [
-      {
-        name: 'id',
-        label: t(langs.idBlog),
-        default: 'N/A',
-      },
-
       {
         name: 'blog_title ',
         label: t(langs.title),
@@ -106,29 +101,31 @@ const Product = () => {
         default: '  N/A',
         component: BlogImage,
       },
-      {
-        name: 'blog_slug',
-        label: t(langs.slug),
-        component: BlogSlug,
-        default: 'N/A',
-      },
+
+      // {
+      //   name: 'blog_slug',
+      //   label: t(langs.slug),
+      //   component: BlogSlug,
+      //   default: 'N/A',
+      // },
+
       {
         name: 'content',
         label: t(langs.content),
         default: 'N/A',
         component: BlogContent,
       },
-      {
-        name: 'id_user ',
-        label: t(langs.idUser),
-        default: 'N/A',
-      },
-      {
-        name: 'id_cat ',
-        label: t(langs.idCategory),
-        default: 'N/A',
-        component: ({ id_cat }) => <div>{id_cat}</div>,
-      },
+      // {
+      //   name: 'id_user ',
+      //   label: t(langs.idUser),
+      //   default: 'N/A',
+      // },
+      // {
+      //   name: 'id_cat ',
+      //   label: t(langs.idCategory),
+      //   default: 'N/A',
+      //   component: ({ id_cat }) => <div>{id_cat}</div>,
+      // },
       {
         name: 'view',
         label: t(langs.view),

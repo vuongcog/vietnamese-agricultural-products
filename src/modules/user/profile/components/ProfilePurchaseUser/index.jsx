@@ -168,11 +168,8 @@ const ProfilePurchaseUser = () => {
         >
           <div>
             {data.items.map(item => (
-              <div className="flex flex-col gap-2">
-                <ProfileProductCard
-                  key={item.id}
-                  item={item}
-                ></ProfileProductCard>
+              <div key={item.id} className="flex flex-col gap-2">
+                <ProfileProductCard item={item}></ProfileProductCard>
                 <Divider borderWidth={1} borderColor={'black'}></Divider>
               </div>
             ))}
