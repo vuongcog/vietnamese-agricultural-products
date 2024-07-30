@@ -51,6 +51,8 @@ export const schemaFormCreate = {
       placeholder: langs.quantity,
       isRequire: true,
       type: 'number',
+      min: 0,
+      max: 1000000000,
     },
     {
       name: 'unit_prices',
@@ -58,6 +60,8 @@ export const schemaFormCreate = {
       placeholder: langs.unitPrices,
       isRequire: true,
       type: 'number',
+      min: 0,
+      max: 1000000000,
     },
     {
       name: 'status',

@@ -13,6 +13,8 @@ export const schemaFormEdit = {
       placeholder: langs.discountValue,
       isRequire: true,
       type: 'number',
+      min: 0,
+      max: 1000000000,
     },
     {
       name: 'coupon_start_date',
@@ -32,6 +34,8 @@ export const schemaFormEdit = {
       placeholder: langs.quantity,
       isRequire: true,
       type: 'number',
+      min: 0,
+      max: 1000000000,
     },
     {
       name: 'status',

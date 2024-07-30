@@ -22,6 +22,8 @@ export const schemaFormEdit = {
       placeholder: langs.name,
       isRequire: true,
       type: 'text',
+      minLength: 5,
+      maxLength: 255,
     },
     {
       name: 'product_des',
@@ -50,6 +52,8 @@ export const schemaFormEdit = {
       placeholder: langs.quantity,
       isRequire: true,
       type: 'number',
+      min: 0,
+      max: 1000000000,
     },
     {
       name: 'unit_prices',
@@ -57,6 +61,8 @@ export const schemaFormEdit = {
       placeholder: langs.unitPrices,
       isRequire: true,
       type: 'number',
+      min: 0,
+      max: 1000000000,
     },
     {
       name: 'status',

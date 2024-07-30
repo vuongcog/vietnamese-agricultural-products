@@ -1,41 +1,43 @@
-import { ADD_DATA } from "../../../../components/core/AdminCrud/Store/constants";
-import langs from "../langs";
+import { ADD_DATA } from '../../../../components/core/AdminCrud/Store/constants';
+import langs from '../langs';
 
 export const schemaFormCreate = {
   title: langs.CREATE_CATEGORY,
-  doneText: ["Cancel", "Create"],
+  doneText: ['Cancel', 'Create'],
   button: langs.createCategory,
   type: ADD_DATA,
   schemaForm: [
     {
-      name: "category_name",
+      name: 'category_name',
       label: langs.name,
       placeholder: langs.name,
       isRequire: true,
-      type: "text",
+      type: 'text',
+      minLength: 5,
+      maxLength: 255,
     },
     {
-      name: "category_des",
+      name: 'category_des',
       label: langs.des,
       placeholder: langs.des,
       isRequire: true,
-      type: "text",
+      type: 'text',
     },
     {
-      name: "status",
+      name: 'status',
       label: langs.status,
-      type: "select",
+      type: 'select',
       items: [
         {
-          name: "inactive",
-          value: "inactive",
+          name: 'inactive',
+          value: 'inactive',
         },
         {
-          name: "active",
-          value: "active",
+          name: 'active',
+          value: 'active',
         },
       ],
-      placeholder: "status",
+      placeholder: 'status',
       isRequire: true,
     },
   ],

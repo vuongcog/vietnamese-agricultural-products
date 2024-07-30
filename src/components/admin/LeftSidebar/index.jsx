@@ -3,26 +3,37 @@ import styles from './styles.module.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import AdminAvatar from '../Avatar';
 import { SCHEMA } from '../../../constants/nav-bar-item';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import useProducerDataUser from '../../../useCustom/admin/useProducerDataUser';
 
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import SecurityIcon from '@mui/icons-material/Security';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+
 const AdminLeftSidebar = () => {
+  const MapperIcon = {
+    manager: <ManageAccountsIcon className={styles.titleIcon} />,
+    admin: <SecurityIcon className={styles.titleIcon} />,
+    staff: <WorkOutlineIcon className={styles.titleIcon} />,
+  };
+
   const navigate = useNavigate();
   const location = useLocation();
   const { inforUser } = useProducerDataUser();
   const [activeLink, setActiveLink] = useState(location.pathname);
   const { t } = useTranslation();
   const handleNavigate = link => {
-    setActiveLink(link);
-    navigate(link);
+    setActiveLink(`${link}`);
+    navigate(`${link}`);
   };
+  const IconUser = MapperIcon[inforUser?.role];
 
   return (
     <nav className={classNames(styles.leftSideBar)}>
       <div className={styles.wrapperTitle}>
-        <i className={`fas fa-paw ${styles.titleIcon}`}></i>
+        {IconUser}
         <h1 className={styles.titleText}>{inforUser.role}</h1>
       </div>
       <AdminAvatar />

@@ -13,13 +13,17 @@ export const schemaFormCreate = {
       placeholder: langs.title,
       isRequire: true,
       type: 'text',
+      minLength: 5,
+      maxLength: 255,
     },
     {
       name: 'banner_des',
       label: langs.des,
       placeholder: langs.des,
       isRequire: true,
-      type: 'editor',
+      type: 'text',
+      minLength: 5,
+      maxLength: 255,
     },
     {
       name: 'banner_image',

@@ -9,26 +9,31 @@
   color: white;
 
   &__image {
-    width: 56px;
-    height: 56px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #4caf50;
+    border: 2px solid #fcfcfc;
   }
 
   &__info {
     display: flex;
     flex-direction: column;
+    gap: 12px;
   }
 
   &__name {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 12px;
     color: #ffffff;
   }
 
-  &__phone {
+  &__password {
     font-size: 14px;
     color: #b0b0b0;
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }

@@ -1,40 +1,43 @@
-import { UPDATE_DATA } from "../../../../components/core/AdminCrud/Store/constants";
-import langs from "../langs";
+import { UPDATE_DATA } from '../../../../components/core/AdminCrud/Store/constants';
+import langs from '../langs';
 
 export const schemaFormEdit = {
   title: langs.EDIT_CATEGORY,
-  doneText: ["Cancel", "Save"],
+  doneText: ['Cancel', 'Save'],
   type: UPDATE_DATA,
   schemaForm: [
     {
-      name: "category_name",
+      name: 'category_name',
       label: langs.name,
-      placeholder: "category_name",
+      placeholder: 'category_name',
       isRequire: true,
-      type: "text",
+      type: 'text',
+      minLength: 5,
+      maxLength: 255,
     },
     {
-      name: "category_des",
+      name: 'category_des',
       label: langs.des,
-      placeholder: "category_des",
+      placeholder: 'category_des',
+      type: 'text',
       isRequire: true,
-      type: "text",
+      maxLength: 255,
     },
     {
-      name: "status",
+      name: 'status',
       label: langs.status,
-      type: "select",
+      type: 'select',
       items: [
         {
-          name: "inactive",
-          value: "inactive",
+          name: 'inactive',
+          value: 'inactive',
         },
         {
-          name: "active",
-          value: "active",
+          name: 'active',
+          value: 'active',
         },
       ],
-      placeholder: "status",
+      placeholder: 'status',
       isRequire: true,
     },
   ],

@@ -12,6 +12,8 @@ export const schemaFormEdit = {
       placeholder: 'Name',
       isRequire: true,
       type: 'text',
+      minLength: 5,
+      maxLength: 255,
     },
     {
       name: 'email',
@@ -19,6 +21,8 @@ export const schemaFormEdit = {
       type: 'email',
       placeholder: 'Email',
       isRequire: true,
+      minLength: 11,
+      maxLength: 255,
     },
     // {
     //   name: "password",
@@ -53,6 +57,7 @@ export const schemaFormEdit = {
       type: 'number',
       placeholder: 'Phone Number',
       isRequire: true,
+      max: 9999999999,
     },
     {
       name: 'avatar',

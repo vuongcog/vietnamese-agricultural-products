@@ -55,7 +55,6 @@ const BreadCrumb = ({
   const isSendingMail = useSelector(getIsSendingEmailStatus);
   const errorSendMailMessage = useSelector(getErrorSendMail);
   const successSendMailMessage = useSelector(getSuccessSendMail);
-
   const dispatch = useDispatch();
   const handlerSendmail = data => {
     dispatch({ type: SEND_EMAIL, payload: { ...data, endpoint: '/sendmail' } });

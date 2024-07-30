@@ -23,6 +23,8 @@ export const schemaFormCreate = {
       placeholder: langs.title,
       isRequire: true,
       type: 'text',
+      minLength: 5,
+      maxLength: 255,
     },
     {
       name: 'content',
