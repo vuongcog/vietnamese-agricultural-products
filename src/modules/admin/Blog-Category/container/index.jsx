@@ -54,12 +54,6 @@ const BlogCategory = () => {
         dropdownActions: {
           items: [
             {
-              icon: <i className="font-semibold fa-regular fa-copy"></i>,
-              name: 'duplicate',
-              label: <span className="font-semibold">Duplicate</span>,
-              callback: () => {},
-            },
-            {
               icon: <i className=" fa fa-trash"></i>,
               name: 'delete',
               label: <span className=" font-semibold">Delete</span>,
@@ -70,14 +64,7 @@ const BlogCategory = () => {
                 });
               },
             },
-            {
-              icon: <Icon as={FaFileExcel} />,
-              name: 'export-excel',
-              label: <span className="font-semibold">Export Excel</span>,
-              callback: (items, name) => {
-                exportToExcel(items, name);
-              },
-            },
+
             {
               icon: (
                 <i className="font-semibold fa-regular fa-pen-to-square"></i>

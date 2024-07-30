@@ -88,7 +88,7 @@ const UserHeader = () => {
           </li>
         )}
         <li>
-          <SelectLanguage width={90} />
+          <SelectLanguage width={120} />
         </li>
 
         <li>

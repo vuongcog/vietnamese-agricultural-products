@@ -7,7 +7,7 @@ import { PICTURE } from '../../../../../constants/picture';
 
 const OrderPaymentType = ({ payment_type }) => {
   const mappingLogo = {
-    [`THANH TOÁN VN PAY`]: (
+    [`THANH TOÁN VNPAY`]: (
       <img src={PICTURE.vnpay} className="w-12 h-12 rounded-full"></img>
     ),
   };

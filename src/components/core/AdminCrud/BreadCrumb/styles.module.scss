@@ -51,8 +51,9 @@
   }
   :global(.ant-select-selector) {
     display: flex;
+    border: none !important;
     align-items: center !important;
-
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     // background-color: rgb(61, 219, 17) !important;
     border-radius: 6px;
     padding: 0 12px !important;

@@ -133,10 +133,7 @@ const BreadCrumb = ({
         <DialogCreateForm endpoint={endpoint} schemaForm={schemaForm} />
       )}
 
-      <SelectLanguage
-        classNameProps={styles.customOption}
-        bordered
-      ></SelectLanguage>
+      <SelectLanguage classNameProps={styles.customOption}></SelectLanguage>
       <button color={'black'} className={styles.logoutButton} onClick={logout}>
         {t(langs.logout)}
       </button>
