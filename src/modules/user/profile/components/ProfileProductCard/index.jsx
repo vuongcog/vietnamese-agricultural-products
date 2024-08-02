@@ -65,8 +65,8 @@ const ProfileProductCard = ({ item }) => {
             onClick={onOpen}
             fontWeight={'bold'}
             w={100}
-            color={'white'}
-            backgroundColor={'blue'}
+            // color={'white'}
+            // backgroundColor={'blue'}
           >
             Đánh giá
           </Button>

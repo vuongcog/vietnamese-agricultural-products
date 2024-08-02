@@ -35,7 +35,6 @@ const Card = ({ item, ...props }) => {
   if (isFetching) {
     return <SkeletonCart></SkeletonCart>;
   }
-
   return (
     <div className={styles.wrapper}>
       <div
@@ -52,8 +51,12 @@ const Card = ({ item, ...props }) => {
         <div className="flex">
           <h5 className={styles.title}>{cloneItem.product_name}</h5>
           <span className={styles.price}>
-            {'/'}
-            {formattedNumber(cloneItem?.unit_prices?.toLocaleString())}
+            {/* {'/'} */}
+            {cloneItem &&
+              parseFloat(cloneItem?.unit_prices).toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+              })}
           </span>
         </div>
       </div>

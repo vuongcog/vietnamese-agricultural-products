@@ -37,7 +37,9 @@ export const addCart = (product, quantity) => {
           return;
         }
         setCookieCart(product, parseCartObject, quantity);
-        toast.success('Thêm thành công');
+        toast.success('Thêm thành công', {
+          autoClose: 1000,
+        });
       }
       Cookies.set('cart', JSON.stringify(parseCartObject));
     } else {

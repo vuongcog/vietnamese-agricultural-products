@@ -34,7 +34,12 @@ const Product = ({
           <div className={styles.voucher}>{voucher}</div>
         </div>
       </div>
-      <span className={styles.unit_prices}>{formattedNumber(unit_prices)}</span>
+      <span className={styles.unit_prices}>
+        {parseFloat(unit_prices).toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND',
+        })}
+      </span>
       <QuantitySelector
         max={product.quantity}
         onSetNumber={handlerChangeNumber}
@@ -42,7 +47,10 @@ const Product = ({
         className={styles.numberSelector}
       />
       <span className={classNames(styles.totalPrice)}>
-        {formattedNumber(totalPrice)}
+        {parseFloat(totalPrice).toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND',
+        })}
       </span>
       <i
         onClick={() => {

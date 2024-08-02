@@ -34,7 +34,6 @@ import FormLoginManagement from './authentication/components/FormLoginManagement
 import FormManagementProvider from './authentication/components/FormLoginManagement/FormContext';
 import FormProvider from './authentication/components/FormLogin/FormContext';
 import CheckoutContainer from './user/oder/container';
-import axios from 'axios';
 import Profile from './user/profile';
 import CartNotToken from './user/cart-not-token/container';
 import PaymentSuccsess from './mayment-succsess/PaymentSuccsess';

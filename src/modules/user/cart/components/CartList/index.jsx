@@ -40,10 +40,10 @@ const CartList = () => {
       </div>
       <CheckboxGroup value={selectedItems} onChange={handleChange}>
         <div className={styles[`container-cart-list`]}>
-          {filterCarts.map((item, index) => {
-            console.log(item);
+          {filterCarts?.map((item, index) => {
             if (item.product.status === INACTIVE || item.product.quantity <= 0)
               return null;
+
             return (
               <CartItem
                 {...item}

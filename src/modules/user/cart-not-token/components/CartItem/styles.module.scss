@@ -16,15 +16,6 @@
   }
   span {
     position: relative;
-
-    &::before {
-      content: 'đ';
-      font-size: 0.75rem;
-      position: absolute;
-      top: 0;
-      left: -10px;
-      text-decoration: underline;
-    }
   }
 }
 .checkbox {

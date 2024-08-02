@@ -1,8 +1,15 @@
 .layout {
   min-height: 100vh;
+  width: 100%;
   // background-image: url('https://img.freepik.com/free-photo/blue-surface-with-study-tools_23-2147864592.jpg?size=626&ext=jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
+  gap: 48px;
+  padding: 24px 48px;
+  .categories {
+    flex: 0 0 320px;
+    max-width: 320px;
+  }
 }

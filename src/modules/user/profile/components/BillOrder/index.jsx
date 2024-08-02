@@ -27,7 +27,7 @@ const BillOrder = React.forwardRef(({ order }, ref) => {
     );
 
   return (
-    <Container maxW="container.md" ref={ref} borderRadius="md" boxShadow="xl">
+    <div className="max-w-[800px]">
       <Box p={6} borderWidth={1} borderRadius="lg" boxShadow="lg" bg="white">
         <VStack spacing={4} align="stretch">
           <Text
@@ -119,7 +119,7 @@ const BillOrder = React.forwardRef(({ order }, ref) => {
           </Table>
         </VStack>
       </Box>
-    </Container>
+    </div>
   );
 });
 BillOrder.displayName = 'BillOrder';

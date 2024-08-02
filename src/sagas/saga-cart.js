@@ -39,11 +39,15 @@ function* wokerAddCart(action) {
     yield call(http.addCart, payload.params);
     yield put({ type: ADD_CART_CUCCESS });
     yield put({ type: RE_FETCH_CART });
-    toast.success('Thêm giỏ hàng thành công');
+    toast.success('Thêm giỏ hàng thành công', {
+      autoClose: 1000,
+    });
   } catch (err) {
     yield put({ type: ADD_CART_FAILED });
     const message = parseObjectJson(err.response.data);
-    toast.error(message.message);
+    toast.error(message.message, {
+      autoClose: 1000,
+    });
   } finally {
     yield put({ type: ADDED_CART });
     yield put({ type: ADD_CART_RESET_STATUS_ADDING });

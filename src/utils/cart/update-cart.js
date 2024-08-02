@@ -28,7 +28,7 @@ export const updateCartItemQuantity = (idProduct, newQuantity) => {
     parseCartObject[productIndex].updated_at = new Date().toISOString();
 
     Cookies.set('cart', JSON.stringify(parseCartObject));
-    toast.success('Cập nhật số lượng sản phẩm thành công');
+    // toast.success('Cập nhật số lượng sản phẩm thành công');
   } catch (error) {
     toast.error('Có lỗi xảy ra khi cập nhật số lượng sản phẩm');
   }

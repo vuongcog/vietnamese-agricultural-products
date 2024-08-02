@@ -24,12 +24,18 @@ const CartItem = ({
   const totalPrice = useMemo(() => number * unit_prices, [number, unit_prices]);
   const { handlerDeleteCart, handlerUpdateCart } = useContext(CartContext);
   const firstEffect = useRef(false);
+  const quantityRef = useRef(quantity);
+
   const debounceNumber = useDebounce(number, 300);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setNumber(quantity);
+    if (quantityRef.current !== quantity) {
+      setNumber(quantity);
+      quantityRef.current = quantity;
+    }
   }, [quantity]);
+
   useEffect(() => {
     if (firstEffect.current) {
       handlerUpdateCart(id_product, debounceNumber);
@@ -40,6 +46,7 @@ const CartItem = ({
   const handlerSetNumber = number => {
     setNumber(number);
   };
+
   const handleCheckboxChange = () => {
     const newChecked = !checked;
     setChecked(newChecked);
@@ -49,7 +56,9 @@ const CartItem = ({
       onDeselect(id_product);
     }
   };
+
   if (product.quantity <= 0 || product.status === INACTIVE) return null;
+
   return (
     <div {...props} className={styles.container}>
       <Checkbox
@@ -79,7 +88,12 @@ const CartItem = ({
         </div>
       </div>
       <Divider orientation="vertical" borderWidth={1}></Divider>
-      <span className={styles.price}>{formattedNumber(unit_prices)}</span>
+      <span className={styles.price}>
+        {parseFloat(unit_prices).toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND',
+        })}
+      </span>
       <QuantitySelector
         max={product.quantity}
         onSetNumber={handlerSetNumber}
@@ -87,7 +101,10 @@ const CartItem = ({
         className={styles.numberSelector}
       />
       <span className={classNames(styles.totalPrice, 'w-[10%]')}>
-        {formattedNumber(totalPrice)}
+        {parseFloat(totalPrice).toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND',
+        })}
       </span>
       <i
         onClick={() => {

@@ -13,85 +13,117 @@ $white: #fafafa;
     0 0.5rem 1.125rem rgba(75, 0, 0, 0.05);
 }
 .layout {
-  // padding: 60px 400px;
-  min-height: 100vh;
-  // background-image: url('https://img.freepik.com/free-photo/desktop-with-notebook-photo-camera_23-2148128817.jpg?size=626&ext=jpg&ga=GA1.1.1131032606.1720929651&semt=ais_user');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-ol.gradient-list {
-  counter-reset: gradient-counter;
-  list-style: none;
-  margin: 1.75rem 0;
-  padding-left: 1rem;
-  > li {
-    background: white;
-    border-radius: 0 0.5rem 0.5rem 0.5rem;
-    @extend %boxshadow;
-    counter-increment: gradient-counter;
-    margin-top: 1rem;
-    min-height: 6rem;
-    padding: 6px 3rem;
-    position: relative;
-    .title {
-      @include setLimitLine(1);
-      font-weight: 800;
-    }
-    .content {
-      @include setLimitLine(3);
-      :hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-      * {
-        font-size: 12px;
-        color: rgb(5, 49, 122);
-      }
-    }
-    &::before,
-    &::after {
-      background: linear-gradient(135deg, $blue 0%, $green 100%);
-      border-radius: 1rem 1rem 0 1rem;
-      content: '';
-      height: 3rem;
-      left: -1rem;
-      overflow: hidden;
-      position: absolute;
-      top: -1rem;
-      width: 3rem;
-    }
-    &::before {
-      align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  .header_title {
+    @include setLimitLine(1);
+    cursor: pointer;
+  }
+
+  ol.gradient-list {
+    counter-reset: gradient-counter;
+    list-style: none;
+    padding-left: 0px;
+
+    > li {
+      background: white;
+      border-radius: 0 0.5rem 0.5rem 0.5rem;
       @extend %boxshadow;
-      content: counter(gradient-counter);
-      color: $black;
+      counter-increment: gradient-counter;
+      margin-top: 1rem;
+      padding: 6px;
+      position: relative;
+      .title {
+        @include setLimitLine(1);
+        font-weight: 800;
+      }
+      .content {
+        @include setLimitLine(2);
+        :hover {
+          // text-decoration: underline;
+          cursor: pointer;
+        }
+        * {
+          font-size: 12px;
+          color: rgb(5, 49, 122);
+        }
+      }
+      &::before,
+      &::after {
+        background: linear-gradient(135deg, $blue 0%, $green 100%);
+        border-radius: 1rem 1rem 0 1rem;
+        content: '';
+        height: 2rem;
+        left: -1.5rem;
+        overflow: hidden;
+        position: absolute;
+        top: -1rem;
+        width: 2rem;
+      }
+      &::before {
+        align-items: flex-end;
+        @extend %boxshadow;
+        content: counter(gradient-counter);
+        color: $black;
+        display: flex;
+        font: 900 1.5em/1 'Montserrat';
+        justify-content: flex-end;
+        padding: 0.125em 0.25em;
+        z-index: 1;
+      }
+      @for $i from 1 through 5 {
+        &:nth-child(10n + #{$i}):before {
+          background: linear-gradient(
+            135deg,
+            rgba($green, $i * 0.2) 0%,
+            rgba($yellow, $i * 0.2) 100%
+          );
+        }
+      }
+      @for $i from 6 through 10 {
+        &:nth-child(10n + #{$i}):before {
+          background: linear-gradient(
+            135deg,
+            rgba($green, 1 - (($i - 5) * 0.2)) 0%,
+            rgba($yellow, 1 - (($i - 5) * 0.2)) 100%
+          );
+        }
+      }
+      + li {
+        margin-top: 2rem;
+      }
+    }
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    label {
+      flex: 0 0 auto;
+    }
+    .perpage_container {
+      flex: 0 0 200px;
+    }
+    .pagination {
       display: flex;
-      font: 900 1.5em/1 'Montserrat';
-      justify-content: flex-end;
-      padding: 0.125em 0.25em;
-      z-index: 1;
-    }
-    @for $i from 1 through 5 {
-      &:nth-child(10n + #{$i}):before {
-        background: linear-gradient(
-          135deg,
-          rgba($green, $i * 0.2) 0%,
-          rgba($yellow, $i * 0.2) 100%
-        );
+      justify-content: center;
+      list-style-type: none;
+      padding: 0;
+      .pageItem {
+        margin: 0 5px;
+      }
+      .pageLink {
+        padding: 4px 8px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .pageLink:hover {
+        background-color: #eee;
       }
     }
-    @for $i from 6 through 10 {
-      &:nth-child(10n + #{$i}):before {
-        background: linear-gradient(
-          135deg,
-          rgba($green, 1 - (($i - 5) * 0.2)) 0%,
-          rgba($yellow, 1 - (($i - 5) * 0.2)) 100%
-        );
-      }
-    }
-    + li {
-      margin-top: 2rem;
-    }
+  }
+  .active {
+    text-decoration: underline;
   }
 }

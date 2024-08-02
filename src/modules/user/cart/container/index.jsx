@@ -74,6 +74,7 @@ const CartContainer = () => {
   const handlerUpdateCart = (id_product, quantity) => {
     dispatch({ type: UPDATE_CART, payload: { id_prd: id_product, quantity } });
   };
+
   useEffect(() => {
     dispatch({
       type: FETCH_CART,

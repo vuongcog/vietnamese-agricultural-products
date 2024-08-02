@@ -16,15 +16,14 @@
   span {
     position: relative;
     margin-left: 15px;
-
-    &::before {
-      content: 'đ';
-      font-size: 0.75rem;
-      position: absolute;
-      top: 0;
-      left: -10px;
-      text-decoration: underline;
-    }
+    // &::before {
+    //   content: 'đ';
+    //   font-size: 0.75rem;
+    //   position: absolute;
+    //   top: 0;
+    //   left: -10px;
+    //   text-decoration: underline;
+    // }
   }
   &:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);

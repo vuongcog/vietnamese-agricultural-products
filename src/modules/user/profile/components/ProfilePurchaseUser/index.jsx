@@ -70,39 +70,39 @@ const ProfilePurchaseUser = () => {
         <OrderTotalPrice order_total_prices={row.order_total_prices} />
       ),
     },
-    {
-      name: 'Ghi chú',
-      selector: row => row.order_notes,
-      sortable: true,
-      cell: row => <OrderNotes order_notes={row.order_notes} />,
-    },
+    // {
+    //   name: 'Ghi chú',
+    //   selector: row => row.order_notes,
+    //   sortable: true,
+    //   cell: row => <OrderNotes order_notes={row.order_notes} />,
+    // },
     {
       name: 'Tên người nhận',
       selector: row => row.customer,
       sortable: true,
       cell: row => <OrderCustomer customer={row.customer} />,
     },
-    {
-      name: 'Hình thức thanh toán',
-      minWidth: '300px',
-      selector: row => row.payment_type,
-      sortable: true,
-      cell: row => <OrderPaymentType payment_type={row.payment_type} />,
-    },
+    // {
+    //   name: 'Hình thức thanh toán',
+    //   minWidth: '300px',
+    //   selector: row => row.payment_type,
+    //   sortable: true,
+    //   cell: row => <OrderPaymentType payment_type={row.payment_type} />,
+    // },
     {
       name: 'Trạng thái thanh toán',
       selector: row => row.payment_status,
       sortable: true,
       cell: row => <OrderPaymentStatus payment_status={row.payment_status} />,
     },
-    {
-      name: 'Địa chỉ vận chuyển',
-      selector: row => row.delivery_address,
-      sortable: true,
-      cell: row => (
-        <OrderDeliveryAddress delivery_address={row.delivery_address} />
-      ),
-    },
+    // {
+    //   name: 'Địa chỉ vận chuyển',
+    //   selector: row => row.delivery_address,
+    //   sortable: true,
+    //   cell: row => (
+    //     <OrderDeliveryAddress delivery_address={row.delivery_address} />
+    //   ),
+    // },
     {
       name: 'Số điện thoại',
       selector: row => row.phone,
@@ -122,7 +122,7 @@ const ProfilePurchaseUser = () => {
     //   cell: row => row.id_payment || 'N/A',
     // },
     {
-      name: 'Ngày tạo',
+      name: 'Ngày đặt',
       selector: row => row.created_at,
       sortable: true,
       minWidth: '200px',
@@ -168,9 +168,9 @@ const ProfilePurchaseUser = () => {
         >
           <div>
             {data.items.map(item => (
-              <div key={item.id} className="flex flex-col gap-2">
+              <div key={item.id} className="flex flex-col gap-2 py-10">
                 <ProfileProductCard item={item}></ProfileProductCard>
-                <Divider borderWidth={1} borderColor={'black'}></Divider>
+                {/* <Divider borderWidth={1} borderColor={'black'}></Divider> */}
               </div>
             ))}
           </div>

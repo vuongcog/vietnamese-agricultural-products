@@ -79,7 +79,12 @@ const CartItem = ({
         </div>
       </div>
       <Divider orientation="vertical" borderWidth={1}></Divider>
-      <span className={styles.price}>{formattedNumber(unit_prices)}</span>
+      <span className={styles.price}>
+        {parseFloat(unit_prices).toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND',
+        })}
+      </span>
       <QuantitySelector
         max={product.quantity}
         onSetNumber={handlerSetNumber}
@@ -87,7 +92,10 @@ const CartItem = ({
         className={styles.numberSelector}
       />
       <span className={classNames(styles.totalPrice, 'w-[10%]')}>
-        {formattedNumber(totalPrice)}
+        {parseFloat(totalPrice).toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND',
+        })}
       </span>
       <i
         onClick={() => {

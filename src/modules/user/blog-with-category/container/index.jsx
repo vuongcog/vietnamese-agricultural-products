@@ -10,14 +10,13 @@ const BlogCategoyGuest = () => {
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get('category');
   const name = queryParams.get('name');
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
       type: FETCH_BLOGS_WITH_CATEGORY,
       payload: { endpoint: `/baiviet-danhmuc/${category}` },
     });
-  }, []);
+  }, [location]);
   return (
     <div>
       <BlogWithCategory name={name}></BlogWithCategory>
