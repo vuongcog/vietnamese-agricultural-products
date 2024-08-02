@@ -3,7 +3,13 @@ import Confirm from '../Confirm';
 import CreateForm from '../CreateForm';
 import ProviderDialogCreateForm from './context/ProviderDialogCreateForm';
 import PropTypes from 'prop-types';
-const DialogCreateForm = ({ schemaForm, callbackCancel, endpoint, item }) => (
+const DialogCreateForm = ({
+  inheritanceData,
+  schemaForm,
+  callbackCancel,
+  endpoint,
+  item,
+}) => (
   <ProviderDialogCreateForm endpoint={endpoint} type={schemaForm.type}>
     <Confirm
       callbackCancel={callbackCancel}
@@ -11,6 +17,7 @@ const DialogCreateForm = ({ schemaForm, callbackCancel, endpoint, item }) => (
       button={schemaForm.button}
     >
       <CreateForm
+        inheritanceData={inheritanceData}
         doneText={schemaForm.doneText}
         endpoint={endpoint}
         type={schemaForm.type}

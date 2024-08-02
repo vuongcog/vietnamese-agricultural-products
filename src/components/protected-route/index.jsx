@@ -6,7 +6,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import PropTypes from 'prop-types';
 export function ProtectedRoute({ children }) {
   const {} = useAuth();
-
   if (!Cookies.get('accsessToken')) {
     return <Navigate to="/authen/signin-management" />;
   }
@@ -19,7 +18,7 @@ export function ProtectedAuthenRoute({ children }) {
     Cookies.get('accsessToken') &&
     location.pathname === '/authen/signin-management'
   ) {
-    return <Navigate to="/user" />;
+    return <Navigate to="/order" />;
   }
   if (Cookies.get('accsessToken') && location.pathname === '/authen/signin') {
     return <Navigate to="/" />;

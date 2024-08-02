@@ -7,6 +7,8 @@ import styles from './styles.module.scss';
 import useInjectReducerSagaDataUser from '../../useCustom/admin/useInjectReducerSagaGlobalAdmin';
 import { FETCH_DATA_USER } from '../../modules/admin/store/constants/action';
 import { useDispatch } from 'react-redux';
+import useProducerDataUser from '../../useCustom/admin/useProducerDataUser';
+import { useAuth } from '../../contexts/AuthContext';
 const LayoutAdmin = ({ children }) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,7 +23,12 @@ const LayoutAdmin = ({ children }) => {
   }, []);
   useInjectReducerSagaDataUser();
   const location = useLocation();
+  const { inforUser } = useProducerDataUser();
+  const { logout } = useAuth();
   const navigate = useNavigate();
+  if (inforUser.role === 'customer') {
+    logout();
+  }
   useEffect(() => {
     if (location.pathname === '/') {
       navigate('/user');

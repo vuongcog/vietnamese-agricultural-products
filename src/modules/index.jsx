@@ -26,8 +26,6 @@ import {
 import Product from './admin/Product/container';
 import CartContainer from './user/cart/container';
 import NotFound from './page-not-found';
-import FormEmailContainer from '../components/core/FormEmail/container';
-import DialogMessage from '../components/core/DialogMessage';
 import BlogCategoyGuest from './user/blog-with-category/container';
 import BlogContainer from './user/blog-categories/container';
 import BlogGuestContainer from './user/blog/container';
@@ -41,13 +39,14 @@ import Profile from './user/profile';
 import CartNotToken from './user/cart-not-token/container';
 import PaymentSuccsess from './mayment-succsess/PaymentSuccsess';
 import PaymentFailed from './PaymentFailed';
+import useProducerDataUser from '../useCustom/admin/useProducerDataUser';
+import { MAPPER_PERMISSION_ROUTE_USER } from '../constants/mapper-permission-role';
 
 const App = () => {
-  axios.get('https://esgoo.net/api-tinhthanh/1/0.htm');
-
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const location = useLocation();
+  const { inforUser } = useProducerDataUser();
   useEffect(() => {
     const hostname = window.location.hostname;
     const subdomain = hostname.split('.')[0];
@@ -121,25 +120,18 @@ const App = () => {
               </ProtectedRoute>
             }
           >
+            <Route path="/*" element={<div />} />
             <Route path="/dashboard" element={<ChartComponent />} />
-            <Route
-              path="/test"
-              element={
-                <div>
-                  <DialogMessage>
-                    <FormEmailContainer />
-                  </DialogMessage>
-                </div>
-              }
-            />
-            <Route
-              path="/user"
-              element={
-                <Suspense fallback={<div>Loading...</div>}>
-                  <User />
-                </Suspense>
-              }
-            />
+            {MAPPER_PERMISSION_ROUTE_USER[inforUser?.role] && (
+              <Route
+                path="/user"
+                element={
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <User />
+                  </Suspense>
+                }
+              />
+            )}
             <Route
               path="/category"
               element={

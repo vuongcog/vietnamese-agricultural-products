@@ -2,28 +2,26 @@ import React, { useState } from 'react';
 import UserName from '../components/UserName';
 import styles from './styles.module.scss';
 import UserEmail from '../components/UserEmail';
-import formatDateTime from '../../../../utils/formateDateTime';
 import AdminCrud from '../../../../components/core/AdminCrud';
 import ContextCrudProvider from '../../../../components/core/AdminCrud/CrudContext/CrudContext';
 import DialogCreateForm from '../../../../components/core/DialogCreateForm';
-import { schemaFormFactory } from '../utils/schemaFormFactory';
-import { FaFileExcel } from 'react-icons/fa'; // Import icon từ react-icons
-import { exportToExcel } from '../../../../utils/export-excel';
-import { Icon } from '@chakra-ui/react';
+import {
+  schemaFormFactory,
+  schemaFormFactoryManager,
+} from '../utils/schemaFormFactory';
 import Status from '../../../../components/admin/Status';
 import UserPhone from '../components/PhoneNum';
 import UserAvatar from '../components/UserAvatar';
-import { useDispatch } from 'react-redux';
-import { DELETE_DATA } from '../../../../components/core/AdminCrud/Store/constants';
 import useInjectReducerSaga from '../../../../useCustom/admin/useInjectReducerSaga';
 import langs from '../langs';
 import { useTranslation } from 'react-i18next';
 import CreatedAtComponent from '../../../../components/core/CreatedAt';
 import UpdatedAtComponent from '../../../../components/core/UpdatedAt';
+import useProducerDataUser from '../../../../useCustom/admin/useProducerDataUser';
 const User = () => {
   const { t } = useTranslation();
   const [selectElement, setSelectElement] = useState(null);
-  const dispatch = useDispatch();
+  const { inforUser } = useProducerDataUser();
   const crudOptions = {
     endpointParams: {
       q: '',
@@ -52,15 +50,6 @@ const User = () => {
         dropdownActions: {
           items: [
             {
-              icon: <i className=" fa fa-trash"></i>,
-              name: 'delete',
-              label: <span className=" font-semibold">Delete</span>,
-              callback: item => {
-                dispatch({ type: DELETE_DATA, payload: `/user/${item.id}` });
-              },
-            },
-
-            {
               icon: (
                 <i className="font-semibold fa-regular fa-pen-to-square"></i>
               ),
@@ -69,11 +58,18 @@ const User = () => {
               callback: item => {
                 setSelectElement(
                   <DialogCreateForm
+                    inheritanceData={
+                      inforUser?.role === 'manager' ? true : false
+                    }
                     item={item}
                     endpoint={'/user'}
                     callbackCancel={setSelectElement}
                     title="Update User"
-                    schemaForm={schemaFormFactory('edit')}
+                    schemaForm={
+                      inforUser?.role === 'admin'
+                        ? schemaFormFactory('edit')
+                        : schemaFormFactoryManager('edit')
+                    }
                   ></DialogCreateForm>
                 );
               },
@@ -136,7 +132,11 @@ const User = () => {
   return (
     <div className={styles.module}>
       <ContextCrudProvider
-        schemaForm={schemaFormFactory('create')}
+        schemaForm={
+          inforUser?.role === 'admin'
+            ? schemaFormFactory('create')
+            : schemaFormFactoryManager('create')
+        }
         {...crudOptions}
         classNameProps={{
           tableBodyRow: styles[`table-body-row`],

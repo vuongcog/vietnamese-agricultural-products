@@ -35,6 +35,7 @@ import { transformNumber } from '../../../utils/parse-number';
 import moment from 'moment';
 
 const CreateForm = ({
+  inheritanceData,
   doneText = ['Cancel', 'Create'],
   endpoint,
   type,
@@ -50,7 +51,6 @@ const CreateForm = ({
   const [formState, setFormState] = useState(
     schemaForm.reduce((acc, field) => {
       acc[field.name] = type === UPDATE_DATA ? defaultValues[field.name] : '';
-
       if (type === UPDATE_DATA && field.type === 'number') {
         acc[field.name] = transformNumber(defaultValues[field.name]);
       }
@@ -113,6 +113,9 @@ const CreateForm = ({
     }
     if (type === ADD_DATA) {
       data['endpoint'] = `${endpoint}`;
+    }
+    if (inheritanceData) {
+      data = { ...defaultValues, ...data };
     }
     setValueForm(data);
   };

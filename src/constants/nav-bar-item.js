@@ -28,6 +28,7 @@ export const SCHEMA = [
   },
   {
     id: 3,
+    type: 'user',
     name: langs.user,
     icon: PersonOutline,
     link: '/user',

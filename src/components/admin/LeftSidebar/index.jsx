@@ -38,20 +38,23 @@ const AdminLeftSidebar = () => {
       </div>
       <AdminAvatar />
       <ul className={styles.sidebarMenu}>
-        {SCHEMA.map(item => (
-          <li
-            key={item.name || item.id}
-            onClick={() => handleNavigate(item.link)}
-            className={`${styles.navbarItem} ${
-              activeLink === item.link ? styles.active : ''
-            }`}
-          >
-            <item.icon></item.icon>
-            <div className={`${item.color} ${styles.label}`}>
-              {t(item.name)}
-            </div>
-          </li>
-        ))}
+        {SCHEMA.map(item => {
+          if (item.type === 'user' && inforUser?.role === 'staff') return;
+          return (
+            <li
+              key={item.name || item.id}
+              onClick={() => handleNavigate(item.link)}
+              className={`${styles.navbarItem} ${
+                activeLink === item.link ? styles.active : ''
+              }`}
+            >
+              <item.icon></item.icon>
+              <div className={`${item.color} ${styles.label}`}>
+                {t(item.name)}
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
