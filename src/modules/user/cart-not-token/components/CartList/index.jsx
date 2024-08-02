@@ -39,14 +39,13 @@ const CartList = () => {
       </div>
       <CheckboxGroup value={selectedItems} onChange={handleChange}>
         <div className={styles[`container-cart-list`]}>
-          {filterCarts.map((item, index) => {
-            console.log(item);
+          {filterCarts.map(item => {
             if (item.product.status === INACTIVE || item.product.quantity <= 0)
               return null;
             return (
               <CartItem
                 {...item}
-                key={index}
+                key={item.id_product}
                 onSelect={handleSelect}
                 onDeselect={handleDeselect}
               />

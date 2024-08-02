@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect, useContext } from 'react';
 import styles from './styles.module.scss';
 import QuantitySelector from '../../../../../components/core/NumberInput';
-import { formattedNumber } from '../../../../../utils/format-number';
 import { Checkbox, Divider } from '@chakra-ui/react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -11,34 +10,30 @@ import { useNavigate } from 'react-router-dom';
 import { INACTIVE } from '../../../../../constants/mapper-status';
 
 const CartItem = ({
-  quantity,
-  product: { unit_prices },
-  id_product,
-  product,
+  // product: { item.product.unit_prices },
   onSelect,
   onDeselect,
+  item,
   ...props
 }) => {
-  const [number, setNumber] = useState(quantity);
+  const [number, setNumber] = useState(item.quantity);
   const [checked, setChecked] = useState(false);
-  const totalPrice = useMemo(() => number * unit_prices, [number, unit_prices]);
+  const totalPrice = useMemo(
+    () => number * item.product.unit_prices,
+    [number, item.product.unit_prices]
+  );
+
   const { handlerDeleteCart, handlerUpdateCart } = useContext(CartContext);
   const firstEffect = useRef(false);
-  const quantityRef = useRef(quantity);
 
   const debounceNumber = useDebounce(number, 300);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (quantityRef.current !== quantity) {
-      setNumber(quantity);
-      quantityRef.current = quantity;
-    }
-  }, [quantity]);
-
-  useEffect(() => {
     if (firstEffect.current) {
-      handlerUpdateCart(id_product, debounceNumber);
+      handlerUpdateCart(item.id_product, debounceNumber);
+      console.log(debounceNumber);
+      setNumber(debounceNumber);
     }
     firstEffect.current = true;
   }, [debounceNumber]);
@@ -51,18 +46,19 @@ const CartItem = ({
     const newChecked = !checked;
     setChecked(newChecked);
     if (newChecked) {
-      onSelect(id_product);
+      onSelect(item.id_product);
     } else {
-      onDeselect(id_product);
+      onDeselect(item.id_product);
     }
   };
 
-  if (product.quantity <= 0 || product.status === INACTIVE) return null;
+  if (item.product.quantity <= 0 || item.product.status === INACTIVE)
+    return null;
 
   return (
     <div {...props} className={styles.container}>
       <Checkbox
-        value={id_product}
+        value={item.id_product}
         size={'lg'}
         isChecked={checked}
         onChange={handleCheckboxChange}
@@ -71,8 +67,8 @@ const CartItem = ({
       <div className={styles.contentWrapper}>
         <div className={styles.wrapper__image}>
           <img
-            src={product.product_image}
-            alt={product.product_name}
+            src={item.product.product_image}
+            alt={item.product.product_name}
             className={styles.image}
           />
         </div>
@@ -80,22 +76,24 @@ const CartItem = ({
           <div
             className={styles.title}
             onClick={() => {
-              navigate(`/detail?slug=${product.product_slug}&id=${product.id}`);
+              navigate(
+                `/detail?slug=${item.product.product_slug}&id=${item.product.id}`
+              );
             }}
           >
-            {product.product_name}
+            {item.product.product_name}
           </div>
         </div>
       </div>
       <Divider orientation="vertical" borderWidth={1}></Divider>
       <span className={styles.price}>
-        {parseFloat(unit_prices).toLocaleString('vi-VN', {
+        {parseFloat(item.product.unit_prices).toLocaleString('vi-VN', {
           style: 'currency',
           currency: 'VND',
         })}
       </span>
       <QuantitySelector
-        max={product.quantity}
+        max={item.product.quantity}
         onSetNumber={handlerSetNumber}
         value={number}
         className={styles.numberSelector}
@@ -108,7 +106,7 @@ const CartItem = ({
       </span>
       <i
         onClick={() => {
-          handlerDeleteCart(id_product);
+          handlerDeleteCart(item.id_product);
         }}
         className={classNames('fa-solid fa-trash', styles.deleteIcon)}
       ></i>
@@ -118,7 +116,7 @@ const CartItem = ({
 
 CartItem.defaultProps = {
   oldPrice: 89000,
-  unit_prices: 50000,
+  // item.product.unit_prices: 50000,
   inventory: 20,
   product_name: 'Gối cao su non ZARA HOME cao cấp chống ngáy ngủ, đau vai gáy',
   linkImage:
@@ -130,7 +128,7 @@ CartItem.propTypes = {
   product: PropTypes.object,
   quantity: PropTypes.number,
   product_image: PropTypes.string,
-  unit_prices: PropTypes.number.isRequired,
+  // item.product.unit_prices: PropTypes.number.isRequired,
   linkImage: PropTypes.string.isRequired,
   product_name: PropTypes.string.isRequired,
   voucher: PropTypes.string,

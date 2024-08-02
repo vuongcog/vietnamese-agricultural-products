@@ -27,9 +27,10 @@ const CartItem = ({
   const debounceNumber = useDebounce(number, 300);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setNumber(quantity);
-  }, [quantity]);
+  // useEffect(() => {
+  //   setNumber(quantity);
+  // }, [quantity]);
+
   useEffect(() => {
     if (firstEffect.current) {
       handlerUpdateCart(id_product, debounceNumber);

@@ -21,6 +21,7 @@ const CartList = () => {
   } = useContext(CartContext);
 
   if (_.isEmpty(carts)) return null;
+  console.log('hello');
   const filterCarts = carts.items.filter(
     item => item.product.quantity > 0 && item.product.status === ACTIVE
   );
@@ -43,11 +44,12 @@ const CartList = () => {
           {filterCarts?.map((item, index) => {
             if (item.product.status === INACTIVE || item.product.quantity <= 0)
               return null;
-
+            console.log(item.quantity);
             return (
               <CartItem
                 {...item}
-                key={index}
+                item={item}
+                key={item.id_product}
                 onSelect={handleSelect}
                 onDeselect={handleDeselect}
               />

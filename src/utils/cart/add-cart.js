@@ -2,7 +2,6 @@ import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
 export const addCart = (product, quantity) => {
-  console.log(product);
   try {
     if (quantity <= 0) {
       toast.error('Số lượng sản phẩm phải lớn hơn 0');
@@ -21,18 +20,26 @@ export const addCart = (product, quantity) => {
           parseCartObject[existingProductIndex].quantity + quantity;
         if (newQuantity > product.quantity) {
           toast.error(
-            'Số lượng sản phẩm trong giỏ hàng vượt quá số lượng hiện có'
+            'Số lượng sản phẩm trong giỏ hàng vượt quá số lượng hiện có',
+            {
+              autoClose: 1000,
+            }
           );
           return;
         }
         parseCartObject[existingProductIndex].quantity = newQuantity;
         parseCartObject[existingProductIndex].updated_at =
           new Date().toISOString();
-        toast.success('Sản phẩm đã được cập nhật số lượng trong giỏ hàng');
+        toast.success('Sản phẩm đã được cập nhật số lượng trong giỏ hàng', {
+          autoClose: 1000,
+        });
       } else {
         if (quantity > product.quantity) {
           toast.error(
-            'Số lượng sản phẩm trong giỏ hàng vượt quá số lượng hiện có'
+            'Số lượng sản phẩm trong giỏ hàng vượt quá số lượng hiện có',
+            {
+              autoClose: 1000,
+            }
           );
           return;
         }
@@ -45,17 +52,24 @@ export const addCart = (product, quantity) => {
     } else {
       if (quantity > product.quantity) {
         toast.error(
-          'Số lượng sản phẩm trong giỏ hàng vượt quá số lượng hiện có'
+          'Số lượng sản phẩm trong giỏ hàng vượt quá số lượng hiện có',
+          {
+            autoClose: 1000,
+          }
         );
         return;
       }
       const listCart = [];
       setCookieCart(product, listCart, quantity);
-      toast.success('Thêm thành công');
+      toast.success('Thêm thành công', {
+        autoClose: 1000,
+      });
     }
   } catch (error) {
     console.log(error);
-    toast.error('Mặt hàng này đã hết hoặc không tồn tại');
+    toast.error('Mặt hàng này đã hết hoặc không tồn tại', {
+      autoClose: 1000,
+    });
   }
 };
 
