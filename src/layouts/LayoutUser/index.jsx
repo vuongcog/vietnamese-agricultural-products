@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FETCH_DATA_USER } from '../../actions/action-infor-user';
+import ButtonExport from '../../components/core/ButtonExport';
 
 const LayoutUser = ({ children }) => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const LayoutUser = ({ children }) => {
     <div>
       <UserHeader></UserHeader>
       <div className={classNames(`mt-[80px]`, styles.content)}>
+        {/* <ButtonExport></ButtonExport> */}
         {children}
         <Outlet></Outlet>
       </div>

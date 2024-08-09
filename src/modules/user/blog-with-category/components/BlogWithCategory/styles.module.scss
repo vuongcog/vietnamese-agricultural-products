@@ -16,6 +16,7 @@ $white: #fafafa;
   display: flex;
   flex-direction: column;
   gap: 24px;
+
   .header_title {
     @include setLimitLine(1);
     cursor: pointer;
@@ -27,7 +28,7 @@ $white: #fafafa;
     padding-left: 0px;
 
     > li {
-      background: white;
+      background-color: rgb(255, 255, 255, 0.75);
       border-radius: 0 0.5rem 0.5rem 0.5rem;
       @extend %boxshadow;
       counter-increment: gradient-counter;
@@ -98,6 +99,9 @@ $white: #fafafa;
   .container {
     display: flex;
     align-items: center;
+    background-color: rgb(255, 255, 255, 0.75);
+    border-radius: 4px;
+    width: 400px;
     label {
       flex: 0 0 auto;
     }

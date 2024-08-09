@@ -13,7 +13,6 @@ const Cart = () => {
   useEffect(() => {
     dispatch({ type: FETCH_CART, payload: { endpoint: '/giohang' } });
   }, [refesh]);
-  console.log(carts);
   if (_.isEmpty(carts)) return null;
   const lenght = carts.items.filter(
     item => item.product.quantity > 0 && item.product.status === ACTIVE

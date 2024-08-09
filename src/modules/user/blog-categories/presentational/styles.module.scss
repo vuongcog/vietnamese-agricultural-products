@@ -1,15 +1,27 @@
 .layout {
-  min-height: 100vh;
-  width: 100%;
-  // background-image: url('https://img.freepik.com/free-photo/blue-surface-with-study-tools_23-2147864592.jpg?size=626&ext=jpg');
-  background-size: cover;
-  background-position: center;
+  background-image: url(9316195_LE_auto_x2_light_ai.jpg);
   background-repeat: no-repeat;
-  display: flex;
-  gap: 48px;
-  padding: 24px 48px;
-  .categories {
-    flex: 0 0 320px;
-    max-width: 320px;
+  background-size: cover;
+  .overlay {
+    min-height: 100vh;
+    width: 100%;
+    // background: linear-gradient(
+    //   rgba(255, 255, 255, 0.1),
+    //   rgba(255, 255, 255, 0.1)
+    // );
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    // backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    gap: 48px;
+    padding: 24px 48px;
+    .categories {
+      flex: 0 0 320px;
+      max-width: 320px;
+    }
   }
 }

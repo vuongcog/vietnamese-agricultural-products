@@ -2,6 +2,13 @@
   gap: 24px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  .container-button {
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
   .container-cart-list {
     display: grid;
     grid-template-columns: 1fr 1fr;

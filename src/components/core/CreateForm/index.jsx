@@ -60,6 +60,11 @@ const CreateForm = ({
       if (field.type === 'file') {
         acc[field.name] = null;
       }
+      if (field.type === 'date' && type === UPDATE_DATA) {
+        acc[field.name] = moment(defaultValues[field.name]).format(
+          'DD-MM-YYYY'
+        );
+      }
       return acc;
     }, {})
   );
@@ -220,8 +225,7 @@ const CreateForm = ({
             <Input
               {...item}
               type="date"
-              // defaultValue={formatDefaultDate(formState[item.name])}
-              // value={formatDate(formState[item.name])}
+              // value={formState[item.name]}
               onChange={e => {
                 const selectedDate = e.target.value;
                 const formattedDate = moment(selectedDate).format('DD-MM-YYYY');

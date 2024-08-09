@@ -54,7 +54,6 @@ const BlogCategoriesList = () => {
       <h1>{t(langsGlobal.blogCategories)}</h1>
       <div className={styles.container}>
         {/* <label htmlFor="itemsPerPage">Số lượng:</label> */}
-
         <Select
           className={styles.perpage}
           id="itemsPerPage"

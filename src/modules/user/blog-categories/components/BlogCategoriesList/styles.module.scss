@@ -19,11 +19,12 @@ $white: #fafafa;
     list-style: none;
     padding-left: 0px;
     > li {
-      background: white;
+      background-color: rgb(255, 255, 255, 0.75);
       border-radius: 0 0.5rem 0.5rem 0.5rem;
       @extend %boxshadow;
       counter-increment: gradient-counter;
       margin-top: 1rem;
+      color: rgb(13, 38, 99);
       min-height: 3rem;
       padding: 1rem 1rem 1rem 3rem;
       position: relative;
@@ -81,6 +82,9 @@ $white: #fafafa;
   }
 
   .container {
+    background-color: rgb(255, 255, 255, 0.75);
+
+    border-radius: 4px;
     display: flex;
     align-items: center;
     label {

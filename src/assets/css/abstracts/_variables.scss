@@ -7,12 +7,12 @@ $coreTextWhite: #dedee1;
 $user-crud-background: white;
 
 $color-map: (
-  "admin-background": $coreColorBackgroundAdmin,
-  "admin-background-second": $coreColorBlackAdmin,
-  "core-text-white": $coreTextWhite,
+  'admin-background': $coreColorBackgroundAdmin,
+  'admin-background-second': $coreColorBlackAdmin,
+  'core-text-white': $coreTextWhite,
 
   // * biến user crud
-  "user-crud-background": $user-crud-background,
+  'user-crud-background': $user-crud-background,
 );
 
 ////theme color
@@ -27,19 +27,21 @@ $theme-light-blue: #00e9ff;
 $theme-blue: #0097ff;
 $theme-purple: #ff18cf;
 $theme-pink: #ff2087;
+$theme-green-customer: rgb(67, 160, 67);
 
 $theme-map: (
-  "theme-red": $theme-red,
-  "theme-light-red": $theme-light-red,
-  "theme-light-orange": $theme-light-orange,
-  "theme-yellow": $theme-yellow,
-  "theme-light-yellow": $theme-light-yellow,
-  "theme-green": $theme-green,
-  "theme-dark-green": $theme-dark-green,
-  "theme-light-blue": $theme-light-blue,
-  "theme-blue": $theme-blue,
-  "theme-purple": $theme-purple,
-  "theme-pink": $theme-pink,
+  'theme-red': $theme-red,
+  'theme-light-red': $theme-light-red,
+  'theme-light-orange': $theme-light-orange,
+  'theme-yellow': $theme-yellow,
+  'theme-light-yellow': $theme-light-yellow,
+  'theme-green': $theme-green,
+  'theme-dark-green': $theme-dark-green,
+  'theme-light-blue': $theme-light-blue,
+  'theme-blue': $theme-blue,
+  'theme-purple': $theme-purple,
+  'theme-pink': $theme-pink,
+  'theme-green-customer': $theme-green-customer,
 );
 
 :root {

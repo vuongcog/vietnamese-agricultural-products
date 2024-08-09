@@ -45,7 +45,10 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
+    if (_.isEmpty(formData.address)) {
+      toast.warning('Phải điền thông tin địa chỉ');
+      return;
+    }
     // if (checkIfAllUndefined(formData.address)) {
     //   toast.error('Xin hãy điền đầy đủ thông tin địa chỉ');
     //   return;
@@ -60,7 +63,11 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
     <div className={styles['form-container']}>
       <Box borderWidth="1px" p={6} boxShadow="lg">
         <form onSubmit={handleSubmit} className={styles['form']}>
-          <FormControl id="first_name" className={styles['form__group']}>
+          <FormControl
+            isRequired
+            id="first_name"
+            className={styles['form__group']}
+          >
             <FormLabel>{t(langs.firstName)}</FormLabel>
             <Input
               type="text"
@@ -71,7 +78,11 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
               className={styles['form__input']}
             />
           </FormControl>
-          <FormControl id="last_name" className={styles['form__group']}>
+          <FormControl
+            isRequired
+            id="last_name"
+            className={styles['form__group']}
+          >
             <FormLabel>{t(langs.lastName)}</FormLabel>
             <Input
               type="text"
@@ -82,7 +93,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
               className={styles['form__input']}
             />
           </FormControl>
-          <FormControl id="email" className={styles['form__group']}>
+          <FormControl isRequired id="email" className={styles['form__group']}>
             <FormLabel>{t(langs.email)}</FormLabel>
             <Input
               type="email"
@@ -93,7 +104,7 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
               className={styles['form__input']}
             />
           </FormControl>
-          <FormControl id="phone" className={styles['form__group']}>
+          <FormControl id="phone" isRequired className={styles['form__group']}>
             <FormLabel>{t(langs.phone)}</FormLabel>
             <Input
               type="number"
@@ -124,7 +135,6 @@ const FormComponent = ({ handlerSetValueRequest, totalPrice }) => {
                   //   setOtherAdress(e.target.value);
                   // }}
                   onChange={handleChange}
-                  required
                   className={styles['form__input']}
                 />
               </div>

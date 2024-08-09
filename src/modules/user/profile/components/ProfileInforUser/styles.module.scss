@@ -1,7 +1,19 @@
 .container {
+  margin-top: 57px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  .wrapper-image {
+    width: 296px;
+    border-radius: 100%;
+    padding: 12px;
+
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.2) 77%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
   div {
     border: none;
     font-size: 20px;

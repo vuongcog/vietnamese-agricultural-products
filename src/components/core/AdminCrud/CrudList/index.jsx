@@ -141,7 +141,7 @@ const CrudList = props => {
     <>
       <div
         className={classNames(
-          'max-h-[500px] rounded-md overflow-y-scroll',
+          'max-h-[600px] rounded-md overflow-y-scroll',
           styles.container
         )}
       >

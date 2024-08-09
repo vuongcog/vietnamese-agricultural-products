@@ -23,7 +23,7 @@
   "src/components/user/Header.logout": "Đăng xuất",
 
   "src/modules/user/home.category": "Danh mục",
-  "src/modules/user/home.priceRange": "Giá",
+  "src/modules/user/home.priceRange": "Tìm theo giá",
   "src/modules/user/home.search": "Tìm kiếm",
   "src/modules/user/home.filter": "Bộ lọc",
   "src/modules/user/home.from": "Từ",

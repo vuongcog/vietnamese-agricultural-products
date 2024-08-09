@@ -62,7 +62,7 @@ const FormLogin = () => {
         <img src={LOGO.login}></img>
       </Link>
       <h1>LOG IN</h1>
-      <FormControl className={styles.field} isInvalid={!!emailError}>
+      <FormControl className={styles.field} isRequired>
         <Input
           id="email"
           type="email"
@@ -73,10 +73,10 @@ const FormLogin = () => {
             setEmailError('');
           }}
         />
-        <FormErrorMessage>{emailError}</FormErrorMessage>
+        {/* <FormErrorMessage>{emailError}</FormErrorMessage> */}
       </FormControl>
 
-      <FormControl className={styles.field} isInvalid={!!passwordError}>
+      <FormControl className={styles.field} isRequired>
         <Input
           id="password"
           type="password"
@@ -87,7 +87,7 @@ const FormLogin = () => {
             setPasswordError('');
           }}
         />
-        <FormErrorMessage>{passwordError}</FormErrorMessage>
+        {/* <FormErrorMessage>{passwordError}</FormErrorMessage> */}
       </FormControl>
       <FormControl>
         <div className="flex justify-evenly">

@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import styles from './styles.module.scss';
 import {
   Box,
   FormControl,
@@ -16,6 +17,8 @@ import {
   TagCloseButton,
   Wrap,
   WrapItem,
+  Divider,
+  Tooltip,
 } from '@chakra-ui/react';
 import { debounce } from 'lodash';
 import {
@@ -28,10 +31,15 @@ import { useTranslation } from 'react-i18next';
 import langs from '../../langs';
 import useProducerCategory from '../../../../../useCustom/user/useProducerCategory';
 import { formattedNumber } from '../../../../../utils/format-number';
+import useCustomSelector from '../../utils/useCustomSelector';
+import { useNavigate } from 'react-router-dom';
+import { INACTIVE } from '../../../../../constants/mapper-status';
 
 const ProductFilter = () => {
   const { t } = useTranslation();
   const { category, priceRange } = useProducerFilterShopping();
+  const { items } = useCustomSelector();
+  const navigate = useNavigate();
   const [localPriceRange, setLocalPriceRange] = useState(priceRange);
   const [selectedCategories, setSelectedCategories] = useState(category);
   const { categories } = useProducerCategory();
@@ -66,17 +74,15 @@ const ProductFilter = () => {
     dispatch({ type: FILTER_CATEGORY, payload: newCategories });
   };
   return (
-    <Box
-      as="form"
-      p={4}
-      paddingTop={14}
-      w={200}
-      borderWidth={1}
-      borderRadius="md"
-    >
-      <FormControl mb={4}>
-        <FormLabel>{t(langs.category)}</FormLabel>
-        <Select name="category" value="" onChange={handleCategoryChange}>
+    <div className={styles.container}>
+      <div className={styles[`container-catetory`]}>
+        <div className={styles[`header-category`]}>{t(langs.category)}</div>
+        <Select
+          border={'none'}
+          name="category"
+          value=""
+          onChange={handleCategoryChange}
+        >
           <option value="">All</option>
           {suggestions?.map(item => (
             <option key={item} value={item}>
@@ -87,38 +93,82 @@ const ProductFilter = () => {
         <Wrap mt={2}>
           {selectedCategories.map(category => (
             <WrapItem key={category}>
-              <Tag size="md" colorScheme="teal" borderRadius="full">
+              <Tag size="md" colorScheme="teal">
                 <TagLabel>{category}</TagLabel>
                 <TagCloseButton onClick={() => removeCategory(category)} />
               </Tag>
             </WrapItem>
           ))}
         </Wrap>
-      </FormControl>
+      </div>
 
-      <FormControl mb={4}>
-        <FormLabel>{t(langs.priceRange)}</FormLabel>
+      <div className={styles.containerPrices}>
+        <div className={styles.titlePrice}>{t(langs.priceRange)}</div>
         <RangeSlider
           aria-label={['min', 'max']}
           min={0}
           max={10000000}
           step={10}
+          color={'red'}
+          width={170}
           value={localPriceRange}
           onChange={val => handlePriceChange(val)}
           onChangeEnd={val => handlePriceChange(val)}
         >
-          <RangeSliderTrack>
-            <RangeSliderFilledTrack />
+          <RangeSliderTrack height="6px">
+            <RangeSliderFilledTrack color={'red'} backgroundColor={'gray'} />
           </RangeSliderTrack>
           <RangeSliderThumb index={0} />
           <RangeSliderThumb index={1} />
         </RangeSlider>
-        <Text fontSize={14} mt={2}>
-          {formattedNumber(localPriceRange[0])} đồng -{' '}
-          {formattedNumber(localPriceRange[1])} đồng
+
+        <Text fontSize={16} mt={2}>
+          {parseFloat(localPriceRange[0]).toLocaleString('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+          })}
+          {'  '}-{'  '}
+          {parseFloat(localPriceRange[1]).toLocaleString('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+          })}{' '}
         </Text>
-      </FormControl>
-    </Box>
+      </div>
+
+      <div className={styles[`container-products`]}>
+        <div className={styles[`header-products`]}>{'Sản phẩm'}</div>
+        <div className={styles.products}>
+          {items?.map(item => {
+            if (item.status === INACTIVE) return null;
+            return (
+              <div
+                key={item.id}
+                onClick={() => {
+                  navigate(`/detail?slug=${item.product_slug}&id=${item.id}`);
+                }}
+                className={styles[`container-product`]}
+              >
+                <img src={item.product_image} />
+                <Divider orientation="vertical"></Divider>
+                <div className="flex flex-col">
+                  <Tooltip
+                    placement="top"
+                    label={item.product_name}
+                    aria-label="Full text"
+                  >
+                    <span className="text-black">{item.product_name}</span>
+                  </Tooltip>
+                  {parseFloat(item.unit_prices).toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 };
 

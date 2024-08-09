@@ -4,7 +4,7 @@ import CartList from '../components/CartList';
 import CartHeader from '../components/CartHeader';
 
 const CartModule = () => (
-  <div>
+  <div className={styles.module}>
     <CartHeader></CartHeader>
     <div className={styles.layout}>
       <CartList></CartList>

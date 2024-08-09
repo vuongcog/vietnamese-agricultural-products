@@ -59,7 +59,7 @@
     }
 
     .price {
-      color: #921c26;
+      color: var(--theme-green-customer);
       font-size: 18px;
       font-weight: 700;
     }
@@ -71,7 +71,7 @@
     justify-content: center;
     gap: 8px;
     padding: 4px 8px;
-    background-color: rgba(223, 118, 19, 0.7);
+    background-color: var(--theme-green-customer);
     color: #fff;
     font-size: 16px;
     font-weight: 600;
@@ -81,7 +81,7 @@
     transition: background-color 0.3s ease-in-out;
 
     &:hover {
-      background-color: rgba(201, 105, 8, 1);
+      background-color: greenyellow;
     }
 
     .cartIcon {

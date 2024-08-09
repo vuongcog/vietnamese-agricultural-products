@@ -2,7 +2,6 @@ import React, { Suspense, useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import LayoutAdmin from '../layouts/LayoutAdmin';
 import LayoutUser from '../layouts/LayoutUser';
-import ChartComponent from './Test/Test';
 
 const User = React.lazy(() => import('./admin/User/container'));
 const Category = React.lazy(() => import('./admin/Category/container'));
@@ -40,6 +39,8 @@ import PaymentSuccsess from './mayment-succsess/PaymentSuccsess';
 import PaymentFailed from './PaymentFailed';
 import useProducerDataUser from '../useCustom/admin/useProducerDataUser';
 import { MAPPER_PERMISSION_ROUTE_USER } from '../constants/mapper-permission-role';
+import Report from './admin/Report/container';
+import ButtonExport from '../components/core/ButtonExport';
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -120,7 +121,7 @@ const App = () => {
             }
           >
             <Route path="/*" element={<div />} />
-            <Route path="/dashboard" element={<ChartComponent />} />
+            <Route path="/report" element={<Report />} />
             {MAPPER_PERMISSION_ROUTE_USER[inforUser?.role] && (
               <Route
                 path="/user"

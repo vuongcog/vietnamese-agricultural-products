@@ -22,29 +22,30 @@ const ProfileInforUser = () => {
   };
   return (
     <div className={classNames(styles.container, 'font-serif')}>
-      <img
-        className="w-[296px] h-[296px] rounded-full"
-        src={dataUser.url_avatar}
-        alt=""
-      />
-
-      <div className="flex gap-2">
+      <div className={styles[`wrapper-image`]}>
+        <img
+          className="w-[296px] h-[296px] rounded-full object-cover"
+          src={dataUser.url_avatar}
+          alt=""
+        />
+      </div>
+      <div className="flex gap-2 text-white">
         <span className="font-semibold">Họ và tên:</span>
-        <span className="italic">{dataUser.name}</span>
+        <span className="italic font-semibold">{dataUser.name}</span>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 text-white">
         <span className="font-semibold">Email: </span>
-        <span className="italic">{dataUser.email}</span>
+        <span className="italic font-semibold">{dataUser.email}</span>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 text-white">
         <span className="font-semibold">SDT: </span>
-        <span className="italic">{dataUser.phone_num}</span>
+        <span className="italic font-semibold">{dataUser.phone_num}</span>
       </div>
 
       <div>
         <button
           onClick={onOpen}
-          className="underline italic text-[20px] text-blue-500"
+          className="underline italic font-semibold text-[20px] text-blue-500"
         >
           Đổi mật khẩu
         </button>

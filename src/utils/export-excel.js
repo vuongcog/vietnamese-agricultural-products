@@ -1,103 +1,63 @@
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import ExcelJS from 'exceljs';
-import Cookies from 'js-cookie';
+import { nanoid } from 'nanoid';
+import React from 'react';
+import * as XLSX from 'xlsx';
+import { transformNumber } from './parse-number';
 
-export const exportToExcel = async (data, fileName) => {
-  try {
-    if (!Array.isArray(data)) {
-      console.error('Data is not an array');
-      return;
-    }
+export const exportToExcel = data => {
+  const totalUsers = data.total_users;
+  const users = [
+    { type: 'Tổng', count: data.total_users },
+    { type: 'Admin', count: data.admin },
+    { type: 'Managers', count: data.managers },
+    { type: 'Staff', count: data.staff },
+    { type: 'Customers', count: data.customers },
+  ];
 
-    const token = Cookies.get('accsessToken');
+  const worksheetData = users.map(user => ({
+    ['Vai trò']: user.type,
+    ['Số lượng']: user.count,
+    ['Tỉ lệ']: ((user.count / totalUsers) * 100).toFixed(2) + '%',
+  }));
 
-    const loadImage = async url => {
-      try {
-        const response = await axios.get(url, {
-          responseType: 'arraybuffer',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const imageData = Buffer.from(response.data, 'binary');
-        console.log(imageData);
-        return imageData;
-      } catch (error) {
-        console.warn(`Failed to load image from ${url}`, error);
-        return null;
-      }
-    };
+  const worksheet = XLSX.utils.json_to_sheet(worksheetData);
 
-    const imageCache = {};
+  worksheet['!cols'] = [{ wch: 20 }, { wch: 15 }, { wch: 10 }];
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Users Report');
+  XLSX.writeFile(workbook, `user_report${nanoid()}.xlsx`);
+};
+export const exportToExcelProduct = data => {
+  const totalQuantity = data.product_revenue.reduce(
+    (cal, item) => cal + item.quantity,
+    0
+  );
 
-    const imagePromises = [];
-    const rowsWithImageUrls = data.map(row => {
-      const rowWithImages = { ...row };
-      for (const key in row) {
-        if (typeof row[key] === 'string' && row[key].startsWith('http://')) {
-          if (!imageCache[row[key]]) {
-            const promise = loadImage(row[key]).then(imageData => {
-              imageCache[row[key]] = imageData;
-              rowWithImages[key] = imageData || row[key];
-            });
-            imagePromises.push(promise);
-          } else {
-            rowWithImages[key] = imageCache[row[key]];
-          }
-        }
-      }
-      return rowWithImages;
-    });
-
-    await Promise.all(imagePromises);
-
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Sheet1');
-
-    rowsWithImageUrls.forEach(row => {
-      const rowValues = [];
-      Object.keys(row).forEach((key, colIndex) => {
-        rowValues[colIndex + 1] = row[key];
-      });
-      worksheet.addRow(rowValues);
-    });
-
-    await Promise.all(
-      rowsWithImageUrls.map(async (row, rowIndex) => {
-        for (const key in row) {
-          if (imageCache[row[key]]) {
-            const imageId = workbook.addImage({
-              buffer: imageCache[row[key]],
-              extension: 'jpeg',
-            });
-            worksheet.addImage(imageId, {
-              tl: { col: Object.keys(row).indexOf(key), row: rowIndex + 1 },
-              ext: { width: 100, height: 100 },
-            });
-          }
-        }
-      })
-    );
-
-    const buffer = await workbook.xlsx.writeBuffer();
-    const blob = new Blob([buffer], { type: 'application/octet-stream' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `${fileName}.xlsx`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    toast.success('Excel file created successfully!', {
-      autoClose: 500,
-      position: 'top-center',
-    });
-  } catch (error) {
-    console.error('Error:', error);
-    toast.error('Failed to export data to Excel: ' + error.message, {
-      autoClose: 500,
-      position: 'top-center',
-    });
-  }
+  let products = data.product_revenue.map(item => ({
+    name: item.product_name,
+    quantity: item.quantity,
+    revenue: item.revenue,
+  }));
+  products = [
+    { name: 'Tổng quát', quantity: totalQuantity, revenue: data.total_revenue },
+    ...products,
+  ];
+  const workSheetData = products.map(item => ({
+    'Tên sản phẩm': item.name,
+    'Doanh thu': transformNumber(item.revenue),
+    'Số lượng': item.quantity,
+    'Tỉ lệ doanh thu':
+      ((item.revenue / data.total_revenue) * 100).toFixed(2) + '%',
+    'Tỉ lệ sản phẩm': ((item.quantity / totalQuantity) * 100).toFixed(2) + '%',
+  }));
+  const worksheet = XLSX.utils.json_to_sheet(workSheetData);
+  worksheet['!cols'] = [
+    { wch: 20 },
+    { wch: 15 },
+    { wch: 10 },
+    { wch: 20 },
+    { wch: 20 },
+  ];
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Users Report');
+  XLSX.writeFile(workbook, `product_report${nanoid()}.xlsx`);
 };

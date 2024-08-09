@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { useContext } from 'react';
 import { CartContext } from '../../container';
 import { ACTIVE, INACTIVE } from '../../../../../constants/mapper-status';
+import classNames from 'classnames';
 
 const CartList = () => {
   const { carts } = useProducerCart();
@@ -21,21 +22,26 @@ const CartList = () => {
   } = useContext(CartContext);
 
   if (_.isEmpty(carts)) return null;
-  console.log('hello');
   const filterCarts = carts.items.filter(
     item => item.product.quantity > 0 && item.product.status === ACTIVE
   );
 
   return (
     <div className={styles.container}>
-      <div className="flex items-center gap-3">
+      <div
+        className={classNames(
+          `flex items-center gap-3`,
+          styles[`container-button`]
+        )}
+      >
         <Checkbox
           onChange={handleSelectAll}
           isChecked={selectedItems.length === filterCarts.length}
+          fontWeight={'bold'}
         >
           Chọn tất cả
         </Checkbox>
-        <Button onClick={findCommonItems} width={'100px'} color="blue">
+        <Button onClick={findCommonItems} width={'100px'}>
           Mua ngay
         </Button>
       </div>

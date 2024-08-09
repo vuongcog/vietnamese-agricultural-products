@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import DataTable from 'react-data-table-component';
 import useProducerDataUser from '../../../../../useCustom/user/useProducerDataUser';
 import { Divider, useDisclosure } from '@chakra-ui/react';
-
 import DialogMessage from '../../../../../components/core/DialogMessage';
 import OrderCode from '../OrderCode';
 import OrderNotes from '../../../../admin/Order/components/OrderNotes';
@@ -22,7 +21,7 @@ import ProgressFullScreen from '../../../../../components/core/ProgressFullScree
 import SearchInput from '../../../../../components/core/AdminCrud/SearchInput';
 import { useDebounce } from '../../../../../utils/use-debounce';
 import ProfileProductCard from '../ProfileProductCard';
-
+import './styles.scss';
 const ProfilePurchaseUser = () => {
   const {
     dataUser: { orders = [] },
@@ -121,24 +120,24 @@ const ProfilePurchaseUser = () => {
     //   sortable: true,
     //   cell: row => row.id_payment || 'N/A',
     // },
-    {
-      name: 'Ngày đặt',
-      selector: row => row.created_at,
-      sortable: true,
-      minWidth: '200px',
-      cell: row => <CreatedAtComponent created_at={row.created_at} />,
-    },
-    {
-      name: 'Ngày cập nhật',
-      selector: row => row.updated_at,
-      sortable: true,
-      minWidth: '200px',
-      cell: row => <UpdatedAtComponent updated_at={row.updated_at} />,
-    },
+
+    // {
+    //   name: 'Ngày đặt',
+    //   selector: row => row.created_at,
+    //   sortable: true,
+    //   minWidth: '200px',
+    //   cell: row => <CreatedAtComponent created_at={row.created_at} />,
+    // },
+    // {
+    //   name: 'Ngày cập nhật',
+    //   selector: row => row.updated_at,
+    //   sortable: true,
+    //   minWidth: '200px',
+    //   cell: row => <UpdatedAtComponent updated_at={row.updated_at} />,
+    // },
   ];
 
   const ExpandedComponent = ({ data }) => {
-    console.log(data);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const {
       isOpen: isOpen1,
@@ -146,7 +145,7 @@ const ProfilePurchaseUser = () => {
       onClose: onClose1,
     } = useDisclosure();
     return (
-      <div className="flex gap-2 ">
+      <div className="flex gap-2">
         <div
           onClick={onOpen}
           className="hover:text-blue-500 hover:underline hover:italic cursor-pointer"
@@ -214,7 +213,7 @@ const ProfilePurchaseUser = () => {
   return (
     <div>
       {isFetchingDataUser && <ProgressFullScreen></ProgressFullScreen>}
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center container-filter">
         <SortSelector
           defaultOptions={[`created_at`]}
           extraFields={['order_code', 'order_total_prices']}

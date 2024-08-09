@@ -24,7 +24,7 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import classNames from 'classnames';
 import CartNotToken from '../../core/CartNotToken';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
-
+import logo from './crate_5919706.png';
 const UserHeader = () => {
   const { t } = useTranslation();
   const { accessToken, logout } = useAuth();
@@ -33,15 +33,25 @@ const UserHeader = () => {
 
   return (
     <div className={styles.container}>
-      <div
-        onClick={() => {
-          navigate('/');
-        }}
-        className={styles.title}
-      >
-        Trang chủ
+      <div className="flex items-center gap-10">
+        <div
+          onClick={() => {
+            navigate('/');
+          }}
+          className={styles.title}
+        >
+          Trang chủ
+        </div>
+        <img
+          className="w-16 cursor-pointer"
+          onClick={() => {
+            navigate('/');
+          }}
+          src={logo}
+        ></img>
+        <SearchHeader />
       </div>
-      <SearchHeader />
+
       <ul className={styles.navList}>
         {SCHEMA.map((item, index) => (
           <li key={index}>

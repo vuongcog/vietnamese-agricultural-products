@@ -108,18 +108,18 @@ const Oder = () => {
         default: 'N/A',
         component: OrderStatus,
       },
-      {
-        name: 'payment_type',
-        label: t(langs.payment_type),
-        default: 'N/A',
-        component: OrderPaymentType,
-      },
-      {
-        name: 'order_notes',
-        label: 'Notes',
-        default: 'N/A',
-        component: OrderNotes,
-      },
+      // {
+      //   name: 'payment_type',
+      //   label: t(langs.payment_type),
+      //   default: 'N/A',
+      //   component: OrderPaymentType,
+      // },
+      // {
+      //   name: 'order_notes',
+      //   label: 'Notes',
+      //   default: 'N/A',
+      //   component: OrderNotes,
+      // },
 
       {
         name: 'payment_status',
@@ -127,30 +127,30 @@ const Oder = () => {
         default: 'N/A',
         component: OrderPaymentStatus,
       },
-      {
-        name: 'email',
-        label: t(langs.email),
-        default: 'N/A',
-      },
+      // {
+      //   name: 'email',
+      //   label: t(langs.email),
+      //   default: 'N/A',
+      // },
 
-      {
-        name: 'delivery_address',
-        label: t(langs.delivery_address),
-        default: 'N/A',
-        component: OrderDeliveryAddress,
-      },
-      {
-        name: 'phone',
-        label: 'Phone',
-        default: 'N/A',
-      },
+      // {
+      //   name: 'delivery_address',
+      //   label: t(langs.delivery_address),
+      //   default: 'N/A',
+      //   component: OrderDeliveryAddress,
+      // },
+      // {
+      //   name: 'phone',
+      //   label: 'Phone',
+      //   default: 'N/A',
+      // },
 
-      {
-        name: 'created_at',
-        label: t(langs.created_at),
-        default: 'N/A',
-        component: CreatedAtComponent,
-      },
+      // {
+      //   name: 'created_at',
+      //   label: t(langs.created_at),
+      //   default: 'N/A',
+      //   component: CreatedAtComponent,
+      // },
       {
         name: 'updated_at',
         label: t(langs.updated_at),
