@@ -5,19 +5,17 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background-color: hsl(0, 0%, 98%);
   border-radius: 8px;
   padding: 8px 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 10px 0;
-  transition: transform 0.3s, box-shadow 0.3s;
   .icon {
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
+    color: rgb(23, 63, 128);
   }
   .label {
     @include styles.setLimitLine(1);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 18px;
     font-weight: 600;
   }

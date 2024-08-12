@@ -7,7 +7,6 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  // border-right: 1px solid rgba(37, 25, 25, 0.5);
 }
 .container-catetory {
   display: flex;
@@ -15,19 +14,19 @@
   align-items: center;
   border-radius: 10px 10px 0px 0px;
   gap: 12px;
-  // padding: 4px;
-  // box-shadow: 1px 1px 1px rgb(42, 40, 40, 0.5);
+  background-color: #f6f5f2;
+
   border: 1px solid rgb(30, 28, 28, 0.1);
   color: var(--theme-green-customer);
-  font-weight: 600;
+  font-weight: 500;
   .header-category {
     padding: 4px;
-    color: white;
+    color: #255946;
+    font-weight: 600;
     font-size: 24px;
     text-align: center;
     border-radius: 4px 4px 0px 0px;
     width: 100%;
-    background-color: var(--theme-green-customer);
   }
 }
 .containerPrices {
@@ -36,20 +35,20 @@
   align-items: center;
   border-radius: 4px 4px 0px 0px;
   gap: 12px;
-  // padding: 4px;
-  // box-shadow: 1px 1px 1px rgb(42, 40, 40, 0.5);
+
   border: 1px solid rgb(30, 28, 28, 0.1);
   color: var(--theme-green-customer);
-  font-weight: 600;
+  font-weight: 500;
+  background-color: #f6f5f2;
   .titlePrice {
     height: 50px;
     padding: 4px;
-    color: white;
+    color: #255946;
+    font-weight: 600;
     font-size: 24px;
     text-align: center;
     border-radius: 4px 4px 0px 0px;
     width: 100%;
-    background-color: var(--theme-green-customer);
   }
 }
 .container-products {
@@ -58,19 +57,18 @@
   align-items: center;
   border-radius: 10px 10px 0px 0px;
 
-  // padding: 4px;
-  // box-shadow: 1px 1px 1px rgb(42, 40, 40, 0.5);
   border: 1px solid rgb(30, 28, 28, 0.1);
-  color: var(--theme-green-customer);
-  font-weight: 600;
+  background-color: #f6f5f2;
+
+  font-weight: 500;
   .header-products {
     padding: 4px;
-    color: white;
+    color: #255946;
+    font-weight: 600;
     font-size: 24px;
     text-align: center;
     border-radius: 4px 4px 0px 0px;
     width: 100%;
-    background-color: var(--theme-green-customer);
   }
   .products {
     width: 100%;
@@ -86,8 +84,18 @@
       height: 70px;
       padding: 4px;
       gap: 4px;
-      &:nth-child(odd) {
-        background-color: rgba(217, 210, 210, 0.5);
+      .content-product {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 100%;
+        span {
+          color: rgb(110, 118, 115);
+        }
+        .product__prices {
+          color: rgb(73, 167, 96);
+          font-weight: 500;
+        }
       }
       &:hover {
         background-color: rgb(173, 213, 113);
@@ -98,8 +106,8 @@
       img {
         flex-shrink: 0;
         flex-grow: 0;
-        width: 70px;
-        height: 100%;
+        width: 50px;
+        height: 50;
         object-fit: cover;
       }
     }

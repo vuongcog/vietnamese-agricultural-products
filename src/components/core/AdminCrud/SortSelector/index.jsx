@@ -42,7 +42,7 @@ const SortSelector = ({
   };
 
   return (
-    <div className="border-solid border-[1px] p-2">
+    <div>
       <div className="flex text-black items-center gap-6px">
         <Select value={sortField} onChange={handleSortFieldChange} mr={2}>
           {sortFieldOptions.map(item => (

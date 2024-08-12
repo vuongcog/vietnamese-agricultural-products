@@ -6,34 +6,53 @@ $coreColorBorder: rgba(255, 255, 255, 0.1);
 .leftSideBar {
   min-width: 200px;
   height: 100vh;
-  background-color: var(--admin-background-second);
+  // background-color: rgba(41, 45, 63, 0.8);
+  // background-color: rgba(81, 116, 12, 0.8);
+  background-image: linear-gradient(
+    to left,
+    rgba(137, 160, 117, 0.8) 0%,
+    rgba(139, 166, 97, 0.8) 40%,
+
+    rgba(228, 175, 135, 0.8) 75%,
+    rgba(230, 188, 163, 0.8) 100%
+  );
+
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 16px;
+  padding: 4px 8px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   overflow-y: scroll;
   box-sizing: border-box;
   flex: 0 0 15%;
-
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
   .wrapperTitle {
     display: flex;
     align-items: center;
     gap: 12px;
 
     .titleIcon {
-      color: white;
       font-size: 40px;
       border: 1px solid white;
       padding: 6px;
       border-radius: 50%;
+      color: rgb(41, 60, 9);
     }
 
     .titleText {
       text-transform: capitalize;
       text-align: center;
       font-size: 24px;
-      color: white;
+      color: rgb(41, 60, 9);
       font-weight: bold;
     }
   }
@@ -43,21 +62,25 @@ $coreColorBorder: rgba(255, 255, 255, 0.1);
     flex-direction: column;
     gap: 12px;
     font-weight: 500;
+    padding-left: 1rem;
 
     .navbarItem {
       display: flex;
       align-items: center;
-      height: 64px;
+      height: 44px;
       padding: 6px 12px;
       border-radius: 6px;
       gap: 12px;
       cursor: pointer;
-      color: white;
+
+      color: rgb(41, 60, 9);
+      background-color: rgba(255, 255, 255, 0.4);
+
       transition: background-color 0.3s, transform 0.2s;
-      border-bottom: 1px solid $coreColorBorder; // Thêm border dưới
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5); // Thêm border dưới
 
       &:hover {
-        background-color: $coreColorHover;
+        background-color: rgba(255, 255, 255, 0.7);
         transform: translateX(5px);
       }
 
@@ -69,6 +92,7 @@ $coreColorBorder: rgba(255, 255, 255, 0.1);
       .label {
         font-weight: bold;
         transition: color 0.3s;
+        font-size: 12px;
       }
 
       .iconChevron {
@@ -78,7 +102,7 @@ $coreColorBorder: rgba(255, 255, 255, 0.1);
     }
 
     .navbarItem.active {
-      background-color: $coreColorActive;
+      background-color: rgba(255, 255, 255, 0.8);
       box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0,
         inset rgba(255, 255, 255, 0.16) 0 1px;
     }

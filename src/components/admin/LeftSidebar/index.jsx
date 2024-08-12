@@ -49,9 +49,7 @@ const AdminLeftSidebar = () => {
               }`}
             >
               <item.icon></item.icon>
-              <div className={`${item.color} ${styles.label}`}>
-                {t(item.name)}
-              </div>
+              <div className={` ${styles.label}`}>{t(item.name)}</div>
             </li>
           );
         })}

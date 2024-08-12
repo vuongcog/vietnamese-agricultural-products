@@ -7,9 +7,6 @@ import { schemaFormFactory } from '../utils/schemaFormFactory';
 import {} from '../../../../components/core/AdminCrud/utils/inject-reducer-saga';
 import {} from '../../../../utils/fetch-cancel-saga-reducer-with-key';
 import Status from '../../../../components/admin/Status';
-import { exportToExcel } from '../../../../utils/export-excel';
-import { Icon } from '@chakra-ui/react';
-import { FaFileExcel } from 'react-icons/fa';
 import CreatedAtComponent from '../../../../components/core/CreatedAt';
 import UpdatedAtComponent from '../../../../components/core/UpdatedAt';
 import CouponCode from '../components/CouponCode';
@@ -21,9 +18,15 @@ import { useDispatch } from 'react-redux';
 import useInjectReducerSaga from '../../../../useCustom/admin/useInjectReducerSaga';
 import { useTranslation } from 'react-i18next';
 import langs from '../langs';
+import DialogMessage from '../../../../components/core/DialogMessage';
+import ProductDetail from '../../Product/components/ProductDetail';
+import CouponDetail from '../components/CouponDetail';
+import { useDisclosure } from '@chakra-ui/react';
 const Coupon = () => {
   const [selectElement, setSelectElement] = useState(null);
   const { t } = useTranslation();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [coupon, setCoupon] = useState();
   const dispatch = useDispatch();
   const crudOptions = {
     endpointParams: {
@@ -36,7 +39,7 @@ const Coupon = () => {
       create: true,
       paging: true,
     },
-    placeholderSearch: 'Search with coupon code...',
+    placeholderSearch: 'Tìm theo mã khuyến mãi',
     search: [
       {
         name: 'search',
@@ -58,6 +61,15 @@ const Coupon = () => {
         component: CouponCode,
         dropdownActions: {
           items: [
+            {
+              icon: <i className="fa-brands fa-first-order-alt"></i>,
+              name: 'view',
+              label: <span className="font-semibold">Chi tiết</span>,
+              callback: item => {
+                setCoupon(item);
+                onOpen();
+              },
+            },
             {
               icon: <i className=" fa fa-trash"></i>,
               name: 'delete',
@@ -97,18 +109,18 @@ const Coupon = () => {
         default: 'N/A',
         component: CouponDiscount,
       },
-      {
-        name: 'coupon_start_date',
-        label: t(langs.startDate),
-        default: '  N/A',
-        component: CouponEndDate,
-      },
-      {
-        name: 'coupon_end_date',
-        label: t(langs.endDate),
-        default: 'N/A',
-        component: CouponStartDate,
-      },
+      // {
+      //   name: 'coupon_start_date',
+      //   label: t(langs.startDate),
+      //   default: '  N/A',
+      //   component: CouponEndDate,
+      // },
+      // {
+      //   name: 'coupon_end_date',
+      //   label: t(langs.endDate),
+      //   default: 'N/A',
+      //   component: CouponStartDate,
+      // },
       {
         name: 'coupon_quantity',
         label: t(langs.quantity),
@@ -145,6 +157,14 @@ const Coupon = () => {
         classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
       >
         {selectElement}
+        <DialogMessage
+          width={1000}
+          isOpen={isOpen}
+          onClose={onClose}
+          onOpen={onOpen}
+        >
+          <CouponDetail coupon={coupon}></CouponDetail>
+        </DialogMessage>
         <AdminCrud
           classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
           {...crudOptions}

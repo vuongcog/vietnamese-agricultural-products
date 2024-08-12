@@ -9,6 +9,7 @@ import {
   MenuList,
   Tooltip,
 } from '@chakra-ui/react';
+import { PersonOutline } from '@mui/icons-material';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import SearchHeader from './SearchHeader';
@@ -25,6 +26,7 @@ import classNames from 'classnames';
 import CartNotToken from '../../core/CartNotToken';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import logo from './crate_5919706.png';
+import './styles.scss';
 const UserHeader = () => {
   const { t } = useTranslation();
   const { accessToken, logout } = useAuth();
@@ -33,7 +35,12 @@ const UserHeader = () => {
 
   return (
     <div className={styles.container}>
-      <div className="flex items-center gap-10">
+      <div
+        className={classNames(
+          'flex items-center gap-5',
+          styles[`left-content`]
+        )}
+      >
         <div
           onClick={() => {
             navigate('/');
@@ -50,6 +57,13 @@ const UserHeader = () => {
           src={logo}
         ></img>
         <SearchHeader />
+        <div>
+          {Cookies.get('accsessToken') ? (
+            <Cart />
+          ) : (
+            <CartNotToken></CartNotToken>
+          )}
+        </div>
       </div>
 
       <ul className={styles.navList}>
@@ -82,25 +96,12 @@ const UserHeader = () => {
             </Link>
           </li>
         )}
-        {!_.isEmpty(dataUser) && (
-          <li>
-            <Tooltip placement="top" label={'Profile'} aria-label="Full text">
-              <Link to={'/profile'}>
-                <div className="border-[1px] rounded-full border-solid border-black">
-                  <img
-                    className="cursor-pointer w-8 h-8 rounded-full"
-                    src={dataUser.url_avatar}
-                    alt="profile"
-                  />
-                </div>
-              </Link>
-            </Tooltip>
-          </li>
-        )}
-        <li>
-          <SelectLanguage width={120} />
-        </li>
 
+        <li className="li-select-lang">
+          <SelectLanguage fontWeight={100} width={120} />
+        </li>
+      </ul>
+      <ul className={styles[`nav-opitons`]}>
         <li>
           <Menu>
             <MenuButton
@@ -174,13 +175,22 @@ const UserHeader = () => {
             </MenuList>
           </Menu>
         </li>
-        <li>
-          {Cookies.get('accsessToken') ? (
-            <Cart />
-          ) : (
-            <CartNotToken></CartNotToken>
-          )}
-        </li>
+        {!_.isEmpty(dataUser) && (
+          <li className={styles.profile}>
+            <Tooltip placement="top" label={'Profile'} aria-label="Full text">
+              <Link to={'/profile'}>
+                <div>
+                  <PersonOutline
+                    className="font-bold"
+                    color="blue"
+                    fontSize="large"
+                    style={{ fontWeight: 'bold' }}
+                  ></PersonOutline>
+                </div>
+              </Link>
+            </Tooltip>
+          </li>
+        )}
       </ul>
     </div>
   );

@@ -4,16 +4,16 @@ import styles from './styles.module.scss';
 import classNames from 'classnames';
 import DialogMessage from '../../../../../components/core/DialogMessage';
 import { useDisclosure } from '@chakra-ui/react';
+import { VisibilityOutlined } from '@mui/icons-material';
 const ProductInfo = ({ product_info }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <div>
-      <div
+      <VisibilityOutlined
+        cursor={'pointer'}
         onClick={onOpen}
-        className={classNames(styles.container)}
-        dangerouslySetInnerHTML={{ __html: product_info }}
-      ></div>
+      ></VisibilityOutlined>
       <DialogMessage
         width={1200}
         height={200}

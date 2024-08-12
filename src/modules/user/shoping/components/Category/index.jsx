@@ -116,7 +116,7 @@ const ProductFilter = () => {
           onChangeEnd={val => handlePriceChange(val)}
         >
           <RangeSliderTrack height="6px">
-            <RangeSliderFilledTrack color={'red'} backgroundColor={'gray'} />
+            <RangeSliderFilledTrack color={'red'} backgroundColor={'#255946'} />
           </RangeSliderTrack>
           <RangeSliderThumb index={0} />
           <RangeSliderThumb index={1} />
@@ -148,21 +148,25 @@ const ProductFilter = () => {
                 }}
                 className={styles[`container-product`]}
               >
-                <img src={item.product_image} />
-                <Divider orientation="vertical"></Divider>
-                <div className="flex flex-col">
+                <div className={styles[`content-product`]}>
                   <Tooltip
                     placement="top"
                     label={item.product_name}
                     aria-label="Full text"
                   >
-                    <span className="text-black">{item.product_name}</span>
+                    <span className="text-black font-bold">
+                      {item.product_name}
+                    </span>
                   </Tooltip>
-                  {parseFloat(item.unit_prices).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND',
-                  })}
+                  <div className={styles.product__prices}>
+                    {parseFloat(item.unit_prices).toLocaleString('vi-VN', {
+                      style: 'currency',
+                      currency: 'VND',
+                    })}
+                  </div>
                 </div>
+                <Divider orientation="vertical"></Divider>
+                <img src={item.product_image} />
               </div>
             );
           })}

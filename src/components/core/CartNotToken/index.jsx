@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { getCart } from '../../../utils/cart/get-cart';
+import { ShoppingCartOutlined } from '@mui/icons-material';
 
 const CartNotToken = () => {
   const [carts, setCarts] = useState([]);
@@ -23,7 +24,7 @@ const CartNotToken = () => {
 
   return (
     <Link to={'/cart'} className={classNames(styles.container)}>
-      <i className={classNames('fa fa-cart-plus', styles.cart)}></i>
+      <ShoppingCartOutlined className={styles.cart}></ShoppingCartOutlined>
       <span className={styles.cartCount}>{carts?.length}</span>
     </Link>
   );

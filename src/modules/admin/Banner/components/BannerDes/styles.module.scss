@@ -3,7 +3,7 @@
 .container {
   max-width: 240px;
   min-width: 240px;
-
+  font-size: 14px;
   @include setLimitLine(1);
   border-radius: 8px;
   color: #333;
@@ -16,7 +16,6 @@
 }
 
 .container:hover {
-  background-color: #e0e0e0;
   transform: translateY(-2px);
   color: blue;
 }

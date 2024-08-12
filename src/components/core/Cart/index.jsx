@@ -6,6 +6,7 @@ import useProducerCart from '../../../useCustom/user/useProducerCart';
 import { useDispatch } from 'react-redux';
 import { FETCH_CART } from '../../../actions/action-cart';
 import { ACTIVE } from '../../../constants/mapper-status';
+import { ShoppingCartOutlined } from '@mui/icons-material';
 
 const Cart = () => {
   const { carts, refesh } = useProducerCart();
@@ -19,7 +20,7 @@ const Cart = () => {
   ).length;
   return (
     <Link to={'/cart'} className={classNames(styles.container)}>
-      <i className={classNames('fa fa-cart-plus', styles.cart)}></i>
+      <ShoppingCartOutlined className={styles.cart}></ShoppingCartOutlined>
       <span className={styles.cartCount}>{lenght}</span>
     </Link>
   );

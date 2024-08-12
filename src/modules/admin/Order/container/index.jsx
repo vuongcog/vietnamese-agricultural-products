@@ -39,7 +39,7 @@ const Oder = () => {
       create: false,
       paging: true,
     },
-    placeholderSearch: 'Search with order code',
+    placeholderSearch: 'Tìm theo mã đơn hàng',
     search: [
       {
         name: 'search',
@@ -192,7 +192,7 @@ const Oder = () => {
             onOpen={onOpen}
             isOpen={isOpen}
           >
-            <BillOrderPrintable order={order}></BillOrderPrintable>
+            <BillOrderPrintable print order={order}></BillOrderPrintable>
           </DialogMessage>
         </div>
         <AdminCrud

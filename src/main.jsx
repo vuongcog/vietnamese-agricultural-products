@@ -15,6 +15,8 @@ import i18n from '../i18n';
 import { ConfigProvider } from 'antd';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import '@fontsource/smooch';
+import '@fontsource-variable/exo-2';
 window._ = lodash;
 window.$ = jquery;
 

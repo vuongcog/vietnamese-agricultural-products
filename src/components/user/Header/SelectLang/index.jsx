@@ -9,7 +9,12 @@ const languageOptions = [
   { value: 'en', label: 'English' },
   { value: 'vi', label: 'Tiếng Việt' },
 ];
-const SelectLanguage = ({ classNameProps, width = 150, ...props }) => {
+const SelectLanguage = ({
+  classNameProps,
+  width = 150,
+  fontWeight,
+  ...props
+}) => {
   const { i18n } = useTranslation();
   const handleChangeLanguage = value => {
     i18n.changeLanguage(value);

@@ -13,33 +13,33 @@
 
   .cart {
     font-size: 24px;
-    color: #078941;
+    color: #255946;
     transition: color 0.2s ease-in-out;
     &:hover {
-      color: #ff7043;
+      color: #255946;
     }
   }
 
   .cartCount {
     position: absolute;
     top: 0px;
-    right: -5px;
+    right: -20px;
     font-size: 10px;
     font-weight: bold;
-    color: rgb(192, 23, 23);
-    border: 2px solid #078941;
+    color: #255946;
+    border: 1px solid;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
+    border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 13px;
+    min-width: 25px;
     height: 13px;
     line-height: 20px;
     transition: background-color 0.2s ease-in-out;
 
     &:hover {
-      background-color: #ff7043;
+      background-color: #255946;
     }
   }
 }

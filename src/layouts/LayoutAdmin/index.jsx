@@ -35,7 +35,7 @@ const LayoutAdmin = ({ children }) => {
     }
   }, [location, navigate]);
   return (
-    <div className="admin-app">
+    <div className={classNames('admin-app', styles.layout)}>
       <div id="admin-body" className="flex font-inter">
         <AdminLeftSidebar></AdminLeftSidebar>
         <main

@@ -1,13 +1,12 @@
 @import '../../../../assets/css/abstracts/mixin';
 .layout {
-  background-image: url(high-angle-grains-sacks.jpg);
+  background-image: url(test1.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
   padding: 48px 120px;
 }
 .overlay {
-  background-color: rgb(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+  background-color: rgb(255, 255, 255, 0.6);
   display: flex;
   min-height: 100vh;
   position: relative;

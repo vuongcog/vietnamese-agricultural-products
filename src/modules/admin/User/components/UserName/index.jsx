@@ -6,8 +6,8 @@ import classNames from 'classnames';
 import { Tooltip } from '@chakra-ui/react';
 const UserName = ({ name, role }) => {
   const mappingRole = {
-    manager: 'text-indigo-600',
-    admin: 'text-blue-500',
+    manager: 'text-orange-600',
+    admin: 'text-red-500',
     staff: 'text-teal-500',
     customer: 'text-green-600',
   };
@@ -17,7 +17,7 @@ const UserName = ({ name, role }) => {
         <SupportAgentIcon
           className={classNames(styles.icon, mappingRole[role])}
         ></SupportAgentIcon>
-        <span className={`${styles.label}`}>{name}</span>
+        <span className={classNames(styles.label)}>{name}</span>
       </div>
     </Tooltip>
   );

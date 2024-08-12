@@ -51,7 +51,9 @@ const BlogCategoriesList = () => {
   }, [currentPage]);
   return (
     <div className={styles.layout}>
-      <h1>{t(langsGlobal.blogCategories)}</h1>
+      <h1 className="font-semibold text-[#255946]">
+        {t(langsGlobal.blogCategories)}
+      </h1>
       <div className={styles.container}>
         {/* <label htmlFor="itemsPerPage">Số lượng:</label> */}
         <Select

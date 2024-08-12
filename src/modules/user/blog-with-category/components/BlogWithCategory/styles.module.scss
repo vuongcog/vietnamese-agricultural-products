@@ -20,6 +20,8 @@ $white: #fafafa;
   .header_title {
     @include setLimitLine(1);
     cursor: pointer;
+    font-weight: 600;
+    color: #255946;
   }
 
   ol.gradient-list {
@@ -28,7 +30,7 @@ $white: #fafafa;
     padding-left: 0px;
 
     > li {
-      background-color: rgb(255, 255, 255, 0.75);
+      background-color: rgb(255, 255, 255, 0.9);
       border-radius: 0 0.5rem 0.5rem 0.5rem;
       @extend %boxshadow;
       counter-increment: gradient-counter;
@@ -99,7 +101,7 @@ $white: #fafafa;
   .container {
     display: flex;
     align-items: center;
-    background-color: rgb(255, 255, 255, 0.75);
+    background-color: rgb(255, 255, 255, 0.9);
     border-radius: 4px;
     width: 400px;
     label {

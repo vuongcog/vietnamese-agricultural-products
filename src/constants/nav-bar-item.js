@@ -17,7 +17,7 @@ export const SCHEMA = [
     name: 'Report',
     icon: DashboardOutlined,
     link: '/report',
-    color: 'text-[#f0414a]',
+    color: 'text-[#00e9ff]',
   },
   {
     id: 10,
@@ -32,14 +32,14 @@ export const SCHEMA = [
     name: langs.user,
     icon: PersonOutline,
     link: '/user',
-    color: 'text-[#ffce00]',
+    color: 'text-[#00e9ff]',
   },
   {
     id: 4,
     name: langs.category,
     icon: CategoryOutlined,
     link: '/category',
-    color: 'text-[#00eca3]',
+    color: 'text-[#00e9ff]',
   },
   {
     id: 5,

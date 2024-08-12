@@ -4,8 +4,12 @@ import styles from './styles.module.scss';
 import PropTypes from '../../../../../utils/prop-types';
 const ProductUnitPrice = ({ unit_prices }) => (
   <div className={styles.wrapper}>
-    <span>{formattedNumber(unit_prices)}</span>
-    <span className="text-red-400">/đồng</span>
+    <span>
+      {parseFloat(unit_prices).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+      })}
+    </span>
   </div>
 );
 ProductUnitPrice.propTypes = {

@@ -26,7 +26,7 @@ const LayoutUser = ({ children }) => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.layout}>
       <UserHeader></UserHeader>
       <div className={classNames(`mt-[80px]`, styles.content)}>
         {/* <ButtonExport></ButtonExport> */}

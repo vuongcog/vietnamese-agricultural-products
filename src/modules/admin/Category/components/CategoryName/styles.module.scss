@@ -7,12 +7,12 @@
   gap: 12px;
   .icon {
     font-size: 20px;
-    color: var(--theme-green);
+    color: rgb(23, 63, 128);
   }
   .label {
-    @include styles.setLimitLine(2);
-    font-size: 13px;
+    @include styles.setLimitLine(1);
+    font-size: 14px;
     line-height: 18px;
-    font-weight: 500;
+    font-weight: 600;
   }
 }

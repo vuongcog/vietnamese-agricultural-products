@@ -18,10 +18,16 @@ import { useTranslation } from 'react-i18next';
 import CreatedAtComponent from '../../../../components/core/CreatedAt';
 import UpdatedAtComponent from '../../../../components/core/UpdatedAt';
 import useProducerDataUser from '../../../../useCustom/admin/useProducerDataUser';
+import UserProfile from '../components/UserDetail';
+import { useDisclosure } from '@chakra-ui/react';
+import DialogMessage from '../../../../components/core/DialogMessage';
 const User = () => {
   const { t } = useTranslation();
   const [selectElement, setSelectElement] = useState(null);
+  const [user, setUser] = useState({});
   const { inforUser } = useProducerDataUser();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const crudOptions = {
     endpointParams: {
       q: '',
@@ -50,6 +56,16 @@ const User = () => {
         dropdownActions: {
           items: [
             {
+              icon: <i className="fa-brands fa-first-order-alt"></i>,
+              name: 'view',
+              label: <span className="font-semibold">Chi tiết</span>,
+              callback: item => {
+                setUser(item);
+                onOpen();
+              },
+            },
+
+            {
               icon: (
                 <i className="font-semibold fa-regular fa-pen-to-square"></i>
               ),
@@ -77,30 +93,30 @@ const User = () => {
           ],
         },
       },
-      {
-        name: 'email',
-        label: t(langs.email),
-        default: 'N/A',
+      // {
+      //   name: 'email',
+      //   label: t(langs.email),
+      //   default: 'N/A',
 
-        component: UserEmail,
-      },
-      {
-        name: 'url_avatar',
-        label: t(langs.avatar),
-        default: 'N/A',
-        component: UserAvatar,
-      },
-      {
-        name: 'email_verified_at',
-        label: t(langs.emailVerifiedAt),
-        default: 'N/A',
-      },
-      {
-        name: 'phone_num',
-        label: t(langs.phoneNum),
-        default: 'N/A',
-        component: UserPhone,
-      },
+      //   component: UserEmail,
+      // },
+      // {
+      //   name: 'url_avatar',
+      //   label: t(langs.avatar),
+      //   default: 'N/A',
+      //   component: UserAvatar,
+      // },
+      // {
+      //   name: 'email_verified_at',
+      //   label: t(langs.emailVerifiedAt),
+      //   default: 'N/A',
+      // },
+      // {
+      //   name: 'phone_num',
+      //   label: t(langs.phoneNum),
+      //   default: 'N/A',
+      //   component: UserPhone,
+      // },
       {
         name: 'role',
         label: t(langs.role),
@@ -144,6 +160,14 @@ const User = () => {
         }}
       >
         {selectElement}
+        <DialogMessage
+          width={1000}
+          onClose={onClose}
+          onOpen={onOpen}
+          isOpen={isOpen}
+        >
+          <UserProfile user={user}></UserProfile>
+        </DialogMessage>
         <AdminCrud
           classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
           {...crudOptions}

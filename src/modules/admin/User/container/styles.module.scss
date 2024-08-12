@@ -4,11 +4,10 @@
   }
 }
 .table-body-row {
-  td[name='link'] {
-    box-shadow: -5px 0px 10px -5px rgba(199, 190, 186, 0.567) inset;
-    padding: 0px;
-    border: none;
-    padding: 0;
+  td[name='role'] {
+    font-weight: 500;
+    text-transform: capitalize;
+    font-size: 14px;
   }
 }
 

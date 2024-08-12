@@ -4,17 +4,17 @@ import PropTypes from '../../../../../utils/prop-types';
 import classNames from 'classnames';
 import DialogMessage from '../../../../../components/core/DialogMessage';
 import { useDisclosure } from '@chakra-ui/react';
+import { VisibilityOutlined } from '@mui/icons-material';
 
 const BlogContent = ({ content }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <div>
-      <div
+      <VisibilityOutlined
+        cursor={'pointer'}
         onClick={onOpen}
-        className={classNames(styles.container)}
-        dangerouslySetInnerHTML={{ __html: content }}
-      ></div>
+      ></VisibilityOutlined>
       <DialogMessage
         width={800}
         height={200}

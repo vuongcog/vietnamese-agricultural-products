@@ -2,6 +2,7 @@
 
 .container {
   @include styles.setLimitLine(1);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   max-width: 240px;
   min-width: 100px;
   align-items: center;

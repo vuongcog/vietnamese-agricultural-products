@@ -48,10 +48,9 @@ const Card = ({ item, ...props }) => {
         <div className={styles.wrapperImg}>
           <img src={cloneItem.product_image} alt={cloneItem.product_name} />
         </div>
-        <div className="flex">
+        <div className="flex flex-col justify-center items-center ">
           <h5 className={styles.title}>{cloneItem.product_name}</h5>
           <span className={styles.price}>
-            {/* {'/'} */}
             {cloneItem &&
               parseFloat(cloneItem?.unit_prices).toLocaleString('vi-VN', {
                 style: 'currency',
@@ -81,11 +80,12 @@ const Card = ({ item, ...props }) => {
           }}
           className={styles.cart}
         >
-          {t(langsGlobal.addCart)}
+          {/* {t(langsGlobal.addCart)} */}
           <ShoppingCartCheckout className={styles.cartIcon} />
         </button>
         <div className={styles.quantity}>
           <h6 className="text-slate-600">
+            Số lượng:{' '}
             {cloneItem.quantity <= 0 ? 'Hết hàng' : cloneItem.quantity}
           </h6>
         </div>

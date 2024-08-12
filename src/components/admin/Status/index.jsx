@@ -10,7 +10,7 @@ import {
 const Status = ({ status }) => (
   <div
     className={classNames(
-      'flex items-center font-semibold',
+      'flex items-center font-semibold text-[14px]',
       `${status === 'active' ? 'text-green-600' : 'text-red-500'}`
     )}
   >

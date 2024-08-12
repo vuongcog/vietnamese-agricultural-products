@@ -1,18 +1,18 @@
 .layout {
-  background-image: url(9316195_LE_auto_x2_light_ai.jpg);
+  background-image: url(test1.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #061c10;
+  align-items: center;
+  padding: 24px 48px;
+  gap: 24px;
   .overlay {
     min-height: 100vh;
     width: 100%;
-    // background: linear-gradient(
-    //   rgba(255, 255, 255, 0.1),
-    //   rgba(255, 255, 255, 0.1)
-    // );
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    // backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -20,8 +20,8 @@
     gap: 48px;
     padding: 24px 48px;
     .categories {
-      flex: 0 0 320px;
-      max-width: 320px;
+      flex: 0 0 440px;
+      max-width: 440px;
     }
   }
 }

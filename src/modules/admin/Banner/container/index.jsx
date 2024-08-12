@@ -30,7 +30,7 @@ const Category = () => {
       create: true,
       paging: true,
     },
-    placeholderSearch: 'Search with title banner',
+    placeholderSearch: 'Tìm theo chủ đề banner',
     search: [
       {
         name: 'search',

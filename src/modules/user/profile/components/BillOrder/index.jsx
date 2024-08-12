@@ -103,7 +103,7 @@ const BillOrder = React.forwardRef(({ order }, ref) => {
               <Tr>
                 <Td colSpan={3} align="right">
                   <Text fontWeight="bold" fontFamily="serif">
-                    Tổng cộng
+                    Thành tiền
                   </Text>
                 </Td>
                 <Td>
@@ -124,25 +124,26 @@ const BillOrder = React.forwardRef(({ order }, ref) => {
 });
 BillOrder.displayName = 'BillOrder';
 
-const BillOrderPrintable = ({ order }) => {
+const BillOrderPrintable = ({ order, print }) => {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-
   return (
     <Container maxW="container.md" position="relative">
-      <Button
-        onClick={handlePrint}
-        mb={4}
-        colorScheme="teal"
-        fontFamily="serif"
-        position="absolute"
-        top={4}
-        right={4}
-      >
-        In hóa đơn
-      </Button>
+      {print && (
+        <Button
+          onClick={handlePrint}
+          mb={4}
+          colorScheme="teal"
+          fontFamily="serif"
+          position="absolute"
+          top={4}
+          right={4}
+        >
+          In hóa đơn
+        </Button>
+      )}
       <BillOrder ref={componentRef} order={order} />
     </Container>
   );

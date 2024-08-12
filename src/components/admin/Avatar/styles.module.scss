@@ -8,6 +8,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: white;
 
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 4px;
   &__image {
     width: 40px;
     height: 40px;
@@ -24,13 +26,14 @@
 
   &__name {
     font-weight: bold;
-    font-size: 12px;
-    color: #ffffff;
+    font-size: 14px;
+    // color: #ffffff;
+    color: rgb(41, 60, 9);
   }
 
   &__password {
-    font-size: 14px;
-    color: #b0b0b0;
+    font-size: 12px;
+    color: #3e3838;
     &:hover {
       text-decoration: underline;
       cursor: pointer;

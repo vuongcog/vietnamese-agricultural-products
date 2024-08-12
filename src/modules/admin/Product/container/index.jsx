@@ -12,7 +12,7 @@ import Status from '../../../../components/admin/Status';
 import ProductInfo from '../components/ProductInfo';
 import ProductUnitPrice from '../components/ProductUnitPrice';
 import { exportToExcel } from '../../../../utils/export-excel';
-import { Icon } from '@chakra-ui/react';
+import { Icon, useDisclosure } from '@chakra-ui/react';
 import { FaFileExcel } from 'react-icons/fa';
 import ProductSlug from '../components/ProductSlug';
 import ProductImage from '../components/ProductImage';
@@ -23,10 +23,23 @@ import { DELETE_DATA } from '../../../../components/core/AdminCrud/Store/constan
 import useInjectReducerSaga from '../../../../useCustom/admin/useInjectReducerSaga';
 import { useTranslation } from 'react-i18next';
 import langs from '../langs';
+import DialogMessage from '../../../../components/core/DialogMessage';
+import UserProfile from '../../User/components/UserDetail';
+import ProductDetail from '../components/ProductDetail';
+import ProductCategory from '../components/ProductCategory';
 const Product = () => {
   const [selectElement, setSelectElement] = useState(null);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenC,
+    onOpen: onOpenC,
+    onClose: onCloseC,
+  } = useDisclosure();
+
+  const [product, setProduct] = useState({});
+
   const crudOptions = {
     endpointParams: {
       q: '',
@@ -55,21 +68,23 @@ const Product = () => {
         dropdownActions: {
           items: [
             {
-              icon: <i className=" fa fa-trash"></i>,
-              name: 'delete',
-              label: <span className=" font-semibold">Delete</span>,
+              icon: <i className="fas fa-tags"></i>,
+              name: 'view',
+              label: <span className="font-semibold">Xem danh muc</span>,
               callback: item => {
-                dispatch({ type: DELETE_DATA, payload: `/product/${item.id}` });
+                setProduct(item);
+                onOpenC();
               },
             },
-            // {
-            //   icon: <Icon as={FaFileExcel} />,
-            //   name: 'export-excel',
-            //   label: <span className="font-semibold">Export Excel</span>,
-            //   callback: (items, name) => {
-            //     exportToExcel(items, name);
-            //   },
-            // },
+            {
+              icon: <i className="fa-brands fa-first-order-alt"></i>,
+              name: 'view',
+              label: <span className="font-semibold">Chi tiết</span>,
+              callback: item => {
+                setProduct(item);
+                onOpen();
+              },
+            },
             {
               icon: (
                 <i className="font-semibold fa-regular fa-pen-to-square"></i>
@@ -86,6 +101,14 @@ const Product = () => {
                     schemaForm={schemaFormFactory('edit')}
                   ></DialogCreateForm>
                 );
+              },
+            },
+            {
+              icon: <i className=" fa fa-trash"></i>,
+              name: 'delete',
+              label: <span className=" font-semibold">Delete</span>,
+              callback: item => {
+                dispatch({ type: DELETE_DATA, payload: `/product/${item.id}` });
               },
             },
           ],
@@ -105,18 +128,18 @@ const Product = () => {
         default: '  N/A',
         component: ProductImage,
       },
-      {
-        name: 'product_des',
-        label: t(langs.des),
-        component: ProductDes,
-        default: 'N/A',
-      },
-      {
-        name: 'product_info',
-        label: t(langs.info),
-        component: ProductInfo,
-        default: 'N/A',
-      },
+      // {
+      //   name: 'product_des',
+      //   label: t(langs.des),
+      //   component: ProductDes,
+      //   default: 'N/A',
+      // },
+      // {
+      //   name: 'product_info',
+      //   label: t(langs.info),
+      //   component: ProductInfo,
+      //   default: 'N/A',
+      // },
       {
         name: 'quantity',
         label: t(langs.quantity),
@@ -161,6 +184,23 @@ const Product = () => {
         classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
       >
         {selectElement}
+        <DialogMessage
+          width={1000}
+          onClose={onCloseC}
+          onOpen={onOpenC}
+          isOpen={isOpenC}
+        >
+          <ProductCategory id={product.id_category}></ProductCategory>
+        </DialogMessage>
+
+        <DialogMessage
+          width={1000}
+          onClose={onClose}
+          onOpen={onOpen}
+          isOpen={isOpen}
+        >
+          <ProductDetail product={product}></ProductDetail>
+        </DialogMessage>
         <AdminCrud
           classNameProps={{ tableBodyRow: styles[`table-body-row`] }}
           {...crudOptions}
