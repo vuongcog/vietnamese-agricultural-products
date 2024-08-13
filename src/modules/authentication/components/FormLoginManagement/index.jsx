@@ -90,13 +90,13 @@ const FormLoginManagement = () => {
       </FormControl>
       <FormControl>
         <div className="flex justify-evenly">
-          <Checkbox
+          {/* <Checkbox
             className={styles.remember}
             isChecked={remember}
             onChange={e => setRemember(e.target.checked)}
           >
             Remember me
-          </Checkbox>
+          </Checkbox> */}
           <Link
             className="text-[13px] font-bold text-blue-500 underline"
             to={`${import.meta.env.VITE_HOST_CUSTOMER}/authen/signup`}

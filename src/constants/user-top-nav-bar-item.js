@@ -2,6 +2,7 @@ import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutl
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { ContactEmergencyOutlined } from '@mui/icons-material';
 
 export const SCHEMA = [
   {
@@ -22,5 +23,11 @@ export const SCHEMA = [
     name: 'blogs',
     icon: ArticleOutlinedIcon,
     link: '/blog-categories',
+  },
+  {
+    id: 8,
+    name: 'contactUs',
+    icon: ContactEmergencyOutlined,
+    link: '/contact',
   },
 ];

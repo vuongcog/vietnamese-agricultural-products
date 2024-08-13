@@ -26,7 +26,7 @@ const ProfileProductCard = ({ item }) => {
           ></FormCreateFeedback>
         </DialogMessage>
         <img
-          className="w-[150px] h-[150px]"
+          className="w-[150px] h-[150px] object-cover"
           src={item.products.product_image}
           alt={item.products.product_name}
         />

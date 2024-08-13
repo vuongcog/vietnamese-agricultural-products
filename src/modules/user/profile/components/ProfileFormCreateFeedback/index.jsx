@@ -1,35 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ChakraProvider,
   Box,
   FormControl,
   FormLabel,
-  Input,
   Textarea,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   Button,
 } from '@chakra-ui/react';
+import { FaStar, FaRegStar } from 'react-icons/fa';
+import Rating from 'react-rating';
 import axios from 'axios';
 import HttpUserClient from '../../../../../utils/http/httpUserClient';
 import { toast } from 'react-toastify';
-import { parseObjectJson } from '../../../../../utils/parse-json';
 import { useNavigate } from 'react-router-dom';
 
 const FormCreateFeedback = ({ id_user, id_product, slug }) => {
+  const [rating, setRating] = useState(0);
   const navigate = useNavigate();
+
   const handleSubmit = event => {
     event.preventDefault();
     const formData = new FormData(event.target);
+    if (!rating) {
+      toast.warning('Phải đánh giá mức độ hài lòng sản phẩm');
+      return;
+    }
+    if (!formData.get('comment')) {
+      toast.warning('Phải bình luận sản phẩm');
+      return;
+    }
     const data = {
       id_user,
       id_product,
-      rate: formData.get('rate'),
+      rate: rating,
       comment: formData.get('comment'),
     };
+
     const http = new HttpUserClient('/danhgiasanpham/themdanhgia');
     http
       .createFeedback(data)
@@ -37,7 +43,7 @@ const FormCreateFeedback = ({ id_user, id_product, slug }) => {
         if (res.status === 201) toast.success('Thêm đánh giá thành công');
         if (res.status === 403)
           toast.success(
-            'Người dùng cần phải mua sản phẩm này trước khi đánh giá'
+            'Bạn dùng cần phải mua sản phẩm này trước khi đánh giá'
           );
       })
       .catch(err => {
@@ -50,13 +56,13 @@ const FormCreateFeedback = ({ id_user, id_product, slug }) => {
       <form onSubmit={handleSubmit}>
         <FormControl id="rate" isRequired mt={4}>
           <FormLabel>Đánh giá</FormLabel>
-          <NumberInput name="rate" min={1} max={5}>
-            <NumberInputField />
-            <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-            </NumberInputStepper>
-          </NumberInput>
+          <Rating
+            emptySymbol={<FaRegStar color="#ccc" size={30} />}
+            fullSymbol={<FaStar color="#FFD700" size={30} />}
+            fractions={1}
+            initialRating={rating}
+            onChange={rate => setRating(rate)}
+          />
         </FormControl>
         <FormControl id="comment" mt={4}>
           <FormLabel>Bình luận</FormLabel>
@@ -76,7 +82,7 @@ const FormCreateFeedback = ({ id_user, id_product, slug }) => {
             onClick={() => {
               navigate(`/detail?slug=${slug}&id=${id_product}`);
             }}
-            type="submit"
+            type="button"
           >
             Xem sản phẩm
           </Button>

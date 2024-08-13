@@ -9,6 +9,8 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FETCH_DATA_USER } from '../../actions/action-infor-user';
 import ButtonExport from '../../components/core/ButtonExport';
+import Contact from '../../modules/user/contact/pressentational';
+import Footer from '../../components/user/Footer';
 
 const LayoutUser = ({ children }) => {
   const dispatch = useDispatch();
@@ -33,6 +35,7 @@ const LayoutUser = ({ children }) => {
         {children}
         <Outlet></Outlet>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

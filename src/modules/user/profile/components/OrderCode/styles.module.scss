@@ -2,15 +2,17 @@
 
 .container {
   width: 100%;
-  max-width: 200px;
+
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 4px;
   padding: 8px 12px;
-  background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, box-shadow 0.3s;
+  .menuButton {
+    background-color: transparent;
+    border: none;
+  }
 
   &:hover {
     background-color: #e6f7ff;
@@ -23,10 +25,10 @@
 
   .label {
     @include styles.setLimitLine(1);
-    width: 200px;
     font-size: 14px;
     line-height: 20px;
     font-weight: 500;
+    width: 140px;
     color: #333;
   }
 }

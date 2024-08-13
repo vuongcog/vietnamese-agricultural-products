@@ -14,13 +14,15 @@ import langs from '../layouts/LayoutAdmin/langs';
 export const SCHEMA = [
   {
     id: 1,
-    name: 'Report',
+    type: 'report',
+    name: 'Thống kê',
     icon: DashboardOutlined,
     link: '/report',
     color: 'text-[#00e9ff]',
   },
   {
     id: 10,
+
     name: 'Đơn hàng',
     icon: ReceiptOutlined,
     link: '/order',

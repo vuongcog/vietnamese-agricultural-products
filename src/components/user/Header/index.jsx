@@ -47,7 +47,7 @@ const UserHeader = () => {
           }}
           className={styles.title}
         >
-          Trang chủ
+          NSSK
         </div>
         <img
           className="w-16 cursor-pointer"

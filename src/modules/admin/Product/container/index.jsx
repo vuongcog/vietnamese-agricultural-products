@@ -70,7 +70,7 @@ const Product = () => {
             {
               icon: <i className="fas fa-tags"></i>,
               name: 'view',
-              label: <span className="font-semibold">Xem danh muc</span>,
+              label: <span className="font-semibold">Xem danh mục</span>,
               callback: item => {
                 setProduct(item);
                 onOpenC();

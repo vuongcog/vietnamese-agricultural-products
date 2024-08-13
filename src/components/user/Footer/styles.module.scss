@@ -1,0 +1,26 @@
+.title {
+  font-size: 12px !important;
+  color: white;
+}
+.message {
+  font-size: 12px !important;
+}
+.wrapperIcon {
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 12px !important;
+  background-color: white !important;
+}
+.layout {
+  padding: 24px;
+  background-color: rgb(11, 11, 11, 0.9);
+  display: flex;
+  justify-content: space-around;
+  .link-container {
+    display: flex;
+    flex-direction: column;
+    color: #ebe8e1;
+    font-size: 12px;
+    gap: 18px;
+  }
+}

@@ -58,8 +58,8 @@ const ProfilePurchaseUser = () => {
       name: 'Mã đơn hàng',
       selector: row => row.order_code,
       sortable: true,
-      minWidth: '200px',
-      cell: row => <OrderCode order_code={row.order_code} />,
+      minWidth: '240px',
+      cell: row => <OrderCode data={row} />,
     },
     {
       name: 'Tổng giá',
@@ -137,56 +137,6 @@ const ProfilePurchaseUser = () => {
     // },
   ];
 
-  const ExpandedComponent = ({ data }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const {
-      isOpen: isOpen1,
-      onOpen: onOpen1,
-      onClose: onClose1,
-    } = useDisclosure();
-    return (
-      <div className="flex gap-2">
-        <div
-          onClick={onOpen}
-          className="hover:text-blue-500 hover:underline hover:italic cursor-pointer"
-        >
-          Xem chi tiết đơn hàng
-        </div>
-        {'/'}
-        <div
-          onClick={onOpen1}
-          className="hover:text-blue-500 hover:underline hover:italic cursor-pointer"
-        >
-          Xem sản phẩm có trong đơn hàng
-        </div>
-        <DialogMessage
-          width={1000}
-          isOpen={isOpen1}
-          onOpen={onOpen1}
-          onClose={onClose1}
-        >
-          <div>
-            {data.items.map(item => (
-              <div key={item.id} className="flex flex-col gap-2 py-10">
-                <ProfileProductCard item={item}></ProfileProductCard>
-                {/* <Divider borderWidth={1} borderColor={'black'}></Divider> */}
-              </div>
-            ))}
-          </div>
-        </DialogMessage>
-
-        <DialogMessage
-          width={1000}
-          isOpen={isOpen}
-          onOpen={onOpen}
-          onClose={onClose}
-        >
-          <BillOrderPrintable order={data}></BillOrderPrintable>
-        </DialogMessage>
-      </div>
-    );
-  };
-
   const handlePageChange = page => {
     setCurrentPage(page);
   };
@@ -233,8 +183,6 @@ const ProfilePurchaseUser = () => {
         paginationPerPage={perPage}
         onChangeRowsPerPage={handlePerRowsChange}
         onChangePage={handlePageChange}
-        expandableRows
-        expandableRowsComponent={ExpandedComponent}
         highlightOnHover
         customStyles={customStyles}
       />

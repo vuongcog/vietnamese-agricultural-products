@@ -23,7 +23,7 @@ const CartList = () => {
   const filterCarts = carts.filter(
     item => item.product.quantity > 0 && item.product.status === ACTIVE
   );
-
+  const checkedGroup = selectedItems.length === filterCarts.length;
   return (
     <div className={styles.container}>
       <div className="flex items-center gap-3">
@@ -44,6 +44,7 @@ const CartList = () => {
               return null;
             return (
               <CartItem
+                checkedGroup={checkedGroup}
                 {...item}
                 key={item.id_product}
                 onSelect={handleSelect}

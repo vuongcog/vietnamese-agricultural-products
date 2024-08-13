@@ -13,6 +13,7 @@ import { INACTIVE } from '../../../../../constants/mapper-status';
 const CartItem = ({
   quantity,
   product: { unit_prices },
+  checkedGroup,
   id_product,
   product,
   onSelect,
@@ -102,7 +103,11 @@ const CartItem = ({
         onClick={() => {
           handlerDeleteCart(id_product);
         }}
-        className={classNames('fa-solid fa-trash', styles.deleteIcon)}
+        className={classNames(
+          'fa-solid fa-trash',
+          styles.deleteIcon,
+          checkedGroup ? styles.disabled : ''
+        )}
       ></i>
     </div>
   );

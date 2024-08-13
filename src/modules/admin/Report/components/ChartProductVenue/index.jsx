@@ -122,7 +122,7 @@ const BarChart = ({ report_product, onChangeSelectedProduct }) => {
         display: true,
         text: 'Thống kê doanh thu sản phẩm',
         font: {
-          size: 18,
+          size: 28,
           family: 'Arial, sans-serif',
           weight: 'bold',
         },

@@ -112,13 +112,13 @@ const FormRegister = ({ isRegisting, handlerSubmitForm, setIsRegisting }) => {
       </FormControl>
       <FormControl>
         <div className="flex justify-evenly">
-          <Checkbox
+          {/* <Checkbox
             className={classNames(styles.remember)}
             isChecked={remember}
             onChange={e => setRemember(e.target.checked)}
           >
             Remember me
-          </Checkbox>
+          </Checkbox> */}
           <Link
             className="font-bold text-blue-500 underline"
             to={'/authen/signin'}

@@ -14,6 +14,7 @@ const UserName = ({ name, role }) => {
   return (
     <Tooltip placement="top" label={name} aria-label="Full text">
       <div className={styles.container}>
+        
         <SupportAgentIcon
           className={classNames(styles.icon, mappingRole[role])}
         ></SupportAgentIcon>

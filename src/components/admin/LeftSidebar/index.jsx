@@ -40,6 +40,8 @@ const AdminLeftSidebar = () => {
       <ul className={styles.sidebarMenu}>
         {SCHEMA.map(item => {
           if (item.type === 'user' && inforUser?.role === 'staff') return;
+
+          if (item.type === 'report' && inforUser?.role !== 'admin') return;
           return (
             <li
               key={item.name || item.id}

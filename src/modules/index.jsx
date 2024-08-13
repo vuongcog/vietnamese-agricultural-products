@@ -41,6 +41,7 @@ import useProducerDataUser from '../useCustom/admin/useProducerDataUser';
 import { MAPPER_PERMISSION_ROUTE_USER } from '../constants/mapper-permission-role';
 import Report from './admin/Report/container';
 import ButtonExport from '../components/core/ButtonExport';
+import Contact from './user/contact/pressentational';
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -86,6 +87,7 @@ const App = () => {
             <Route path="/purchase" element={<DetailProduct />} />
             <Route path="/checkout" element={<CheckoutContainer />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/contact" element={<Contact />} />
           </Route>
         )}
         <Route path="/authen" element={<Authentication />}>
@@ -121,7 +123,11 @@ const App = () => {
             }
           >
             <Route path="/*" element={<div />} />
-            <Route path="/report" element={<Report />} />
+
+            {inforUser?.role === 'admin' ? (
+              <Route path="/report" element={<Report />} />
+            ) : null}
+
             {MAPPER_PERMISSION_ROUTE_USER[inforUser?.role] && (
               <Route
                 path="/user"

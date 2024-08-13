@@ -2,7 +2,7 @@
   display: flex;
   // justify-content: space-between;
   align-items: center;
-  padding: 16px 100px;
+  padding: 16px 40px;
   height: 80px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -14,11 +14,11 @@
     flex: 0 1 auto;
   }
   .title {
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: bold;
     font-style: italic;
     color: #255946;
-
+    font-family: kalam;
     cursor: pointer;
     flex: 0 1 200px;
   }

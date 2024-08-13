@@ -25,6 +25,7 @@ const CartList = () => {
   const filterCarts = carts.items.filter(
     item => item.product.quantity > 0 && item.product.status === ACTIVE
   );
+  const checkedGroup = selectedItems.length === filterCarts.length;
 
   return (
     <div className={styles.container}>
@@ -53,6 +54,7 @@ const CartList = () => {
             console.log(item.quantity);
             return (
               <CartItem
+                checkedGroup={checkedGroup}
                 {...item}
                 item={item}
                 key={item.id_product}

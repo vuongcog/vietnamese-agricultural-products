@@ -3,7 +3,7 @@ import BannerCarousel from '../components/UserHomeCarousel';
 import UserHomeAboutUs from '../components/UserHomeAboutUs';
 import UserHomeAdvertise from '../components/UserHomeAdvertise';
 const Home = () => (
-  <div>
+  <div className="pb-5">
     <BannerCarousel></BannerCarousel>
     <UserHomeAboutUs></UserHomeAboutUs>
     <UserHomeAdvertise></UserHomeAdvertise>

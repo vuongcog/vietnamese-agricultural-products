@@ -13,6 +13,7 @@ const CartItem = ({
   // product: { item.product.unit_prices },
   onSelect,
   onDeselect,
+  checkedGroup,
   item,
   ...props
 }) => {
@@ -108,7 +109,11 @@ const CartItem = ({
         onClick={() => {
           handlerDeleteCart(item.id_product);
         }}
-        className={classNames('fa-solid fa-trash', styles.deleteIcon)}
+        className={classNames(
+          'fa-solid fa-trash',
+          styles.deleteIcon,
+          checkedGroup ? styles.disabled : ''
+        )}
       ></i>
     </div>
   );
